@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="WizardView">
+    <attr name="icon" format="reference"/>
+    <attr name="nextLabel" format="string"/>
+    <attr name="submitLabel" format="string"/>
+    <attr name="showDivider" format="boolean"/>
+    <attr name="showIndicator" format="boolean"/>
+    <attr name="showTitle" format="boolean"/>
+  </declare-styleable>
+</resources>

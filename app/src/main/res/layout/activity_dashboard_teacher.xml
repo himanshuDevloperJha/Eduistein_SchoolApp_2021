@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TeacherDashboardActivity">
+
+  <!-- Fixed top action bar -->
+  <com.google.android.material.appbar.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
+      app:elevation="0dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll"/>
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin">
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/classTeacherCard"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          app:cardBackgroundColor="?colorAccent"
+          app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_accent"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="16dp"
+              android:gravity="top"
+              android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/headline"
+                  style="@style/TextAppearance.MaterialComponents.Overline"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/teacher_class_head"/>
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/className"
+                  style="@style/TextAppearance.MaterialComponents.Button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textStyle="bold"
+                  android:text="@string/ph_assigned_class"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/studentCount"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:enabled="false"
+                android:gravity="end|center_vertical"
+                android:padding="0dp"
+                android:text="@string/ph_student_count"
+                android:textAllCaps="false"
+                android:textSize="12sp"/>
+
+          </LinearLayout>
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/manageStudentsButton"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:padding="0dp"
+              android:text="@string/label_manage_students"
+              android:textAllCaps="false"
+              app:icon="@drawable/ic_students"
+              app:iconSize="24dp"/>
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/attendanceButton"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:padding="0dp"
+              android:text="@string/label_mark_attendance"
+              android:textAllCaps="false"
+              app:icon="@drawable/ic_attendance"
+              app:iconSize="24dp"/>
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/classAnnouncementsButton"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:padding="0dp"
+              android:text="@string/label_announcements"
+              android:textAllCaps="false"
+              app:icon="@drawable/ic_announcements"
+              app:iconSize="24dp"/>
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/classscheduleButton"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:padding="0dp"
+              android:text="Schedule Class"
+              android:textAllCaps="false"
+              app:icon="@drawable/timetable"
+              app:iconSize="24dp"/>
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/classyoutube"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:padding="0dp"
+              android:text="Youtube Videos"
+              android:textAllCaps="false"
+              app:icon="@drawable/youtube"
+              app:iconSize="24dp"/>
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:textStyle="bold"
+          android:text="@string/courses_head"/>
+
+      <co.aspirasoft.view.NestedGridView
+          android:id="@+id/coursesList"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:numColumns="2"/>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:textStyle="bold"
+          android:text="@string/timetable_head"/>
+
+      <com.google.android.material.tabs.TabLayout
+          style="@style/Widget.MaterialComponents.TabLayout"
+          android:id="@+id/timetableDay"
+          android:layout_width="match_parent"
+          android:layout_height="24dp"
+          android:layout_marginTop="8dp"
+          app:tabGravity="fill"
+          app:tabBackground="@drawable/box"
+          app:tabSelectedTextColor="@android:color/primary_text_dark"
+          app:tabIndicatorColor="@color/colorPrimary"
+          app:tabIndicatorHeight="24dp"
+          app:tabMode="fixed"/>
+
+      <co.aspirasoft.view.NestedViewPager
+          android:id="@+id/timetableView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

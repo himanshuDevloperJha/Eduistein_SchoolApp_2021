@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
+      app:elevation="0dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_scrollFlags="scroll"/>
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+      <com.google.android.material.card.MaterialCardView
+          android:layout_width="128dp"
+          android:layout_height="128dp"
+          app:cardBackgroundColor="?android:attr/colorBackground"
+          app:cardCornerRadius="64dp"
+          app:strokeColor="?android:attr/textColorPrimary"
+          app:strokeWidth="2dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/userImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ph_student"/>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.button.MaterialButton
+          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+          android:id="@+id/changeUserImageButton"
+          android:layout_width="wrap_content"
+          android:layout_height="42dp"
+          android:layout_marginBottom="16dp"
+          android:layout_marginTop="8dp"
+          android:text="@string/label_change_photo"
+          android:textAllCaps="false"
+          app:cornerRadius="16dp"/>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Body1"
+          android:id="@+id/userNameLabel"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/ph_name"
+          android:textStyle="bold"/>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Body2"
+          android:id="@+id/headline"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:autoLink="email"
+          android:textColorLink="?android:attr/textColorPrimary"
+          android:text="@string/ph_type"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/activity_horizontal_margin"
+          android:orientation="vertical">
+
+        <!-- PERSONAL DETAILS -->
+        <LinearLayout
+            android:id="@+id/personalSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Caption"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="16dp"
+              android:layout_marginStart="24dp"
+              android:layout_marginLeft="24dp"
+              android:text="@string/about_head"
+              app:textAllCaps="true"/>
+
+          <!-- Birthday -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/birthdayLabel"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_date"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              android:visibility="gone"
+              app:icon="@drawable/ic_birthday"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Gender -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/genderLabel"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/label_male"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_gender"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+        </LinearLayout>
+
+        <!-- ACADEMIC INFO -->
+        <LinearLayout
+            android:id="@+id/academicSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Caption"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="16dp"
+              android:layout_marginStart="24dp"
+              android:layout_marginLeft="24dp"
+              android:text="@string/academic_head"
+              app:textAllCaps="true"/>
+
+          <!-- Blood Type -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/className"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_assigned_class"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_classroom"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Emergency Contact -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/rollNo"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/hint_student_roll_no"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_students"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+        </LinearLayout>
+
+        <!-- CONTACT DETAILS -->
+        <LinearLayout
+            android:id="@+id/contactSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Caption"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="16dp"
+              android:layout_marginStart="24dp"
+              android:layout_marginLeft="24dp"
+              android:text="@string/contact_head"
+              app:textAllCaps="true"/>
+
+          <!-- Address -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/addressLabel"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_address"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_address"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Email -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/userEmailLabel"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_email"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_email"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Phone -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/phoneLabel"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_phone"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_phone"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+        </LinearLayout>
+
+        <!-- EMERGENCY INFO -->
+        <LinearLayout
+            android:id="@+id/emergencySection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Caption"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="16dp"
+              android:layout_marginStart="24dp"
+              android:layout_marginLeft="24dp"
+              android:text="@string/emergency_head"
+              app:textAllCaps="true"/>
+
+          <!-- Blood Type -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/bloodType"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/hint_blood_group"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_blood"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Emergency Contact -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/emergencyContactName"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_name"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_emergency"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Emergency Email -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/emergencyContactEmail"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_email"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_email"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+          <!-- Emergency Phone -->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/emergencyContactPhone"
+              android:layout_width="wrap_content"
+              android:layout_height="32dp"
+              android:layout_margin="0dp"
+              android:clickable="false"
+              android:padding="0dp"
+              android:text="@string/ph_phone"
+              android:textAllCaps="false"
+              android:textColor="?android:attr/textColorPrimary"
+              app:icon="@drawable/ic_phone"
+              app:iconSize="18dp"
+              app:iconPadding="4dp"
+              app:iconTint="?android:attr/textColorPrimary"/>
+
+        </LinearLayout>
+
+        <!-- Password Reset -->
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:id="@+id/changePasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="32dp"
+            android:padding="0dp"
+            android:text="@string/label_change_password"
+            android:textAllCaps="false"/>
+
+        <!-- Account Delete -->
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:id="@+id/deleteAccountButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:padding="0dp"
+            android:text="@string/label_delete_account"
+            android:textColor="@color/colorWarning"
+            android:textAllCaps="false"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

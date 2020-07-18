@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/activity_horizontal_margin">
+
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Subtitle1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textStyle="bold"
+      android:text="Add Lecture"/>
+
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Body2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Select a day and time to create a new lecture appointment."/>
+
+  <com.google.android.material.tabs.TabLayout
+      android:id="@+id/lectureDayField"
+      style="@style/Widget.MaterialComponents.TabLayout"
+      android:layout_width="match_parent"
+      android:layout_height="32dp"
+      android:layout_marginTop="8dp"
+      app:tabBackground="@drawable/box"
+      app:tabMode="fixed">
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="F"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S"/>
+
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S"/>
+
+  </com.google.android.material.tabs.TabLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:orientation="horizontal"
+      android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Caption"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Time"/>
+
+      <com.google.android.material.button.MaterialButton
+          style="@style/Widget.MaterialComponents.Button.TextButton"
+          android:id="@+id/lectureTimeField"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:paddingBottom="0dp"
+          android:gravity="start|bottom"
+          android:text="00:00"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Caption"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Duration (min)"/>
+
+      <com.google.android.material.textfield.TextInputLayout
+          style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="0dp"
+          app:boxBackgroundMode="none"
+          app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/lectureDurationField"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="0dp"
+            android:inputType="number"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:hint="Duration"
+            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"/>
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+  <com.google.android.material.button.MaterialButton
+      android:id="@+id/okButton"
+      style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:layout_marginTop="8dp"
+      android:text="@string/label_save"/>
+
+</LinearLayout>

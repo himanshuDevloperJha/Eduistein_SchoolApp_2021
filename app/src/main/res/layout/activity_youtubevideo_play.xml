@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="@android:color/black"
+    android:layout_height="match_parent"
+    tools:context=".YoutubevideoPlay">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="WebViewLayout">
+
+        <WebView
+            android:id="@+id/videoView"
+            android:visibility="gone"
+            android:layout_height="220dp"
+            android:layout_width="match_parent"
+         />
+
+        <com.pierfrancescosoffritti.youtubeplayer.player.YouTubePlayerView
+            android:id="@+id/youtube_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <!--<com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:videoId="S0Q4gqBUs7c"
+            app:autoPlay="true"
+            app:showYouTubeButton="false"
+            app:showFullScreenButton="false" />-->
+
+        <ProgressBar
+            android:id="@+id/pb_youtube"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorPrimary"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+
+</LinearLayout>

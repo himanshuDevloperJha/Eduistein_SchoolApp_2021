@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">Eduistein</string>
+    <string name="required_asterisk"><![CDATA[<font color=\'#cc0029\'>*</font>]]></string>
+    <string name="title_sign_in">Sign In</string>
+
+    <!-- Placeholders -->
+    <string name="ph_address">74 Bangur Avenue, Kolkata, West Bengal</string>
+    <string name="ph_date">2 January, 1961</string>
+    <string name="ph_assigned_class">Assigned Class</string>
+    <string name="ph_email">bdeshmukh91@gmail.com</string>
+    <string name="ph_name">Brahman Deshmukh</string>
+    <string name="ph_phone">+9125742299</string>
+    <string name="ph_school">The Exemplary School</string>
+    <string name="ph_student_count">%d Student(s)</string>
+    <string name="ph_type">Student</string>
+
+    <!-- Input Hints -->
+    <string name="hint_blood_group">Blood Group</string>
+    <string name="hint_city">City</string>
+    <string name="hint_class_name">Class Name</string>
+    <string name="hint_class_teacher">Class Teacher Email</string>
+    <string name="hint_country">Country</string>
+    <string name="hint_dob">Date of Birth</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_emails">Emails</string>
+    <string name="hint_emergency_contact">Emergency Contact</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_message">Message</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_password_confirm">Confirm Password</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_postal_code">Postal Code</string>
+    <string name="hint_state">State</string>
+    <string name="hint_street">Street</string>
+    <string name="hint_student_email">Student Email</string>
+    <string name="hint_student_roll_no">Roll Number</string>
+    <string name="hint_subject_class">Class/Section</string>
+    <string name="hint_subject_name">Course Name</string>
+    <string name="hint_subject_teacher">Teacher\'s Email</string>
+
+    <!-- Button Labels -->
+    <string name="label_add">Add</string>
+    <string name="label_add_account">Add Account</string>
+    <string name="label_announcements">Announcements</string>
+    <string name="label_class_teacher">Class Teacher</string>
+    <string name="label_edit">Edit</string>
+    <string name="label_grades">Grades</string>
+    <string name="label_invite">Invite</string>
+    <string name="label_invite_multiple">Send Multiple Invites</string>
+    <string name="label_manage_classes">Class\nManagement</string>
+    <string name="label_manage_courses">Course\nManagement</string>
+    <string name="label_news">News</string>
+    <string name="label_profile">Manage your Eduistein Profile</string>
+    <string name="label_revoke">Revoke</string>
+    <string name="label_save">Save</string>
+    <string name="label_skip_teacher_assignment">Assign a teacher later.</string>
+    <string name="label_staff_invited">%d Pending</string>
+    <string name="label_staff_joined">%d Joined</string>
+    <string name="label_female">Female</string>
+    <string name="label_male">Male</string>
+    <string name="label_manage_students">Manage Your Students</string>
+    <string name="label_mark_attendance">Mark Attendance</string>
+    <string name="label_non_binary">Other</string>
+    <string name="label_privacy">Privacy Policy</string>
+    <string name="label_see_attendance">See Attendance</string>
+    <string name="label_see_grades">See Grades</string>
+    <string name="label_send">Send</string>
+    <string name="label_tos">Terms of Service</string>
+    <string name="label_change_photo">Change Photo</string>
+    <string name="label_change_password">Change Password</string>
+    <string name="label_delete_account">Delete Account</string>
+
+    <!-- Section Headings -->
+    <string name="about_head">About</string>
+    <string name="academic_head">Academic Info</string>
+    <string name="academics_head">Academics</string>
+    <string name="academics_desc">Add/Edit the classes and courses taught at your school. You can also
+    assign class teachers, and select instructors for each subject.
+  </string>
+    <string name="add_class_head">Add Class</string>
+    <string name="add_class_desc">Enter details of the new class to add it to your school. Please note that each
+    school class must have a unique name.
+  </string>
+    <string name="add_student_head">Add Student</string>
+    <string name="add_student_desc">Enter details of the new student to add it to your class. Please note that each
+    student must have a unique roll number and email address.
+  </string>
+    <string name="add_subject_head">Add Subject</string>
+    <string name="add_subject_desc">Enter details of the new subject to add it to your school. Please note that each
+    subject taught to a class must have a unique name.
+  </string>
+    <string name="contact_head">Contact</string>
+    <string name="course_material_head">Course Material</string>
+    <string name="courses_head">Your Courses</string>
+    <string name="emergency_head">Emergency Info</string>
+    <string name="homework_sheets_head">Homework Sheets</string>
+    <string name="lecture_times_head">Lecture Times</string>
+    <string name="staff_head">Staff</string>
+    <string name="staff_desc">Invite your team members to join Eduistein. A magic link will be emailed which
+    can be used to sign up.
+  </string>
+    <string name="student_class_head">You are enrolled in</string>
+    <string name="teacher_class_head">You are assigned to</string>
+    <string name="timetable_head">Timetable</string>
+    <string name="other_accounts_head">Other Accounts</string>
+
+    <!-- Prompts and Explanations -->
+    <string name="use_invited_email">Please use the same email address on which you received the sign up invitation.
+  </string>
+    <string name="emails_input_explanation">Please write one email address on each line.</string>
+    <string name="sign_up_welcome_msg">%s %s,\n\nYou have been invited by your %s to join the Eduistein App.
+    \n\nPlease complete the registration process by creating a password for your new account.
+  </string>
+    <string name="prompt_cancel_signup">Your account has not been created yet. Do you want to exit sign up?</string>
+    <string name="permission_storage">We need permission to access your file storage in order to download
+    images, course contents, and other application files. The files you access frequently are cached on
+    your device in order to provide you a smoother experience.
+  </string>
+
+    <!-- Status Messages -->
+    <string name="status_invitation_sending">Sending Invitation</string>
+    <string name="status_invitation_progress">A magic link is being emailed to %s…</string>
+    <string name="status_invitation_sent">Invitation emailed</string>
+
+    <string name="status_invitations_sending">Sending %d/%d Invitation…</string>
+    <string name="status_invitations_progress">Emailed %d/%d magic links…</string>
+    <string name="status_invitations_sent">Invitations Sent</string>
+
+    <string name="status_invite_pending">Pending</string>
+    <string name="status_invite_accepted">Accepted</string>
+
+    <!-- Error Messages -->
+    <string name="error_invitation_failure">Failed to invite</string>
+    <string name="sign_up_email_explanation">To verify your identity, you must use the same email address to sign up on
+    which you received this invitation.
+  </string>
+    <string name="error_password_mismatch">Passwords do not match.</string>
+    <string name="error_email_invalid">Invalid email address.</string>
+    <string name="error_blood_type_invalid">Invalid blood type.</string>
+    <string name="error_invitation_accepted">This user is already registered. Please make sure you are using the email on
+    which you received the invitation.
+  </string>
+    <string name="error_invitation_not_found">Link verification failed. Please ask your admin to issue a new invitation.
+  </string>
+    <string name="error_sign_up_failed">Sign up failed.</string>
+    <string name="error_email_exists">Email already exists.</string>
+    <string name="error_roll_no_exists">Roll number already exists.</string>
+    <string name="error_invitation_not_sent">Invitation could not be sent</string>
+    <string name="error_invalid_teacher">Select a valid teacher from the list.</string>
+    <string name="error_unknown">Unknown error.</string>
+
+    <!-- Menu Actions -->
+    <string name="menu_account">Account</string>
+
+    <string name="upload_title">Add to %s (%s)</string>
+    <string name="upload_confirm">Uploaded files cannot be edited or removed. Do you want to add \'%s\'?</string>
+    <string name="upload_started">Uploading…</string>
+    <string name="upload_success">File uploaded.</string>
+    <string name="upload_failure">Failed to upload file.</string>
+
+    <string-array name="blood_types">
+        <item>O+</item>
+        <item>O-</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
+
+</resources>

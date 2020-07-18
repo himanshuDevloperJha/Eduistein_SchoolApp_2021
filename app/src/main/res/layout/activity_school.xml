@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryDark"
+    android:theme="@style/AppTheme.Dark"
+    tools:context=".SchoolDashboardActivity">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
+      android:gravity="center"
+      app:elevation="0dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@android:color/transparent"
+        app:layout_scrollFlags="scroll"/>
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+      <com.google.android.material.card.MaterialCardView
+          android:layout_width="128dp"
+          android:layout_height="128dp"
+          app:cardBackgroundColor="@android:color/white"
+          app:cardCornerRadius="16dp"
+          app:cardElevation="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/schoolCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"/>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Headline6"
+          android:id="@+id/schoolName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:gravity="center"
+          android:text="@string/ph_school"/>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Subtitle2"
+          android:id="@+id/schoolEmail"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:gravity="center"
+          android:text="@string/ph_email"/>
+
+      <com.google.android.material.card.MaterialCardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:theme="@style/AppTheme"
+          app:contentPadding="4dp"
+          app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="6dp"
+            android:layout_height="wrap_content">
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:hint="Class">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/admin_class"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:layout_marginBottom="10dp"
+              android:hint="Teacher">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/admin_teacher"
+                android:textColor="#000000"
+                android:enabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+
+
+
+
+      <!-- Staff Section -->
+      <com.google.android.material.card.MaterialCardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:theme="@style/AppTheme"
+          app:contentPadding="4dp"
+          android:layout_marginTop="16dp"
+
+          app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Subtitle1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:gravity="center"
+              android:textStyle="bold"
+              android:text="@string/staff_head"/>
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/joinedStaffButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.75"
+                android:gravity="center"
+                android:onClick="onJoinedStaffClicked"
+                android:text="@string/label_staff_joined"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_team"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp"
+                app:iconSize="24dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/invitedStaffButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.75"
+                android:gravity="center"
+                android:onClick="onInvitedStaffClicked"
+                android:text="@string/label_staff_invited"
+                android:textAllCaps="false"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_invite"
+                app:iconPadding="2dp"
+                app:iconSize="24dp"/>
+
+          </LinearLayout>
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Body2"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:padding="@dimen/_8dp"
+              android:text="@string/staff_desc"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginBottom="8dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:weightSum="1"
+              android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="match_parent"
+                android:hint="@string/hint_email">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/emailField"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:inputType="textFilter|textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:id="@+id/inviteSingleButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:onClick="onInviteSingleClicked"
+                android:text="@string/label_invite"/>
+
+          </LinearLayout>
+
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:id="@+id/inviteMultipleButton"
+              android:layout_width="wrap_content"
+              android:layout_height="42dp"
+              android:onClick="onInviteMultipleClicked"
+              android:text="@string/label_invite_multiple"/>
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <!-- Academics Section -->
+      <com.google.android.material.card.MaterialCardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:theme="@style/AppTheme"
+          app:contentPadding="8dp"
+          app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Subtitle1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:gravity="center"
+              android:textStyle="bold"
+              android:text="@string/academics_head"/>
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/TextAppearance.MaterialComponents.Body2"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/_8dp"
+              android:gravity="center"
+              android:text="@string/academics_desc"/>
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/manageClassesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onManageClassesClicked"
+                android:text="@string/label_manage_classes"/>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/manageSubjectsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onManageSubjectsClicked"
+                android:text="@string/label_manage_courses"/>
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cd_youtube"
+    android:background="@android:color/white"
+    android:elevation="4dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="7dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_thumbnail"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+       >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Title: "
+            android:gravity="center"
+            android:id="@+id/tv_titlee"
+            android:padding="3dp"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="fitXY"
+            android:id="@+id/iv_thumbnail"
+            />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="16dp"-->
+<!--            android:padding="15dp"-->
+<!--            android:id="@+id/iv_thumbnail"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:textColor="@color/colorPrimary"-->
+<!--            />-->
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

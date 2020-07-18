@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center">
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:contentPadding="8dp"
+      app:cardCornerRadius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+      <com.google.android.material.card.MaterialCardView
+          android:layout_width="96dp"
+          android:layout_height="96dp"
+          android:layout_margin="8dp"
+          app:cardBackgroundColor="@android:color/background_light"
+          app:cardCornerRadius="48dp"
+          app:cardElevation="4dp"
+          app:strokeColor="@color/colorPrimaryDark"
+          app:strokeWidth="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/userImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ph_student"/>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_name"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_name"
+            app:boxBackgroundColor="@android:color/transparent">
+
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/nameField"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:inputType="textPersonName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_birthday"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_dob"
+            app:boxBackgroundColor="@android:color/transparent">
+
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/dateOfBirthField"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:inputType="date"
+              android:clickable="false"
+              android:cursorVisible="false"
+              android:focusable="false"
+              android:focusableInTouchMode="false"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_gender"/>
+
+        <RadioGroup
+            android:id="@+id/genderField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/genderMale"
+            android:orientation="horizontal">
+
+          <com.google.android.material.radiobutton.MaterialRadioButton
+              android:id="@+id/genderMale"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:layout_marginRight="8dp"
+              android:text="@string/label_male"/>
+
+          <com.google.android.material.radiobutton.MaterialRadioButton
+              android:id="@+id/genderFemale"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="8dp"
+              android:layout_marginRight="8dp"
+              android:text="@string/label_female"/>
+
+          <com.google.android.material.radiobutton.MaterialRadioButton
+              android:id="@+id/genderOther"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/label_non_binary"/>
+
+        </RadioGroup>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

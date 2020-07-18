@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.cygnus"
+    tools:ignore="LockedOrientationActivity">
+
+    <application
+        android:name=".CygnusApp"
+        android:icon="@drawable/applogoo"
+        android:label="@string/app_name"
+        android:logo="@drawable/applogoo"
+        android:roundIcon="@drawable/applogoo"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".St_Youtubethumbnails"></activity>
+        <activity android:name=".St_Chapters" />
+        <activity
+            android:name=".YoutubevideoPlay"
+            android:screenOrientation="sensorLandscape" />
+        <activity android:name=".St_YoutubeVideos" />
+        <activity android:name=".St_ScheduledClass" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="cygnus.page.link"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SignInActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".sign_up.SignUpActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".StudentDashboardActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".AttendanceActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Attendance"
+            android:parentActivityName=".StudentDashboardActivity" />
+        <activity
+            android:name=".ReportCardActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Report Card"
+            android:parentActivityName=".StudentDashboardActivity" />
+        <activity
+            android:name=".TeacherDashboardActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ProfileActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Profile" />
+        <activity
+            android:name=".StudentsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Manage Students"
+            android:parentActivityName=".TeacherDashboardActivity" />
+        <activity
+            android:name=".NoticeActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Announcements"
+            android:parentActivityName=".TeacherDashboardActivity" />
+        <activity
+            android:name=".MarkAttendanceActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Mark Attendance"
+            android:parentActivityName=".TeacherDashboardActivity" />
+        <activity
+            android:name=".SubjectActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Subjects" />
+        <activity
+            android:name=".TestsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Grades"
+            android:parentActivityName=".SubjectActivity" />
+        <activity
+            android:name=".TestActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Add Grades"
+            android:parentActivityName=".SubjectActivity" />
+        <activity
+            android:name=".SchoolDashboardActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".SchoolTeachersActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Staff"
+            android:parentActivityName=".SchoolDashboardActivity" />
+        <activity
+            android:name=".SchoolClassesActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Manage Classes"
+            android:parentActivityName=".SchoolDashboardActivity" />
+        <activity
+            android:name=".SchoolSubjectsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Manage Classes"
+            android:parentActivityName=".SchoolDashboardActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.cygnus.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+</manifest>

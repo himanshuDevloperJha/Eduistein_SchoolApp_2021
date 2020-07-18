@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="8dp"
+      app:cardBackgroundColor="?android:attr/colorBackground"
+      app:cardCornerRadius="32dp"
+      app:strokeColor="?android:attr/textColorPrimary"
+      app:strokeWidth="2dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/userImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ph_student"/>
+
+  </com.google.android.material.card.MaterialCardView>
+
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Body1"
+      android:id="@+id/userNameLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/ph_name"
+      android:textStyle="bold"/>
+
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Body2"
+      android:id="@+id/userEmailLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/ph_email"/>
+
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Caption"
+      android:id="@+id/headline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/ph_type"/>
+
+  <com.google.android.material.button.MaterialButton
+      style="@style/Widget.MaterialComponents.Button"
+      android:id="@+id/profileButton"
+      android:layout_width="wrap_content"
+      android:layout_height="42dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginTop="8dp"
+      android:text="@string/label_profile"
+      android:textAllCaps="false"
+      app:cornerRadius="16dp"/>
+
+  <View android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8888"/>
+
+</LinearLayout>

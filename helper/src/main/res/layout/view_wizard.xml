@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:paddingBottom="?actionBarSize"
+      android:paddingEnd="@dimen/activity_horizontal_margin"
+      android:paddingStart="@dimen/activity_horizontal_margin"
+      android:paddingTop="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/wizardIcon"
+          android:layout_width="64dp"
+          android:layout_height="64dp"
+          android:layout_margin="8dp"
+          android:scaleType="centerInside"
+          android:tint="@android:color/white"/>
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/wizardTitle"
+          style="@style/TextAppearance.MaterialComponents.Headline6"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:textColor="@android:color/white"
+          android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <co.aspirasoft.view.SwipelessViewPager
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/activity_horizontal_margin"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:layout_gravity="bottom"
+      android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorPrimary"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+      <params.com.stepview.StatusViewScroller
+          android:id="@+id/stepsView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          app:circleColor="?attr/colorAccent"
+          app:circleColorCurrent="?attr/colorAccent"
+          app:circleColorIncomplete="?attr/colorPrimary"
+          app:circleRadius="6dp"
+          app:completeDrawable="@drawable/ic_complete"
+          app:currentCount="1"
+          app:currentStepZoom="0.50"
+          app:drawLabels="false"
+          app:lineColor="?attr/colorAccent"
+          app:lineColorCurrent="?attr/colorAccent"
+          app:lineColorIncomplete="?attr/colorPrimary"
+          app:lineGap="0dp"
+          app:lineLength="8dp"
+          app:lineWidth="1dp"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/nextButton"
+          style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+  </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

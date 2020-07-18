@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp">
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+      <com.cygnus.view.UserSummaryView
+          android:id="@+id/userSummaryView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+
+      <View android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4888"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:padding="8dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other_accounts_head"/>
+
+        <ListView
+            android:id="@+id/accountsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/addAccountButton"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="@string/label_add_account"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"/>
+
+      </LinearLayout>
+
+      <View android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4888"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/privacyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/label_privacy"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/tosButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/label_tos"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:id="@+id/signOutButton"
+        android:layout_width="36dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|end"
+        android:padding="0dp"
+        app:icon="@drawable/ic_action_sign_out"
+        app:iconSize="28dp"
+        app:iconPadding="4dp"
+        app:iconTint="?android:attr/textColorPrimary"/>
+
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</com.google.android.material.card.MaterialCardView>
