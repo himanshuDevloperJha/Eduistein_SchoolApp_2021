@@ -26,36 +26,109 @@ import java.util.stream.Collectors;
 
 public class St_Chapters extends AppCompatActivity {
     GridView gv_chapters;
-    DatabaseReference rootRef, rootRef1, rootRef2, rootRef3;
-    String cls_teacherid, subjectname, subject_teacherid, teacher_emailid;
+    DatabaseReference rootRef, rootRef1, rootRef2, rootRef3,rootRef4;
+    String user_schoolid, subjectname, classid, teacher_emailid,user_standard;
     List<Chapter> chapterlist = new ArrayList<>();
     List<Chapter> chapterlist2 = new ArrayList<>();
-    List<String> chapternamelist=new ArrayList<>();
-    List<String> chapternolist=new ArrayList<>();
+    List<String> chapternamelist = new ArrayList<>();
+    List<String> chapternolist = new ArrayList<>();
 
     ArrayList<String> chapterlinklist = new ArrayList<>();
     ProgressBar pb_chapters;
+    List<String> ch1, ch2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_st__chapters);
 
+
         gv_chapters = findViewById(R.id.gv_chapters);
         pb_chapters = findViewById(R.id.pb_chapters);
 
         teacher_emailid = getIntent().getStringExtra("teacher_emailid");
+        classid = getIntent().getStringExtra("user_classid");
+        user_standard = getIntent().getStringExtra("user_standard");
         subjectname = getIntent().getStringExtra("subjectname");
-        Log.e("msg", "subjectnamee: " + subjectname);
+        user_schoolid = getIntent().getStringExtra("user_schoolid");
 
         rootRef3 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
-        rootRef = FirebaseDatabase.getInstance().getReference().child("youtubevideos");
+
+        rootRef3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot datas2 : dataSnapshot.getChildren()) {
+
+                    if (user_standard.equals(datas2.child("standard").getValue().toString()) &&
+                            subjectname.equals(datas2.getKey())) {
+                        rootRef4 = FirebaseDatabase.getInstance().getReference().child("admin-videos").
+                                child(datas2.getKey()).child("Chapters");
+
+                        rootRef4.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (final DataSnapshot datas2 : dataSnapshot.getChildren()) {
+
+
+                                    Log.e("msg", "onDataChangeeeee: " + datas2.getKey());
+                                    Log.e("msg", "onDataChangeeeee1: " + datas2.child("name").getValue());
+                                    final String chapterno = datas2.getKey();
+                                    final String chaptername = datas2.child("name").getValue().toString();
+                                    chapternolist.add(chapterno);
+                                    chapternamelist.add(chaptername);
+
+
+                                }
+
+
+                                LinkedHashSet<String> chaptername = new LinkedHashSet<>(chapternamelist);
+                                LinkedHashSet<String> chapterno = new LinkedHashSet<>(chapternolist);
+                                ch1 = new ArrayList<String>(chaptername);
+
+                                ch2 = new ArrayList<String>(chapterno);
+                                Log.e("msg", "dist: " + chaptername + " = " + chapterno);
+                                Log.e("msg", "dist: " + ch1 + " = " + ch2);
+
+
+                                Chaptersdapter chaptersdapter = new Chaptersdapter(St_Chapters.this,
+                                        teacher_emailid, subjectname, ch1, ch2, user_schoolid,classid,user_standard);
+                                gv_chapters.setAdapter(chaptersdapter);
+                                pb_chapters.setVisibility(View.GONE);
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+
+                    } else {
+                        Log.e("msg", "subjectnamee1112: hii" );
+
+                    }
+
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("msg", "subjectnamee1113: "+databaseError.toString() );
+
+            }
+        });
+
+
+        rootRef = FirebaseDatabase.getInstance().getReference().child(user_schoolid).child("youtubevideos");
 
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (final DataSnapshot datas : dataSnapshot.getChildren()) {
-
 
                     final String subjectkey = datas.getKey();
                     rootRef2 = rootRef.child(subjectkey);
@@ -69,7 +142,7 @@ public class St_Chapters extends AppCompatActivity {
 
                                     Log.e("msg", "subjectnamee1: " + datas1.child("subject").getValue().toString());
 
-                                    rootRef1 = FirebaseDatabase.getInstance().getReference().
+                                    rootRef1 = FirebaseDatabase.getInstance().getReference().child(user_schoolid).
                                             child("youtubevideos").child(subjectkey).
                                             child(datas1.getKey()).child("Chapters");
 
@@ -90,55 +163,20 @@ public class St_Chapters extends AppCompatActivity {
                                                 chapternamelist.add(chaptername);
 
 
-
-
-
-                                    /*rootRef2 = FirebaseDatabase.getInstance().getReference().
-                                            child("youtubevideos").child(datas.getKey()).child("Chapters")
-                                    .child(datas2.getKey()).child("videos-url");
-
-                                    rootRef2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-                                            for(DataSnapshot datas3: dataSnapshot.getChildren()){
-
-
-                                                String chapterurl=  datas3.child("url").getValue().toString();
-                                                Log.e("msg", "onDataChangeeeee1: "+chapterurl);
-
-
                                             }
 
 
-                                        }
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-                                            //   Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    });*/
-
-
-                                            }
-
-//                                            List<String> listname = chapternamelist.stream().distinct().collect(Collectors.toList());
-//                                            Log.e("msg", "dist: "+listname );
-//
-//                                            List<Object> listno = chapternolist.stream().distinct().collect(Collectors.toList());
-//                                            Log.e("msg", "dist: "+listno );
-
-                                           LinkedHashSet<String> chaptername = new LinkedHashSet<>(chapternamelist);
+                                            LinkedHashSet<String> chaptername = new LinkedHashSet<>(chapternamelist);
                                             LinkedHashSet<String> chapterno = new LinkedHashSet<>(chapternolist);
-                                            List<String> ch1 = new ArrayList<String>(chaptername);
+                                            ch1 = new ArrayList<String>(chaptername);
 
-                                            List<String> ch2 = new ArrayList<String>(chapterno);
-                                            Log.e("msg", "dist: "+chaptername+" = "+chapterno );
-                                            Log.e("msg", "dist: "+ch1+" = "+ch2 );
-
+                                            ch2 = new ArrayList<String>(chapterno);
+                                            Log.e("msg", "dist: " + chaptername + " = " + chapterno);
+                                            Log.e("msg", "dist: " + ch1 + " = " + ch2);
 
 
                                             Chaptersdapter chaptersdapter = new Chaptersdapter(St_Chapters.this,
-                                                    chapterlist, teacher_emailid, subjectname,ch1,ch2);
+                                                     teacher_emailid, subjectname, ch1, ch2, user_schoolid,classid,user_standard);
                                             gv_chapters.setAdapter(chaptersdapter);
                                             pb_chapters.setVisibility(View.GONE);
 
@@ -147,10 +185,6 @@ public class St_Chapters extends AppCompatActivity {
 
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
-                                            //  pb_chapters.setVisibility(View.GONE);
-
-                                            //  Toast.makeText(St_Chapters.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-
                                         }
                                     });
 
@@ -164,15 +198,12 @@ public class St_Chapters extends AppCompatActivity {
                         }
 
 
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                             //   Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
 
                         }
                     });
-
-
 
 
                 }

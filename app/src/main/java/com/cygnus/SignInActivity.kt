@@ -152,12 +152,9 @@ class SignInActivity : AppCompatActivity() {
         startActivity(Intent(
                 applicationContext,
                 when (user) {
-
                     is School -> SchoolDashboardActivity::class.java
                     is Teacher -> TeacherDashboardActivity::class.java
                     else -> StudentDashboardActivity::class.java
-
-
                 }
         ).apply {
             putExtra(CygnusApp.EXTRA_USER, user)

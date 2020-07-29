@@ -23,9 +23,9 @@ import java.util.ArrayList;
 public class St_Youtubethumbnails extends AppCompatActivity {
     RecyclerView rv_youtubethumb;
     ProgressBar pb_thumbnail;
-    String teacher_emailidd, chapter_name, sub_name;
+    String teacher_emailidd, chapter_name, sub_name, user_schoolid, classid, user_standard;
     ThumbnailAdapter thumbnailAdapter;
-    DatabaseReference rootRef, rootRef1, rootRef2, rootRef3;
+    DatabaseReference rootRef, rootRef1, rootRef2, rootRef3,rootRef4,rootRef5;
 
     ArrayList<Chapter> chapter_urllist = new ArrayList<>();
 
@@ -41,13 +41,105 @@ public class St_Youtubethumbnails extends AppCompatActivity {
         teacher_emailidd = getIntent().getStringExtra("teacher_emailidd");
         chapter_name = getIntent().getStringExtra("chapter_name");
         sub_name = getIntent().getStringExtra("sub_name");
+        user_schoolid = getIntent().getStringExtra("user_schoolid");
+        classid = getIntent().getStringExtra("user_classid");
+        user_standard = getIntent().getStringExtra("user_standard");
         //chapter_urllist = getIntent().getStringArrayListExtra("chapter_urllist");
         Log.e("msg", "onCreateList: " + chapter_urllist);
 
         Log.e("msg", "subjectnameeee1: " + sub_name);
 
+        rootRef3 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
 
-        rootRef = FirebaseDatabase.getInstance().getReference().child("youtubevideos");
+        rootRef3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (final DataSnapshot datas : dataSnapshot.getChildren()) {
+
+                    if (user_standard.equals(datas.child("standard").getValue().toString()) &&
+                            sub_name.equals(datas.getKey())) {
+
+                        rootRef4 = FirebaseDatabase.getInstance().getReference().child("admin-videos").
+                                child(datas.getKey()).child("Chapters");
+
+
+                        rootRef4.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                for (final DataSnapshot datas2 : dataSnapshot.getChildren()) {
+
+                                    if (datas2.child("name").getValue().toString().equals(chapter_name)) {
+                                        Log.e("msg", "onDataChangeeeee: " + datas2.getKey());
+                                        Log.e("msg", "onDataChangeeeee1: " + datas2.child("name").getValue());
+
+                                        rootRef5 = FirebaseDatabase.getInstance().getReference().child("admin-videos").
+                                                child(datas.getKey()).child("Chapters").child(datas2.getKey())
+                                        .child("chapter-videos");
+
+
+                                        rootRef5.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                for (final DataSnapshot datas3 : dataSnapshot.getChildren()) {
+                                                        Log.e("msg", "onDataChangeeeee: " + datas3.getKey());
+
+                                                        final String chapterurl = datas3.child("url").getValue().toString();
+                                                        final String chaptertitle = datas3.child("title").getValue().toString();
+                                                        Chapter c = new Chapter("", "", chapterurl, chaptertitle);
+                                                        chapter_urllist.add(c);
+
+                                                        rv_youtubethumb.setLayoutManager(new LinearLayoutManager(St_Youtubethumbnails.this, RecyclerView.VERTICAL, false));
+                                                        thumbnailAdapter = new ThumbnailAdapter(St_Youtubethumbnails.this,
+                                                                chapter_urllist);
+
+                                                        rv_youtubethumb.setAdapter(thumbnailAdapter);
+                                                        pb_thumbnail.setVisibility(View.GONE);
+
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                //  pb_chapters.setVisibility(View.GONE);
+
+                                                //  Toast.makeText(St_Chapters.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+
+                                    } else {
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                //  pb_chapters.setVisibility(View.GONE);
+
+                                //  Toast.makeText(St_Chapters.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    } else {
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        rootRef = FirebaseDatabase.getInstance().getReference().child(user_schoolid).child("youtubevideos");
 
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -68,7 +160,7 @@ public class St_Youtubethumbnails extends AppCompatActivity {
 
                                     Log.e("msg", "subjectnamee1: " + datas1.child("subject").getValue().toString());
 
-                                    rootRef1 = FirebaseDatabase.getInstance().getReference().
+                                    rootRef1 = FirebaseDatabase.getInstance().getReference().child(user_schoolid).
                                             child("youtubevideos").child(subjectkey).
                                             child(datas1.getKey()).child("Chapters");
 

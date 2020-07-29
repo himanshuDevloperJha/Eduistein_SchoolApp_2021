@@ -22,7 +22,6 @@ import com.cygnus.R;
 import com.cygnus.St_Chapters;
 import com.cygnus.YoutubevideoPlay;
 import com.cygnus.model.Chapter;
-import com.cygnus.model.Youtube;
 
 import org.w3c.dom.Text;
 
@@ -59,7 +58,14 @@ public class ThumbnailAdapter extends RecyclerView.Adapter<ThumbnailAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-holder.tv_titlee.setText(holder.tv_titlee.getText()+""+thumbnaillist.get(position).getChaptertitle());
+        if(thumbnaillist.get(position).getChaptertitle().equals("")){
+            holder.tv_titlee.setVisibility(View.GONE);
+        }
+        else {
+            holder.tv_titlee.setVisibility(View.VISIBLE);
+            holder.tv_titlee.setText(holder.tv_titlee.getText()+""+thumbnaillist.get(position).getChaptertitle());
+
+        }
         if (thumbnaillist.get(position).getChapterurl().startsWith("https://youtu")) {
           String videoid = extractYTId1(thumbnaillist.get(position).getChapterurl());
             String url = "http://img.youtube.com/vi/"+videoid + "/0.jpg";

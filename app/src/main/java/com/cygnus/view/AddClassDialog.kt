@@ -33,10 +33,12 @@ class AddClassDialog : BottomSheetDialogFragment() {
 
     private lateinit var schoolId: String
     private lateinit var teachers: ArrayList<String>
+    private  var classes: ArrayList<String> = ArrayList()
 
     private lateinit var classNameField: TextInputEditText
     private lateinit var class_teacher_name: TextInputEditText
     private lateinit var classTeacherField: AutoCompleteTextView
+    private lateinit var classStandard: AutoCompleteTextView
     private lateinit var classTeacherWrapper: TextInputLayout
     private lateinit var skipTeacherAssignment: MaterialCheckBox
     private lateinit var okButton: Button
@@ -57,13 +59,31 @@ class AddClassDialog : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        classes.add("Class 1st")
+        classes.add("Class 2nd")
+        classes.add("Class 3rd")
+        classes.add("Class 4th")
+        classes.add("Class 5th")
+        classes.add("Class 6th")
+        classes.add("Class 7th")
+        classes.add("Class 8th")
+        classes.add("Class 9th")
+        classes.add("Class 10th")
+        classes.add("Class 11th")
+        classes.add("Class 12th")
+
         classNameField = v.findViewById(R.id.classNameField)
 
         classTeacherField = v.findViewById(R.id.classTeacherField)
+        classStandard = v.findViewById(R.id.classStandard)
         class_teacher_name = v.findViewById(R.id.class_teacher_name)
         classTeacherWrapper = v.findViewById(R.id.classTeacherWrapper)
+
         classTeacherField.setAdapter(ArrayAdapter(v.context, android.R.layout.select_dialog_item, teachers))
         classTeacherField.threshold = 1
+
+        classStandard.setAdapter(ArrayAdapter(v.context, android.R.layout.select_dialog_item, classes))
+        classStandard.threshold = 1
 
         skipTeacherAssignment = v.findViewById(R.id.skipTeacherAssignment)
         skipTeacherAssignment.setOnCheckedChangeListener { _, isChecked ->
@@ -82,6 +102,7 @@ class AddClassDialog : BottomSheetDialogFragment() {
     private fun setEditModeEnabled(enabled: Boolean) {
         classNameField.isEnabled = enabled && !isReadOnly
         classTeacherField.isEnabled = enabled
+        classStandard.isEnabled = enabled
         class_teacher_name.isEnabled = enabled
         skipTeacherAssignment.visibility = if (enabled) View.VISIBLE else View.GONE
         okButton.visibility = if (enabled) View.VISIBLE else View.GONE
@@ -94,6 +115,7 @@ class AddClassDialog : BottomSheetDialogFragment() {
             classNameField.setText(model?.name)
             class_teacher_name.setText(model?.teachername)
             classTeacherField.setText(model?.teacherId)
+            classStandard.setText(model?.standard)
         }
     }
 
@@ -110,6 +132,7 @@ class AddClassDialog : BottomSheetDialogFragment() {
             val className = classNameField.text.toString().trim()
             val teacherName = class_teacher_name.text.toString().trim()
             var classTeacher = classTeacherField.text.toString().trim()
+            var classStandard = classStandard.text.toString().trim()
             if (!skipTeacherAssignment.isChecked && classTeacher.isBlank()) {
                 onError()
                 return
@@ -118,7 +141,7 @@ class AddClassDialog : BottomSheetDialogFragment() {
             }
 
             if (teachers.contains(classTeacher) || skipTeacherAssignment.isChecked) {
-                val schoolClass = SchoolClass(className, classTeacher,teacherName)
+                val schoolClass = SchoolClass(className, classTeacher,teacherName,classStandard)
                 if (classTeacher.isNotBlank()) {
                     CygnusApp.refToClasses(schoolId)
                             .orderByChild("teacherId")

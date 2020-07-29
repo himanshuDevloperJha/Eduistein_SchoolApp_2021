@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.cygnus.adapter.SubjectsAdapter;
+import com.cygnus.model.Schedule;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
 public class St_ScheduledClass extends AppCompatActivity {
 RecyclerView rv_subjects;
 SubjectsAdapter subjectsAdapter;
-String classname;
-ArrayList<String> subjectlist=new ArrayList<>();
+String classname,user_schoolid;
+ArrayList<Schedule> subjectlist=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +31,14 @@ ArrayList<String> subjectlist=new ArrayList<>();
         classname=getIntent().getStringExtra("user_classid");
       //  user_teacherid=getIntent().getStringExtra("user_teacherid");
       //  user_classid=getIntent().getStringExtra("user_classid");
-      //  user_schoolid=getIntent().getStringExtra("user_schoolid");
+        user_schoolid=getIntent().getStringExtra("user_schoolid");
 
         //subjectlist = getIntent().getStringArrayListExtra("subjectlist");
 
 
 
         DatabaseReference reference ;
-        reference = FirebaseDatabase.getInstance().getReference().child("scheduleclass");
+        reference = FirebaseDatabase.getInstance().getReference().child(user_schoolid).child("scheduleclass");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -45,17 +46,16 @@ ArrayList<String> subjectlist=new ArrayList<>();
                     if(classname.equals(datas.child("classs").getValue().toString())){
                         try{
                             String s=datas.getKey();
-                            String date=datas.child("date").getValue().toString();
-                            String starttime=datas.child("starttime").getValue().toString();
-                            String endtime=datas.child("endtime").getValue().toString();
-                            String cls=datas.child("classs").getValue().toString();
-                            String zoomlink=datas.child("zoomlink").getValue().toString();
-                            subjectlist.add(s);
+
+                            Schedule schedulemodel=new Schedule(datas.child("email").getValue().toString(),
+                                    datas.child("classs").getValue().toString(), datas.getKey(),
+                                    datas.child("date").getValue().toString(), datas.child("starttime").getValue().toString(),
+                                    datas.child("endtime").getValue().toString(), datas.child("zoomlink").getValue().toString());
+                            subjectlist.add(schedulemodel);
                             //  Toast.makeText(St_ScheduledClass.this, ""+date, Toast.LENGTH_SHORT).show();
 
                             rv_subjects.setLayoutManager(new LinearLayoutManager(St_ScheduledClass.this,RecyclerView.VERTICAL,false));
-                            subjectsAdapter=new SubjectsAdapter(St_ScheduledClass.this,subjectlist,
-                                    date,starttime,endtime,cls,zoomlink,s) ;
+                            subjectsAdapter=new SubjectsAdapter(St_ScheduledClass.this,subjectlist) ;
                             rv_subjects.setAdapter(subjectsAdapter);
 
 
@@ -66,7 +66,7 @@ ArrayList<String> subjectlist=new ArrayList<>();
                         }
                     }
                     else {
-                        Toast.makeText(St_ScheduledClass.this, "No scheduled class", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(St_ScheduledClass.this, "No scheduled class", Toast.LENGTH_SHORT).show();
                     }
 
 

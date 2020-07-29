@@ -26,21 +26,25 @@ public class Chaptersdapter extends BaseAdapter {
    // private List<Chapter> chapterlistt;
     //ArrayList<String> chapterlinklistt;
 Context mcontext;
-String teacher_emailidd,subjectnamee;
+String teacher_emailidd,subjectnamee,user_schoolidd,classidd,user_standardd;
 
     private LayoutInflater mInflater;
 
     List<String> chapternamee;
     List<String> chapternoo;
-    public Chaptersdapter(Context context, List<Chapter> chapterlist,
+    public Chaptersdapter(Context context,
                           String teacherEmailid, String subjectname,
-                          List<String> chaptername,  List<String> chapterno) {
+                          List<String> chaptername, List<String> chapterno, String user_schoolid,
+                          String classid,String user_standard) {
         mInflater = LayoutInflater.from(context);
         mcontext=context;
         teacher_emailidd=teacherEmailid;
         chapternoo=chapterno;
         chapternamee=chaptername;
         subjectnamee=subjectname;
+        user_schoolidd=user_schoolid;
+        classidd=classid;
+        user_standardd=user_standard;
 
     }
 
@@ -76,7 +80,9 @@ String teacher_emailidd,subjectnamee;
                     intent.putExtra("sub_name",subjectnamee);
                     intent.putExtra("chapter_name",chapternamee.get(position));
                     intent.putExtra("chapter_num",chapternoo.get(position));
-                    //intent.putStringArrayListExtra("chapter_urllist", chapterlinklistt);
+                    intent.putExtra("user_schoolid",user_schoolidd);
+                    intent.putExtra("user_classid",classidd);
+                    intent.putExtra("user_standard", user_standardd);
                     mcontext.startActivity(intent);
 
 

@@ -55,12 +55,13 @@ class SchoolDashboardActivity : DashboardActivity() {
         setContentView(R.layout.activity_school)
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
+        Log.e("msg","schoolName----"+schoolId)
 
         val clslist: MutableList<String> = mutableListOf()
         val teacherlist: MutableList<String> = mutableListOf()
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val rootRef = FirebaseDatabase.getInstance().reference
-        val uidRef = rootRef.child("eq32pznJQ6MgHFu2jvyFSTmRBY72")
+        val uidRef = rootRef.child(schoolId)
                 .child("classes")
 
         val valueEventListener = object : ValueEventListener {
@@ -94,7 +95,7 @@ class SchoolDashboardActivity : DashboardActivity() {
             val t_name = admin_class.adapter.getItem(i).toString()
             Log.e("msg", "UNITSSS" + t_name)
 
-            val uidRef1 = rootRef.child("eq32pznJQ6MgHFu2jvyFSTmRBY72")
+            val uidRef1 = rootRef.child(schoolId)
                     .child("classes")
 
             val valueEventListener1 = object : ValueEventListener {

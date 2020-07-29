@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cygnus.R;
+import com.cygnus.model.Schedule;
 
 import java.util.ArrayList;
 
@@ -21,19 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.ViewHolder> {
 
 Context context;
-String date,starttime,endtime,cls,zoomlink,s;
-    ArrayList<String> subjectlist;
-    public SubjectsAdapter(Context context, ArrayList<String> subjectlist,
-                           String date, String starttime, String endtime,
-                           String cls, String zoomlink, String s) {
+//String date,starttime,endtime,cls,zoomlink,s;
+    ArrayList<Schedule> subjectlist;
+    public SubjectsAdapter(Context context, ArrayList<Schedule> subjectlist) {
         this.context = context;
         this.subjectlist = subjectlist;
-        this.date = date;
-        this.starttime = starttime;
-        this.endtime = endtime;
-        this.cls = cls;
-        this.zoomlink = zoomlink;
-        this.s = s;
     }
 
     @NonNull
@@ -44,18 +37,18 @@ String date,starttime,endtime,cls,zoomlink,s;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-holder.tv_subject.setText(subjectlist.get(position)+" ("+cls+")");
-holder.tv_date.setText(holder.tv_date.getText().toString()+""+date);
-holder.tv_starttime.setText(holder.tv_starttime.getText().toString()+""+starttime);
-holder.tv_endtime.setText(holder.tv_endtime.getText().toString()+""+endtime);
-holder.tv_zoomlink.setText(zoomlink);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+holder.tv_subject.setText(subjectlist.get(position).getSubject()+" ("+subjectlist.get(position).getClasss()+")");
+holder.tv_date.setText(holder.tv_date.getText().toString()+""+subjectlist.get(position).getDate());
+holder.tv_starttime.setText(holder.tv_starttime.getText().toString()+""+subjectlist.get(position).getStarttime());
+holder.tv_endtime.setText(holder.tv_endtime.getText().toString()+""+subjectlist.get(position).getEndtime());
+holder.tv_zoomlink.setText(subjectlist.get(position).getZoomlink());
         holder.tv_zoomlink.setPaintFlags(holder.tv_zoomlink.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 holder.tv_zoomlink.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         try{
-            String url = zoomlink;
+            String url = subjectlist.get(position).getZoomlink();
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             context.startActivity(intent);

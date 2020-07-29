@@ -59,7 +59,9 @@ class SchoolClassesActivity : DashboardChildActivity() {
         val dialog = AddClassDialog.newInstance(teachers, currentUser.id)
         dialog.onOkListener = { schoolClass ->
             if (schoolClass.teacherId.isNotBlank()) {
-                classes.filter { it.teacherId == schoolClass.teacherId }
+                classes.filter {
+                    it.teacherId == schoolClass.teacherId
+                }
                         .forEach { it.teacherId = "" }
             }
             classes.add(schoolClass)

@@ -18,7 +18,13 @@ import com.cygnus.model.User
 import com.cygnus.timetable.TimetablePagerAdapter
 import com.cygnus.view.SubjectView
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard_student.*
+import kotlinx.android.synthetic.main.activity_dashboard_student.toolbar
+import kotlinx.android.synthetic.main.activity_school.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,6 +46,7 @@ class StudentDashboardActivity : DashboardActivity() {
     private var classPosts = ArrayList<NoticeBoardPost>()
     private  var subjectNames= ArrayList<String>()
     var teacherid:String?=null
+    var standard:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard_student)
@@ -54,6 +61,29 @@ class StudentDashboardActivity : DashboardActivity() {
                 return
             }
         }
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val uidRef1 = rootRef.child(schoolId)
+                .child("classes")
+
+        val valueEventListener1 = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.getChildren()) {
+
+                    val c = ds.child("name").getValue().toString()
+                    if (currentStudent.classId.equals(c)) {
+                        standard = ds.child("standard").getValue().toString()
+                        Log.e("msg","msggg333333"+ standard);   //gives the value for given keyname
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("msg", databaseError.message) //Don't ignore errors!
+            }
+        }
+        uidRef1.addListenerForSingleValueEvent(valueEventListener1)
 
         attendanceButton.setOnClickListener { startSecurely(AttendanceActivity::class.java) }
         classAnnouncementsButton.setOnClickListener {
@@ -65,6 +95,8 @@ class StudentDashboardActivity : DashboardActivity() {
             val intent = Intent(this,St_YoutubeVideos::class.java)
             intent.putExtra("user_classid",currentStudent.classId)
             intent.putExtra("user_teacherid",teacherid)
+            intent.putExtra("user_schoolid",schoolId)
+            intent.putExtra("user_standard",standard)
             startActivity(intent)
         }
 
@@ -77,61 +109,6 @@ class StudentDashboardActivity : DashboardActivity() {
             intent.putExtra("user_schoolid",schoolId)
             intent.putStringArrayListExtra("subjectlist", subjectNames as ArrayList<String>?)
             startActivity(intent)
-           /* val dialog= Dialog(this)
-            dialog.setContentView(R.layout.custom_student_schedule_class)
-            dialog.show()
-
-            val class_subject=dialog.findViewById(R.id.class_st_sub) as TextInputEditText
-            val class_st_classname=dialog.findViewById(R.id.class_st_classname) as TextInputEditText
-            val class_zoomlink=dialog.findViewById(R.id.class_st_zoomlink) as TextInputEditText
-            val class_st_date=dialog.findViewById(R.id.class_st_date) as TextInputEditText
-            val class_st_starttime=dialog.findViewById(R.id.class_st_starttime) as TextInputEditText
-            val class_st_endtime=dialog.findViewById(R.id.class_st_endtime) as Text
-            InputEditText
-
-             val listt: MutableList<Schedule> = mutableListOf()
-            val uid = FirebaseAuth.getInstance().currentUser!!.uid
-            val rootRef = FirebaseDatabase.getInstance().reference
-            val uidRef = rootRef.child("scheduleclass")
-            Log.e("msg","msg11112"+uid)
-            val valueEventListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val children = dataSnapshot!!.children
-                    val subject = dataSnapshot.child("subject").getValue(String::class.java)
-                    val zoomlink = dataSnapshot.child("zoomlink").getValue(String::class.java)
-                 //   val value = dataSnapshot.getValue(String::class.java)
-                    Log.d("msg1111", subject+","+zoomlink) //Don't ignore errors!
-class_subject.setText(subject)
-class_zoomlink.setText(zoomlink)
-                    class_st_classname.setText(dataSnapshot.child("classs").getValue(String::class.java))
-                    class_st_date.setText(dataSnapshot.child("date").getValue(String::class.java))
-                    class_st_starttime.setText(dataSnapshot.child("starttime").getValue(String::class.java))
-                    class_st_endtime.setText(dataSnapshot.child("endtime").getValue(String::class.java))
-                    class_zoomlink.setOnClickListener {
-                        try{  val url = zoomlink
-                            val intent = Intent(Intent.ACTION_VIEW)
-                            intent.data = Uri.parse(url)
-                            startActivity(intent)
-                        }
-                        catch (e:Exception){
-                          //  Toast.makeText(this,"Invalid Link",Toast.LENGTH_SHORT).show
-                        }
-
-                    }
-//                    children.forEach {
-//                        println(it.toString())
-//
-//                    }
-//                    dataSnapshot.children.mapNotNullTo(listt) {
-//                        it.getValue<Schedule>(Schedule::class.java) }
-
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Log.d("msg", databaseError.message) //Don't ignore errors!
-                }
-            }
-            uidRef.addListenerForSingleValueEvent(valueEventListener)*/
 
 
 

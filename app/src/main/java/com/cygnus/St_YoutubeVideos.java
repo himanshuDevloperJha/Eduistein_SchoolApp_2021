@@ -27,7 +27,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
     YoutubeAdapter youtubeAdapter;
     ArrayList<Youtube> youtubelist = new ArrayList<>();
     DatabaseReference reference, reference1, rootRef2;
-    String classname, teacher_email;
+    String classname,user_standard, teacher_email,user_schoolid;
     ArrayList<String> subjectnameList=new ArrayList<>();
     ArrayList<String> clsnameList=new ArrayList<>();
 
@@ -38,9 +38,51 @@ public class St_YoutubeVideos extends AppCompatActivity {
         rv_ytvideos = findViewById(R.id.rv_ytvideos);
 
         classname = getIntent().getStringExtra("user_classid");
+        user_standard = getIntent().getStringExtra("user_standard");
+        user_schoolid = getIntent().getStringExtra("user_schoolid");
         teacher_email = getIntent().getStringExtra("user_teacherid");
-        reference = FirebaseDatabase.getInstance().getReference().child("youtubevideos");
+        reference = FirebaseDatabase.getInstance().getReference().child(user_schoolid).
+                child("youtubevideos");
         reference1 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot datas : dataSnapshot.getChildren()) {
+                    if (user_standard.equals(datas.child("standard").getValue().toString())) {
+                        try {
+                            Youtube yt = new Youtube("",
+                                    datas.getKey(),
+                                    datas.child("standard").getValue().toString());
+
+                            youtubelist.add(yt);
+                            subjectnameList.add(datas.getKey());
+
+                            LinkedHashSet<String> sb = new LinkedHashSet<>(subjectnameList);
+                            List<String> subjctlist = new ArrayList<String>(sb);
+
+                            rv_ytvideos.setLayoutManager(new LinearLayoutManager(St_YoutubeVideos.this, RecyclerView.VERTICAL, false));
+                            youtubeAdapter = new YoutubeAdapter(St_YoutubeVideos.this, youtubelist,
+                                    teacher_email,subjctlist,user_schoolid,classname,user_standard);
+                            rv_ytvideos.setAdapter(youtubeAdapter);
+
+                        } catch (Exception e) {
+
+                        }
+
+                    } else {
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -65,9 +107,10 @@ public class St_YoutubeVideos extends AppCompatActivity {
 
                                         youtubelist.add(yt);
                                         subjectnameList.add(datas1.child("subject").getValue().toString());
-                                    clsnameList.add(datas1.child("cls").getValue().toString());
+                                        clsnameList.add(datas1.child("cls").getValue().toString());
 
 
+                                    //unique subject names
                                         LinkedHashSet<String> sb = new LinkedHashSet<>(subjectnameList);
                                         List<String> subjctlist = new ArrayList<String>(sb);
 
@@ -76,7 +119,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
 
                                         rv_ytvideos.setLayoutManager(new LinearLayoutManager(St_YoutubeVideos.this, RecyclerView.VERTICAL, false));
                                         youtubeAdapter = new YoutubeAdapter(St_YoutubeVideos.this, youtubelist,
-                                                teacher_email,subjctlist);
+                                                teacher_email,subjctlist,user_schoolid,classname,user_standard);
                                         rv_ytvideos.setAdapter(youtubeAdapter);
 
 
@@ -117,52 +160,16 @@ public class St_YoutubeVideos extends AppCompatActivity {
                         }
                     });
 
-
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //   Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
-       /* reference1.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                    if (classname.equals(datas.child("class").getValue().toString())) {
-                        try {
-                            Youtube yt = new Youtube(datas.child("email").getValue().toString(),
-                                    datas.child("subject").getValue().toString(),
-                                    datas.child("class").getValue().toString());
-
-                            youtubelist.add(yt);
-
-
-                        } catch (Exception e) {
-
-                        }
-
-                    } else {
-
-                    }
-
-
-                    rv_ytvideos.setLayoutManager(new LinearLayoutManager(St_YoutubeVideos.this, RecyclerView.VERTICAL, false));
-                    youtubeAdapter = new YoutubeAdapter(St_YoutubeVideos.this, youtubelist, teacher_email);
-                    rv_ytvideos.setAdapter(youtubeAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //   Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
 
 
     }

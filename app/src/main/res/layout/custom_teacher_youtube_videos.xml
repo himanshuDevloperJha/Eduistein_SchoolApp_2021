@@ -67,7 +67,6 @@
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Chapter No">
@@ -85,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Chapter">
+        android:hint="Chapter Name">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/class_st_yt_units"

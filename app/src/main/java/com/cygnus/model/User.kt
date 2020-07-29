@@ -87,7 +87,8 @@ class School(id: String, name: String, credentials: Credentials) : User(id, name
  * @author saifkhichi96
  * @since 1.0.0
  */
-class Student(id: String, name: String, credentials: Credentials, var classId: String, var rollNo: String)
+class Student(id: String, name: String, credentials: Credentials,
+              var classId: String, var rollNo: String)
     : User(id, name, credentials) {
 
     // no-arg constructor required for Firebase

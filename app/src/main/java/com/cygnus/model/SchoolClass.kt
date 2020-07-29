@@ -16,10 +16,11 @@ import co.aspirasoft.model.BaseModel
  * @author saifkhichi96
  * @since 1.0.0
  */
-class SchoolClass(name: String, teacherId: String,teachername:String) : BaseModel() {
+class SchoolClass(name: String, teacherId: String,teachername:String,standard:String) : BaseModel()
+{
 
     // no-arg constructor required for Firebase
-    constructor() : this("", "","")
+    constructor() : this("", "","","")
 
     var name = name
         set(value) {
@@ -27,6 +28,11 @@ class SchoolClass(name: String, teacherId: String,teachername:String) : BaseMode
             notifyObservers()
         }
     var teachername = teachername
+        set(value) {
+            field = value
+            notifyObservers()
+        }
+    var standard = standard
         set(value) {
             field = value
             notifyObservers()

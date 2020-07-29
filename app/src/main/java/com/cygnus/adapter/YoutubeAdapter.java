@@ -30,16 +30,19 @@ import androidx.recyclerview.widget.RecyclerView;
 public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.ViewHolder> {
 
     Context context;
-    String teacher_email;
+    String teacher_email,user_schoolid,classid,user_standard;
     ArrayList<Youtube> youtubelist;
     List<String> subjctlist;
 
     public YoutubeAdapter(Context context, ArrayList<Youtube> youtubelist, String teacher_email,
-                         List<String> subjctlist) {
+                          List<String> subjctlist, String user_schoolid, String classid, String user_standard) {
         this.context = context;
         this.youtubelist = youtubelist;
         this.teacher_email = teacher_email;
         this.subjctlist = subjctlist;
+        this.user_schoolid = user_schoolid;
+        this.classid = classid;
+        this.user_standard = user_standard;
 
 
     }
@@ -62,6 +65,9 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.ViewHold
                 Intent intent = new Intent(context, St_Chapters.class);
                 intent.putExtra("teacher_emailid", teacher_email);
                 intent.putExtra("subjectname", subjctlist.get(position));
+                intent.putExtra("user_schoolid", user_schoolid);
+                intent.putExtra("user_classid", classid);
+                intent.putExtra("user_standard", user_standard);
                 context.startActivity(intent);
             }
         });
