@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.button.MaterialButton
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/Widget.MaterialComponents.Button.TextButton"
-    android:id="@+id/fileView"
-    android:layout_width="match_parent"
-    android:layout_height="32dp"
-    android:gravity="start"
-    android:paddingBottom="0dp"
-    android:paddingTop="0dp"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:text="Filename"
-    android:textAllCaps="false"
-    android:textColor="?android:attr/textColorPrimary"
-    app:icon="@drawable/ic_cloud"
-    app:iconSize="24dp"
-    app:iconPadding="4dp"
-    app:iconTint="?android:attr/textColorPrimary"/>
+   android:orientation="vertical"
+   android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.button.MaterialButton
+
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:id="@+id/fileView"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:gravity="start"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="Filename"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        app:icon="@drawable/ic_cloud"
+        app:iconSize="24dp"
+        app:iconPadding="4dp"
+        app:iconTint="?android:attr/textColorPrimary"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="at "
+            android:textSize="12sp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:id="@+id/postDatehome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_date"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+

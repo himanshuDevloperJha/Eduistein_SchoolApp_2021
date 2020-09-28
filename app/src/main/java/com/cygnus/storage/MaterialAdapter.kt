@@ -12,7 +12,8 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 
-class MaterialAdapter(val context: Activity, val material: ArrayList<CourseFile>, val fileManager: FileManager)
+class MaterialAdapter(val context: Activity, val material: ArrayList<CourseFile>,
+                      val fileManager: FileManager)
     : ModelViewAdapter<CourseFile>(context, material, CourseFileView::class) {
 
     override fun notifyDataSetChanged() {

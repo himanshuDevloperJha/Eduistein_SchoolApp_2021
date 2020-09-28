@@ -49,6 +49,7 @@ object InputUtils {
         return matcher.matches()
     }
 
+
     fun Activity.hideKeyboard() {
         val imm: InputMethodManager = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         var view = this.currentFocus

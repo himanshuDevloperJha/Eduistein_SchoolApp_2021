@@ -59,6 +59,9 @@ class AddClassDialog : BottomSheetDialogFragment() {
             dismiss()
         }
 
+        classes.add("Class Nursery")
+        classes.add("Class LKG")
+        classes.add("Class UKG")
         classes.add("Class 1st")
         classes.add("Class 2nd")
         classes.add("Class 3rd")

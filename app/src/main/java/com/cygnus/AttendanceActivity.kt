@@ -35,6 +35,19 @@ class AttendanceActivity : DashboardChildActivity() {
 
         adapter = AttendanceAdapter(this, attendanceRecords)
         contentList.adapter = adapter
+
+
+        AttendanceDao.getByStudent(schoolId, currentStudent, OnSuccessListener { savedRecords ->
+            attendanceRecords.clear()
+            savedRecords?.let {
+                supportActionBar?.title = String.format("%.1f%% Attendance",
+                        calculateAttendancePercentage(it))
+                attendanceRecords.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
+
+        })
+
         addButton.visibility = View.GONE
     }
 
@@ -42,10 +55,12 @@ class AttendanceActivity : DashboardChildActivity() {
         AttendanceDao.getByStudent(schoolId, currentStudent, OnSuccessListener { savedRecords ->
             attendanceRecords.clear()
             savedRecords?.let {
-                supportActionBar?.title = String.format("%.1f%% Attendance", calculateAttendancePercentage(it))
+                supportActionBar?.title = String.format("%.1f%% Attendance",
+                        calculateAttendancePercentage(it))
                 attendanceRecords.addAll(it)
+                adapter.notifyDataSetChanged()
             }
-            adapter.notifyDataSetChanged()
+
         })
     }
 
@@ -56,10 +71,11 @@ class AttendanceActivity : DashboardChildActivity() {
     }
 
     private inner class AttendanceAdapter(context: Context, val records: List<AttendanceRecord>)
-        : ModelViewAdapter<AttendanceRecord>(context, records, AttendanceView::class) {
+        : ModelViewAdapter<AttendanceRecord>(context, attendanceRecords, AttendanceView::class) {
 
         override fun notifyDataSetChanged() {
-            records.sortedBy { it.date }
+            //records.sortedBy { it.date }
+            attendanceRecords.sortByDescending { it.date }
             super.notifyDataSetChanged()
         }
 

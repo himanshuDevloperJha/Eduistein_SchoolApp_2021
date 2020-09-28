@@ -167,6 +167,30 @@ object UsersDao {
                 })
     }
 
+
+    fun getUserByPhone(schoolId: String, phone: String, listener: OnSuccessListener<in User?>) {
+        CygnusApp.refToUsers(schoolId)
+                .orderByChild("phone")
+                .equalTo(phone)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach {
+                            val user = it.toUser()
+                            if (user?.phone == phone) {
+                                listener.onSuccess(it.toUser())
+                                return
+                            }
+                        }
+
+                        listener.onSuccess(null)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        listener.onSuccess(null)
+                    }
+                })
+    }
+
     /**
      * Retrieves a [User] by their unique id.
      *

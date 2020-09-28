@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,17 +31,27 @@ public class St_YoutubeVideos extends AppCompatActivity {
     String classname,user_standard, teacher_email,user_schoolid;
     ArrayList<String> subjectnameList=new ArrayList<>();
     ArrayList<String> clsnameList=new ArrayList<>();
-
+   SharedPreferences sp_loginsave;
+     SharedPreferences.Editor ed_loginsave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_st__youtube_videos);
         rv_ytvideos = findViewById(R.id.rv_ytvideos);
 
-        classname = getIntent().getStringExtra("user_classid");
-        user_standard = getIntent().getStringExtra("user_standard");
-        user_schoolid = getIntent().getStringExtra("user_schoolid");
-        teacher_email = getIntent().getStringExtra("user_teacherid");
+
+        sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", MODE_PRIVATE);
+        ed_loginsave = sp_loginsave.edit();
+
+        classname = sp_loginsave.getString("studentclassId","");
+        user_schoolid = sp_loginsave.getString("studentschoolid","");
+       // teacher_email =sp_loginsave.getString("user_teacheremail","");
+
+        teacher_email=getIntent().getStringExtra("user_teacherid");
+        user_standard=getIntent().getStringExtra("user_standard");
+       // Toast.makeText(this, "22:: "+user_standard, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "22"+teacher_email, Toast.LENGTH_SHORT).show();
+
         reference = FirebaseDatabase.getInstance().getReference().child(user_schoolid).
                 child("youtubevideos");
         reference1 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
@@ -98,7 +109,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot datas1 : dataSnapshot.getChildren()) {
 
-                                if (classname.equals(datas1.child("cls").getValue().toString())) {
+                                if (classname.equalsIgnoreCase(datas1.child("cls").getValue().toString())) {
 
                                         Youtube yt = new Youtube(datas1.child("email").getValue().toString(),
                                                 datas1.child("subject").getValue().toString(),

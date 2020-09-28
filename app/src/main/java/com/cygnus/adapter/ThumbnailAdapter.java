@@ -44,7 +44,6 @@ public class ThumbnailAdapter extends RecyclerView.Adapter<ThumbnailAdapter.View
     public ThumbnailAdapter(Context context, ArrayList<Chapter> thumbnaillist) {
         this.context = context;
         this.thumbnaillist = thumbnaillist;
-        this.thumbnaillist = thumbnaillist;
 
 
     }
@@ -63,7 +62,7 @@ public class ThumbnailAdapter extends RecyclerView.Adapter<ThumbnailAdapter.View
         }
         else {
             holder.tv_titlee.setVisibility(View.VISIBLE);
-            holder.tv_titlee.setText(holder.tv_titlee.getText()+""+thumbnaillist.get(position).getChaptertitle());
+            holder.tv_titlee.setText("Title: "+thumbnaillist.get(position).getChaptertitle());
 
         }
         if (thumbnaillist.get(position).getChapterurl().startsWith("https://youtu")) {
@@ -179,5 +178,15 @@ TextView tv_titlee;
             }
         }
         return bitmap;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 }

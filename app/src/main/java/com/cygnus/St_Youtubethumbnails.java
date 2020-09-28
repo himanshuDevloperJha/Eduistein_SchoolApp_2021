@@ -48,16 +48,17 @@ public class St_Youtubethumbnails extends AppCompatActivity {
         Log.e("msg", "onCreateList: " + chapter_urllist);
 
         Log.e("msg", "subjectnameeee1: " + sub_name);
-
+        chapter_urllist.clear();
         rootRef3 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
 
         rootRef3.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (final DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                    if (user_standard.equals(datas.child("standard").getValue().toString()) &&
-                            sub_name.equals(datas.getKey())) {
+                    if (user_standard.equalsIgnoreCase(datas.child("standard").getValue().toString()) &&
+                            sub_name.equalsIgnoreCase(datas.getKey())) {
 
                         rootRef4 = FirebaseDatabase.getInstance().getReference().child("admin-videos").
                                 child(datas.getKey()).child("Chapters");
@@ -69,7 +70,7 @@ public class St_Youtubethumbnails extends AppCompatActivity {
 
                                 for (final DataSnapshot datas2 : dataSnapshot.getChildren()) {
 
-                                    if (datas2.child("name").getValue().toString().equals(chapter_name)) {
+                                    if (datas2.child("name").getValue().toString().equalsIgnoreCase(chapter_name)) {
                                         Log.e("msg", "onDataChangeeeee: " + datas2.getKey());
                                         Log.e("msg", "onDataChangeeeee1: " + datas2.child("name").getValue());
 
@@ -95,7 +96,9 @@ public class St_Youtubethumbnails extends AppCompatActivity {
                                                                 chapter_urllist);
 
                                                         rv_youtubethumb.setAdapter(thumbnailAdapter);
-                                                        pb_thumbnail.setVisibility(View.GONE);
+                                                    thumbnailAdapter.notifyDataSetChanged();
+
+                                                    pb_thumbnail.setVisibility(View.GONE);
 
                                                 }
 
@@ -155,8 +158,8 @@ public class St_Youtubethumbnails extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot datas1 : dataSnapshot.getChildren()) {
 
-                                if ((datas1.child("email").getValue().toString()).equals(teacher_emailidd)
-                                        && (datas1.child("subject").getValue().toString()).equals(sub_name)) {
+                                if ((datas1.child("email").getValue().toString()).equalsIgnoreCase(teacher_emailidd)
+                                        && (datas1.child("subject").getValue().toString()).equalsIgnoreCase(sub_name)) {
 
                                     Log.e("msg", "subjectnamee1: " + datas1.child("subject").getValue().toString());
 
@@ -171,7 +174,7 @@ public class St_Youtubethumbnails extends AppCompatActivity {
 
                                             for (final DataSnapshot datas2 : dataSnapshot.getChildren()) {
 
-                                                if (datas2.child("name").getValue().toString().equals(chapter_name)) {
+                                                if (datas2.child("name").getValue().toString().equalsIgnoreCase(chapter_name)) {
                                                     Log.e("msg", "onDataChangeeeee: " + datas2.getKey());
                                                     Log.e("msg", "onDataChangeeeee1: " + datas2.child("name").getValue());
                                                     final String chapterno = datas2.getKey();
@@ -186,6 +189,7 @@ public class St_Youtubethumbnails extends AppCompatActivity {
                                                             chapter_urllist);
 
                                                     rv_youtubethumb.setAdapter(thumbnailAdapter);
+                                                    thumbnailAdapter.notifyDataSetChanged();
                                                     pb_thumbnail.setVisibility(View.GONE);
                                                 } else {
                                                 }

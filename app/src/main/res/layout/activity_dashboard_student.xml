@@ -11,15 +11,17 @@
   <!-- Fixed top action bar -->
   <com.google.android.material.appbar.AppBarLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@android:color/transparent"
+      android:layout_height="55dp"
+      android:background="@drawable/bg"
       app:elevation="0dp">
+    <!--    android:background="@android:color/transparent"-->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_scrollFlags="scroll"/>
+        app:layout_scrollFlags="scroll"
+        app:titleTextColor="#fff" />
 
   </com.google.android.material.appbar.AppBarLayout>
 
@@ -36,125 +38,200 @@
         android:paddingEnd="@dimen/activity_horizontal_margin">
 
       <com.google.android.material.card.MaterialCardView
+          app:cardElevation="4dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          app:cardBackgroundColor="?colorAccent"
-          app:cardElevation="4dp">
+          app:cardCornerRadius="20dp"
+          app:cardBackgroundColor="#FFFFFF"
+
+          >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_accent"
-            android:padding="16dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="5dp"
             android:orientation="vertical">
+          <!--hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
 
           <LinearLayout
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginBottom="16dp"
-              android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/headline"
-                style="@style/TextAppearance.MaterialComponents.Overline"
+              android:orientation="horizontal"
+              android:weightSum="3">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/student_class_head"/>
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/className"
-                style="@style/TextAppearance.MaterialComponents.Button"
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/headline"
+                  style="@style/TextAppearance.MaterialComponents.Overline"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/student_class_head"/>
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/className"
+                  style="@style/TextAppearance.MaterialComponents.Button"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textStyle="bold"
+                  android:text="@string/ph_assigned_class"/>
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@string/ph_assigned_class"/>
+                android:orientation="vertical"
+                android:layout_weight="2">
 
+              <com.google.android.material.textview.MaterialTextView
+                  style="@style/TextAppearance.MaterialComponents.Caption"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAllCaps="true"
+                  android:textSize="10sp"
+                  android:text="@string/label_class_teacher"
+                  tools:ignore="SmallSp"/>
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/classTeacherName"
+                  style="@style/TextAppearance.MaterialComponents.Body2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/classTeacherEmail"
+                  style="@style/TextAppearance.MaterialComponents.Body2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:autoLink="email"
+                  android:textColorLink="?android:attr/textColorPrimary"/>
+
+            </LinearLayout>
           </LinearLayout>
 
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/attendanceButton"
-              style="@style/Widget.MaterialComponents.Button.TextButton"
-              android:layout_width="wrap_content"
-              android:layout_height="32dp"
-              android:padding="0dp"
-              android:text="@string/label_see_attendance"
-              android:textAllCaps="false"
-              app:icon="@drawable/ic_attendance"
-              app:iconSize="24dp"/>
+          <!--hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
 
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/gradesButton"
-              style="@style/Widget.MaterialComponents.Button.TextButton"
-              android:layout_width="wrap_content"
-              android:layout_height="32dp"
-              android:padding="0dp"
-              android:text="@string/label_see_grades"
-              android:textAllCaps="false"
-              app:icon="@drawable/ic_grades"
-              app:iconSize="24dp"/>
-
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/classAnnouncementsButton"
-              style="@style/Widget.MaterialComponents.Button.TextButton"
-              android:layout_width="wrap_content"
-              android:layout_height="32dp"
-              android:padding="0dp"
-              android:text="@string/label_announcements"
-              android:textAllCaps="false"
-              app:icon="@drawable/ic_announcements"
-              app:iconSize="24dp"/>
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/classschedule_student"
-              style="@style/Widget.MaterialComponents.Button.TextButton"
-              android:layout_width="wrap_content"
-              android:layout_height="32dp"
-              android:padding="0dp"
-              android:text="My Scheduled Classes"
-              android:textAllCaps="false"
-              app:icon="@drawable/timetable"
-              app:iconSize="24dp"/>
-
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/class_yt_myvideos"
-              style="@style/Widget.MaterialComponents.Button.TextButton"
-              android:layout_width="wrap_content"
-              android:layout_height="32dp"
-              android:padding="0dp"
-              android:text="My Videos"
-              android:textAllCaps="false"
-              app:icon="@drawable/youtube"
-              app:iconSize="24dp"/>
-          <LinearLayout
-              android:layout_width="wrap_content"
+          <GridLayout
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
-              android:orientation="vertical">
+              android:columnCount="2"
+              android:rowCount="3"
+              android:paddingVertical="0dp"
+              android:orientation="horizontal"
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/TextAppearance.MaterialComponents.Caption"
-                android:layout_width="wrap_content"
+              >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/attendanceButton"
+                app:icon="@drawable/ic_attendance"
+                android:text="@string/label_see_attendance"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
                 android:textAllCaps="true"
-                android:textSize="10sp"
-                android:text="@string/label_class_teacher"
-                tools:ignore="SmallSp"/>
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/classTeacherName"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/classTeacherEmail"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/gradesButton"
+                android:text="@string/label_see_grades"
+                app:icon="@drawable/ic_grades"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:autoLink="email"
-                android:textColorLink="?android:attr/textColorPrimary"/>
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
 
-          </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/classschedule_student"
+                android:text="My Scheduled Classes"
+                app:icon="@drawable/timetable"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/class_yt_myvideos"
+                android:text="My Videos"
+                app:icon="@drawable/youtube"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/class_yt_notifications"
+                app:icon="@drawable/ic_notifications_black_24dp"
+                android:text="@string/my_notification"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/classAnnouncementsButton"
+                android:text="@string/label_announcements"
+                app:icon="@drawable/ic_announcements"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
+          </GridLayout>
+
+
+
+
 
         </LinearLayout>
 

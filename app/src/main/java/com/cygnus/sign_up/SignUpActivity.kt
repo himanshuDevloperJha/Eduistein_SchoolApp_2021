@@ -1,11 +1,14 @@
 package com.cygnus.sign_up
 
-import android.content.Intent
+import android.content.*
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.util.SparseArray
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.cygnus.CygnusApp
 import com.cygnus.R
 import com.cygnus.SignInActivity
@@ -13,6 +16,9 @@ import com.cygnus.dao.Invite
 import com.cygnus.dao.InvitesDao
 import com.cygnus.dao.UsersDao
 import com.cygnus.model.*
+import com.cygnus.notifications.GCMRegistrationIntentService
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -119,6 +125,9 @@ class SignUpActivity : AppCompatActivity() {
             findViewById<Button>(R.id.nextButton).isEnabled = false
             onSubmit(it)
         }
+
+
+
     }
 
     /**
@@ -163,6 +172,7 @@ class SignUpActivity : AppCompatActivity() {
             }
             else -> Teacher().apply {
                 this.classId = classId
+
             }
         }.also {
             it.name = name
@@ -171,8 +181,11 @@ class SignUpActivity : AppCompatActivity() {
             it.phone = phone
             it.gender = gender
 
+
             onUserCreated(it, password)
         }
+
+
     }
 
     /**
@@ -278,5 +291,6 @@ class SignUpActivity : AppCompatActivity() {
                     .show()
         }
     }
+
 
 }

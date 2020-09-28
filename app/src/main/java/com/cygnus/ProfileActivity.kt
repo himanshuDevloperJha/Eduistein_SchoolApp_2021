@@ -9,13 +9,16 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
+import android.telephony.SmsManager
 import android.view.View
+import android.widget.Toast
 import co.aspirasoft.util.PermissionUtils
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.model.School
 import com.cygnus.model.Student
 import com.cygnus.model.Teacher
 import com.cygnus.model.User
+import com.cygnus.sign_up.MobileSignup
 import com.cygnus.storage.FileManager
 import com.cygnus.storage.ImageLoader
 import com.google.android.material.snackbar.Snackbar
@@ -36,6 +39,7 @@ class ProfileActivity : DashboardChildActivity() {
             changeUserImageButton.visibility = View.GONE
             changePasswordButton.visibility = View.GONE
             deleteAccountButton.visibility = View.GONE
+            btn_phonelogin.visibility = View.GONE
         }
         currentUser = user
         mFileManager = FileManager.newInstance(this, "users/${currentUser.id}/")
@@ -50,7 +54,16 @@ class ProfileActivity : DashboardChildActivity() {
                 pickImage()
             }
         }
+
+        btn_phonelogin.setOnClickListener {
+            val intent = Intent(applicationContext, MobileSignup::class.java)
+            startActivity(intent)
+        }
+
     }
+
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

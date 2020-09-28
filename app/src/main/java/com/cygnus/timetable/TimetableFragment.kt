@@ -1,5 +1,6 @@
 package com.cygnus.timetable
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import co.aspirasoft.view.NestedListView
 import com.cygnus.model.Lecture
 import com.cygnus.model.Subject
 
-class TimetableFragment(val data: List<Pair<Subject, Lecture>>?, private val showClass: Boolean) : Fragment() {
+
+class TimetableFragment(val data: List<Pair<Subject, Lecture>>?,
+                        private val showClass: Boolean) : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -24,5 +27,11 @@ class TimetableFragment(val data: List<Pair<Subject, Lecture>>?, private val sho
                 }
             }
         }
+
+    }
+
+    @SuppressLint("ValidFragment")
+    fun TimetableFragment() {
     }
 }
+

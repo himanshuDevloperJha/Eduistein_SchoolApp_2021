@@ -1,39 +1,50 @@
 package com.cygnus
 
+import android.Manifest
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
-import android.content.Context
-import android.content.Intent
+import android.content.*
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import co.aspirasoft.adapter.ModelViewAdapter
-import com.cygnus.adapter.PeopleAdapter
+import com.android.volley.AuthFailureError
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.cygnus.core.DashboardActivity
 import com.cygnus.dao.ClassesDao
-import com.cygnus.dao.SchoolDao
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
 import com.cygnus.model.*
+import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.timetable.TimetablePagerAdapter
 import com.cygnus.view.SubjectView
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dashboard_teacher.*
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -62,11 +73,24 @@ class TeacherDashboardActivity : DashboardActivity() {
     var cls: String? = null
     var selectedItem: String? = null
     var chapterlist: ArrayList<String> = ArrayList()
+    var tokenlist: ArrayList<String> = ArrayList()
+
     var chapternoolist: ArrayList<String> = ArrayList()
     var chsplist: ArrayList<ChapterSpinner> = ArrayList()
-   // var chapternolist: ArrayList<String> = ArrayList()
+    // var chapternolist: ArrayList<String> = ArrayList()
     var selectedchapter: String? = null
-  //  var yourArray: List<String> = ArrayList()
+    private val REQUEST_EXTERNAL_STORAGE = 1
+    private var mRegistrationBroadcastReceiver: BroadcastReceiver? = null
+    var token: String? = null
+    lateinit var sp_loginsave: SharedPreferences;
+    lateinit var ed_loginsave: SharedPreferences.Editor;
+    var uniquetokenlist: List<String>? = null
+    lateinit var class_st_yt_subject: AutoCompleteTextView;
+    lateinit var class_st_yt_class: AutoCompleteTextView;
+    lateinit var class_st_yt_units: AutoCompleteTextView;
+    lateinit var class_st_yt_unitsno: AutoCompleteTextView;
+    lateinit var class_st_yt_title: TextInputEditText;
+    lateinit var class_st_yt_youtubelink: TextInputEditText;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +108,8 @@ class TeacherDashboardActivity : DashboardActivity() {
         }
 
 
+
+
         teacheremail = currentUser.credentials.email
         Log.e("currentemail", teacheremail)
 
@@ -92,21 +118,47 @@ class TeacherDashboardActivity : DashboardActivity() {
         month = cal.get(Calendar.MONTH)
         year = cal.get(Calendar.YEAR)
 
-       /* SchoolDao.getSchoolByUser(firebaseUser.uid, OnSuccessListener {
-            it?.let { schoolDetails ->
-                onSchoolDetailsReceived(schoolDetails, firebaseUser)
-            } ?: onFailure(null)
-        })*/
+
+        //fetch token
+
+        sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", Context.MODE_PRIVATE)
+        ed_loginsave = sp_loginsave.edit()
+
+        ed_loginsave.putString("SubjectTeacherName", currentTeacher.name)
+        ed_loginsave.putString("SubjectTeacherClassId", currentTeacher.classId)
+        ed_loginsave.commit()
+
+        Log.e("msg", "SUBJECT-TEACHERNAMEIDD" + sp_loginsave.getString("SubjectTeacherClassId", ""))
+
+
+
+
+        /* SchoolDao.getSchoolByUser(firebaseUser.uid, OnSuccessListener {
+             it?.let { schoolDetails ->
+                 onSchoolDetailsReceived(schoolDetails, firebaseUser)
+             } ?: onFailure(null)
+         })*/
 
         // Set up click listeners
-        attendanceButton.setOnClickListener { startSecurely(MarkAttendanceActivity::class.java) }
-        classAnnouncementsButton.setOnClickListener {
-            val posts = ArrayList<NoticeBoardPost>()
-            assignedClass?.notices?.values?.let { posts.addAll(it) }
-            startSecurely(NoticeActivity::class.java, Intent().apply {
-                putParcelableArrayListExtra(CygnusApp.EXTRA_NOTICE_POSTS, posts)
-            })
+
+        if (ContextCompat.checkSelfPermission(applicationContext,
+                        Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(applicationContext,
+                        Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            this, Manifest.permission.SEND_SMS) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(
+                            this, Manifest.permission.SEND_SMS)) { // Show an explanation to the user *asynchronously* -- don't block
+
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.SEND_SMS,
+                        Manifest.permission.SEND_SMS), REQUEST_EXTERNAL_STORAGE)
+
+            }
         }
+        attendanceButton.setOnClickListener { startSecurely(MarkAttendanceActivity::class.java) }
+
 
         addChapternoList()
 
@@ -118,12 +170,12 @@ class TeacherDashboardActivity : DashboardActivity() {
             dialog1.show()
 
             val btn_yt_save = dialog1.findViewById(R.id.btn_yt_save) as MaterialButton
-            val class_st_yt_subject = dialog1.findViewById(R.id.class_st_yt_subject) as AppCompatAutoCompleteTextView
-            val class_st_yt_class = dialog1.findViewById(R.id.class_st_yt_class) as AppCompatAutoCompleteTextView
-            var class_st_yt_units = dialog1.findViewById(R.id.class_st_yt_units) as AppCompatAutoCompleteTextView
-              val class_st_yt_unitsno = dialog1.findViewById(R.id.class_st_yt_unitsno) as AppCompatAutoCompleteTextView
-            val class_st_yt_title = dialog1.findViewById(R.id.class_st_yt_title) as TextInputEditText
-            val class_st_yt_youtubelink = dialog1.findViewById(R.id.class_st_yt_youtubelink) as TextInputEditText
+            class_st_yt_subject = dialog1.findViewById(R.id.class_st_yt_subject) as AppCompatAutoCompleteTextView
+            class_st_yt_class = dialog1.findViewById(R.id.class_st_yt_class) as AppCompatAutoCompleteTextView
+            class_st_yt_units = dialog1.findViewById(R.id.class_st_yt_units) as AppCompatAutoCompleteTextView
+            class_st_yt_unitsno = dialog1.findViewById(R.id.class_st_yt_unitsno) as AppCompatAutoCompleteTextView
+            class_st_yt_title = dialog1.findViewById(R.id.class_st_yt_title) as TextInputEditText
+            class_st_yt_youtubelink = dialog1.findViewById(R.id.class_st_yt_youtubelink) as TextInputEditText
 
 
             class_st_yt_unitsno.setAdapter(ArrayAdapter(applicationContext,
@@ -235,8 +287,8 @@ class TeacherDashboardActivity : DashboardActivity() {
                                                             Log.e("Chapterss1112", ds2.key + " = " + ds2.getValue().toString())
                                                             chapterlist.add(ds2.getValue().toString())
                                                             //chapternolist.add(ds2.key.toString())
-                                                           // var cs = ChapterSpinner(ds2.key.toString(), ds2.getValue().toString())
-                                                           // chsplist.add(cs)
+                                                            // var cs = ChapterSpinner(ds2.key.toString(), ds2.getValue().toString())
+                                                            // chsplist.add(cs)
                                                         }
 
                                                     }
@@ -251,16 +303,16 @@ class TeacherDashboardActivity : DashboardActivity() {
                                                     class_st_yt_units.setAdapter(ArrayAdapter(applicationContext,
                                                             android.R.layout.select_dialog_item, chapterlist));
 
-                                                   /* class_st_yt_units.setOnItemClickListener { adapterView, view, i, l ->
-                                                       // selectedchapter = peopleAdapter.getItem(i)!!.no + "-" + peopleAdapter.getItem(i)!!.name
-                                                        selectedchapter = peopleAdapter.getItem(i)!!.name
-                                                        //  Log.e("msg","UNITSSS"+adapterView.getItemAtPosition(i))
-                                                        class_st_yt_units.setText(selectedchapter)
-                                                       // yourArray = selectedchapter!!.split("-")
-                                                      //  Log.e("msg", "UNITSSS" + yourArray[0] + "----" + yourArray[1])
+                                                    /* class_st_yt_units.setOnItemClickListener { adapterView, view, i, l ->
+                                                        // selectedchapter = peopleAdapter.getItem(i)!!.no + "-" + peopleAdapter.getItem(i)!!.name
+                                                         selectedchapter = peopleAdapter.getItem(i)!!.name
+                                                         //  Log.e("msg","UNITSSS"+adapterView.getItemAtPosition(i))
+                                                         class_st_yt_units.setText(selectedchapter)
+                                                        // yourArray = selectedchapter!!.split("-")
+                                                       //  Log.e("msg", "UNITSSS" + yourArray[0] + "----" + yourArray[1])
 
 
-                                                    }*/
+                                                     }*/
 //                                                    class_st_yt_units.setAdapter(ArrayAdapter(applicationContext,
 //                                                            android.R.layout.select_dialog_item, chapterlist))
 //                                                    class_st_yt_unitsno.setAdapter(ArrayAdapter(applicationContext,
@@ -299,6 +351,7 @@ class TeacherDashboardActivity : DashboardActivity() {
             })
 
             btn_yt_save.setOnClickListener {
+                tokenlist.clear()
                 if (class_st_yt_subject.text!!.isEmpty() &&
                         class_st_yt_class.text!!.isEmpty() && class_st_yt_title.text!!.isEmpty()
                         && class_st_yt_youtubelink.text!!.isEmpty()
@@ -320,15 +373,11 @@ class TeacherDashboardActivity : DashboardActivity() {
                     class_st_yt_title.setError("Enter youtube title")
                 } else if (class_st_yt_youtubelink.text!!.isEmpty()) {
                     class_st_yt_youtubelink.setError("Enter youtube url")
-                }
-                else if (class_st_yt_units.text!!.isEmpty()) {
+                } else if (class_st_yt_units.text!!.isEmpty()) {
                     class_st_yt_units.setError("Enter chapter name")
-                }
-                else if (class_st_yt_unitsno.text!!.isEmpty()) {
+                } else if (class_st_yt_unitsno.text!!.isEmpty()) {
                     class_st_yt_unitsno.setError("Enter chapter no")
-                }
-
-                else {
+                } else {
 //                 val uid = FirebaseAuth.getInstance().currentUser!!.uid
 //                 val rootRef = FirebaseDatabase.getInstance().reference
 //                 val key = rootRef.child("scheduleclass").push()
@@ -338,16 +387,8 @@ class TeacherDashboardActivity : DashboardActivity() {
 
 
                     val post = YoutubeVideos(teacheremail, class_st_yt_class.text.toString(),
-                            class_st_yt_subject.text.toString());
+                            class_st_yt_subject.text.toString(), token);
 
-//                 val childUpdates = hashMapOf<String, Any>(
-//                         "/youtubevideos/" to post
-//                 )
-//                 Log.e("msgnew45",childUpdates.toString())
-//
-//                 rootRef.updateChildren(childUpdates)
-
-//
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolId).child("youtubevideos")
                                     .child(class_st_yt_subject.text.toString()).push()
@@ -372,15 +413,50 @@ class TeacherDashboardActivity : DashboardActivity() {
                     missionsReference2.child(class_st_yt_unitsno.text.toString()).setValue(cn);
 
 
+                    //subjectlist = getIntent().getStringArrayListExtra("subjectlist");
+
+                    //get student tokens and add it to list for notifications
+                    val reference: DatabaseReference
+                    reference = FirebaseDatabase.getInstance().reference.child(schoolId).child("StudentTokens")
+                    reference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            Log.e("msg", "TOKENCLASS11111" + class_st_yt_class.text.toString())
+                            for (datas in dataSnapshot.children) {
+                                //Log.e("msg", "TOKENCLASS" + datas.child("classId").value.toString())
+
+                                if (class_st_yt_class.text.toString().equals(datas.child("classId").value.toString(), ignoreCase = true)) {
+                                    try {
+                                        val s = datas.key
+                                        val studenttoken = datas.child("token").value.toString()
+                                        tokenlist.add(studenttoken)
 
 
-                    Toast.makeText(this, "Video has been uploaded", Toast.LENGTH_SHORT).show()
-                    class_st_yt_class.setText("")
-                    class_st_yt_subject.setText("")
-                    class_st_yt_title.setText("")
-                    class_st_yt_units.setText("")
-                    class_st_yt_youtubelink.setText("")
-                    dialog1.dismiss()
+                                    } catch (e: Exception) {
+                                        //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    // Toast.makeText(applicationContext, "No scheduled class", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            val body = "Hey! Your Subject Teacher " + currentTeacher.name + " has shared a Video on " + class_st_yt_title.text.toString() + ".\nClick to Watch Now !"
+                            sendFCMPush(tokenlist, body);
+
+                            Toast.makeText(applicationContext, "Video has been uploaded", Toast.LENGTH_SHORT).show()
+                            class_st_yt_class.setText("")
+                            class_st_yt_subject.setText("")
+                            class_st_yt_title.setText("")
+                            class_st_yt_units.setText("")
+                            class_st_yt_youtubelink.setText("")
+                            dialog1.dismiss()
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            //Toast.makeText(applicationContext, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+
+
                 }
             }
 
@@ -468,6 +544,7 @@ class TeacherDashboardActivity : DashboardActivity() {
             uidRef.addListenerForSingleValueEvent(valueEventListener)
 
             btn_schedulesave.setOnClickListener {
+                tokenlist.clear()
                 if (class_subject.text!!.isEmpty() &&
                         class_zoomlink.text!!.isEmpty() && class_name.text!!.isEmpty()
                         && class_date.text!!.isEmpty() &&
@@ -503,17 +580,52 @@ class TeacherDashboardActivity : DashboardActivity() {
 
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolId).child("scheduleclass")
-                                    .child(class_subject.text.toString())
+                                    .child(class_subject.text.toString()).push()
                     missionsReference.setValue(post)
 
-                    Toast.makeText(this, "Class is being scheduled successfully", Toast.LENGTH_SHORT).show()
-                    class_name.setText("")
-                    class_subject.setText("")
-                    class_date.setText("")
-                    class_starttime.setText("")
-                    class_endtime.setText("")
-                    class_zoomlink.setText("")
-                    dialog.dismiss()
+
+                    val reference: DatabaseReference
+                    reference = FirebaseDatabase.getInstance().reference.child(schoolId).child("StudentTokens")
+                    reference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            for (datas in dataSnapshot.children) {
+                                Log.e("msg", "TOKENCLASS" + datas.child("classId").value.toString())
+                                //Log.e("msg", "TOKENCLASS1" + datas.child("token").value.toString())
+                                if (class_name.text.toString().equals(datas.child("classId").value.toString(), ignoreCase = true)) {
+                                    try {
+                                        val s = datas.key
+                                        val studenttoken = datas.child("token").value.toString()
+                                        tokenlist.add(studenttoken)
+
+
+                                    } catch (e: Exception) {
+                                        Toast.makeText(applicationContext, "" + e.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    // Toast.makeText(applicationContext, "No scheduled class", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            val scheduledclassbody = "Hey! Your Subject Teacher " + currentTeacher.name +
+                                    " has scheduled an Online class.\nClick to Check Now !"
+                            sendFCMPush(tokenlist, scheduledclassbody);
+
+                            Toast.makeText(applicationContext, "Class is being scheduled successfully", Toast.LENGTH_SHORT).show()
+                            class_name.setText("")
+                            class_subject.setText("")
+                            class_date.setText("")
+                            class_starttime.setText("")
+                            class_endtime.setText("")
+                            class_zoomlink.setText("")
+                            dialog.dismiss()
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            //Toast.makeText(applicationContext, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+
+
                 }
             }
 
@@ -563,7 +675,17 @@ class TeacherDashboardActivity : DashboardActivity() {
             // startActivity(Intent(applicationContext, ScheduleClass::class.java))
         }
 
-        manageStudentsButton.setOnClickListener { startSecurely(StudentsActivity::class.java) }
+        manageStudentsButton.setOnClickListener {
+            startSecurely(StudentsActivity::class.java)
+        }
+        classAnnouncementsButton.setOnClickListener {
+            val posts = ArrayList<NoticeBoardPost>()
+            assignedClass?.notices?.values?.let { posts.addAll(it) }
+            startSecurely(NoticeActivity::class.java, Intent().apply {
+                putParcelableArrayListExtra(CygnusApp.EXTRA_NOTICE_POSTS, posts)
+            })
+        }
+
 
         if (currentTeacher.isClassTeacher()) {
             ClassesDao.getClassByTeacher(
@@ -573,7 +695,146 @@ class TeacherDashboardActivity : DashboardActivity() {
                         assignedClass = it
                     })
         }
+
+        mRegistrationBroadcastReceiver = object : BroadcastReceiver() {
+            //When the broadcast received
+//We are sending the broadcast from GCMRegistrationIntentService
+            override fun onReceive(context: Context, intent: Intent) { //If the broadcast has received with success
+//that means device is registered successfully
+                if (intent.action == GCMRegistrationIntentService.REGISTRATION_SUCCESS) { //Getting the registration token from the intent
+                    token = intent.getStringExtra("token")
+                    ed_loginsave.putString("SAVETOKEN", token)
+                    ed_loginsave.commit()
+                    Handler().postDelayed({
+                        // Toast.makeText(applicationContext,token, Toast.LENGTH_LONG).show()
+
+                        val post = TeacherToken(currentTeacher.email, token);
+
+                        val missionsReference =
+                                FirebaseDatabase.getInstance().reference.child(schoolId).
+                                        child("TeacherTokens").child(token.toString())
+
+                        missionsReference.setValue(post)
+                        Log.d("msg", "onReceiveToken: $token")
+                        //if the intent is not with success then displaying error messages
+                    }, 2000)
+                } else if (intent.action == GCMRegistrationIntentService.REGISTRATION_ERROR) { // Toast.makeText(getApplicationContext(), "GCM registration error!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        //Checking play service is available or not
+        //Checking play service is available or not
+        val resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(applicationContext)
+
+        //if play service is not available
+        //if play service is not available
+        if (ConnectionResult.SUCCESS != resultCode) { //If play service is supported but not installed
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) { //Displaying message that play service is not installed
+//  Toast.makeText(getApplicationContext(), "Google Play Service is not install/enabled in this device!", Toast.LENGTH_LONG).show();
+                GooglePlayServicesUtil.showErrorNotification(resultCode, applicationContext)
+                //If play service is not supported
+//Displaying an error message
+            } else { // Toast.makeText(getApplicationContext(), "This device does not support for Google Play Service!", Toast.LENGTH_LONG).show();
+            }
+            //If play service is available
+        } else {
+            //Starting intent to register device
+            val itent = Intent(applicationContext, GCMRegistrationIntentService::class.java)
+            startService(itent)
+        }
+
+
     }
+
+    private fun sendFCMPush(tokenlist: ArrayList<String>, bodyy: String) {
+        val SERVER_KEY = "AAAAav-QFhw:APA91bG7ChbWR2kwz_FBMKgaDV8IZ_PMmED0Rp_sy7f0PtlZm37t-uAJRnUwyLYSM4Z-kSg_Jj9Xv9O8x4r_L5iQC9JAKhhTPt-ga5nmEqCBMcqgaUMtDnF5ponwXi8mD31k481DWHoF"
+        var obj: JSONObject? = null
+        var objData: JSONObject? = null
+        var dataobjData: JSONObject? = null
+        val jsonArray = JSONArray()
+
+        var regId: JSONArray? = null;
+
+
+        try {
+            obj = JSONObject()
+            objData = JSONObject()
+            regId = JSONArray()
+
+            for (item in tokenlist) {
+                regId.put(item);
+            }
+
+            objData.put("body", bodyy)
+            objData.put("title", "Eduistein")
+            objData.put("sound", "default")
+            objData.put("icon", "icon_name") //   icon_name
+            // objData.put("tag", token)
+            objData.put("priority", "high")
+            dataobjData = JSONObject()
+            dataobjData.put("title", "Eduistein")
+            dataobjData.put("text", bodyy)
+
+            // obj.put("to", token)
+            obj.put("registration_ids", regId);
+            obj.put("notification", objData)
+            obj.put("data", dataobjData)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        val jsObjRequest: JsonObjectRequest = object : JsonObjectRequest(Method.POST,
+                "https://fcm.googleapis.com/fcm/send", obj,
+                Response.Listener { response ->
+                    Log.e("msg", "onResponse111111: $response")
+                    val post = StoreNotifications(currentTeacher.classId, bodyy);
+
+                    val missionsReference =
+                            FirebaseDatabase.getInstance().reference.child(schoolId).
+                                    child("Notifications").push()
+
+                    missionsReference.setValue(post)
+                    //Toast.makeText(applicationContext, "1:" + response.toString(), Toast.LENGTH_SHORT).show()
+
+
+                },
+                Response.ErrorListener { error ->
+                    Log.e("msg", "onResponse1111112: $error")
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Authorization"] = "key=$SERVER_KEY"
+                params["Content-Type"] = "application/json"
+                return params
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(jsObjRequest)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.w("MainActivity", "onResume")
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver!!,
+                IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS))
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver!!,
+                IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR))
+    }
+
+
+    //Unregistering receiver on activity paused
+    override fun onPause() {
+        super.onPause()
+        Log.w("MainActivity", "onPause")
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver!!)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver!!)
+    }
+
 
     private fun addChapternoList() {
         chapternoolist.add("Chapter 1")
@@ -713,6 +974,21 @@ class TeacherDashboardActivity : DashboardActivity() {
         SubjectsDao.getSubjectsByTeacher(schoolId, currentTeacher.email, OnSuccessListener {
             onSubjectsReceived(it)
         })
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if(sp_loginsave.getString("notice_back","").equals("true")){
+            val intent = getIntent()
+            finish()
+            startActivity(intent)
+            ed_loginsave.putString("notice_back","false")
+            ed_loginsave.commit()
+        }
+        else{
+
+        }
+
     }
 
     private fun onSubjectsReceived(subjects: List<Subject>) {

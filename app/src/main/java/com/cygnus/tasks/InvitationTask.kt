@@ -65,6 +65,7 @@ class InvitationTask(
                 .sendSignInLinkToEmail(inviteeEmail, when {
                     isTeacherInvite -> DynamicLinksUtils.createSignUpActionForTeacher(referral)
                     else -> DynamicLinksUtils.createSignUpActionForStudent(referral, rollNo!!, classId!!)
+
                 }).addOnSuccessListener {
                     InvitesDao.add(referral, inviteeEmail, sender)
                 }

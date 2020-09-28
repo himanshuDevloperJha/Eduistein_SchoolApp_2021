@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.cygnus.adapter.Chaptersdapter;
 import com.cygnus.model.Chapter;
@@ -47,11 +48,13 @@ public class St_Chapters extends AppCompatActivity {
         pb_chapters = findViewById(R.id.pb_chapters);
 
         teacher_emailid = getIntent().getStringExtra("teacher_emailid");
+
         classid = getIntent().getStringExtra("user_classid");
         user_standard = getIntent().getStringExtra("user_standard");
         subjectname = getIntent().getStringExtra("subjectname");
         user_schoolid = getIntent().getStringExtra("user_schoolid");
-
+     //  Toast.makeText(this, ""+teacher_emailid, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+subjectname, Toast.LENGTH_SHORT).show();
         rootRef3 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
 
         rootRef3.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -59,8 +62,8 @@ public class St_Chapters extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas2 : dataSnapshot.getChildren()) {
 
-                    if (user_standard.equals(datas2.child("standard").getValue().toString()) &&
-                            subjectname.equals(datas2.getKey())) {
+                    if (user_standard.equalsIgnoreCase(datas2.child("standard").getValue().toString()) &&
+                            subjectname.equalsIgnoreCase(datas2.getKey())) {
                         rootRef4 = FirebaseDatabase.getInstance().getReference().child("admin-videos").
                                 child(datas2.getKey()).child("Chapters");
 
@@ -100,6 +103,7 @@ public class St_Chapters extends AppCompatActivity {
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(St_Chapters.this, "1:"+databaseError.toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -118,6 +122,7 @@ public class St_Chapters extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("msg", "subjectnamee1113: "+databaseError.toString() );
+                Toast.makeText(St_Chapters.this, "2:"+databaseError.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -137,8 +142,8 @@ public class St_Chapters extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot datas1 : dataSnapshot.getChildren()) {
 
-                                if ((datas1.child("email").getValue().toString()).equals(teacher_emailid)
-                                        && (datas1.child("subject").getValue().toString()).equals(subjectname)) {
+                                if ((datas1.child("email").getValue().toString()).equalsIgnoreCase(teacher_emailid)
+                                        && (datas1.child("subject").getValue().toString()).equalsIgnoreCase(subjectname)) {
 
                                     Log.e("msg", "subjectnamee1: " + datas1.child("subject").getValue().toString());
 
@@ -185,6 +190,8 @@ public class St_Chapters extends AppCompatActivity {
 
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
+                                            Toast.makeText(St_Chapters.this, "3:"+databaseError.toString(), Toast.LENGTH_SHORT).show();
+
                                         }
                                     });
 
@@ -200,7 +207,8 @@ public class St_Chapters extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            //   Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(St_Chapters.this, "4:"+databaseError.toString(), Toast.LENGTH_SHORT).show();
+
 
                         }
                     });
@@ -211,7 +219,7 @@ public class St_Chapters extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //   Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(St_Chapters.this, "5:"+databaseError.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });

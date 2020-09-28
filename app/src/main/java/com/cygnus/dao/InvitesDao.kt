@@ -34,6 +34,11 @@ object InvitesDao {
                 .push()
                 .setValue("${sender}:${invitee}:${CygnusApp.STATUS_INVITE_PENDING}")
     }
+    fun add_mobile(schoolId: String, invitee: String, sender: String) {
+        CygnusApp.refToInvites(schoolId)
+                .push()
+                .setValue("${sender}:${invitee}:${CygnusApp.STATUS_INVITE_PENDING}")
+    }
 
     /**
      * Retrieves a sent invite, if found, from the database.

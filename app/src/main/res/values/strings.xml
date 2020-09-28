@@ -103,6 +103,7 @@
     <string name="teacher_class_head">You are assigned to</string>
     <string name="timetable_head">Timetable</string>
     <string name="other_accounts_head">Other Accounts</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
     <!-- Prompts and Explanations -->
     <string name="use_invited_email">Please use the same email address on which you received the sign up invitation.
@@ -158,6 +159,9 @@
     <string name="upload_success">File uploaded.</string>
     <string name="upload_failure">Failed to upload file.</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="blood_types">
         <item>O+</item>
         <item>O-</item>

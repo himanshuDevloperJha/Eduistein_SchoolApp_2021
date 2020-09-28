@@ -1,14 +1,23 @@
 package com.cygnus.model;
 
 public class YoutubeVideos {
-    String email,cls,subject;
+    String email, cls, subject, token;
 
-    public YoutubeVideos(String email, String cls, String subject) {
+    public YoutubeVideos(String email, String cls, String subject, String token) {
         this.setEmail(email);
         this.setCls(cls);
         this.setSubject(subject);
+        this.setSubject(subject);
+        this.setToken(token);
 
+    }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getEmail() {

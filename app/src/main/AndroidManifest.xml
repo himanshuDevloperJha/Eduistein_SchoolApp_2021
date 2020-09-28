@@ -12,13 +12,20 @@
         android:roundIcon="@drawable/applogoo"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".St_Youtubethumbnails"></activity>
+        <activity android:name=".ScheduleCkassOnlineList"></activity>
+        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".St_Youtubethumbnails" />
+        <activity android:name=".ShowStudentUploadedFiles" />
         <activity android:name=".St_Chapters" />
         <activity
             android:name=".YoutubevideoPlay"
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".St_YoutubeVideos" />
+        <activity android:name=".CourseMaterial" />
+        <activity android:name=".HomeworkMaterial" />
+        <activity android:name=".StudentFileUpload" />
         <activity android:name=".St_ScheduledClass" />
+        <activity android:name=".sign_up.MobileSignup" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -110,6 +117,13 @@
             android:label="Manage Classes"
             android:parentActivityName=".SchoolDashboardActivity" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/applogo" /> <!-- firebase notification -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.cygnus.fileprovider"
@@ -119,10 +133,38 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-    </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
+                <category android:name="com.gnirt69.gcmexample" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".notifications.GCMPushReceiverService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".notifications.GCMRegistrationIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

@@ -2,6 +2,7 @@ package com.cygnus.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
 import co.aspirasoft.view.BaseView
@@ -36,8 +37,17 @@ class MarkAttendanceView : BaseView<AttendanceRecord> {
     override fun updateView(model: AttendanceRecord) {
         studentNameView.text = model.studentName
         studentRollNoView.text = "Roll # ${model.studentRollNo}"
-        markPresentButton.isChecked = model.attendance
-        markAbsentButton.isChecked = !model.attendance
+        Log.e("msg","Attendancee1::"+model.studentRollNo!!+", "+ model.attendance)
+
+        if(model.attendance.equals(true)){
+            markPresentButton.isChecked =true
+            Log.e("msg","Attendancee112::"+model.studentRollNo!!+", "+ model.attendance)
+
+        }
+//        else if(model.attendance.equals(false)){
+//        }
+
+
         markPresentButton.setOnCheckedChangeListener { _, isChecked ->
             model.attendance = isChecked
         }

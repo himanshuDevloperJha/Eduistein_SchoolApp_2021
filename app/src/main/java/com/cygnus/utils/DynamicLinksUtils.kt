@@ -37,7 +37,8 @@ object DynamicLinksUtils {
     /**
      * Returns [ActionCodeSettings] to register a new [Student] with [referralCode] and [rollNo].
      */
-    fun createSignUpActionForStudent(referralCode: String, rollNo: String, classId: String): ActionCodeSettings {
+    fun createSignUpActionForStudent(referralCode: String, rollNo: String, classId: String):
+            ActionCodeSettings {
         val url = "$domain$ACTION_REGISTRATION?" +
                 "${CygnusApp.PARAM_REFERRAL_CODE}=${encode(referralCode)}&" +
                 "${CygnusApp.PARAM_ACCOUNT_TYPE}=${encode(Student::class.simpleName ?: "Student")}&" +

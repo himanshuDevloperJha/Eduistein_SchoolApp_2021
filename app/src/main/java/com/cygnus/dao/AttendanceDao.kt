@@ -11,9 +11,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 
-object AttendanceDao {
+public object AttendanceDao {
 
-    fun add(schoolId: String, attendance: Attendance, listener: OnCompleteListener<Void?>) {
+   public fun add(schoolId: String, attendance: Attendance, listener: OnCompleteListener<Void?>) {
         CygnusApp.refToAttendance(schoolId, attendance.classId)
                 .child(attendance.date)
                 .setValue(attendance)
@@ -68,5 +68,7 @@ object AttendanceDao {
                     }
                 })
     }
+
+
 
 }

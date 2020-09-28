@@ -20,11 +20,13 @@ import kotlin.reflect.KClass
  * @author saifkhichi96
  * @since 1.0.0
  */
-sealed class User(var id: String, var name: String, var credentials: Credentials) : BaseModel() {
+sealed class User(var id: String, var name: String, var credentials: Credentials
+) : BaseModel() {
 
     open val type: String get() = this::class.simpleName ?: "Student"
 
     val email: String get() = credentials.email
+
 
     var address: String? = null
         set(value) {
@@ -43,6 +45,7 @@ sealed class User(var id: String, var name: String, var credentials: Credentials
             field = value
             setChanged()
         }
+
 
     companion object {
         @JvmStatic
