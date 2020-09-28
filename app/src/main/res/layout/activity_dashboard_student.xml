@@ -198,7 +198,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/class_yt_notifications"
                 app:icon="@drawable/ic_notifications_black_24dp"
-                android:text="@string/my_notification"
+                android:text="@string/my_notifications"
                 android:layout_marginRight="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
