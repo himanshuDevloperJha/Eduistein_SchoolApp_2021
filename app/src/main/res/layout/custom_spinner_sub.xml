@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:textColor="#333333"
     android:text="hug"
+    android:fontFamily="sans-serif"
+    android:textSize="17dp"
     android:id="@+id/tv_chh"
     android:padding="15dp"
-    android:textStyle="bold"  />
+    />

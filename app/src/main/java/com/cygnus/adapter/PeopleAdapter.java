@@ -42,7 +42,7 @@ public class PeopleAdapter extends ArrayAdapter<ChapterSpinner> {
         if (people != null) {
             TextView lblName = (TextView) view.findViewById(R.id.tv_chh);
             if (lblName != null)
-                lblName.setText(people.getNo()+"-"+people.getName());
+                lblName.setText(people.getStudentname()+" - "+people.getStudentRollno());
         }
         return view;
     }

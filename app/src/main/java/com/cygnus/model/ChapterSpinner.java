@@ -1,26 +1,26 @@
 package com.cygnus.model;
 
 public class ChapterSpinner {
-    String no,name;
+    String studentname,studentRollno;
 
-    public ChapterSpinner(String no, String name) {
-       this.setName(name);
-       this.setNo(no);
+    public ChapterSpinner(String studentname, String studentRollno) {
+        this.setStudentname(studentname);
+        this.setStudentRollno(studentRollno);
     }
 
-    public String getNo() {
-        return no;
+    public String getStudentname() {
+        return studentname;
     }
 
-    public void setNo(String no) {
-        this.no = no;
+    public void setStudentname(String studentname) {
+        this.studentname = studentname;
     }
 
-    public String getName() {
-        return name;
+    public String getStudentRollno() {
+        return studentRollno;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudentRollno(String studentRollno) {
+        this.studentRollno = studentRollno;
     }
 }

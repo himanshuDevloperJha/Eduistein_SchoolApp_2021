@@ -15,7 +15,7 @@ import com.google.firebase.database.*
  * Purpose of this class is to provide methods for communicating with the
  * Firebase backend to access data related to app users.
  *
- * @author saifkhichi96
+ * @author https://github.com/Kushaggra
  * @since 1.0.0
  */
 object UsersDao {

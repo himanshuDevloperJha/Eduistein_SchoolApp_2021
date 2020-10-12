@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener
  * Purpose of this class is to provide methods for communicating with the
  * Firebase backend to access data related to notice boards.
  *
- * @author saifkhichi96
+ * @author https://github.com/Kushaggra
  * @since 1.0.0
  */
 object NoticeBoardDao {

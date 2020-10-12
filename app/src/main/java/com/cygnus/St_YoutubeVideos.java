@@ -49,8 +49,9 @@ public class St_YoutubeVideos extends AppCompatActivity {
 
         teacher_email=getIntent().getStringExtra("user_teacherid");
         user_standard=getIntent().getStringExtra("user_standard");
-       // Toast.makeText(this, "22:: "+user_standard, Toast.LENGTH_SHORT).show();
-       // Toast.makeText(this, "22"+teacher_email, Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(this, "21:: "+user_standard, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "22"+classname, Toast.LENGTH_SHORT).show();
 
         reference = FirebaseDatabase.getInstance().getReference().child(user_schoolid).
                 child("youtubevideos");
@@ -60,7 +61,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
-                    if (user_standard.equals(datas.child("standard").getValue().toString())) {
+                    if (user_standard.equalsIgnoreCase(datas.child("standard").getValue().toString())) {
                         try {
                             Youtube yt = new Youtube("",
                                     datas.getKey(),

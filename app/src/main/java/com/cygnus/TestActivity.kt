@@ -370,7 +370,9 @@ class TestActivity : DashboardChildActivity() {
         : ModelViewAdapter<TestScore>(context, scores, TestScoreView::class) {
 
         override fun notifyDataSetChanged() {
-            scores.sortedBy { it.studentRollNo }
+            //scores.sortedBy { it.studentRollNo }
+            Collections.sort(scores, AscendingComparator())
+
             super.notifyDataSetChanged()
         }
 
@@ -387,5 +389,18 @@ class TestActivity : DashboardChildActivity() {
         }
 
     }
+    class AscendingComparator : Comparator<TestScore?> {
 
+        override fun compare(p0: TestScore?, p1: TestScore?): Int {
+            val pM1 = Math.round(p0!!.studentRollNo!!.toFloat()).toInt()
+            val pM2 = Math.round(p1!!.studentRollNo!!.toFloat()).toInt()
+            return if (pM1 > pM2) {
+                1
+            } else if (pM1 < pM2) {
+                -1
+            } else {
+                0
+            }
+        }
+    }
 }

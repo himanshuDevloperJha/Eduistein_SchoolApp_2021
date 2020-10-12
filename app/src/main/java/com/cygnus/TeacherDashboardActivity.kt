@@ -204,8 +204,7 @@ class TeacherDashboardActivity : DashboardActivity() {
 
 
                             //for subjects
-                            val uidRef1 = rootRef
-                                    .child(schoolId)
+                            val uidRef1 = rootRef.child(schoolId)
                                     .child("classes").child(ds.key.toString())
                                     .child("subjects")
 
@@ -301,7 +300,7 @@ class TeacherDashboardActivity : DashboardActivity() {
 
 
                                                     class_st_yt_units.setAdapter(ArrayAdapter(applicationContext,
-                                                            android.R.layout.select_dialog_item, chapterlist));
+                                                            android.R.layout.select_dialog_item, chapterlist))
 
                                                     /* class_st_yt_units.setOnItemClickListener { adapterView, view, i, l ->
                                                         // selectedchapter = peopleAdapter.getItem(i)!!.no + "-" + peopleAdapter.getItem(i)!!.name
@@ -387,26 +386,12 @@ class TeacherDashboardActivity : DashboardActivity() {
 
 
                     val post = YoutubeVideos(teacheremail, class_st_yt_class.text.toString(),
-                            class_st_yt_subject.text.toString(), token);
+                            class_st_yt_subject.text.toString(), token)
 
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolId).child("youtubevideos")
                                     .child(class_st_yt_subject.text.toString()).push()
                     missionsReference.setValue(post)
-
-
-//                    val childUpdates1 = hashMapOf<String, Any>(
-//                         "/Chapters/1/" to cn)
-//                    missionsReference.setValue(childUpdates1);
-
-//                    val missionsReference1= missionsReference.child("Chapters")
-//                    val map2: HashMap<String, Chapternumbers> = HashMap()
-//                  map2.put(class_st_yt_unitsno.text.toString(),cn)
-//                    missionsReference1.setValue(map2);
-
-
-                    // val sdf: SimpleDateFormat  =  SimpleDateFormat("yyyyMMdd G HH:mm:ss z")
-                    // val currenttime:String  = sdf.format(Date());
 
                     val missionsReference2 = missionsReference.child("Chapters")
 
@@ -979,9 +964,18 @@ class TeacherDashboardActivity : DashboardActivity() {
     override fun onRestart() {
         super.onRestart()
         if(sp_loginsave.getString("notice_back","").equals("true")){
-            val intent = getIntent()
-            finish()
-            startActivity(intent)
+          //  val intent = getIntent()
+          //  finish()
+          //  startActivity(intent)
+
+            if (currentTeacher.isClassTeacher()) {
+                ClassesDao.getClassByTeacher(
+                        schoolId,
+                        currentTeacher.email,
+                        OnSuccessListener {
+                            assignedClass = it
+                        })
+            }
             ed_loginsave.putString("notice_back","false")
             ed_loginsave.commit()
         }

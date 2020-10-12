@@ -275,14 +275,18 @@
               android:text="@string/academics_desc"/>
 
           <LinearLayout
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
+             android:weightSum="3"
               android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:id="@+id/manageClassesButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:textSize="13dp"
                 android:layout_height="wrap_content"
                 android:onClick="onManageClassesClicked"
                 android:text="@string/label_manage_classes"/>
@@ -290,10 +294,24 @@
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:id="@+id/manageSubjectsButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="13dp"
+
+                android:textAllCaps="false"
                 android:layout_height="wrap_content"
                 android:onClick="onManageSubjectsClicked"
                 android:text="@string/label_manage_courses"/>
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/manageFeesButton"
+                android:layout_width="0dp"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:textSize="13dp"
+
+                android:layout_height="wrap_content"
+                android:text="Fee\nManagement"/>
 
           </LinearLayout>
 

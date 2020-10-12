@@ -50,6 +50,10 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          app:boxCornerRadiusTopEnd="@dimen/_8dp"
+          app:boxCornerRadiusBottomEnd="@dimen/_8dp"
+          app:boxCornerRadiusBottomStart="@dimen/_8dp"
+          app:boxCornerRadiusTopStart="@dimen/_8dp"
           android:layout_marginBottom="8dp"
           android:hint="@string/hint_email">
 
@@ -57,6 +61,7 @@
             android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:inputType="textEmailAddress"/>
 
       </com.google.android.material.textfield.TextInputLayout>
@@ -65,12 +70,17 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          app:boxCornerRadiusTopEnd="@dimen/_8dp"
+          app:boxCornerRadiusBottomEnd="@dimen/_8dp"
+          app:boxCornerRadiusBottomStart="@dimen/_8dp"
+          app:boxCornerRadiusTopStart="@dimen/_8dp"
           android:hint="@string/hint_password"
           app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
 

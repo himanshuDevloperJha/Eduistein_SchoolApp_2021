@@ -9,6 +9,7 @@ import com.cygnus.R
 import com.cygnus.model.CourseFile
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
+import java.lang.Exception
 
 class CourseFileView : BaseView<CourseFile> {
 
@@ -29,11 +30,18 @@ class CourseFileView : BaseView<CourseFile> {
 
     override fun updateView(model: CourseFile) {
 
+try{
+    val extracteddatetime = model.name.substring(model.name.length - 24, model.name.length);
+    mFileView.text = model.name.substring(0,model.name.length-24)
+    postDatehome.text = extracteddatetime
+    Log.e("msg","DATETIMEEE::"+extracteddatetime+","+model.name.substring(model.name.length - 24));
 
-        val extracteddatetime = model.name.substring(model.name.length - 24, model.name.length);
-        mFileView.text = model.name.substring(0,model.name.length-24)
-        postDatehome.text = extracteddatetime
-        Log.e("msg","DATETIMEEE::"+extracteddatetime+","+model.name.substring(model.name.length - 24));
+}
+catch (e:Exception){
+    Log.e("msg","DATETIMEEE11::"+e.toString());
+
+}
+
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

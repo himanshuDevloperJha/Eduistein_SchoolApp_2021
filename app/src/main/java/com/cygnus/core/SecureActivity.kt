@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser
  * and the unique [schoolId] to which this user is associated is passed with the
  * [CygnusApp.EXTRA_SCHOOL] tag.
  *
- * @author saifkhichi96
+ * @author https://github.com/Kushaggra
  * @since 1.0.0
  */
 abstract class SecureActivity : AppCompatActivity() {

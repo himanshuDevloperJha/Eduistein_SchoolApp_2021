@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="500dp"
@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:text="Schedule Class"/>
 
     <com.google.android.material.textview.MaterialTextView
@@ -21,10 +22,10 @@
         android:layout_height="wrap_content"
         android:text="@string/add_subject_desc"/>
 
-       <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
-           android:visibility="gone"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Class/Section">
@@ -42,6 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Subject">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -58,6 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="@string/hint_subject_class">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -74,6 +79,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Date">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -93,6 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Start Time">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -112,6 +121,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="End Time">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -130,13 +141,20 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hintTextColor="@color/colorPrimary"
         android:layout_marginTop="8dp"
-        android:hint="Class Link">
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxCornerRadiusTopEnd="@dimen/d20dp"
+        app:boxCornerRadiusBottomStart="@dimen/d20dp"
+        android:hint="Class Link"
+        android:textColorHint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_zoomlink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -144,7 +162,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_schedulesave"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

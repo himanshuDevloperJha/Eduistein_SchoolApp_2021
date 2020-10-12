@@ -228,9 +228,24 @@
                 android:textAlignment="textStart"
                 app:iconSize="34dp"
                 android:textSize="10dp"/>
+
+
           </GridLayout>
 
-
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/classFees"
+              android:text="Fee Payment"
+              app:icon="@drawable/pay_fees"
+              android:layout_marginRight="2dp"
+              android:layout_marginLeft="2dp"
+              android:layout_width="match_parent"
+              android:layout_gravity="fill"
+              app:cornerRadius="20dp"
+              android:layout_height="50dp"
+              android:padding="10dp"
+              android:textAllCaps="true"
+              android:textAlignment="center"
+              app:iconSize="20dp"/>
 
 
 

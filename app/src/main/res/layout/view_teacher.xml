@@ -9,15 +9,17 @@
     android:padding="@dimen/activity_horizontal_margin">
 
   <com.google.android.material.card.MaterialCardView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
       app:cardBackgroundColor="?android:attr/colorBackground"
-      app:cardCornerRadius="16dp">
+      app:cardCornerRadius="10dp"
+      android:elevation="@dimen/_8dp"
+      android:paddingHorizontal="16dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/userImage"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/ph_student"/>
 
@@ -35,9 +37,12 @@
         android:id="@+id/teacherName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="true"
         android:text="@string/ph_name"
         android:textStyle="bold"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="7dp"/>
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:id="@+id/teacherEmail"

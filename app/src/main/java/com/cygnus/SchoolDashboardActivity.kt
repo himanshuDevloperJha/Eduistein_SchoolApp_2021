@@ -2,6 +2,7 @@ package com.cygnus
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -20,6 +21,7 @@ import co.aspirasoft.util.InputUtils.showError
 import com.cygnus.core.DashboardActivity
 import com.cygnus.dao.Invite
 import com.cygnus.dao.InvitesDao
+import com.cygnus.feesmanage.FeesmanagmentList
 import com.cygnus.model.School
 import com.cygnus.model.User
 import com.cygnus.tasks.InvitationTask
@@ -49,6 +51,9 @@ class SchoolDashboardActivity : DashboardActivity() {
     private val joinedStaff = ArrayList<Invite>()
     var classname: String? = null
     var teachername: String? = null
+    lateinit var sp_loginsave: SharedPreferences;
+    lateinit var ed_loginsave: SharedPreferences.Editor;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +61,13 @@ class SchoolDashboardActivity : DashboardActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
         Log.e("msg","schoolName----"+schoolId)
+
+        sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", MODE_PRIVATE)
+        ed_loginsave = sp_loginsave.edit()
+
+        ed_loginsave.putString("SchoolID", schoolId)
+        ed_loginsave.commit()
+
 
         val clslist: MutableList<String> = mutableListOf()
         val teacherlist: MutableList<String> = mutableListOf()
@@ -129,6 +141,11 @@ class SchoolDashboardActivity : DashboardActivity() {
             uidRef1.addListenerForSingleValueEvent(valueEventListener1)
 
 
+        }
+
+        manageFeesButton.setOnClickListener {
+            intent = Intent(this, FeesmanagmentList::class.java)
+            startActivity(intent)
         }
     }
 

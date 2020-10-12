@@ -18,7 +18,7 @@ import kotlin.collections.HashMap
  * Purpose of this class is to provide methods for communicating with the
  * Firebase backend to access data related to sent sign up invites.
  *
- * @author saifkhichi96
+ * @author https://github.com/Kushaggra
  * @since 1.0.0
  */
 object InvitesDao {

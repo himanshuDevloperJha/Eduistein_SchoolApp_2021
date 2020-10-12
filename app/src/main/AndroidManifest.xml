@@ -12,8 +12,16 @@
         android:roundIcon="@drawable/applogoo"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ScheduleCkassOnlineList"></activity>
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".feesmanage.SchoolFeeDetail"></activity>
+        <activity android:name=".feesmanage.FeeHistoryStudent" />
+        <activity android:name=".feesmanage.PayFees" />
+        <activity android:name=".feesmanage.CheckFeeStatus" />
+        <activity android:name=".feesmanage.AccounDetails" />
+        <activity android:name=".feesmanage.AddFeeStructure" />
+        <activity android:name=".feesmanage.StudentFeeList" />
+        <activity android:name=".feesmanage.FeesmanagmentList" />
+        <activity android:name=".ScheduleCkassOnlineList" />
+        <activity android:name=".NotificationActivity" />
         <activity android:name=".St_Youtubethumbnails" />
         <activity android:name=".ShowStudentUploadedFiles" />
         <activity android:name=".St_Chapters" />
@@ -133,6 +141,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -158,13 +167,16 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver android:name=".StudentDashboardActivity$AlarmReceiver">
+        </receiver>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
 </manifest>

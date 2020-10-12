@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="480dp"
@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="@android:color/holo_red_light"
         android:text="Youtube Videos"/>
 
 
@@ -38,6 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="@string/hint_subject_class">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -54,6 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Subject">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -69,6 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Chapter No">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -84,6 +91,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Chapter Name">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -102,6 +111,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Title">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -117,7 +128,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Youtube URL">
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxCornerRadiusBottomStart="@dimen/d20dp"
+        app:boxCornerRadiusTopEnd="@dimen/d20dp"
+        android:hint="Youtube URL"
+        android:textColorHint="@android:color/holo_red_light">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_yt_youtubelink"
@@ -130,10 +146,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_yt_save"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+
         android:layout_marginTop="8dp"
         android:text="@string/label_save"/>
 

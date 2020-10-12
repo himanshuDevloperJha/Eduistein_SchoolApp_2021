@@ -1,18 +1,22 @@
 package com.cygnus
 
+import android.app.*
 import android.content.*
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import co.aspirasoft.adapter.ModelViewAdapter
 import com.cygnus.core.DashboardActivity
 import com.cygnus.dao.NoticeBoardDao
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
+import com.cygnus.feesmanage.PayFees
 import com.cygnus.model.*
 import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.timetable.TimetablePagerAdapter
@@ -20,14 +24,12 @@ import com.cygnus.view.SubjectView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import kotlinx.android.synthetic.main.activity_dashboard_student.*
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -46,7 +48,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
 
     var subjectlist: MutableList<String> = mutableListOf()
     private lateinit var currentStudent: Student
-    private var classPosts = ArrayList<NoticeBoardPost>()
+    public var classPosts = ArrayList<NoticeBoardPost>()
     private var subjectNames = ArrayList<String>()
     var teacherid: String? = null
     var standard: String? = null
@@ -54,6 +56,9 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     lateinit var ed_loginsave: SharedPreferences.Editor;
     private var mRegistrationBroadcastReceiver: BroadcastReceiver? = null
     var token: String? = null
+    var reminderstatus: Boolean = false
+    lateinit var reference2: DatabaseReference
+    lateinit var reference5: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,30 +76,109 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             }
         }
 
+//notification Reminder
+        /*val myIntent = Intent(applicationContext, NotifyService::class.java)
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val pendingIntent = PendingIntent.getService(this, 0, myIntent, 0)
+        val calendar = Calendar.getInstance()
+        calendar[Calendar.SECOND] = 0
+        calendar[Calendar.MINUTE] = 1
+        calendar[Calendar.HOUR] = 0
+        calendar[Calendar.AM_PM] = Calendar.AM
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, 1000 * 60 * 60 * 24.toLong(), pendingIntent)*/
 
-        val rootRef = FirebaseDatabase.getInstance().reference
-        val uidRef1 = rootRef.child(schoolId)
-                .child("classes")
+        /*var currentMonth: Int = calendar.get(Calendar.MONTH);
 
-        val valueEventListener1 = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (ds in dataSnapshot.getChildren()) {
+        // move month ahead
+        currentMonth++;
+        // check if has not exceeded threshold of december
 
-                    val c = ds.child("name").getValue().toString()
-                    if (currentStudent.classId.equals(c)) {
-                        standard = ds.child("standard").getValue().toString()
-                        Log.e("msg", "msggg333333" + standard);   //gives the value for given keyname
-                    }
-
-                }
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.d("msg", databaseError.message) //Don't ignore errors!
-            }
+        if (currentMonth > Calendar.DECEMBER) {
+            // alright, reset month to jan and forward year by 1 e.g fro 2013 to 2014
+            currentMonth = Calendar.JANUARY
+            // Move year ahead as well
+            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 1)
         }
-        uidRef1.addListenerForSingleValueEvent(valueEventListener1)
+
+        // reset calendar to next month
+        calendar.set(Calendar.MONTH, currentMonth)
+        // get the maximum possible days in this month
+        var maximumDay: Int = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        // set the calendar to maximum day (e.g in case of fEB 28th, or leap 29th)
+        calendar.set(Calendar.DAY_OF_MONTH, maximumDay)
+        var thenTime: Long = calendar.getTimeInMillis()// this is time one month ahead*/
+
+
+        /*  val rootRef = FirebaseDatabase.getInstance().reference
+          val uidRef1 = rootRef.child(schoolId)
+                  .child("classes")
+
+          val valueEventListener1 = object : ValueEventListener {
+              override fun onDataChange(dataSnapshot: DataSnapshot) {
+                  for (ds in dataSnapshot.getChildren()) {
+
+                      val c = ds.child("name").getValue().toString()
+                      if (currentStudent.classId.equals(c)) {
+                          Log.e("msg", "msggg333333" + standard);   //gives the value for given keyname
+                      }
+
+                  }
+
+              }
+
+              override fun onCancelled(databaseError: DatabaseError) {
+                  Log.d("msg", databaseError.message) //Don't ignore errors!
+              }
+          }
+          uidRef1.addListenerForSingleValueEvent(valueEventListener1)*/
+
+
+        if (currentStudent.classId.contains("NURSERY", ignoreCase = true)) {
+            standard = "Class Nursery"
+        } else if (currentStudent.classId.contains("LKG", ignoreCase = true)) {
+            standard = "Class LKG"
+        } else if (currentStudent.classId.contains("UKG", ignoreCase = true)) {
+            standard = "Class UKG"
+
+        } else if (currentStudent.classId.contains("1", ignoreCase = true)) {
+            standard = "Class 1st"
+        } else if (currentStudent.classId.contains("2", ignoreCase = true)) {
+            standard = "Class 2nd"
+
+        } else if (currentStudent.classId.contains("3", ignoreCase = true)) {
+            standard = "Class 3rd"
+
+        } else if (currentStudent.classId.contains("4", ignoreCase = true)) {
+            standard = "Class 4th"
+
+        } else if (currentStudent.classId.contains("5", ignoreCase = true)) {
+            standard = "Class 5th"
+
+        } else if (currentStudent.classId.contains("6", ignoreCase = true)) {
+            standard = "Class 6th"
+
+        } else if (currentStudent.classId.contains("7", ignoreCase = true)) {
+            standard = "Class 7th"
+
+        } else if (currentStudent.classId.contains("8", ignoreCase = true)) {
+            standard = "Class 8th"
+
+        } else if (currentStudent.classId.contains("9", ignoreCase = true)) {
+            standard = "Class 9th"
+
+        } else if (currentStudent.classId.contains("10", ignoreCase = true)) {
+            standard = "Class 10th"
+
+        } else if (currentStudent.classId.contains("11", ignoreCase = true)) {
+            standard = "Class 11th"
+
+        } else if (currentStudent.classId.contains("12", ignoreCase = true)) {
+            standard = "Class 12th"
+
+        }
+
 
         attendanceButton.setOnClickListener { startSecurely(AttendanceActivity::class.java) }
         classAnnouncementsButton.setOnClickListener {
@@ -131,6 +215,15 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             startActivity(intent)
         }
 
+        classFees.setOnClickListener {
+            val intent = Intent(this, PayFees::class.java)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentclassId", currentStudent.classId)
+            intent.putExtra("studentname", currentStudent.name)
+            intent.putExtra("studentrollNoo", currentStudent.rollNo)
+            startActivity(intent)
+        }
+
         classschedule_student.setOnClickListener {
             val intent = Intent(this, ScheduleCkassOnlineList::class.java)
             /*intent.putExtra("username",currentUser.credentials.email)
@@ -145,9 +238,9 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
 
         }
 
-       /* payfees.setOnClickListener {
-            startRazorPayProcess()
-        }*/
+        /* payfees.setOnClickListener {
+             startRazorPayProcess()
+         }*/
 
         NoticeBoardDao.getPostsByClass(
                 schoolId,
@@ -215,6 +308,73 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             val itent = Intent(applicationContext, GCMRegistrationIntentService::class.java)
             startService(itent)
         }
+
+
+        //set reminder
+        val cal = Calendar.getInstance()
+        val month_date = SimpleDateFormat("MMMM")
+        val month_name = month_date.format(cal.time)
+        reference2 = FirebaseDatabase.getInstance().reference.child(schoolId).
+                child("FeeHistory")
+        reference2!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (datas in dataSnapshot.children) {
+                    if (currentStudent.classId.equals(datas.child("classId").value.toString())
+                            && currentStudent.name.equals(datas.child("studentName").value.toString())
+                            && month_name.equals(datas.child("feeMonth").value.toString())
+                            && currentStudent.rollNo.equals(datas.child("studentRollno").value.toString())) {
+                        reminderstatus = true
+                    }
+
+                }
+
+                if (reminderstatus == true) {
+                   Log.e("Receiver", "Broadcast receiveddd44:")
+
+               } else {
+                   val calendar = Calendar.getInstance()
+                   val myIntent = Intent(applicationContext, AlarmReceiver::class.java)
+                   val pendingIntent = PendingIntent.getBroadcast(applicationContext,
+                           0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                   val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                   alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
+                           AlarmManager.INTERVAL_DAY * 30, pendingIntent)
+               }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                //pb_feehistory.visibility= View.GONE
+                Toast.makeText(applicationContext, "" + databaseError.toString(), Toast.LENGTH_SHORT).show();
+            }
+        })
+
+        /*reference5 = FirebaseDatabase.getInstance().reference.child(schoolId).
+                child("SchoolFeeList")
+        reference5!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (datas in dataSnapshot.children) {
+                    if (currentStudent.classId.equals("NURSERY")) {
+                        //reminderstatus = true
+                        Log.e("Receiver", "Broadcast receiveddd44:")
+
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                //pb_feehistory.visibility= View.GONE
+                Toast.makeText(applicationContext, "" + databaseError.toString(), Toast.LENGTH_SHORT).show();
+            }
+        })*/
+
+
+
+
+
+
     }
 
     override fun onResume() {
@@ -342,6 +502,64 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
 
     }
 
+    class AlarmReceiver : BroadcastReceiver() {
+        var monthname: String? = null
+        override fun onReceive(context: Context, intent: Intent) { // TODO Auto-generated method stub
+            val cal = Calendar.getInstance()
+            val month_date = SimpleDateFormat("MMMM")
+            monthname = month_date.format(cal.time)
+            Log.e("Receiver", "Broadcast receiveddd33:" + monthname)
+
+
+            val mNotificationManager: NotificationManager
+            val mBuilder = NotificationCompat.Builder(context, "notify_001")
+            /*long when = System.currentTimeMillis();
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent notificationIntent = new Intent(context, StudentDashboardActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
+                context).setSmallIcon(R.drawable.applogo)
+                .setContentTitle("Alarm Fired")
+                .setContentText("Events to be Performed").setSound(alarmSound)
+                .setAutoCancel(true).setWhen(when)
+                .setContentIntent(pendingIntent)
+                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+        notificationManager.notify(( int ) System. currentTimeMillis (), mNotifyBuilder.build());*/
+// MID++;
+            val ii: Intent
+            ii = Intent(context, StudentDashboardActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(context,
+                    0, ii, 0)
+            val bigText = NotificationCompat.BigTextStyle()
+            bigText.bigText("Fee Due for " + monthname)
+            bigText.setBigContentTitle("Eduistein")
+            mBuilder.setContentIntent(pendingIntent)
+            mBuilder.setSmallIcon(R.drawable.applogo)
+            mBuilder.priority = Notification.PRIORITY_MAX
+            mBuilder.setStyle(bigText)
+            mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            // === Removed some obsoletes
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channelId = "Your_channel_id"
+                val channel = NotificationChannel(
+                        channelId,
+                        "Channel human readable title",
+                        NotificationManager.IMPORTANCE_HIGH)
+                mNotificationManager.createNotificationChannel(channel)
+                mBuilder.setChannelId(channelId)
+            }
+            mNotificationManager.notify(0, mBuilder.build())
+        }
+    }
 }
 
 

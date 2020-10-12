@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/attendance_listitem_back"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/activity_horizontal_margin">
@@ -26,6 +27,10 @@
         android:buttonTint="@color/colorWarning"/>
 
   </RadioGroup>
+  <LinearLayout
+      android:layout_width="3dp"
+      android:layout_height="match_parent"
+      android:background="@android:color/white"/>
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -40,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ph_name"
+        android:textAllCaps="true"
         android:textStyle="bold"/>
 
     <com.google.android.material.textview.MaterialTextView

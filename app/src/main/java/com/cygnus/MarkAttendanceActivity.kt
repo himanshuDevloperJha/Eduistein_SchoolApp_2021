@@ -15,10 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.dao.AttendanceDao
 import com.cygnus.dao.UsersDao
-import com.cygnus.model.Attendance
-import com.cygnus.model.AttendanceRecord
-import com.cygnus.model.Teacher
-import com.cygnus.model.User
+import com.cygnus.model.*
 import com.cygnus.view.MarkAttendanceView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -30,7 +27,8 @@ import kotlinx.android.synthetic.main.activity_mark_attendance.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.HashMap
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MarkAttendanceActivity : DashboardChildActivity() {
     var tokenlist: ArrayList<String> = ArrayList()
@@ -238,10 +236,25 @@ class MarkAttendanceActivity : DashboardChildActivity() {
         : ModelViewAdapter<AttendanceRecord>(context, records, MarkAttendanceView::class) {
 
         override fun notifyDataSetChanged() {
-            records.sortedBy { it.studentRollNo }
+           // records.sortedBy { it.studentRollNo }
+            Collections.sort(records, AscendingComparat())
+
             super.notifyDataSetChanged()
         }
 
     }
+    class AscendingComparat : Comparator<AttendanceRecord?> {
 
+        override fun compare(p0: AttendanceRecord?, p1: AttendanceRecord?): Int {
+            val pM1 = Math.round(p0!!.studentRollNo!!.toFloat()).toInt()
+            val pM2 = Math.round(p1!!.studentRollNo!!.toFloat()).toInt()
+            return if (pM1 > pM2) {
+                1
+            } else if (pM1 < pM2) {
+                -1
+            } else {
+                0
+            }
+        }
+    }
 }

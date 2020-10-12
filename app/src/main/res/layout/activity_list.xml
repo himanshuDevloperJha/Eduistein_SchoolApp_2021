@@ -32,8 +32,11 @@
           android:id="@+id/contentList"
           android:layout_marginTop="?actionBarSize"
           android:layout_width="match_parent"
+          android:divider="@android:color/transparent"
+          android:dividerHeight="15dp"
+          android:padding="10dp"
+          android:elevation="6dp"
           android:layout_height="match_parent"/>
-
 
 
   <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

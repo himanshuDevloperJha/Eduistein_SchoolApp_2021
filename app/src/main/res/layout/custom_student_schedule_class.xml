@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="450dp"
@@ -11,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
         android:text="Schedule Class"/>
 
     <com.google.android.material.textview.MaterialTextView
@@ -26,6 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Subject">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -45,6 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Class Name">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -65,6 +71,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Date">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -84,6 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="Start time">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -102,6 +112,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="End Time">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -123,12 +135,15 @@
         android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
         android:hint="@string/hint_subject_class">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/class_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorLink="@color/colorPrimary"
             android:inputType="none"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +153,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/colorPrimary"
+        app:boxCornerRadiusTopStart="@dimen/d20dp"
+        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxCornerRadiusBottomStart="@dimen/d20dp"
+        app:boxCornerRadiusTopEnd="@dimen/d20dp"
+
         android:hint="Zoom URL">
 
         <com.google.android.material.textfield.TextInputEditText
