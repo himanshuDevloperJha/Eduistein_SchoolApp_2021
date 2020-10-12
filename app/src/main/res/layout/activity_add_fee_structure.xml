@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".feesmanage.AddFeeStructure"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:elevation="0dp">
+
+        <TextView
+            android:id="@+id/toolbar_addFees"
+            android:text="ghjghjgjhjhj"
+            android:textSize="18dp"
+            android:paddingLeft="15dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.91">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/classFeeList"
+                android:layout_marginTop="?actionBarSize"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               />
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/pb_addfee"
+                android:indeterminateTint="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/tv_classtotal"
+            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.09"
+            android:layout_gravity="center"
+            android:text="TOTAL : \u20B9 0"/>
+    </LinearLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addFeeStructure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:backgroundTint="?attr/colorPrimary"
+        app:icon="@drawable/ic_action_add"
+        app:iconTint="?android:attr/textColorPrimary"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

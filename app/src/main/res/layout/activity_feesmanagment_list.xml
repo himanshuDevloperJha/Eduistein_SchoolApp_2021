@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feesmanage.FeesmanagmentList">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="Fee Management"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@android:color/transparent"
+            app:layout_scrollFlags="scroll"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:id="@+id/fee_str"
+        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        app:contentPadding="4dp"
+        app:cardCornerRadius="@dimen/d20dp"
+        app:cardElevation="4dp">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/fee_str1"
+
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:layout_gravity="center"
+            android:text="Design Fee Structure of the Class"/>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:id="@+id/check_fee"
+        app:cardCornerRadius="@dimen/d20dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        app:contentPadding="4dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="4dp">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="200dp"
+            android:id="@+id/check_fee1"
+
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:layout_gravity="center"
+            android:text="Check Fee Status of Students"/>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:id="@+id/account_details"
+        app:cardCornerRadius="@dimen/d20dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        android:layout_marginTop="20dp"
+        app:contentPadding="4dp"
+        app:cardElevation="4dp">
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="200dp"
+            android:id="@+id/account_details1"
+
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:layout_gravity="center"
+            android:text="Add your Account/ UPI Details"/>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="270dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@android:color/white"
+    android:padding="40dp">
+    <TextView
+        android:id="@+id/tv_txt2"
+        android:textSize="16dp"
+        android:text="We will be verifying the phone number: \n 9898778798 \n\nIs this OK,or would you like to edit the number ?"
+        android:textColor="#333333"
+        android:justificationMode="inter_word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:text="Edit"
+            android:id="@+id/btn_edit"
+            android:textSize="8pt"
+            android:background="@drawable/recharge_backbtn"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:layout_height="45dp"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:text="Confirm"
+            android:textSize="8pt"
+            android:textAllCaps="false"
+
+            android:id="@+id/btn_confirm"
+            android:background="@drawable/recharge_backbtn"
+            android:layout_gravity="end|right"
+            android:textColor="@android:color/white"
+            android:layout_height="45dp"/>
+    </LinearLayout>
+</LinearLayout>

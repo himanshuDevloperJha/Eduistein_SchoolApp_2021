@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/vw_color"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"/>
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="16dp"
+            android:id="@+id/tv_classname"
+            android:textStyle="bold"/>
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:id="@+id/tv_recfee"
+            android:textColor="#88827F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            />
+    </LinearLayout>
+
+
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:id="@+id/tv_feesss"
+        android:text="hhjj"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:layout_width="0dp"
+        android:layout_weight="0.4"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:id="@+id/iv_editfee"
+        android:gravity="center"
+        android:padding="3dp"
+        android:tint="@color/colorPrimary"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/edit_icon"
+        android:layout_height="30dp"
+        android:layout_weight="0.1"/>
+
+</LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

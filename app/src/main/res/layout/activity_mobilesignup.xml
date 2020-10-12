@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+android:weightSum="1"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:elevation="0dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lg_logo"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <LinearLayout
+android:id="@+id/linear_layout_phone_input_login_activity"
+        android:layout_width="match_parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_weight="0.4">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:text="Phone number required"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimary"
+            android:text="Please tell us your phone number in order to signup. We will use this phone number for future communications."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:ccp_textSize="17dp"
+                android:gravity="center"
+                android:background="@drawable/bg_season_tab"
+                app:ccp_textColor="@android:color/black"
+                android:visibility="visible"
+                android:id="@+id/countrycodepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp" />
+            <EditText
+                android:id="@+id/edit_text_phone_number_login_acitivty"
+                android:maxLength="15"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:gravity="center|left"
+                android:background="@drawable/bg_season_tab"
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+        </LinearLayout>
+        <RelativeLayout
+            android:elevation="2dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:id="@+id/relative_layout_confirm_phone_number"
+            android:gravity="left|center"
+            android:layout_marginTop="4dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <RelativeLayout
+                android:gravity="center"
+                android:background="@drawable/bg_loading_subtitles_accent"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:tint="@android:color/white"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_send"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:text="Send the verification code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+android:visibility="gone"
+        android:id="@+id/linear_layout_otp_confirm_login_activity"
+        android:layout_width="match_parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_weight="0.4">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:text="Otp Verification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimary"
+            android:text="Please type the verification code sended to you"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.cygnus.sign_up.OtpEditText
+            android:id="@+id/otp_edit_text_login_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="true"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textIsSelectable="true"
+            android:textSize="20sp"/>
+        <RelativeLayout
+            android:id="@+id/relative_layout_confirm_top_login_activity"
+            android:elevation="2dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="left|center"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <RelativeLayout
+                android:gravity="center"
+                android:background="@drawable/bg_loading_subtitles_accent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:tint="@android:color/white"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_check"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:text="Continue"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.4">
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:gravity="center"
+android:id="@+id/pb_bar1"
+        android:visibility="gone"
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+</LinearLayout>

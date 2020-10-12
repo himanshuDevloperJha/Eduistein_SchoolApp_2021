@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feesmanage.AccounDetails">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="Add Account Details"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            android:visibility="gone"
+
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:hint="Account Number*">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/accountno"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            android:visibility="gone"
+
+
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:hint="Holder Name*">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/holdername"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences|textCapWords"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            android:visibility="gone"
+
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:hint="IFSC Code*">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ifsccode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textColor="#000000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            android:visibility="gone"
+
+            android:layout_height="wrap_content"
+            android:hint="Bank Name*">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bankname"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            android:visibility="gone"
+
+            android:layout_height="wrap_content"
+            android:hint="Transaction Id*">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/transactionid"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            android:visibility="gone"
+
+            android:layout_height="wrap_content"
+            android:hint="Transaction Ref Id*">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/transactionrefid"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:visibility="gone"
+
+            android:id="@+id/txtt2"
+            android:layout_marginTop="15dp"
+            android:text="OR"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            app:boxCornerRadiusTopStart="@dimen/d20dp"
+            app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+            app:boxCornerRadiusBottomStart="@dimen/d20dp"
+            app:boxCornerRadiusTopEnd="@dimen/d20dp"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/txtt3"
+            android:hint="UPI ID*">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/upiid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/savebankDetail"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/cardview_light_background"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="end"
+            app:cornerRadius="@dimen/d20dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/label_save"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
