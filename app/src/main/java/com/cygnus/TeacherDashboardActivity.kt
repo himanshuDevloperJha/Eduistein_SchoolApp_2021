@@ -141,7 +141,7 @@ class TeacherDashboardActivity : DashboardActivity() {
 
         // Set up click listeners
 
-        if (ContextCompat.checkSelfPermission(applicationContext,
+      /*  if (ContextCompat.checkSelfPermission(applicationContext,
                         Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(applicationContext,
                         Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) { // Permission is not granted
@@ -156,7 +156,7 @@ class TeacherDashboardActivity : DashboardActivity() {
                         Manifest.permission.SEND_SMS), REQUEST_EXTERNAL_STORAGE)
 
             }
-        }
+        }*/
         attendanceButton.setOnClickListener { startSecurely(MarkAttendanceActivity::class.java) }
 
 

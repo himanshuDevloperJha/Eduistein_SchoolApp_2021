@@ -2,6 +2,7 @@ package com.cygnus.view
 
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.Intent.getIntent
 import android.net.Uri
 import android.os.Bundle
@@ -33,6 +34,7 @@ import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData
+import kotlinx.android.synthetic.main.dialog_add_student.*
 import java.net.URLEncoder
 
 class AddStudentDialog : BottomSheetDialogFragment() {
@@ -155,7 +157,7 @@ lateinit var url:String
                         .buildDynamicLink()
                         val dynamicLinkUri=dynamicLink.uri
 
-                sendSMS("9115947240","hello"+dynamicLink);
+                sendSMS(mobileField.text.toString(),"Hello, "+dynamicLink);
 
 
         return ActionCodeSettings.newBuilder()
@@ -266,14 +268,18 @@ lateinit var url:String
 
     fun sendSMS(phoneNo: String, msg: String) {
         try {
-            val smsManager: SmsManager = SmsManager.getDefault()
-            val smsBody =  StringBuffer()
-//long number = Long.parseLong(get_number);
-           // smsBody.append(Uri.parse(Linkify(uri)));
-            smsManager.sendTextMessage(phoneNo, null, msg, null, null)
+
+            val  sms_uri = Uri.parse("smsto:" +phoneNo);
+             val sms_intent =  Intent(Intent.ACTION_VIEW, sms_uri);
+            sms_intent.setData(sms_uri);
+            sms_intent.putExtra("sms_body", msg);
+            startActivity(sms_intent);
+           // val smsManager: SmsManager = SmsManager.getDefault()
+            //val smsBody =  StringBuffer()
+           // smsManager.sendTextMessage(phoneNo, null, msg, null, null)
 
 
-            Toast.makeText(context, "Message Sent on "+phoneNo, Toast.LENGTH_LONG).show()
+         //   Toast.makeText(context, "Message Sent on "+phoneNo, Toast.LENGTH_LONG).show()
             isCancelable = true
             okButton.isEnabled = true
             dismiss()

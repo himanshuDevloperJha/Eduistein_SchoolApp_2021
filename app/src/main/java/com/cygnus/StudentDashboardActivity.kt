@@ -75,6 +75,17 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                 return
             }
         }
+/*
+        implementation 'com.google.android.gms:play-services-auth:11.6.2'
+        implementation('com.google.apis:google-api-services-drive:v3-rev90-1.23.0') {
+            exclude group: 'org.apache.httpcomponents'
+        }
+
+        implementation 'pub.devrel:easypermissions:0.3.0'
+        implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+        implementation('com.google.api-client:google-api-client-android:1.23.0') {
+            exclude group: 'org.apache.httpcomponents'
+        }*/
 
 //notification Reminder
         /*val myIntent = Intent(applicationContext, NotifyService::class.java)
