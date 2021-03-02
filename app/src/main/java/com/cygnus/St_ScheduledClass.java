@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cygnus.adapter.SubjectsAdapter;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 
 public class St_ScheduledClass extends AppCompatActivity implements ZoomAutoAttendance{
     RecyclerView rv_subjects;
+    ProgressBar pb_scheduledclass;
     SubjectsAdapter subjectsAdapter;
     String classname, user_schoolid;
     ArrayList<Schedule> subjectlist = new ArrayList<>();
@@ -41,6 +44,7 @@ public class St_ScheduledClass extends AppCompatActivity implements ZoomAutoAtte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_st__scheduled_class);
         rv_subjects = findViewById(R.id.rv_subjects);
+        pb_scheduledclass = findViewById(R.id.pb_scheduledclass);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         classname = getIntent().getStringExtra("user_classid");
         //  user_teacherid=getIntent().getStringExtra("user_teacherid");
@@ -52,6 +56,7 @@ public class St_ScheduledClass extends AppCompatActivity implements ZoomAutoAtte
 // Only allow a class teacher to access this page
 
         attendance = new Attendance(classname);
+        pb_scheduledclass.setVisibility(View.VISIBLE);
 
         reference = FirebaseDatabase.getInstance().getReference().
                 child(user_schoolid).child("scheduleclass");
@@ -84,10 +89,13 @@ public class St_ScheduledClass extends AppCompatActivity implements ZoomAutoAtte
 
 
                                     } catch (Exception e) {
+                                        pb_scheduledclass.setVisibility(View.GONE);
                                         Toast.makeText(St_ScheduledClass.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
 
                                     }
                                 } else {
+                                   pb_scheduledclass.setVisibility(View.GONE);
+
                                     Toast.makeText(St_ScheduledClass.this, "No scheduled class", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -97,13 +105,15 @@ public class St_ScheduledClass extends AppCompatActivity implements ZoomAutoAtte
                             subjectsAdapter = new SubjectsAdapter(St_ScheduledClass.this, subjectlist,
                                     St_ScheduledClass.this);
                             rv_subjects.setAdapter(subjectsAdapter);
+                            pb_scheduledclass.setVisibility(View.GONE);
 
 
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(St_ScheduledClass.this, "" + databaseError.toString(), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(St_ScheduledClass.this, "" + databaseError.toString(), Toast.LENGTH_SHORT).show();
+                          //  pb_scheduledclass.setVisibility(View.GONE);
 
                         }
                     });
@@ -114,6 +124,8 @@ public class St_ScheduledClass extends AppCompatActivity implements ZoomAutoAtte
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+              //  pb_scheduledclass.setVisibility(View.GONE);
+
                 //Toast.makeText(St_ScheduledClass.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
 
             }

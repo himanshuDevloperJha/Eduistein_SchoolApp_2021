@@ -1,32 +1,54 @@
 package com.cygnus
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.*
+import android.graphics.Color
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
+import android.widget.*
+import androidx.annotation.NonNull
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import co.aspirasoft.adapter.ModelViewAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cygnus.core.DashboardActivity
+import com.cygnus.coursefeature.Courseofferedmodel
+import com.cygnus.coursefeature.SingleCourseActivity
 import com.cygnus.dao.NoticeBoardDao
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
+
+import com.cygnus.feed.FeedActivity
+import com.cygnus.feed.LikePostsmodel
+import com.cygnus.feed.LikepostInterface
+import com.cygnus.feed.PostmodelBoard
 import com.cygnus.feesmanage.PayFees
 import com.cygnus.model.*
 import com.cygnus.notifications.GCMRegistrationIntentService
+import com.cygnus.quiz.StartQuizActivity
+import com.cygnus.storage.FileManager
 import com.cygnus.timetable.TimetablePagerAdapter
 import com.cygnus.view.SubjectView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.database.*
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_dashboard_student.*
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -49,6 +71,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     var subjectlist: MutableList<String> = mutableListOf()
     private lateinit var currentStudent: Student
     public var classPosts = ArrayList<NoticeBoardPost>()
+    public var coursenamelist = ArrayList<String>()
     private var subjectNames = ArrayList<String>()
     var teacherid: String? = null
     var standard: String? = null
@@ -59,6 +82,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     var reminderstatus: Boolean = false
     lateinit var reference2: DatabaseReference
     lateinit var reference5: DatabaseReference
+    var usertotalpoints = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,76 +99,6 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                 return
             }
         }
-/*
-        implementation 'com.google.android.gms:play-services-auth:11.6.2'
-        implementation('com.google.apis:google-api-services-drive:v3-rev90-1.23.0') {
-            exclude group: 'org.apache.httpcomponents'
-        }
-
-        implementation 'pub.devrel:easypermissions:0.3.0'
-        implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
-        implementation('com.google.api-client:google-api-client-android:1.23.0') {
-            exclude group: 'org.apache.httpcomponents'
-        }*/
-
-//notification Reminder
-        /*val myIntent = Intent(applicationContext, NotifyService::class.java)
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pendingIntent = PendingIntent.getService(this, 0, myIntent, 0)
-        val calendar = Calendar.getInstance()
-        calendar[Calendar.SECOND] = 0
-        calendar[Calendar.MINUTE] = 1
-        calendar[Calendar.HOUR] = 0
-        calendar[Calendar.AM_PM] = Calendar.AM
-        calendar.add(Calendar.DAY_OF_MONTH, 1)
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, 1000 * 60 * 60 * 24.toLong(), pendingIntent)*/
-
-        /*var currentMonth: Int = calendar.get(Calendar.MONTH);
-
-        // move month ahead
-        currentMonth++;
-        // check if has not exceeded threshold of december
-
-        if (currentMonth > Calendar.DECEMBER) {
-            // alright, reset month to jan and forward year by 1 e.g fro 2013 to 2014
-            currentMonth = Calendar.JANUARY
-            // Move year ahead as well
-            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 1)
-        }
-
-        // reset calendar to next month
-        calendar.set(Calendar.MONTH, currentMonth)
-        // get the maximum possible days in this month
-        var maximumDay: Int = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        // set the calendar to maximum day (e.g in case of fEB 28th, or leap 29th)
-        calendar.set(Calendar.DAY_OF_MONTH, maximumDay)
-        var thenTime: Long = calendar.getTimeInMillis()// this is time one month ahead*/
-
-
-        /*  val rootRef = FirebaseDatabase.getInstance().reference
-          val uidRef1 = rootRef.child(schoolId)
-                  .child("classes")
-
-          val valueEventListener1 = object : ValueEventListener {
-              override fun onDataChange(dataSnapshot: DataSnapshot) {
-                  for (ds in dataSnapshot.getChildren()) {
-
-                      val c = ds.child("name").getValue().toString()
-                      if (currentStudent.classId.equals(c)) {
-                          Log.e("msg", "msggg333333" + standard);   //gives the value for given keyname
-                      }
-
-                  }
-
-              }
-
-              override fun onCancelled(databaseError: DatabaseError) {
-                  Log.d("msg", databaseError.message) //Don't ignore errors!
-              }
-          }
-          uidRef1.addListenerForSingleValueEvent(valueEventListener1)*/
-
 
         if (currentStudent.classId.contains("NURSERY", ignoreCase = true)) {
             standard = "Class Nursery"
@@ -207,7 +161,13 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
         ed_loginsave.putString("user_name", currentStudent.name)
         ed_loginsave.putString("user_rollNo", currentStudent.rollNo)
         ed_loginsave.putString("user_standard", standard)
+        ed_loginsave.putString("userrrtypee", "Student")
+
         ed_loginsave.commit()
+
+
+        getCoins()
+
 
         class_yt_myvideos.setOnClickListener {
 
@@ -221,6 +181,19 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                intent.putExtra("user_standard",standard)*/
             startActivity(intent)
         }
+
+               feed.setOnClickListener {
+            val intent = Intent(this, FeedActivity::class.java)
+            intent.putExtra("studentname", currentStudent.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentclassId", currentStudent.classId)
+                   intent.putExtra("studentschool_namee", school)
+                      intent.putExtra("studenttype","Student")
+                      intent.putExtra("student_teacheridd",teacherid)
+
+
+                   startActivity(intent)
+        }
         class_yt_notifications.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
@@ -232,6 +205,15 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             intent.putExtra("studentclassId", currentStudent.classId)
             intent.putExtra("studentname", currentStudent.name)
             intent.putExtra("studentrollNoo", currentStudent.rollNo)
+            startActivity(intent)
+        }
+
+        playquiz.setOnClickListener {
+            val intent=Intent(applicationContext,StartQuizActivity::class.java)
+            intent.putExtra("user_standard", standard)
+            intent.putExtra("studentname", currentStudent.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentclassId", currentStudent.classId)
             startActivity(intent)
         }
 
@@ -283,7 +265,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                     Handler().postDelayed({
                         // Toast.makeText(applicationContext,token, Toast.LENGTH_LONG).show()
 
-                        val post = StudentToken(currentStudent.classId, token);
+                        val post = StudentToken(currentStudent.name,currentStudent.classId, token);
 
                         val missionsReference =
                                 FirebaseDatabase.getInstance().reference.child(schoolId).child("StudentTokens").child(token.toString())
@@ -360,32 +342,17 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             }
         })
 
-        /*reference5 = FirebaseDatabase.getInstance().reference.child(schoolId).
-                child("SchoolFeeList")
-        reference5!!.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (datas in dataSnapshot.children) {
-                    if (currentStudent.classId.equals("NURSERY")) {
-                        //reminderstatus = true
-                        Log.e("Receiver", "Broadcast receiveddd44:")
-
-                    }
-
-                }
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                //pb_feehistory.visibility= View.GONE
-                Toast.makeText(applicationContext, "" + databaseError.toString(), Toast.LENGTH_SHORT).show();
-            }
-        })*/
 
 
 
 
 
 
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        getCoins()
     }
 
     override fun onResume() {
@@ -416,8 +383,44 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     override fun updateUI(currentUser: User) {
         className.text = currentStudent.classId
         getSubjectsList()
+        coursenamelist.clear()
+        getCourseOfferedList()
     }
 
+
+    private fun getCoins(){
+        //get coins of user
+        val rootReff = FirebaseDatabase.getInstance().reference.
+                child("coins")
+        rootReff.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val ref = FirebaseDatabase.getInstance().reference
+                            .child("coins")
+                    ref.orderByChild("name").equalTo(currentStudent.name).
+                            addListenerForSingleValueEvent(object : ValueEventListener {
+
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        for (datas in dataSnapshot.children) {
+                                            val key = datas.key
+                                            usertotalpoints = (datas.child("usertotalpoints").value.toString()).toInt()
+                                            mtv_totalpts.setText(usertotalpoints.toString()+" Points")
+                                       //  Toast.makeText(applicationContext,"Coinss: "+usertotalpoints,Toast.LENGTH_LONG).show()
+                                        }
+                                    }
+                                }
+
+                                override fun onCancelled(p0: DatabaseError) {
+                                }
+                            })
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
+    }
     /**
      * Gets a list of courses from database taught by [currentTeacher].
      */
@@ -425,6 +428,51 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
         SubjectsDao.getSubjectsByClass(schoolId, currentStudent.classId, OnSuccessListener {
             onSubjectsReceived(it)
         })
+    }
+    private fun getCourseOfferedList() {
+        val rootReff = FirebaseDatabase.getInstance().reference.child("coursesoffered")
+                    rootReff.orderByChild("classid").equalTo(standard).
+                            addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        for (datas in dataSnapshot.children) {
+                                                val rootReff5=rootReff.child(datas.key.toString()).child("courselist")
+                                                rootReff5.addListenerForSingleValueEvent(object : ValueEventListener {
+                                                    override fun onDataChange(dataSnapshotliked: DataSnapshot) {
+                                                        if (dataSnapshotliked.exists()) {
+                                                            for (datasliked in dataSnapshotliked.children) {
+                                                               // val coursename= datasliked.child("name").value.toString()
+                                                                coursenamelist.add(datasliked.key.toString())
+
+                                                            }
+                                                            coursesofferedList.layoutManager = GridLayoutManager(this@StudentDashboardActivity, 2)
+                                                            coursesofferedList.adapter = CourseAdapter(this@StudentDashboardActivity,
+                                                                    coursenamelist,datas.key.toString(), standard.toString())
+
+                                                        }
+
+                                                    }
+
+                                                    override fun onCancelled(p0: DatabaseError) {
+                                                        Log.e("msg","Courseerror 2:"+p0.toString())
+
+                                                    }
+                                                })
+
+
+
+                                        }
+                                    }
+                                }
+
+                                override fun onCancelled(p0: DatabaseError) {
+                                    Log.e("msg","Courseerror 3:"+p0.toString())
+
+                                }
+                            })
+
+
+
     }
 
     private fun onSubjectsReceived(subjects: List<Subject>) {
@@ -455,6 +503,8 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
         }
     }
 
+
+
     private inner class SubjectAdapter(context: Context, val subjects: List<Subject>)
         : ModelViewAdapter<Subject>(context, subjects, SubjectView::class) {
 
@@ -479,6 +529,57 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             return v
         }
 
+    }
+
+    internal class CourseAdapter(val context: Activity,
+                                 val coursenamelist: ArrayList<String>,val datakey:String,val standard:String) :
+            RecyclerView.Adapter<CourseAdapter.MyViewHolder>() {
+        internal inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+
+            val coursename: MaterialTextView = v.findViewById(R.id.coursename)
+            val courseColor: View = v.findViewById(R.id.courseColor)
+            val courseCard: MaterialCardView = v.findViewById(R.id.courseCard)
+        }
+        @NonNull
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+            val v: View = LayoutInflater.from(context).inflate(R.layout.custom_courseoffered, parent,false)
+            return MyViewHolder(v)
+        }
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+                holder.coursename.setText(coursenamelist.get(position))
+            holder.courseColor.setBackgroundColor(convertToColor(coursenamelist.get(position)))
+            holder.courseCard.setOnClickListener {
+
+
+                try{
+                    val intent=Intent(context,SingleCourseActivity::class.java)
+                    intent.putExtra("datakeycourse",datakey)
+                    intent.putExtra("course_name",holder.coursename.text.toString())
+                    intent.putExtra("course_std",standard)
+                    context.startActivity(intent)
+                }
+                catch (e:Exception){
+                    Log.e("msg111122","StudentDashboard66:"+e.toString())
+
+                }
+
+            }
+        }
+        override fun getItemCount(): Int {
+            return coursenamelist.size
+        }
+
+        @SuppressLint("NewApi")
+        private fun convertToColor(o: Any): Int {
+            return try {
+                val i = o.hashCode()
+                Color.parseColor("#FF" + Integer.toHexString(i shr 16 and 0xFF) +
+                        Integer.toHexString(i shr 8 and 0xFF) +
+                        Integer.toHexString(i and 0xFF))
+            } catch (ignored: Exception) {
+                context.getColor(R.color.colorAccent)
+            }
+        }
     }
 
     private fun startRazorPayProcess() {

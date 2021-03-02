@@ -1,8 +1,7 @@
 package com.cygnus
 
 import android.app.ProgressDialog
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -15,17 +14,25 @@ import android.widget.Toast
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
 import androidx.core.view.iterator
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import co.aspirasoft.util.InputUtils.hideKeyboard
 import co.aspirasoft.util.InputUtils.isNotBlank
 import co.aspirasoft.util.InputUtils.showError
+import com.cygnus.chatstaff.StaffList
 import com.cygnus.core.DashboardActivity
 import com.cygnus.dao.Invite
 import com.cygnus.dao.InvitesDao
+import com.cygnus.erpfeature.AttendanceTeacher
+import com.cygnus.feed.FeedActivity
 import com.cygnus.feesmanage.FeesmanagmentList
 import com.cygnus.model.School
+import com.cygnus.model.TeacherToken
 import com.cygnus.model.User
+import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.tasks.InvitationTask
 import com.cygnus.view.EmailsInputDialog
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
@@ -53,7 +60,8 @@ class SchoolDashboardActivity : DashboardActivity() {
     var teachername: String? = null
     lateinit var sp_loginsave: SharedPreferences;
     lateinit var ed_loginsave: SharedPreferences.Editor;
-
+    private var mRegistrationBroadcastReceiver: BroadcastReceiver? = null
+    var token: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +74,7 @@ class SchoolDashboardActivity : DashboardActivity() {
         ed_loginsave = sp_loginsave.edit()
 
         ed_loginsave.putString("SchoolID", schoolId)
+        ed_loginsave.putString("schoolnameee", currentUser.name)
         ed_loginsave.commit()
 
 
@@ -102,6 +111,30 @@ class SchoolDashboardActivity : DashboardActivity() {
             }
         }
         uidRef.addListenerForSingleValueEvent(valueEventListener)
+
+        feedButton.setOnClickListener {
+            val intent = Intent(this, FeedActivity::class.java)
+            intent.putExtra("studentname", currentUser.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentschool_namee", schoolDetails.second)
+            intent.putExtra("studenttype","School")
+            startActivity(intent)
+        }
+        chatAdmin.setOnClickListener {
+            val intent = Intent(this, StaffList::class.java)
+            intent.putExtra("studentname", currentUser.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentschool_namee", schoolDetails.second)
+            startActivity(intent)
+        }
+        attendanceTeacher.setOnClickListener {
+            val intent = Intent(this, AttendanceTeacher::class.java)
+            intent.putExtra("studentname", currentUser.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentschool_namee", schoolDetails.second)
+            intent.putExtra("studenttype","School")
+            startActivity(intent)
+        }
 
         admin_class.setOnItemClickListener { adapterView, view, i, l ->
             val t_name = admin_class.adapter.getItem(i).toString()
@@ -147,11 +180,80 @@ class SchoolDashboardActivity : DashboardActivity() {
             intent = Intent(this, FeesmanagmentList::class.java)
             startActivity(intent)
         }
+
+        mRegistrationBroadcastReceiver = object : BroadcastReceiver() {
+            //When the broadcast received
+//We are sending the broadcast from GCMRegistrationIntentService
+            override fun onReceive(context: Context, intent: Intent) { //If the broadcast has received with success
+//that means device is registered successfully
+                if (intent.action == GCMRegistrationIntentService.REGISTRATION_SUCCESS) { //Getting the registration token from the intent
+                    token = intent.getStringExtra("token")
+                    ed_loginsave.putString("SAVETOKEN", token)
+                    ed_loginsave.commit()
+                    Handler().postDelayed({
+                        // Toast.makeText(applicationContext,token, Toast.LENGTH_LONG).show()
+
+
+                            val post = TeacherToken(currentUser.name,schoolId, token)
+                            val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolId).
+                                    child("ChatTokens").child(currentUser.name)
+
+                            missionsReference.setValue(post)
+
+                        Log.d("msg", "onReceiveTokenSchool: $token")
+                        //if the intent is not with success then displaying error messages
+                    }, 2000)
+                } else if (intent.action == GCMRegistrationIntentService.REGISTRATION_ERROR) { // Toast.makeText(getApplicationContext(), "GCM registration error!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        //Checking play service is available or not
+        //Checking play service is available or not
+        val resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(applicationContext)
+
+        //if play service is not available
+        //if play service is not available
+        if (ConnectionResult.SUCCESS != resultCode) { //If play service is supported but not installed
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) { //Displaying message that play service is not installed
+//  Toast.makeText(getApplicationContext(), "Google Play Service is not install/enabled in this device!", Toast.LENGTH_LONG).show();
+                GooglePlayServicesUtil.showErrorNotification(resultCode, applicationContext)
+                //If play service is not supported
+//Displaying an error message
+            } else { // Toast.makeText(getApplicationContext(), "This device does not support for Google Play Service!", Toast.LENGTH_LONG).show();
+            }
+            //If play service is available
+        } else { //Starting intent to register device
+            val itent = Intent(applicationContext, GCMRegistrationIntentService::class.java)
+            startService(itent)
+        }
     }
 
     override fun onStart() {
         super.onStart()
         trackSentInvites() // start the live counters
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.w("MainActivity", "onResume")
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver!!,
+                IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS))
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver!!,
+                IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR))
+    }
+
+
+    //Unregistering receiver on activity paused
+    override fun onPause() {
+        super.onPause()
+        Log.w("MainActivity", "onPause")
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver!!)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -169,7 +271,7 @@ class SchoolDashboardActivity : DashboardActivity() {
             schoolEmail.text = currentUser.email
             schoolCode.setImageBitmap(QRGEncoder(currentUser.id, null, QRGContents.Type.TEXT, 512).bitmap)
 
-            showStaffStats(0, 0)
+            //showStaffStats(0, 0)
         } else finish()
     }
 

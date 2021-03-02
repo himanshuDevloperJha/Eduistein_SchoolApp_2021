@@ -26,15 +26,11 @@ import com.cygnus.storage.MaterialAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_coursematerial.*
 import kotlinx.android.synthetic.main.activity_homeworkmaterial.*
-import kotlinx.android.synthetic.main.activity_subject.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.HashMap
@@ -45,12 +41,13 @@ class HomeworkMaterial : DashboardChildActivity() {
     var subjectteachername:String?=null
     var teacherClassId:String?=null
     var tokenlist: ArrayList<String> = ArrayList()
-    private lateinit var subject: Subject
     private var editable: Boolean = false
     private lateinit var homeworkManager: FileManager
     private var homeworkAdapter: MaterialAdapter? = null
     private val homework = ArrayList<CourseFile>()
      var student_namee:String?=null
+    private lateinit var subject: Subject
+
     private var pickRequestCode = RESULT_ACTION_PICK_MATERIAL
 
 
@@ -303,20 +300,44 @@ class HomeworkMaterial : DashboardChildActivity() {
         showHomeworkExercises()
     }
     private fun showHomeworkExercises() {
+
         if (homeworkAdapter == null) {
+
             homeworkAdapter = MaterialAdapter(this, homework, homeworkManager)
             homeworkListnew.adapter = homeworkAdapter
         }
 
         homeworkManager.listAll().addOnSuccessListener { result ->
+
             homework.clear()
             result?.items?.forEach { reference ->
-                reference.metadata.addOnSuccessListener { metadata ->
+                reference.metadata.addOnSuccessListener {
+                    metadata ->
+
+                    pb_homematerial.visibility=View.VISIBLE
+                    Handler().postDelayed({
+
                     homework.add(CourseFile(reference.name, metadata))
                     homeworkAdapter?.notifyDataSetChanged()
+                    pb_homematerial.visibility=View.GONE
+                    }, 1000)
                 }
+
+            }
+            if(homework.size==0){
+                Handler().postDelayed({
+                    pb_homematerial.visibility=View.GONE
+
+                    // Toast.makeText(applicationContext,"No file has uploaded..",Toast.LENGTH_SHORT).show()
+                }, 1000)
+                //Toast.makeText(applicationContext,"No file has uploaded..",Toast.LENGTH_SHORT).show()
+
+
             }
         }
+
+
+
     }
 
     companion object {

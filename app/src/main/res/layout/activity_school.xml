@@ -160,7 +160,6 @@
                 android:alpha="0.75"
                 android:gravity="center"
                 android:onClick="onJoinedStaffClicked"
-                android:text="@string/label_staff_joined"
                 android:textAllCaps="false"
                 app:icon="@drawable/ic_team"
                 app:iconGravity="textStart"
@@ -175,7 +174,6 @@
                 android:alpha="0.75"
                 android:gravity="center"
                 android:onClick="onInvitedStaffClicked"
-                android:text="@string/label_staff_invited"
                 android:textAllCaps="false"
                 app:iconGravity="textStart"
                 app:icon="@drawable/ic_invite"
@@ -277,7 +275,7 @@
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-             android:weightSum="3"
+             android:weightSum="2"
               android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -302,6 +300,16 @@
                 android:layout_height="wrap_content"
                 android:onClick="onManageSubjectsClicked"
                 android:text="@string/label_manage_courses"/>
+
+
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:weightSum="2"
+              android:orientation="horizontal">
+
+
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:id="@+id/manageFeesButton"
@@ -312,6 +320,44 @@
 
                 android:layout_height="wrap_content"
                 android:text="Fee\nManagement"/>
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/feedButton"
+                android:layout_width="0dp"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:textSize="13dp"
+
+                android:layout_height="wrap_content"
+                android:text="Add Posts\nFeed"/>
+
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:weightSum="2"
+              android:orientation="horizontal">
+
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:id="@+id/attendanceTeacher"
+                android:layout_width="0dp"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="Mark\nAttendance"/>
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:textAllCaps="false"
+                android:layout_weight="2"
+                android:textSize="13dp"
+                android:id="@+id/chatAdmin"
+                android:layout_height="match_parent"
+                android:text="Chat"/>
 
           </LinearLayout>
 

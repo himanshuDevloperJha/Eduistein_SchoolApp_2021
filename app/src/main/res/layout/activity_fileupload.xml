@@ -30,11 +30,22 @@
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content">-->
 
-    <co.aspirasoft.view.NestedListView
-        android:id="@+id/fileListnew"
-        android:layout_marginTop="?actionBarSize"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <co.aspirasoft.view.NestedListView
+            android:id="@+id/fileListnew"
+            android:layout_marginTop="?actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ProgressBar
+            android:id="@+id/pb_studentfiles"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
 
 
 

@@ -30,10 +30,10 @@ class StudentView : BaseView<Student> {
     }
 
     override fun updateView(model: Student) {
-        ImageLoader.with(context)
+       /* ImageLoader.with(context)
                 .load(model)
-                .into(studentImageView)
-
+                .into(studentImageView)*/
+studentImageView.setImageResource(R.drawable.ph_student)
         studentNameView.text = model.name
         studentRollNoView.text = "Roll # ${model.rollNo}"
     }

@@ -82,36 +82,59 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:divider="@null"/>
-
-      <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Subtitle1"
+      <com.google.android.material.button.MaterialButton
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_height="48dp"
           android:textStyle="bold"
           android:visibility="gone"
-          android:layout_marginTop="8dp"
           android:id="@+id/tv_studentFiles"
           android:text="Student Files"/>
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/studentFilesList"
-          android:visibility="gone"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          />
+
       <LinearLayout
+          android:id="@+id/ll_uploadFiles"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
           android:gravity="center_vertical"
           android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textStyle="bold"
-            android:id="@+id/tv_coursematerial"
-            android:text="@string/course_material_head"/>
+            android:id="@+id/tv_uploadfiles"
+            android:text="Upload Files"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addFilesButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:gravity="end"
+            android:visibility="gone"
+            android:padding="0dp"
+            android:onClick="onAddFilesClicked"
+            android:text="@string/label_add"
+            app:rippleColor="@android:color/transparent"/>
+
+      </LinearLayout>
+
+      <co.aspirasoft.view.NestedListView
+          android:id="@+id/filesList"
+          android:visibility="gone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/tv_coursematerial"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:text="@string/course_material_head"
+          android:textStyle="bold" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/addMaterialButton"
@@ -136,14 +159,12 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
           android:gravity="center_vertical"
           android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textStyle="bold"
             android:id="@+id/tv_homework"
             android:text="@string/homework_sheets_head"/>
@@ -168,41 +189,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
 
-      <LinearLayout
-          android:id="@+id/ll_uploadFiles"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:id="@+id/tv_uploadfiles"
-            android:text="Upload Files"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/addFilesButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:gravity="end"
-            android:visibility="gone"
-            android:padding="0dp"
-            android:onClick="onAddFilesClicked"
-            android:text="@string/label_add"
-            app:rippleColor="@android:color/transparent"/>
-
-      </LinearLayout>
-
-      <co.aspirasoft.view.NestedListView
-          android:id="@+id/filesList"
-          android:visibility="gone"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

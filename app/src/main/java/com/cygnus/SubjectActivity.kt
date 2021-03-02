@@ -22,7 +22,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.cygnus.adapter.StudentUploadFilesAdapter
-import com.cygnus.adapter.SubjectsAdapter
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
@@ -95,6 +94,7 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
 
 
 
+
         name = intent.getStringExtra("user_name");
         Log.e("msg","nameeeeeeeeee"+name);
 
@@ -107,8 +107,8 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
             //addMaterialButton.visibility = View.VISIBLE
            // addHomeworkButton.visibility = View.VISIBLE
             tv_studentFiles.visibility = View.VISIBLE
-            studentFilesList.visibility = View.VISIBLE
-            showStudentUploadFiles()
+          //  studentFilesList.visibility = View.VISIBLE
+          //  showStudentUploadFiles()
 
             addFilesButton.visibility = View.GONE
             ll_uploadFiles.visibility = View.GONE
@@ -121,11 +121,20 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
         homeworkManager = FileManager.newInstance(this, "$schoolId/courses/${subject.classId}/subjects/${subject.name}/exercises/")
         filesManager = FileManager.newInstance(this, "$schoolId/courses/${subject.classId}/subjects/${subject.name}$name/files/")
 
+        tv_studentFiles.setOnClickListener {
+            startSecurely(StudentFiles::class.java, Intent().apply {
+                putExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT, subject)
+                putExtra("student_namee", name)
+
+            })
+        }
 
         tv_coursematerial.setOnClickListener {
             startSecurely(CourseMaterial::class.java, Intent().apply {
                 putExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT, subject)
                 putExtra("student_namee", name)
+                ed_loginsave.putString("course_sqlite", "false")
+                ed_loginsave.commit()
 
 
             })
@@ -294,39 +303,6 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
                 }
             }
         }
-    }
-    private fun showStudentUploadFiles(){
-        filesListTeacher.clear()
-        reference = FirebaseDatabase.getInstance().reference.child(schoolId).
-                child("StudentUploadFiles")
-
-        reference!!.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (datas1 in dataSnapshot.children) {
-                        if (subject.classId.equals(datas1.child("classId").value.toString(), ignoreCase = true)) {
-
-                            try {
-                                val uploadfiles = StudentUploadFiles(datas1.child("classId").value.toString(),
-                                        datas1.child("teacherId").value.toString(), datas1.child("subject").value.toString(),
-                                        datas1.child("studentname").value.toString())
-                                filesListTeacher.add(uploadfiles)
-                            } catch (e: Exception) {
-                                // Toast.makeText(applicationContext, "" + e.toString(), Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                studentFilesList.setLayoutManager(LinearLayoutManager(applicationContext,
-                        RecyclerView.VERTICAL, false))
-                stu = StudentUploadFilesAdapter(this@SubjectActivity, filesListTeacher,this@SubjectActivity)
-                studentFilesList.setAdapter(stu)
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                //Toast.makeText(applicationContext, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
-            }
-        })
-
     }
 
     private fun showHomeworkExercises() {
@@ -557,11 +533,7 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
     }
 
     override fun studentuploadfiles(studentname: String?, position: Int, classid: String?) {
-        startSecurely(ShowStudentUploadedFiles::class.java, Intent().apply {
-            putExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT, subject)
-            putExtra(CygnusApp.EXTRA_EDITABLE_MODE, true)
-            putExtra("student_namee", studentname)
-        })
+
     }
 
     override fun zoomauto(classid: String?, position: Int) {

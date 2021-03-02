@@ -4,6 +4,15 @@
     package="com.cygnus"
     tools:ignore="LockedOrientationActivity">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+
     <application
         android:name=".CygnusApp"
         android:icon="@drawable/applogoo"
@@ -12,29 +21,101 @@
         android:roundIcon="@drawable/applogoo"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".feesmanage.SchoolFeeDetail"></activity>
-        <activity android:name=".feesmanage.FeeHistoryStudent" />
-        <activity android:name=".feesmanage.PayFees" />
-        <activity android:name=".feesmanage.CheckFeeStatus" />
-        <activity android:name=".feesmanage.AccounDetails" />
-        <activity android:name=".feesmanage.AddFeeStructure" />
-        <activity android:name=".feesmanage.StudentFeeList" />
-        <activity android:name=".feesmanage.FeesmanagmentList" />
-        <activity android:name=".ScheduleCkassOnlineList" />
-        <activity android:name=".NotificationActivity" />
-        <activity android:name=".St_Youtubethumbnails" />
-        <activity android:name=".ShowStudentUploadedFiles" />
-        <activity android:name=".St_Chapters" />
+        <activity android:name=".chatstaff.Chat"></activity>
+        <activity android:name=".chatstaff.StaffList" />
+        <activity android:name=".erpfeature.AttendanceTeacher" />
+        <activity android:name=".coursefeature.CoursePdf" />
+        <activity
+            android:name=".coursefeature.CourseVideoActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity android:name=".coursefeature.SingleCourseActivity" />
+        <activity android:name=".feed.ArticleLinkWebview" />
+        <activity android:name=".feed.ArticleScreen" />
+        <activity android:name=".feed.PendingSinglePost" />
+        <activity android:name=".feed.PendingApprovalPosts" />
+        <activity
+            android:name=".feed.VideoPlayActivity"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".feed.FeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".quiz.ScorecardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".quiz.StartQuizActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".quiz.QuizActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.SchoolFeeDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.FeeHistoryStudent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.PayFees"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.CheckFeeStatus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.AccounDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.AddFeeStructure"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.StudentFeeList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".feesmanage.FeesmanagmentList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScheduleCkassOnlineList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".St_Youtubethumbnails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShowStudentUploadedFiles"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".St_Chapters"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StudentFiles"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".YoutubevideoPlay"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".St_YoutubeVideos" />
-        <activity android:name=".CourseMaterial" />
-        <activity android:name=".HomeworkMaterial" />
-        <activity android:name=".StudentFileUpload" />
-        <activity android:name=".St_ScheduledClass" />
-        <activity android:name=".sign_up.MobileSignup" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".St_YoutubeVideos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CourseMaterial"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeworkMaterial"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StudentFileUpload"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".St_ScheduledClass"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sign_up.MobileSignup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,77 +134,93 @@
         </activity>
         <activity
             android:name=".SignInActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".sign_up.SignUpActivity"
-            android:screenOrientation="sensorPortrait" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentDashboardActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AttendanceActivity"
             android:configChanges="orientation|screenSize"
             android:label="Attendance"
-            android:parentActivityName=".StudentDashboardActivity" />
+            android:parentActivityName=".StudentDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ReportCardActivity"
             android:configChanges="orientation|screenSize"
             android:label="Report Card"
-            android:parentActivityName=".StudentDashboardActivity" />
+            android:parentActivityName=".StudentDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TeacherDashboardActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProfileActivity"
             android:configChanges="orientation|screenSize"
-            android:label="Profile" />
+            android:label="Profile"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StudentsActivity"
             android:configChanges="orientation|screenSize"
             android:label="Manage Students"
-            android:parentActivityName=".TeacherDashboardActivity" />
+            android:parentActivityName=".TeacherDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NoticeActivity"
             android:configChanges="orientation|screenSize"
             android:label="Announcements"
-            android:parentActivityName=".TeacherDashboardActivity" />
+            android:parentActivityName=".TeacherDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MarkAttendanceActivity"
             android:configChanges="orientation|screenSize"
             android:label="Mark Attendance"
-            android:parentActivityName=".TeacherDashboardActivity" />
+            android:parentActivityName=".TeacherDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SubjectActivity"
             android:configChanges="orientation|screenSize"
-            android:label="Subjects" />
+            android:label="Subjects"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TestsActivity"
             android:configChanges="orientation|screenSize"
             android:label="Grades"
-            android:parentActivityName=".SubjectActivity" />
+            android:parentActivityName=".SubjectActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TestActivity"
             android:configChanges="orientation|screenSize"
             android:label="Add Grades"
-            android:parentActivityName=".SubjectActivity" />
+            android:parentActivityName=".SubjectActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SchoolDashboardActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SchoolTeachersActivity"
             android:configChanges="orientation|screenSize"
             android:label="Staff"
-            android:parentActivityName=".SchoolDashboardActivity" />
+            android:parentActivityName=".SchoolDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SchoolClassesActivity"
             android:configChanges="orientation|screenSize"
             android:label="Manage Classes"
-            android:parentActivityName=".SchoolDashboardActivity" />
+            android:parentActivityName=".SchoolDashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SchoolSubjectsActivity"
             android:configChanges="orientation|screenSize"
             android:label="Manage Classes"
-            android:parentActivityName=".SchoolDashboardActivity" />
+            android:parentActivityName=".SchoolDashboardActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -152,6 +249,7 @@
                 <category android:name="com.gnirt69.gcmexample" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".StudentDashboardActivity$AlarmReceiver" />
 
         <service
             android:name=".notifications.GCMPushReceiverService"
@@ -167,19 +265,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <receiver android:name=".StudentDashboardActivity$AlarmReceiver">
-        </receiver>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

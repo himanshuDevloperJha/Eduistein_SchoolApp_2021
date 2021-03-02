@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cygnus.adapter.YoutubeAdapter;
@@ -25,6 +27,7 @@ import java.util.List;
 
 public class St_YoutubeVideos extends AppCompatActivity {
     RecyclerView rv_ytvideos;
+    ProgressBar pb_videos;
     YoutubeAdapter youtubeAdapter;
     ArrayList<Youtube> youtubelist = new ArrayList<>();
     DatabaseReference reference, reference1, rootRef2;
@@ -38,6 +41,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_st__youtube_videos);
         rv_ytvideos = findViewById(R.id.rv_ytvideos);
+        pb_videos = findViewById(R.id.pb_videos);
 
 
         sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", MODE_PRIVATE);
@@ -56,6 +60,8 @@ public class St_YoutubeVideos extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference().child(user_schoolid).
                 child("youtubevideos");
         reference1 = FirebaseDatabase.getInstance().getReference().child("admin-videos");
+
+
 
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -77,12 +83,15 @@ public class St_YoutubeVideos extends AppCompatActivity {
                             youtubeAdapter = new YoutubeAdapter(St_YoutubeVideos.this, youtubelist,
                                     teacher_email,subjctlist,user_schoolid,classname,user_standard);
                             rv_ytvideos.setAdapter(youtubeAdapter);
+                            pb_videos.setVisibility(View.GONE);
 
                         } catch (Exception e) {
+                            pb_videos.setVisibility(View.GONE);
 
                         }
 
                     } else {
+                        pb_videos.setVisibility(View.GONE);
 
                     }
                 }
@@ -92,6 +101,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                pb_videos.setVisibility(View.GONE);
 
             }
         });
@@ -134,6 +144,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
                                                 teacher_email,subjctlist,user_schoolid,classname,user_standard);
                                         rv_ytvideos.setAdapter(youtubeAdapter);
 
+                                    pb_videos.setVisibility(View.GONE);
 
                             /*rootRef2 = FirebaseDatabase.getInstance().getReference().
                                     child("youtubevideos").child(datas.getKey()).child("Chapters");
@@ -158,6 +169,8 @@ public class St_YoutubeVideos extends AppCompatActivity {
 
 
                                 } else {
+                                    pb_videos.setVisibility(View.GONE);
+
                                     //Toast.makeText(St_YoutubeVideos.this, "No Videos", Toast.LENGTH_SHORT).show();
                                 }
 
@@ -168,6 +181,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                                Toast.makeText(St_YoutubeVideos.this, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
+                            pb_videos.setVisibility(View.GONE);
 
                         }
                     });
@@ -177,6 +191,7 @@ public class St_YoutubeVideos extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                pb_videos.setVisibility(View.GONE);
 
             }
         });

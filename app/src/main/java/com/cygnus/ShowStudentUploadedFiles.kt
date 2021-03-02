@@ -1,6 +1,8 @@
 package com.cygnus
 
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.model.CourseFile
 import com.cygnus.model.Subject
@@ -8,7 +10,6 @@ import com.cygnus.model.User
 import com.cygnus.storage.FileManager
 import com.cygnus.storage.MaterialAdapter
 import kotlinx.android.synthetic.main.activity_showsstudentfiles.*
-import kotlinx.android.synthetic.main.activity_subject.*
 
 class ShowStudentUploadedFiles : DashboardChildActivity() {
     private lateinit var subject: Subject
@@ -38,12 +39,23 @@ class ShowStudentUploadedFiles : DashboardChildActivity() {
 
         filesManager.listAll().addOnSuccessListener { result ->
             files.clear()
+            pb_studentmaterial.visibility= View.VISIBLE
             result?.items?.forEach { reference ->
                 reference.metadata.addOnSuccessListener { metadata ->
-                    files.add(CourseFile(reference.name, metadata))
-                    filesAdapter?.notifyDataSetChanged()
+
+                    Handler().postDelayed({
+                        files.add(CourseFile(reference.name, metadata))
+                        filesAdapter?.notifyDataSetChanged()
+                        pb_studentmaterial.visibility= View.GONE
+
+                        // Toast.makeText(applicationContext,"No file has uploaded..",Toast.LENGTH_SHORT).show()
+                    }, 1000)
+
+
                 }
+
             }
+
         }
     }
 

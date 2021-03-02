@@ -63,13 +63,23 @@ class CygnusApp : Application() {
         // in the Firebase database
         private val db get() = FirebaseDatabase.getInstance()
         fun refToAttendance(schoolId: String, classId: String) = db.getReference("$schoolId/classes/$classId/attendance/")
+        fun refToAttTeacher(schoolId: String, classId: String) = db.getReference("$schoolId/teacherattendance/$classId/attendance/")
         fun refToClasses(schoolId: String) = db.getReference("$schoolId/classes/")
         fun refToClassNoticeBoard(schoolId: String, classId: String) = db.getReference("$schoolId/classes/$classId/notices/")
+        fun refToSchoolPostsInstagram(schoolId: String) = db.getReference("$schoolId/Posts/")
+        fun refToAdminPostsInstagram() = db.getReference("admin/posts/")
+        fun refToAdminAdsInstagram() = db.getReference("admin/feedads/")
+        fun refToAdminQuizAdsInstagram() = db.getReference("admin/quizads/")
+        fun refToCoursesOffered() = db.getReference("coursesoffered/")
         fun refToInvites(schoolId: String) = db.getReference("$schoolId/invites/")
         fun refToSchoolId(userId: String) = db.getReference("user_schools/$userId/")
         fun refToSchoolName(schoolId: String) = db.getReference("$schoolId/name/")
         fun refToSubjects(schoolId: String, classId: String) = db.getReference("$schoolId/classes/$classId/subjects/")
         fun refToUsers(schoolId: String) = db.getReference("$schoolId/users/")
+        fun refToTeachers(schoolId: String) = db.getReference("$schoolId/users/")
+
+        fun refToTimestampUsers(schoolId: String) = db.getReference("$schoolId/NamewithTimestampMessages/")
+
     }
 
 }

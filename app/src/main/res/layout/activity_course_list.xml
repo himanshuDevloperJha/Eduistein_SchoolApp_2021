@@ -26,12 +26,22 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <co.aspirasoft.view.NestedListView
+        android:id="@+id/contentList1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pb_subjectmanage"
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_gravity="center"/>
+</FrameLayout>
 
-        <co.aspirasoft.view.NestedListView
-            android:id="@+id/contentList1"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </LinearLayout>
 

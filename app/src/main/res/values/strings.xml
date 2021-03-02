@@ -3,6 +3,9 @@
     <string name="required_asterisk"><![CDATA[<font color=\'#cc0029\'>*</font>]]></string>
     <string name="title_sign_in">Sign In</string>
 
+    <string name="hint_minute">Minute</string>
+    <string name="message_minutes">Please Enter Minutes...</string>
+
     <!-- Placeholders -->
     <string name="ph_address">74 Bangur Avenue, Kolkata, West Bengal</string>
     <string name="ph_date">2 January, 1961</string>

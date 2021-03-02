@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser
  */
 abstract class SecureActivity : AppCompatActivity() {
 
-    private lateinit var schoolDetails: Pair<String, String>
+     lateinit var schoolDetails: Pair<String, String>
     protected val schoolId: String get() = schoolDetails.first
     protected val school: String get() = schoolDetails.second
      lateinit var currentUser: User

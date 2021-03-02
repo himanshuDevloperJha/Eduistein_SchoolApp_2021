@@ -84,7 +84,8 @@ object UsersDao {
      * @param classId The id of the students' class.
      * @param listener A listener for receiving response of the request.
      */
-    fun getStudentsInClass(schoolId: String, classId: String, listener: OnSuccessListener<List<Student>>) {
+    fun getStudentsInClass(schoolId: String, classId: String,
+                           listener: OnSuccessListener<List<Student>>) {
         CygnusApp.refToUsers(schoolId)
                 .orderByChild("classId")
                 .equalTo(classId)

@@ -68,6 +68,8 @@ class NoticeActivity : DashboardChildActivity() {
             NoticeBoardDao.getPostsBySubject(schoolId, subject, OnSuccessListener {
                 this.posts.addAll(it)
                 this.adapter.notifyDataSetChanged()
+                pb_attendance.visibility=View.GONE
+
             })
         }
         else{
@@ -101,10 +103,13 @@ class NoticeActivity : DashboardChildActivity() {
                                 status.setText("Message sent!")
                                 posts.add(post)
                                 adapter.notifyDataSetChanged()
+                                pb_attendance.visibility=View.GONE
 
                                 fetchTokens();
 
                             } else {
+                                pb_attendance.visibility=View.GONE
+
                                 status.setText(it.exception?.message ?: "Could not send the message at this time.")
                             }
 
@@ -119,6 +124,8 @@ class NoticeActivity : DashboardChildActivity() {
                             NoticeBoardDao.add(schoolId, (currentUser as Teacher).classId!!, post, onCompleteListener)
                         }
                     } catch (ex: Exception) {
+                        pb_attendance.visibility=View.GONE
+
                         ex.printStackTrace()
                     }
                 }
@@ -158,6 +165,7 @@ class NoticeActivity : DashboardChildActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
+                pb_attendance.visibility=View.GONE
                 //Toast.makeText(applicationContext, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
             }
         })
@@ -226,6 +234,7 @@ class NoticeActivity : DashboardChildActivity() {
 
         override fun notifyDataSetChanged() {
             posts.sortByDescending { it.postDate }
+            pb_attendance.visibility=View.GONE
             super.notifyDataSetChanged()
         }
 

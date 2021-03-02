@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.dao.TestsDao
 import com.cygnus.model.*
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_list.*
 class TestsActivity : DashboardChildActivity() {
 
     private lateinit var subject: Subject
+    private lateinit var pb_attendance: ProgressBar
     private val tests = ArrayList<Test>()
     private val testNames = ArrayList<String>()
     private val testScores = ArrayList<TestScore>()
@@ -34,6 +36,7 @@ class TestsActivity : DashboardChildActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+        pb_attendance=findViewById(R.id.pb_attendance)
 
         val subject = intent.getSerializableExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT) as Subject?
         if (subject == null) {
@@ -64,6 +67,7 @@ class TestsActivity : DashboardChildActivity() {
 
             this.adapter = TestAdapter(this, testNames)
             contentList.adapter = this.adapter
+            pb_attendance.visibility=View.GONE
         })
     }
 

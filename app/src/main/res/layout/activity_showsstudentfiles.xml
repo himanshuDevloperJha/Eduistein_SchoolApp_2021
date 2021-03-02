@@ -19,8 +19,22 @@
             app:layout_scrollFlags="scroll"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-    <co.aspirasoft.view.NestedListView
-        android:id="@+id/filesListt"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+
+        <co.aspirasoft.view.NestedListView
+            android:id="@+id/filesListt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:id="@+id/pb_studentmaterial"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+
 </LinearLayout>

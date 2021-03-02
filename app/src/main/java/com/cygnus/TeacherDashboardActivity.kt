@@ -26,10 +26,13 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.cygnus.chatstaff.StaffList
 import com.cygnus.core.DashboardActivity
 import com.cygnus.dao.ClassesDao
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
+import com.cygnus.feed.FeedActivity
+import com.cygnus.feed.PendingApprovalPosts
 import com.cygnus.model.*
 import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.timetable.TimetablePagerAdapter
@@ -126,11 +129,23 @@ class TeacherDashboardActivity : DashboardActivity() {
 
         ed_loginsave.putString("SubjectTeacherName", currentTeacher.name)
         ed_loginsave.putString("SubjectTeacherClassId", currentTeacher.classId)
+        ed_loginsave.putString("studentclassId", currentTeacher.classId)
+        ed_loginsave.putString("studentschoolid", schoolId)
+        ed_loginsave.putString("userrrtypee", "Teacher")
         ed_loginsave.commit()
+
+
 
         Log.e("msg", "SUBJECT-TEACHERNAMEIDD" + sp_loginsave.getString("SubjectTeacherClassId", ""))
 
-
+        getSubjectsList()
+        if (currentTeacher.isClassTeacher()) {
+            classTeacherCard.visibility = View.VISIBLE
+            className.text = currentTeacher.classId
+            getStudentCount()
+        } else {
+            classTeacherCard.visibility = View.VISIBLE
+        }
 
 
         /* SchoolDao.getSchoolByUser(firebaseUser.uid, OnSuccessListener {
@@ -158,11 +173,45 @@ class TeacherDashboardActivity : DashboardActivity() {
             }
         }*/
         attendanceButton.setOnClickListener { startSecurely(MarkAttendanceActivity::class.java) }
+        approvalpostss.setOnClickListener {
+            val intent = Intent(this, PendingApprovalPosts::class.java)
+            intent.putExtra("studentname", currentTeacher.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("teacheridd",currentTeacher.classId)
+            intent.putExtra("studenttype","Teacher")
 
-
+            startActivity(intent)
+        }
+        tchr_notifications.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            intent.putExtra("studentname", currentUser.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentschool_namee", schoolDetails.second)
+            intent.putExtra("studenttype","Teacher")
+            startActivity(intent)
+        }
         addChapternoList()
 
+        feedteacher.setOnClickListener {
+            val intent = Intent(this, FeedActivity::class.java)
+            intent.putExtra("studentname", currentUser.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentschool_namee", schoolDetails.second)
+            intent.putExtra("student_teacheridd", currentTeacher.classId)
+            intent.putExtra("studentclassId", currentTeacher.classId)
+            intent.putExtra("studenttype","Teacher")
+            startActivity(intent)
+        }
 
+        chatbutton.setOnClickListener {
+            val intent = Intent(this, StaffList::class.java)
+            intent.putExtra("studentname", currentUser.name)
+            intent.putExtra("studentschoolid", schoolId)
+            intent.putExtra("studentschool_namee", schoolDetails.second)
+            intent.putExtra("student_teacheridd", currentTeacher.classId)
+            startActivity(intent)
+
+        }
 
         classyoutube.setOnClickListener {
             val dialog1 = Dialog(this)
@@ -693,13 +742,17 @@ class TeacherDashboardActivity : DashboardActivity() {
                     Handler().postDelayed({
                         // Toast.makeText(applicationContext,token, Toast.LENGTH_LONG).show()
 
-                        val post = TeacherToken(currentTeacher.email, token);
-
-                        val missionsReference =
-                                FirebaseDatabase.getInstance().reference.child(schoolId).
+                        val post = TeacherToken(currentTeacher.name,currentTeacher.email, token)
+                        val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolId).
                                         child("TeacherTokens").child(token.toString())
 
                         missionsReference.setValue(post)
+
+                        val post1 = TeacherToken(currentTeacher.name,currentTeacher.email, token)
+                        val missionsReference1 = FirebaseDatabase.getInstance().reference.child(schoolId).
+                                child("ChatTokens").child(currentTeacher.name)
+
+                        missionsReference1.setValue(post1)
                         Log.d("msg", "onReceiveToken: $token")
                         //if the intent is not with success then displaying error messages
                     }, 2000)
@@ -929,14 +982,7 @@ class TeacherDashboardActivity : DashboardActivity() {
      * Displays the signed in user's details.
      */
     override fun updateUI(currentUser: User) {
-        getSubjectsList()
-        if (currentTeacher.isClassTeacher()) {
-            classTeacherCard.visibility = View.VISIBLE
-            className.text = currentTeacher.classId
-            getStudentCount()
-        } else {
-            classTeacherCard.visibility = View.GONE
-        }
+
     }
 
     private fun getStudentCount() {

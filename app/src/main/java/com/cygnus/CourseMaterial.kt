@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -19,7 +21,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.cygnus.core.DashboardChildActivity
-import com.cygnus.model.*
+import com.cygnus.model.CourseFile
+import com.cygnus.model.StoreNotifications
+import com.cygnus.model.Subject
+import com.cygnus.model.User
 import com.cygnus.storage.FileManager
 import com.cygnus.storage.FileUtils.getLastPathSegmentOnly
 import com.cygnus.storage.MaterialAdapter
@@ -27,28 +32,40 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_coursematerial.*
-import kotlinx.android.synthetic.main.activity_list.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-import java.util.HashMap
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.Map
+import kotlin.collections.MutableMap
+import kotlin.collections.forEach
+import kotlin.collections.isNotEmpty
+import kotlin.collections.set
 
 class CourseMaterial : DashboardChildActivity() {
     private lateinit var materialManager: FileManager
     private var materialAdapter: MaterialAdapter? = null
     private val material = ArrayList<CourseFile>()
-    lateinit var sp_loginsave: SharedPreferences;
-    lateinit var ed_loginsave: SharedPreferences.Editor;
-    var subjectteachername:String?=null
-    var teacherClassId:String?=null
+    lateinit var sp_loginsave: SharedPreferences
+    lateinit var ed_loginsave: SharedPreferences.Editor
+    var subjectteachername: String? = null
+    var teacherClassId: String? = null
     private var pickRequestCode = RESULT_ACTION_PICK_MATERIAL
     var tokenlist: ArrayList<String> = ArrayList()
     private lateinit var subject: Subject
-    var student_namee:String?=null
-
+    var student_namee: String? = null
+    val DATABASE_NAME = "FILES"
+    val TABLE_NAME = "course"
+    lateinit var sq: SQLiteDatabase
+    private val UID = "PRIMARY_ID"
+    private val C_NAME = "COURSE_NAME"
+    private val C_FILE = "COURSE_FILE"
+    private val C_TIME = "COURSE_TIME"
+   // var checklist: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,53 +73,115 @@ class CourseMaterial : DashboardChildActivity() {
         sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", Context.MODE_PRIVATE)
         ed_loginsave = sp_loginsave.edit()
 
-        subjectteachername= sp_loginsave.getString("SubjectTeacherName","")
-        teacherClassId= sp_loginsave.getString("SubjectTeacherClassId","")
+        subjectteachername = sp_loginsave.getString("SubjectTeacherName", "")
+        teacherClassId = sp_loginsave.getString("SubjectTeacherClassId", "")
 
-        student_namee=intent.getStringExtra("student_namee");
-
-
-        subject = intent.getSerializableExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT) as Subject? ?: return finish()
+        student_namee = intent.getStringExtra("student_namee");
 
 
-        materialManager = FileManager.newInstance(this, "$schoolId/courses/${subject.classId}/subjects/${subject.name}/lectures/")
+        subject = intent.getSerializableExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT) as Subject?
+                ?: return finish()
+
+
+        materialManager = FileManager.newInstance(this,
+                "$schoolId/courses/${subject.classId}/subjects/${subject.name}/lectures/")
 
         addButtoncourse.setOnClickListener {
             if (PermissionUtils.requestPermissionIfNeeded(
-                            this,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            this, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             getString(R.string.permission_storage),
-                            CourseMaterial.RC_WRITE_PERMISSION
-                    )) {
+                            RC_WRITE_PERMISSION)) {
                 pickFile(RESULT_ACTION_PICK_MATERIAL)
             }
         }
         if (student_namee.equals(null)) {
             addButtoncourse.visibility = View.VISIBLE
-
         }
 
     }
+
     override fun updateUI(currentUser: User) {
         supportActionBar?.title = subject.name
         showClassMaterial()
     }
-    private fun showClassMaterial() {
-        if (materialAdapter == null) {
-            materialAdapter = MaterialAdapter(this, material, materialManager)
-            courseListnew.adapter = materialAdapter
-        }
 
-        materialManager.listAll().addOnSuccessListener { result ->
+    private fun showClassMaterial() {
+
+        /*if (sp_loginsave.getString("course_sqlite", "").equals("true")) {
             material.clear()
-            result?.items?.forEach { reference ->
-                reference.metadata.addOnSuccessListener { metadata ->
-                    material.add(CourseFile(reference.name, metadata))
-                    materialAdapter?.notifyDataSetChanged()
+            sq = SQLiteDatabase.openOrCreateDatabase(applicationContext.filesDir.toString() + "/" + DATABASE_NAME, null)
+            val c: Cursor = sq.rawQuery("SELECT DISTINCT COURSE_FILE FROM " + TABLE_NAME, null)
+            if (c != null) {
+                if (c.moveToFirst()) {
+                    do {
+                        material.add(CourseFile(c.getInt(
+                                c.getColumnIndex("COURSE_FILE")).toString(), null))
+                        materialAdapter?.notifyDataSetChanged()
+                        *//*result.add("" + p_id + ","+p_name +","+ p_quantity +","+ p_price);
+                    Log.d("msg", "productsFromDatabase1: " +result);*//*
+                    } while (c.moveToNext())
+                }
+                materialAdapter = MaterialAdapter(this, material, materialManager)
+                courseListnew.adapter = materialAdapter
+            }
+
+        } else {*/
+            if (materialAdapter == null) {
+                materialAdapter = MaterialAdapter(this, material, materialManager)
+                courseListnew.adapter = materialAdapter
+            }
+
+            materialManager.listAll().addOnSuccessListener { result ->
+                material.clear()
+                result?.items?.forEach { reference ->
+                    reference.metadata.addOnSuccessListener { metadata ->
+                        pb_coursematerial.visibility=View.VISIBLE
+
+                        Handler().postDelayed({
+                            material.add(CourseFile(reference.name, metadata))
+                            materialAdapter?.notifyDataSetChanged()
+
+                            sq = SQLiteDatabase.openOrCreateDatabase(applicationContext.filesDir.toString() + "/" + DATABASE_NAME, null)
+
+                            for (co in material) {
+                                val extracteddatetime = co.name.substring(co.name.length - 24, co.name.length)
+
+                                val CREATE_TABLE = ("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + UID +
+                                        " INTEGER PRIMARY KEY AUTOINCREMENT, " + C_NAME + " VARCHAR(100) ," +
+                                        C_TIME + " VARCHAR(100) ," + C_FILE + " BLOB NOT NULL );")
+                                sq.execSQL(CREATE_TABLE)
+
+                                Log.e("msg", "COURSEDATABASE1" + CREATE_TABLE)
+
+                                val INSERT = ("INSERT INTO " + TABLE_NAME
+                                        + "(" + C_NAME + "," + C_TIME + "," + C_FILE + ")"
+                                        + " VALUES('" + co.name.substring(0, co.name.length - 24) + "','"
+                                        + extracteddatetime + "','" + co.name + "');")
+                                sq.execSQL(INSERT)
+                                Log.e("msg", "COURSEDATABASE2" + INSERT)
+                                ed_loginsave.putString("course_sqlite", "true")
+                                ed_loginsave.commit()
+                                pb_coursematerial.visibility=View.GONE
+                                // checklist=true
+                            }
+                        }, 1000)
+
+
+                    }
+
+                }
+                if(material.size == 0){
+                    Handler().postDelayed({
+                    pb_coursematerial.visibility=View.GONE
+                   // Toast.makeText(applicationContext,"No file has uploaded..",Toast.LENGTH_SHORT).show()
+                    }, 1000)
                 }
             }
-        }
+
+
+
     }
+
     private fun pickFile(requestCode: Int) {
         this.pickRequestCode = requestCode
 
@@ -115,10 +194,9 @@ class CourseMaterial : DashboardChildActivity() {
     @SuppressLint("NewApi")
     private fun uploadFile(fm: FileManager, filename: String, data: Uri, adapter: MaterialAdapter?,
                            textbody: String) {
-        try{
+        try {
 
             val current = LocalDateTime.now()
-
             val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
             val formatted = current.format(formatter)
 
@@ -129,7 +207,7 @@ class CourseMaterial : DashboardChildActivity() {
                         dialog.dismiss()
                         val status = Snackbar.make(courseListnew, getString(R.string.upload_started), Snackbar.LENGTH_INDEFINITE)
                         status.show()
-                        fm.upload(filename+formatted, data)
+                        fm.upload(filename + formatted, data)
                                 .addOnSuccessListener {
                                     it.metadata?.let { metadata ->
 
@@ -163,9 +241,8 @@ class CourseMaterial : DashboardChildActivity() {
                         dialog.cancel()
                     }
                     .show()
-        }
-        catch (e:Exception){
-            Toast.makeText(applicationContext,""+e.toString(), Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(applicationContext, "" + e.toString(), Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -173,22 +250,20 @@ class CourseMaterial : DashboardChildActivity() {
     private fun fetchTokens(textbody: String) {
         tokenlist.clear()
         val reference: DatabaseReference
-        reference = FirebaseDatabase.getInstance().reference.child(schoolId).
-                child("StudentTokens")
+        reference = FirebaseDatabase.getInstance().reference.child(schoolId).child("StudentTokens")
         reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (datas in dataSnapshot.children) {
                     Log.e("msg", "TOKENCLASS" + datas.child("classId").value.toString())
                     //Log.e("msg", "TOKENCLASS1" + datas.child("token").value.toString())
-                    if (teacherClassId.equals(datas.child("classId").
-                                    value.toString(),ignoreCase = true)) {
+                    if (teacherClassId.equals(datas.child("classId").value.toString(), ignoreCase = true)) {
                         try {
                             val s = datas.key
                             val studenttoken = datas.child("token").value.toString()
                             tokenlist.add(studenttoken)
 
                         } catch (e: Exception) {
-                            Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(applicationContext, "" + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         // Toast.makeText(applicationContext, "No scheduled class", Toast.LENGTH_SHORT).show();
@@ -196,7 +271,7 @@ class CourseMaterial : DashboardChildActivity() {
                 }
 
 
-                sendFCMPush(tokenlist,textbody);
+                sendFCMPush(tokenlist, textbody);
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -204,7 +279,8 @@ class CourseMaterial : DashboardChildActivity() {
             }
         })
     }
-    private fun sendFCMPush(tokenlist:  ArrayList<String>, body: String) {
+
+    private fun sendFCMPush(tokenlist: ArrayList<String>, body: String) {
         val SERVER_KEY = "AAAAav-QFhw:APA91bG7ChbWR2kwz_FBMKgaDV8IZ_PMmED0Rp_sy7f0PtlZm37t-uAJRnUwyLYSM4Z-kSg_Jj9Xv9O8x4r_L5iQC9JAKhhTPt-ga5nmEqCBMcqgaUMtDnF5ponwXi8mD31k481DWHoF"
         var obj: JSONObject? = null
         var objData: JSONObject? = null
@@ -248,14 +324,14 @@ class CourseMaterial : DashboardChildActivity() {
                     val post = StoreNotifications(subjectteachername, body);
 
                     val missionsReference =
-                            FirebaseDatabase.getInstance().reference.child(schoolId).
-                                    child("Notifications").push()
+                            FirebaseDatabase.getInstance().reference.child(schoolId).child("Notifications").push()
 
                     missionsReference.setValue(post)
 
                 },
                 Response.ErrorListener { error ->
-                    Log.e("msg", "onResponse1111112: $error") }) {
+                    Log.e("msg", "onResponse1111112: $error")
+                }) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
@@ -275,12 +351,11 @@ class CourseMaterial : DashboardChildActivity() {
                 CourseMaterial.RESULT_ACTION_PICK_MATERIAL -> {
                     data?.data?.getLastPathSegmentOnly(this)?.let { filename ->
 
-                        val materialclassbody="Hey! Your Subject Teacher "+subjectteachername+
+                        val materialclassbody = "Hey! Your Subject Teacher " + subjectteachername +
                                 " has shared a File.\nClick to Check Now !"
-                        uploadFile(materialManager, filename, data.data!!, materialAdapter,materialclassbody)
+                        uploadFile(materialManager, filename, data.data!!, materialAdapter, materialclassbody)
                     }
                 }
-
 
 
             }

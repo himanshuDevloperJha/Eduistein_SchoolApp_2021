@@ -3,7 +3,9 @@ package com.cygnus.storage
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -27,16 +29,16 @@ class MaterialAdapter(val context: Activity, val material: ArrayList<CourseFile>
 
 
        // val item1= it.name
-        material.sortByDescending { it.metadata.creationTimeMillis}
+        material.sortByDescending { it.metadata!!.creationTimeMillis}
         super.notifyDataSetChanged()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val v = super.getView(position, convertView, parent) as CourseFileView
         val item = material[position]
-        /*val extracteddatetime = material[position].name.substring(model.name.length - 24, model.name.length);
-       mFileView.text = model.name.substring(0,model.name.length-24)
+     /*  mFileView.text = model.name.substring(0,model.name.length-24)
        postDatehome.text = extracteddatetime*/
+
 
         if (fileManager.hasInCache(item.name)) {
             v.setStatus(CourseFileView.FileStatus.Local)

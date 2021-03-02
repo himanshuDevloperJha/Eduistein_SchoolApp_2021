@@ -40,8 +40,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:visibility="gone"
-          android:maxLines="1"
-          android:text="@string/ph_email"/>
+          android:maxLines="1" />
 
       <com.google.android.material.textview.MaterialTextView
           style="@style/TextAppearance.MaterialComponents.Body2"
@@ -49,7 +48,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:maxLines="1"
-          android:text="@string/ph_assigned_class"/>
+         />
 
     </LinearLayout>
 

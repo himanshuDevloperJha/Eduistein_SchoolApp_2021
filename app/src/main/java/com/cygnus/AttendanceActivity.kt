@@ -44,6 +44,7 @@ class AttendanceActivity : DashboardChildActivity() {
                         calculateAttendancePercentage(it))
                 attendanceRecords.addAll(it)
                 adapter.notifyDataSetChanged()
+                pb_attendance.visibility=View.GONE
             }
 
         })
@@ -59,6 +60,7 @@ class AttendanceActivity : DashboardChildActivity() {
                         calculateAttendancePercentage(it))
                 attendanceRecords.addAll(it)
                 adapter.notifyDataSetChanged()
+                pb_attendance.visibility=View.GONE
             }
 
         })
@@ -76,6 +78,7 @@ class AttendanceActivity : DashboardChildActivity() {
         override fun notifyDataSetChanged() {
             //records.sortedBy { it.date }
             attendanceRecords.sortByDescending { it.date }
+            pb_attendance.visibility=View.GONE
             super.notifyDataSetChanged()
         }
 

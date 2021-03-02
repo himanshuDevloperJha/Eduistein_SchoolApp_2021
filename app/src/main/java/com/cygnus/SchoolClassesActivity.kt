@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import co.aspirasoft.adapter.ModelViewAdapter
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.dao.ClassesDao
@@ -14,6 +15,7 @@ import com.cygnus.view.AddClassDialog
 import com.cygnus.view.SchoolClassView
 import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.activity_schedule_ckass_online_list.*
 
 class SchoolClassesActivity : DashboardChildActivity() {
 
@@ -26,9 +28,9 @@ class SchoolClassesActivity : DashboardChildActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+
         // Read staff list from intent
-        val invites =
-                intent.getParcelableArrayListExtra<Invite>(CygnusApp.EXTRA_INVITES)
+        val invites=intent.getParcelableArrayListExtra<Invite>(CygnusApp.EXTRA_INVITES)
         if (invites == null) {
             finish()
             return
@@ -40,7 +42,6 @@ class SchoolClassesActivity : DashboardChildActivity() {
             (o1 as SchoolClass).name.compareTo((o2 as SchoolClass).name)
         }
         contentList.adapter = adapter
-
         addButton.setOnClickListener { onAddClassClicked() }
     }
 
@@ -51,6 +52,7 @@ class SchoolClassesActivity : DashboardChildActivity() {
                 classes.addAll(it)
                 classes.sortBy { schoolClass -> schoolClass.name }
                 adapter.notifyDataSetChanged()
+                pb_attendance.visibility=View.GONE
             }
         })
     }
@@ -66,6 +68,8 @@ class SchoolClassesActivity : DashboardChildActivity() {
             }
             classes.add(schoolClass)
             adapter.notifyDataSetChanged()
+            pb_attendance.visibility=View.GONE
+
         }
         dialog.show(supportFragmentManager, dialog.toString())
     }

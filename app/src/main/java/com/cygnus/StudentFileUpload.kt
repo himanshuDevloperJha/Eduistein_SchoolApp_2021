@@ -12,9 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import co.aspirasoft.adapter.ModelViewAdapter
 import co.aspirasoft.util.PermissionUtils
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -98,9 +96,21 @@ class StudentFileUpload  : DashboardChildActivity() {
             files.clear()
             result?.items?.forEach { reference ->
                 reference.metadata.addOnSuccessListener { metadata ->
-                    files.add(CourseFile(reference.name, metadata))
-                    filesAdapter?.notifyDataSetChanged()
+
+                    pb_studentfiles.visibility = View.VISIBLE
+                    Handler().postDelayed({
+                        files.add(CourseFile(reference.name, metadata))
+                        filesAdapter?.notifyDataSetChanged()
+                        pb_studentfiles.visibility = View.GONE
+                    }, 1000)
                 }
+            }
+            if(files.size==0){
+                Handler().postDelayed({
+                    pb_studentfiles.visibility=View.GONE
+
+                    // Toast.makeText(applicationContext,"No file has uploaded..",Toast.LENGTH_SHORT).show()
+                }, 1000)
             }
         }
     }

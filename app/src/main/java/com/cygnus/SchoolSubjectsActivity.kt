@@ -100,6 +100,7 @@ class SchoolSubjectsActivity : DashboardChildActivity() {
                 }
             }
             adapter.notifyDataSetChanged()
+            pb_subjectmanage.visibility=View.GONE
         })
     }
 
@@ -109,6 +110,8 @@ class SchoolSubjectsActivity : DashboardChildActivity() {
             dialog.onOkListener = { subject ->
                 subjects.add(subject)
                 adapter.notifyDataSetChanged()
+                pb_subjectmanage.visibility=View.GONE
+
             }
             dialog.show(supportFragmentManager, dialog.toString())
         } else {
@@ -137,6 +140,8 @@ class SchoolSubjectsActivity : DashboardChildActivity() {
                 dialog.onOkListener = { subject ->
                     subjects[position] = subject
                     adapter.notifyDataSetChanged()
+                    pb_subjectmanage.visibility=View.GONE
+
                 }
                 dialog.show(supportFragmentManager, dialog.toString())
             }

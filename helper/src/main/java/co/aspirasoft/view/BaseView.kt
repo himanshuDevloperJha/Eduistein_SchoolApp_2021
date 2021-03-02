@@ -17,7 +17,7 @@ abstract class BaseView<T : BaseModel>(context: Context, attrs: AttributeSet? = 
         }
     }
 
-    fun bindWithModel(model: T) {
+    fun bindWithModel(model:T) {
         model.addObserver(this)
         model.notifyObservers()
     }

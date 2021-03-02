@@ -90,7 +90,6 @@
                 android:enabled="false"
                 android:gravity="end|center_vertical"
                 android:padding="0dp"
-                android:text="@string/ph_student_count"
                 android:textAllCaps="false"
                 android:textSize="12sp"/>
 
@@ -100,7 +99,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:columnCount="2"
-              android:rowCount="3"
+              android:rowCount="4"
               android:paddingVertical="0dp"
               android:orientation="horizontal"
 
@@ -173,12 +172,79 @@
                 app:iconSize="24dp"
                 android:textSize="10dp"/>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/classAnnouncementsButton"
+                android:text="@string/label_announcements"
+                app:icon="@drawable/ic_announcements"
+                android:layout_width="0dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                app:cornerRadius="20dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/feedteacher"
+                android:text="Feed"
+                app:icon="@drawable/youtube"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                app:cornerRadius="20dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="24dp"
+                android:textSize="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tchr_notifications"
+                android:text="My Notifications"
+                app:icon="@drawable/ic_notifications_black_24dp"
+                android:layout_width="0dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                app:cornerRadius="20dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/approvalpostss"
+                android:text="Pending Posts"
+                app:icon="@drawable/youtube"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                app:cornerRadius="20dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="24dp"
+                android:textSize="10dp"/>
 
           </GridLayout>
           <com.google.android.material.button.MaterialButton
-              android:id="@+id/classAnnouncementsButton"
-              android:text="@string/label_announcements"
-              app:icon="@drawable/ic_announcements"
+              android:id="@+id/chatbutton"
+              android:text="Chat"
+              app:icon="@drawable/ic_chat_black_24dp"
               android:layout_marginRight="2dp"
               android:layout_marginLeft="2dp"
               android:layout_width="match_parent"

@@ -117,16 +117,35 @@
             </LinearLayout>
           </LinearLayout>
 
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_marginTop="6dp"
+              android:layout_marginBottom="5dp"
+              android:layout_height="wrap_content">
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.MaterialComponents.Overline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL POINTS EARNED:  "/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_totalpts"
+                style="@style/TextAppearance.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="0 points"/>
+          </LinearLayout>
           <!--hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
 
           <GridLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:columnCount="2"
-              android:rowCount="3"
+              android:rowCount="5"
               android:paddingVertical="0dp"
               android:orientation="horizontal"
-
               >
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/attendanceButton"
@@ -193,7 +212,7 @@
                 android:padding="10dp"
                 android:textAllCaps="true"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
+                app:iconSize="28dp"
                 android:textSize="10dp"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/class_yt_notifications"
@@ -228,13 +247,45 @@
                 android:textAlignment="textStart"
                 app:iconSize="34dp"
                 android:textSize="10dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/classFees"
+                android:text="Fee Payment"
+                app:icon="@drawable/pay_fees"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="28dp"
+                android:textSize="10dp"/>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/playquiz"
+                android:text="Play Quiz"
+                app:icon="@drawable/ic_announcements"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="20dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>
 
           </GridLayout>
 
           <com.google.android.material.button.MaterialButton
-              android:id="@+id/classFees"
-              android:text="Fee Payment"
+              android:id="@+id/feed"
+              android:text="Feed"
               app:icon="@drawable/pay_fees"
               android:layout_marginRight="2dp"
               android:layout_marginLeft="2dp"
@@ -246,7 +297,6 @@
               android:textAllCaps="true"
               android:textAlignment="center"
               app:iconSize="20dp"/>
-
 
 
         </LinearLayout>
@@ -292,6 +342,21 @@
           android:id="@+id/timetableView"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
+
+      <com.google.android.material.textview.MaterialTextView
+          style="@style/TextAppearance.MaterialComponents.Button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:textStyle="bold"
+          android:text="COURSES OFFERED"/>
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/coursesofferedList"
+          android:layout_width="match_parent"
+
+          android:layout_height="wrap_content"
+          />
 
     </LinearLayout>
 

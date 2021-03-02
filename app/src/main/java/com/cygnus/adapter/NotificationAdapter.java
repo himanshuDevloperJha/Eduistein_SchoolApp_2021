@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.cygnus.ScheduleCkassOnlineList;
 import com.cygnus.St_YoutubeVideos;
 import com.cygnus.StudentDashboardActivity;
 import com.cygnus.YoutubevideoPlay;
+import com.cygnus.feed.PendingApprovalPosts;
 import com.cygnus.model.Chapter;
 
 import java.util.ArrayList;
@@ -37,12 +39,17 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     String videoid;
 
     Context context;
-    String teacher_email;
+    String teacher_email,SubjectTeacherName,teacherid,schoolId;
     List<String> notificationlist;
-
-    public NotificationAdapter(Context context, List<String> notificationlist) {
+    String userrrtypee;
+    public NotificationAdapter(Context context, List<String> notificationlist, String userrrtypee,
+                               String SubjectTeacherName,String teacherid,String schoolId) {
         this.context = context;
         this.notificationlist = notificationlist;
+        this.userrrtypee = userrrtypee;
+        this.teacherid = teacherid;
+        this.SubjectTeacherName = SubjectTeacherName;
+        this.schoolId = schoolId;
 
 
     }
@@ -63,24 +70,19 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
 
-       /* holder.tv_msg_noti.setOnClickListener(new View.OnClickListener() {
+        holder.ll_notifctn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(notificationlist.get(position).contains("scheduled an Online class")){
-                   context.startActivity(new Intent(context, ScheduleCkassOnlineList.class));
-                   ((Activity)context).finish();
-               }
-               else if(notificationlist.get(position).contains("has shared a Video on")){
-                   context.startActivity(new Intent(context, St_YoutubeVideos.class));
-                   ((Activity)context).finish();
-               }
-
-               else {
-                   context.startActivity(new Intent(context, StudentDashboardActivity.class));
+               if(userrrtypee.equals("Teacher")){
+                   Intent intent=new Intent(context, PendingApprovalPosts.class);
+                   intent.putExtra("studentname",SubjectTeacherName);
+                   intent.putExtra("teacheridd",teacherid);
+                   intent.putExtra("studentschoolid",schoolId);
+                   context.startActivity(intent);
                    ((Activity)context).finish();
                }
             }
-        });*/
+        });
 
 
     }
@@ -94,11 +96,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_msg_noti;
-
+LinearLayout ll_notifctn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tv_msg_noti = itemView.findViewById(R.id.tv_msg_noti);
+            ll_notifctn = itemView.findViewById(R.id.ll_notifctn);
 
         }
     }

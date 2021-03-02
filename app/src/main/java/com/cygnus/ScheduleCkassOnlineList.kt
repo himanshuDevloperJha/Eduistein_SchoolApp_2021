@@ -2,6 +2,7 @@ package com.cygnus
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import com.cygnus.model.Schedule
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_schedule_ckass_online_list.*
 import java.util.*
 
 
@@ -82,9 +84,12 @@ class ScheduleCkassOnlineList : AppCompatActivity(), ZoomAutoAttendance {
                                         //subjectlist.sortByDescending { datas1.child("date").value.toString() }
                                         //  Toast.makeText(St_ScheduledClass.this, ""+date, Toast.LENGTH_SHORT).show();
                                     } catch (e: Exception) {
+                                        pb_notification.visibility=View.GONE
                                         // Toast.makeText(applicationContext, "" + e.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                 } else {
+                                    pb_notification.visibility=View.GONE
+
                                     // Toast.makeText(applicationContext, "No scheduled class", Toast.LENGTH_SHORT).show()
                                 }
                             }
@@ -93,9 +98,13 @@ class ScheduleCkassOnlineList : AppCompatActivity(), ZoomAutoAttendance {
                                     RecyclerView.VERTICAL, false))
                             subjectsAdapter = SubjectsAdapter(applicationContext, subjectlist, this@ScheduleCkassOnlineList)
                             rv_subjects.setAdapter(subjectsAdapter)
+                            pb_notification.visibility=View.GONE
+
                         }
 
                         override fun onCancelled(databaseError: DatabaseError) {
+                            pb_notification.visibility=View.GONE
+
                             //Toast.makeText(applicationContext, "" + databaseError.toString(), Toast.LENGTH_SHORT).show()
                         }
                     })
@@ -103,6 +112,8 @@ class ScheduleCkassOnlineList : AppCompatActivity(), ZoomAutoAttendance {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
+                pb_notification.visibility=View.GONE
+
                 //Toast.makeText(applicationContext, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
             }
         })

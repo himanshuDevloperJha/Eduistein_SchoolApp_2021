@@ -2,7 +2,12 @@
 <resources>
     <color name="colorPrimary">#1976D2</color>
     <color name="colorPrimaryDark">#1A237E</color>
-    <color name="colorAccent">#FFCC80</color>
+    <color name="colorAccent">#B27AE3</color>
     <color name="colorWarning">#B71C1C</color>
     <color name="black">#000000</color>
+    <color name="colorBackground">#151B29</color>
+    <color name="colorYellow">#F5FA55</color>
+    <color name="colorpurple">#7F0FE0</color>
+    <color name="lightpurple">#B27AE3</color>
+    <color name="blurpurple">#EEEFFF</color>
 </resources>

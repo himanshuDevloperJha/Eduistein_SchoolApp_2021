@@ -91,6 +91,15 @@ class FileManager private constructor(context: Context, relativePath: String) {
     private fun downloadFromStorage(filename: String, file: File): FileDownloadTask {
         return storage.child(filename).getFile(file)
     }
+    private fun downloadFromUrl(filename: String, file: File): File {
+        storage.child(filename).downloadUrl.addOnSuccessListener {
+            // Got the download URL for 'users/me/profile.png'
+        }.addOnFailureListener {
+            // Handle any errors
+        }
+
+        return file
+    }
 
     private fun File.requiresInvalidation(): Boolean {
         val modified = this.lastModified()

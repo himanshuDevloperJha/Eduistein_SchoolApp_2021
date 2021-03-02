@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="wrap_content"
     >
 
@@ -18,7 +19,7 @@
             android:weightSum="1"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="13dp">
 
 
 
@@ -27,9 +28,11 @@
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:id="@+id/tv_studentname"
                 android:layout_width="0dp"
+                android:paddingLeft="10dp"
                 android:layout_weight="0.85"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:textSize="17dp"
+                android:textStyle="bold"
                 />
             <TextView
                 android:id="@+id/viewFilesButton"
@@ -47,5 +50,11 @@
         </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#C5B9B2"/>
 
 </LinearLayout>

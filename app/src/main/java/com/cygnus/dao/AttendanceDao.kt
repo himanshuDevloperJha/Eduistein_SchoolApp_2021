@@ -1,9 +1,11 @@
 package com.cygnus.dao
 
 import com.cygnus.CygnusApp
+import com.cygnus.erpfeature.AttTeachermodel
 import com.cygnus.model.Attendance
 import com.cygnus.model.AttendanceRecord
 import com.cygnus.model.Student
+import com.cygnus.model.Teacher
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DataSnapshot
@@ -68,6 +70,26 @@ public object AttendanceDao {
                     }
                 })
     }
+
+   /* fun getByTeacher(schoolId: String, teacher: Teacher, listener: OnSuccessListener<List<AttTeachermodel>?>) {
+        CygnusApp.refToAttendance(schoolId, teacher.classId!!)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val t = object : GenericTypeIndicator<HashMap<String, AttTeachermodel>>() {}
+                        val records = ArrayList<AttTeachermodel>()
+                        snapshot.getValue(t)?.let { map ->
+                            map.values.forEach { attendance ->
+                                records.addAll(attendance.attendanceRecords.filter { it.studentRollNo == student.rollNo })
+                            }
+                            listener.onSuccess(records)
+                        } ?: listener.onSuccess(null)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        listener.onSuccess(null)
+                    }
+                })
+    }*/
 
 
 

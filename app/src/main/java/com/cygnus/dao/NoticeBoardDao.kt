@@ -1,6 +1,9 @@
 package com.cygnus.dao
 
+import android.util.Log
 import com.cygnus.CygnusApp
+import com.cygnus.chatstaff.Sortchatmodel
+import com.cygnus.feed.PostmodelBoard
 import com.cygnus.model.NoticeBoardPost
 import com.cygnus.model.Subject
 import com.google.android.gms.tasks.OnCompleteListener
@@ -102,5 +105,92 @@ object NoticeBoardDao {
                     }
                 })
     }
+
+    fun getPostsInstagram(schoolId: String, listener: OnSuccessListener<ArrayList<PostmodelBoard>>) {
+        CygnusApp.refToSchoolPostsInstagram(schoolId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val posts = ArrayList<PostmodelBoard>()
+
+                        val t = object : GenericTypeIndicator<HashMap<String, PostmodelBoard>>() {}
+                        snapshot.getValue(t)?.values?.toList()?.forEach { posts.add(it) }
+                        listener.onSuccess(posts)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        listener.onSuccess(ArrayList())
+                    }
+                })
+    }
+
+    fun getTimestampUsers(schoolId: String, listener: OnSuccessListener<ArrayList<Sortchatmodel>>) {
+        CygnusApp.refToTimestampUsers(schoolId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val posts = ArrayList<Sortchatmodel>()
+
+                        val t = object : GenericTypeIndicator<HashMap<String, Sortchatmodel>>() {}
+                        snapshot.getValue(t)?.values?.toList()?.forEach { posts.add(it) }
+                        listener.onSuccess(posts)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        listener.onSuccess(ArrayList())
+                    }
+                })
+    }
+    fun getAdminPosts(listener: OnSuccessListener<ArrayList<PostmodelBoard>>) {
+        CygnusApp.refToAdminPostsInstagram()
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val posts = ArrayList<PostmodelBoard>()
+
+                        val t = object : GenericTypeIndicator<HashMap<String, PostmodelBoard>>() {}
+                        snapshot.getValue(t)?.values?.toList()?.forEach { posts.add(it) }
+                        listener.onSuccess(posts)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                       // listener.onSuccess(error.toString())
+                        Log.e("msg","ErrorAdminPostsss:"+error.toException())
+                    }
+                })
+    }
+    fun getAdminAds(listener: OnSuccessListener<ArrayList<PostmodelBoard>>) {
+        CygnusApp.refToAdminAdsInstagram()
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val posts = ArrayList<PostmodelBoard>()
+
+                        val t = object : GenericTypeIndicator<HashMap<String, PostmodelBoard>>() {}
+                        snapshot.getValue(t)?.values?.toList()?.forEach { posts.add(it) }
+                        listener.onSuccess(posts)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // listener.onSuccess(error.toString())
+                        Log.e("msg","ErrorAdminPostsss:"+error.toException())
+                    }
+                })
+    }
+
+    fun getAdminQuizAds(listener: OnSuccessListener<ArrayList<PostmodelBoard>>) {
+        CygnusApp.refToAdminQuizAdsInstagram()
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val posts = ArrayList<PostmodelBoard>()
+
+                        val t = object : GenericTypeIndicator<HashMap<String, PostmodelBoard>>() {}
+                        snapshot.getValue(t)?.values?.toList()?.forEach { posts.add(it) }
+                        listener.onSuccess(posts)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // listener.onSuccess(error.toString())
+                        Log.e("msg","ErrorAdminPostsss:"+error.toException())
+                    }
+                })
+    }
+
 
 }

@@ -85,6 +85,7 @@ class SchoolTeachersActivity : DashboardChildActivity() {
 
         adapter = TeacherAdapter(this, teachers)
         contentList.adapter = adapter
+        pb_attendance.visibility=View.GONE
     }
 
     private inner class TeacherAdapter(context: Context, val teachers: List<Teacher>)

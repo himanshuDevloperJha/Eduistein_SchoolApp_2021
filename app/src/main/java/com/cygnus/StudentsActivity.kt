@@ -60,6 +60,7 @@ class StudentsActivity : DashboardChildActivity() {
                 studentsList.clear()
                 studentsList.addAll(it)
                 adapter.notifyDataSetChanged()
+
             })
         }
     }
@@ -81,6 +82,7 @@ class StudentsActivity : DashboardChildActivity() {
                 Log.e("msg","yyyyyyyyyyyyyyy::"+items.rollNo)
             }
             Collections.sort(studentsList, AscendingComparator())
+            pb_attendance.visibility=View.GONE
            //Collections.sort(studentsList, Comparator { lhs, rhs -> lhs.rollNo.compareTo(rhs.rollNo) })
             super.notifyDataSetChanged()
 

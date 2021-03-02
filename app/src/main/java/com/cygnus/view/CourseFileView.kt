@@ -1,6 +1,7 @@
 package com.cygnus.view
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import com.google.android.material.textview.MaterialTextView
 import java.lang.Exception
 
 class CourseFileView : BaseView<CourseFile> {
+
+
 
     constructor(context: Context) : super(context)
 
@@ -35,6 +38,8 @@ try{
     mFileView.text = model.name.substring(0,model.name.length-24)
     postDatehome.text = extracteddatetime
     Log.e("msg","DATETIMEEE::"+extracteddatetime+","+model.name.substring(model.name.length - 24));
+
+
 
 }
 catch (e:Exception){

@@ -1,11 +1,20 @@
 package com.cygnus.model;
 
 public class TeacherToken {
-    String teacherId,token;
+    String username,teacherId,token;
 
-    public TeacherToken(String teacherId, String token) {
+    public TeacherToken(String username,String teacherId, String token) {
         this.setTeacherId(teacherId);
         this.setToken(token);
+        this.setUsername(username);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getTeacherId() {

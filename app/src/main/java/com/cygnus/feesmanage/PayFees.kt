@@ -167,6 +167,8 @@ class PayFees : AppCompatActivity(), TotalFees, PaymentStatusListener {
 
 
                         } catch (e: Exception) {
+                            pb_payfees.visibility=View.GONE
+
                             // Toast.makeText(applicationContext, "" + e.toString(), Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -177,6 +179,7 @@ class PayFees : AppCompatActivity(), TotalFees, PaymentStatusListener {
                 studentfeeadapter = StudentFeeDetailAdapter(applicationContext,
                         feelist, this@PayFees)
                 rv_feeDetail.setAdapter(studentfeeadapter)
+                pb_payfees.visibility=View.GONE
 
                 Handler().postDelayed({
                     //Toast.makeText(applicationContext, "Delay", Toast.LENGTH_SHORT).show();
@@ -186,6 +189,8 @@ class PayFees : AppCompatActivity(), TotalFees, PaymentStatusListener {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
+                pb_payfees.visibility=View.GONE
+
                 //Toast.makeText(applicationContext, ""+databaseError.toString(), Toast.LENGTH_SHORT).show();
             }
         })
