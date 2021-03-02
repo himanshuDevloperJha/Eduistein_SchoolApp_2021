@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".quiz.ScorecardActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="1"
+        android:background="@android:color/white"
+        android:layout_height="?attr/actionBarSize"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:text="SCORECARD"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+
+            android:gravity="right|center"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Total Points: "
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="15dp"
+
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="0 Points"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:id="@+id/tv_totalptsss"
+                android:textStyle="bold"
+                android:layout_marginRight="15dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#A6A09C"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/trophynew"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:text=""
+            android:id="@+id/tv_wonlost"
+            android:layout_marginTop="50dp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textSize="18dp"
+
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="0 Points"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:id="@+id/tv_pts"
+            android:layout_marginTop="5dp"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/tv_correct"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textSize="18dp"
+
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/tv_wrong"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textSize="18dp"
+
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>

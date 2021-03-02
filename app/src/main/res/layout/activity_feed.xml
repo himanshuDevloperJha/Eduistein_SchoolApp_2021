@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".feed.FeedActivity"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarr"
+            app:title="Feed"
+            app:titleTextColor="@android:color/white"
+            android:background="@color/colorpurple"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+           />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--  <androidx.core.widget.NestedScrollView-->
+    <!--      android:layout_width="match_parent"-->
+    <!--      android:layout_height="match_parent"-->
+    <!--      app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/fm_cmm"
+        android:layout_height="match_parent">
+
+
+            <co.aspirasoft.view.NestedListView
+                android:id="@+id/FeedListnew"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="?actionBarSize"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        <ProgressBar
+            android:id="@+id/pb_posts"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminateTint="@color/colorpurple"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addButtonpost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:visibility="visible"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:backgroundTint="@color/colorpurple"
+        app:icon="@drawable/ic_action_add"
+        app:iconTint="@android:color/white"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

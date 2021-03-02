@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="16dp"
+        android:id="@+id/txt_descc"
+        android:textColor="@android:color/black"
+        android:letterSpacing="0.05"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="4dp"
+            android:layout_height="340dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                   android:id="@+id/fm_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                   <!-- <TextView
+                        android:id="@+id/vw_shadowvd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.5"
+                        android:visibility="gone"
+                        android:background="#BDB8B5"
+
+                       />-->
+                  <!--  <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/rl_videofeed"
+                        android:visibility="gone"
+                        android:layout_height="match_parent" >-->
+                        <VideoView
+                            android:layout_width="match_parent"
+                            android:id="@+id/vdd_feed"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:layout_margin="1dp"
+                            android:layout_height="match_parent">
+                        </VideoView>
+
+
+                    <FrameLayout
+                        android:id="@+id/placeholder"
+                        android:visibility="gone"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/looading">
+                    </FrameLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:id="@+id/iv_feed"
+                        android:background="@color/blurpurple"
+                        android:layout_gravity="center"
+                        android:src="@drawable/looading"
+                        android:scaleType="fitCenter"
+                        android:layout_margin="1dp"
+                        android:layout_height="match_parent">
+                    </ImageView>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:id="@+id/iv_play"
+                      android:visibility="gone"
+                        android:src="@drawable/playbtn"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"/>
+
+
+                </FrameLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_article"
+   android:visibility="gone"
+    android:background="@drawable/article_back"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="16dp"
+        android:id="@+id/txt_link"
+        android:textColor="@color/colorpurple"
+        android:fontFamily="sans-serif"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="16dp"
+
+        android:id="@+id/txt_articledesc"
+        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif"
+        android:maxLength="250"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="16dp"
+        android:text="Click here for Full Article"
+        android:gravity="center"
+        android:id="@+id/txt_articlefull"
+        android:textColor="@color/colorpurple"
+        android:fontFamily="sans-serif"
+        android:maxLength="250"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="30dp"
+            android:id="@+id/iv_like"
+            android:layout_height="30dp"
+            android:src="@drawable/withoutlike"/>
+
+       <!-- <pl.droidsonroids.gif.GifImageView
+            android:scaleType="centerCrop"
+            android:src="@drawable/likee"
+            android:layout_width="35dp"
+            android:id="@+id/giflike"
+            android:visibility="gone"
+            android:layout_height="35dp" />-->
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/tv_likes"
+        android:textSize="16dp"
+        android:textColor="@color/colorpurple"
+        android:fontFamily="sans-serif"
+        android:text="0 Likes"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+
+</LinearLayout>

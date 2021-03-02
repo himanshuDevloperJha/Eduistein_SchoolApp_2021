@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_at"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_scrollFlags="scroll"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--  <androidx.core.widget.NestedScrollView-->
+    <!--      android:layout_width="match_parent"-->
+    <!--      android:layout_height="match_parent"-->
+    <!--      app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <co.aspirasoft.view.NestedListView
+            android:id="@+id/attList"
+            android:layout_marginTop="?actionBarSize"
+            android:layout_width="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="15dp"
+            android:padding="10dp"
+            android:elevation="6dp"
+            android:layout_height="match_parent"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pb_att"
+            android:indeterminateTint="@color/colorPrimary"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addButton_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:backgroundTint="?attr/colorPrimary"
+        app:icon="@drawable/ic_action_add"
+        app:iconTint="?android:attr/textColorPrimary"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

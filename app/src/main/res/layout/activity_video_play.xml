@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    tools:context=".feed.VideoPlayActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarr_video"
+            app:title="Video"
+            app:titleTextColor="@android:color/white"
+            android:background="@color/colorpurple"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_scrollFlags="scroll"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <VideoView
+        android:layout_width="match_parent"
+        android:id="@+id/vd_feed"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        android:layout_height="match_parent">
+
+    </VideoView>
+    <ProgressBar
+        android:id="@+id/pb_videopost"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@android:color/white"
+        android:layout_height="wrap_content"/>
+</FrameLayout>
+
+
+</LinearLayout>

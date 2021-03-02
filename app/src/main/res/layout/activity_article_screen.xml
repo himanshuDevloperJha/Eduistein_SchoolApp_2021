@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+    tools:context=".feed.ArticleScreen">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_article"
+            app:title="Article"
+            app:titleTextColor="@android:color/white"
+            android:background="@color/colorpurple"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_margin="15dp"
+        android:textSize="25dp"
+        android:id="@+id/tv_attitle"
+        android:letterSpacing="0.1"
+        android:lineSpacingExtra="5dp"
+        android:text="ghghjgjhgjhgjhghjghhhhhh"
+        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:textSize="16dp"
+        android:id="@+id/tv_atlink"
+        android:lineSpacingExtra="5dp"
+        android:text="ghghjgjhgjhgjhghjghhhhhh"
+        android:textColor="@color/colorpurple"
+        android:fontFamily="sans-serif"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:id="@+id/tv_atdescription"
+        android:lineSpacingExtra="5dp"
+        android:text="ghghjgjhgjhgjhghjghhhhhh"
+        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
