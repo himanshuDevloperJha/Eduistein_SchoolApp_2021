@@ -95,14 +95,10 @@ lateinit var userrtypeeee:String
          time = simpleDateFormat.format(calander.time)
         // UserDetails.chatWith="eduistein"
 
-       val current: LocalDateTime = LocalDateTime.now()
-       val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
        date_time = formattedDate+" "+time
 
 
-
-
-        teacherList.clear()
+       teacherList.clear()
         getStudentsInClass(schoolid,
                 OnSuccessListener {
                //     doOnSuccess(it)

@@ -80,7 +80,8 @@ public class Chat extends AppCompatActivity {
     List<String> datelist=new ArrayList();
     String chatwithtoken="";
    ArrayList<String> tokenlist = new ArrayList();
-    String user_tokennnnn,currentUser;
+    String currentUser,firebaseuid;
+//    user_tokennnnn
  SharedPreferences sp_loginsave;
      SharedPreferences.Editor ed_loginsave;
      int messagecounter=0;
@@ -103,9 +104,9 @@ public class Chat extends AppCompatActivity {
         chatwith=getIntent().getStringExtra("name_chatwith");
         chat_username=getIntent().getStringExtra("chat_username");
         userrtypeeee=getIntent().getStringExtra("userrtypeeee");
-        user_tokennnnn=getIntent().getStringExtra("user_tokennnnn");
+     //   user_tokennnnn=getIntent().getStringExtra("user_tokennnnn");
         currentUser=getIntent().getStringExtra("currentUser");
-        //firebaseuid  = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firebaseuid  = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         toolbar_chat.setTitle(chatwith);
 
@@ -171,9 +172,9 @@ else if(userrtypeeee.equals("Teacher")){
 //                   else{
                        messagecounter++;
                        Newchatmodel post1 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
-                               time, messageText, getIntent().getStringExtra("chat_username"),user_tokennnnn,"unread",String.valueOf(messagecounter),"1");
+                               time, messageText, getIntent().getStringExtra("chat_username"),firebaseuid,"unread",String.valueOf(messagecounter),"1");
                        Newchatmodel post2 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
-                               time, messageText, getIntent().getStringExtra("chat_username"),user_tokennnnn,"unread",String.valueOf(messagecounter),"2");
+                               time, messageText, getIntent().getStringExtra("chat_username"),firebaseuid,"unread",String.valueOf(messagecounter),"2");
                        reference1.push().setValue(post1);
                        reference2.push().setValue(post2);
                      //  reference3.push().setValue(post2);
@@ -240,6 +241,12 @@ else if(userrtypeeee.equals("Teacher")){
             //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
                                                      }
                                                          }
+
+                                            else if(datas2.child("groupname").getValue().toString().equals("")
+                                            && chatwith.equalsIgnoreCase(datas2.child("username").getValue().toString())){
+                                                chatwithtoken = datas2.child("token").getValue().toString();
+                                                tokenlist.add(chatwithtoken);
+                                            }
                                             }
 
                                     else if(userrtypeeee.equals("Student")){
@@ -333,7 +340,7 @@ else if(userrtypeeee.equals("Teacher")){
 
                     chatlist.add(new Newchatmodel(new Date(System.currentTimeMillis()),map.get("date").toString(),
                             map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),
-                            user_tokennnnn,map.get("msgstatus").toString(),  map.get("countunread").toString(),"1"));
+                            firebaseuid,map.get("msgstatus").toString(),  map.get("countunread").toString(),"1"));
 
                     LinearLayoutManager ll=new LinearLayoutManager(Chat.this);
                     layout.setLayoutManager(ll);
@@ -347,7 +354,7 @@ else if(userrtypeeee.equals("Teacher")){
                     //  addMessageBox( message, 2);
                     chatlist.add(new Newchatmodel(new Date(System.currentTimeMillis()),map.get("date").toString(),
                             map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),
-                            user_tokennnnn,map.get("msgstatus").toString(),  map.get("countunread").toString(),"2"));
+                            firebaseuid,map.get("msgstatus").toString(),  map.get("countunread").toString(),"2"));
 
                        /* DatabaseReference reference = FirebaseDatabase.getInstance().getReference().
                                 child(schoolid).child("ChatTokens");
@@ -563,8 +570,11 @@ else if(userrtypeeee.equals("Teacher")){
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
         requestQueue.add(jsObjRequest);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
