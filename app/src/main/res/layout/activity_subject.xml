@@ -222,6 +222,16 @@
         android:onClick="onAddGradesClicked"
         android:text="@string/label_grades"
         app:icon="@drawable/ic_grades"/>
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:id="@+id/groupChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:onClick="onChatClick"
+        android:text="Group Chat"
+        app:icon="@drawable/ic_chat_black_24dp"/>
 
   </LinearLayout>
 

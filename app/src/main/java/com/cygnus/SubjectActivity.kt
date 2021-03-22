@@ -22,6 +22,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.cygnus.adapter.StudentUploadFilesAdapter
+import com.cygnus.chatstaff.Chat
 import com.cygnus.core.DashboardChildActivity
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
@@ -80,6 +81,10 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
     var teacherClassId:String?=null
     var name:String?=null
     var rollNo:String?=null
+     var subjectTeacher_namee:String=""
+     var subjectTeacher_nameonly:String=""
+     var userrtypeeee:String=""
+     var user_tokennn:String=""
     private var pickRequestCode = RESULT_ACTION_PICK_MATERIAL
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +100,10 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
 
 
 
-        name = intent.getStringExtra("user_name");
+        name = intent.getStringExtra("user_name")
+        user_tokennn = intent.getStringExtra("user_tokennn")
+        subjectTeacher_namee = intent.getStringExtra("subjectTeacher_namee")
+        userrtypeeee = intent.getStringExtra("userrtypeeee")
         Log.e("msg","nameeeeeeeeee"+name);
 
         subject = intent.getSerializableExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT) as Subject? ?: return finish()
@@ -113,10 +121,14 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
             addFilesButton.visibility = View.GONE
             ll_uploadFiles.visibility = View.GONE
             filesList.visibility = View.GONE
+            groupChat.visibility = View.VISIBLE
         }
 
 
-
+        UsersDao.getUserByEmail(schoolId, subjectTeacher_namee, OnSuccessListener { user ->
+            subjectTeacher_nameonly = user?.name ?: subjectTeacher_namee
+            Log.e("msg","subjectTeacher_nameonlysubjectTeacher_nameonly"+subjectTeacher_nameonly);
+        })
         materialManager = FileManager.newInstance(this, "$schoolId/courses/${subject.classId}/subjects/${subject.name}/lectures/")
         homeworkManager = FileManager.newInstance(this, "$schoolId/courses/${subject.classId}/subjects/${subject.name}/exercises/")
         filesManager = FileManager.newInstance(this, "$schoolId/courses/${subject.classId}/subjects/${subject.name}$name/files/")
@@ -279,6 +291,33 @@ class SubjectActivity : DashboardChildActivity(),ZoomAutoAttendance {
         startSecurely(TestsActivity::class.java, Intent().apply {
             putExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT, subject)
         })
+    }
+    fun onChatClick(v: View) {
+if(userrtypeeee.equals("Student")){
+    val post = ChatTokens(name.toString(),subject.classId, user_tokennn,subject.name+" "+subject.classId)
+    val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolId).
+            child("ChatTokens").child(name.toString())
+
+    missionsReference.setValue(post)
+}
+        else if(userrtypeeee.equals("Teacher")){
+    val post = ChatTokens(name.toString(),subject.classId, user_tokennn,"")
+    val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolId).
+            child("ChatTokens").child(name.toString())
+
+    missionsReference.setValue(post)
+}
+
+        val i = Intent(applicationContext, Chat::class.java)
+        i.putExtra("schoolid_chat", schoolId)
+        i.putExtra("chat_groupuser", subjectTeacher_nameonly)
+        i.putExtra("chat_username", name)
+        i.putExtra("currentUser", name)
+        i.putExtra("name_chatwith",subject.name+" "+subject.classId)
+        i.putExtra("userrtypeeee", userrtypeeee)
+        i.putExtra("user_tokennnnn", user_tokennn)
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+        startActivity(i)
     }
 
     private fun showCourseContents() {

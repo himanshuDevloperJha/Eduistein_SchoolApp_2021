@@ -48,16 +48,22 @@ class SubjectView : BaseView<Subject> {
         this.model = model
         subjectName.text = model.name
         subjectClass.text = model.classId
-        subjectTeacher.text = model.teacherId
+        UsersDao.getUserByEmail(schoolid, model.teacherId, OnSuccessListener { user ->
+            subjectTeacher.text = user?.name ?: model.teacherId
+        })
+       // subjectTeacher.text = model.teacherId
         subjectColor.setBackgroundColor(convertToColor(model))
-        model?.let {
-            UsersDao.getUserByEmail(schoolid, it.teacherId, OnSuccessListener { user ->
-             //   subjectTeacher.text = user?.name ?: it.teacherId
-            })
-        }
     }
 
     fun updateWithSchool(schoolId: String) {
+       /* this.model = model
+        subjectName.text = model!!.name
+        subjectClass.text = model!!.classId
+        UsersDao.getUserByEmail(schoolid, model!!.teacherId, OnSuccessListener { user ->
+            subjectTeacher.text = user?.name ?: model!!.teacherId
+        })
+        // subjectTeacher.text = model.teacherId
+        subjectColor.setBackgroundColor(convertToColor(model!!))*/
         /*model?.let {
 //            subjectTeacher.text = ""
             UsersDao.getUserByEmail(schoolId, it.teacherId, OnSuccessListener { user ->

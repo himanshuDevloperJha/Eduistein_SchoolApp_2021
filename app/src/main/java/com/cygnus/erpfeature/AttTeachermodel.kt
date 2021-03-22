@@ -7,26 +7,28 @@ import kotlin.collections.ArrayList
 
 class AttTeachermodel : BaseModel() {
 
-    var teacherName: String? = null
-    var teacherId: String? = null
+    var name: String? = null
+    var id: String?=null
     var classId: String? = null
     var date: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(System.currentTimeMillis())
+    var monthname: String = SimpleDateFormat("MMMM", Locale.getDefault()).format(System.currentTimeMillis())
+    var yearname: String = SimpleDateFormat("yyyy", Locale.getDefault()).format(System.currentTimeMillis())
     var attendance: Boolean = false
 
 }
 
 class AttTeacher() {
 
-    constructor(classId: String) : this() {
-        this.classId = classId
+    constructor(school: String) : this() {
+        this.school = school
     }
 
-    var classId: String = ""
+    var school: String = ""
     var date: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(System.currentTimeMillis())
     var attendanceRecords: ArrayList<AttTeachermodel> = ArrayList()
 
-    fun updateRecord(teacherId: String, attendance: Boolean) {
-        attendanceRecords.find { it.teacherId == teacherId }?.attendance = attendance
+    fun updateRecord(teacherName : String, attendance: Boolean) {
+        attendanceRecords.find { it.classId == teacherName }?.attendance = attendance
     }
 
 }

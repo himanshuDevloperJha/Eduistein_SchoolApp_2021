@@ -63,7 +63,7 @@ class CygnusApp : Application() {
         // in the Firebase database
         private val db get() = FirebaseDatabase.getInstance()
         fun refToAttendance(schoolId: String, classId: String) = db.getReference("$schoolId/classes/$classId/attendance/")
-        fun refToAttTeacher(schoolId: String, classId: String) = db.getReference("$schoolId/teacherattendance/$classId/attendance/")
+        fun refToAttTeacher(schoolId: String) = db.getReference("$schoolId/teacherattendance/attendance/")
         fun refToClasses(schoolId: String) = db.getReference("$schoolId/classes/")
         fun refToClassNoticeBoard(schoolId: String, classId: String) = db.getReference("$schoolId/classes/$classId/notices/")
         fun refToSchoolPostsInstagram(schoolId: String) = db.getReference("$schoolId/Posts/")

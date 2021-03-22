@@ -34,7 +34,7 @@ class ScorecardActivity : AppCompatActivity() {
         coinscomputer = intent.getStringExtra("coinscomputer").toInt()
         usertotalpoints = intent.getStringExtra("usertotalpts").toInt()
 
-        if (secondname.contains("Computer")) {
+        if (secondname.contains("Aditya")) {
 
             if(coinsuser > coinscomputer){
                 tv_wonlost.setText("Congratulations "+studentname+"\nYou Won !")
@@ -56,7 +56,7 @@ class ScorecardActivity : AppCompatActivity() {
         }
 
 
-        if (!secondname.contains("Computer")) {
+        if (!secondname.contains("Aditya")) {
             if(coinsuser > coinsseconduser){
                 tv_wonlost.setText("Congratulations "+studentname+"\nYou Won !")
                 usertotalpoints=usertotalpoints+10

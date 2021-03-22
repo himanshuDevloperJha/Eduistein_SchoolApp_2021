@@ -4,40 +4,36 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.content.*
 import android.graphics.Color
-import android.graphics.Paint
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
+import android.os.SystemClock
 import android.util.Log
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.aspirasoft.adapter.ModelViewAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.cygnus.chatstaff.Chat
+import com.cygnus.chatstaff.UserDetails
 import com.cygnus.core.DashboardActivity
-import com.cygnus.coursefeature.Courseofferedmodel
 import com.cygnus.coursefeature.SingleCourseActivity
 import com.cygnus.dao.NoticeBoardDao
 import com.cygnus.dao.SubjectsDao
 import com.cygnus.dao.UsersDao
-
 import com.cygnus.feed.FeedActivity
-import com.cygnus.feed.LikePostsmodel
-import com.cygnus.feed.LikepostInterface
-import com.cygnus.feed.PostmodelBoard
 import com.cygnus.feesmanage.PayFees
 import com.cygnus.model.*
+import com.cygnus.notifications.AlarmReceiverQuizz
 import com.cygnus.notifications.GCMRegistrationIntentService
+import com.cygnus.notifications.ShowNotification
 import com.cygnus.quiz.StartQuizActivity
-import com.cygnus.storage.FileManager
 import com.cygnus.timetable.TimetablePagerAdapter
 import com.cygnus.view.SubjectView
 import com.google.android.gms.common.ConnectionResult
@@ -48,8 +44,8 @@ import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.database.*
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_dashboard_student.*
+import kotlinx.android.synthetic.main.view_subject.*
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -74,6 +70,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     public var coursenamelist = ArrayList<String>()
     private var subjectNames = ArrayList<String>()
     var teacherid: String? = null
+    var teachername: String? = null
     var standard: String? = null
     lateinit var sp_loginsave: SharedPreferences;
     lateinit var ed_loginsave: SharedPreferences.Editor;
@@ -167,6 +164,18 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
 
 
         getCoins()
+       /* val notificationIntent:Intent  =  Intent(applicationContext, ShowNotification::class.java);
+        val contentIntent:PendingIntent  = PendingIntent.getService(applicationContext, 0, notificationIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT)
+        val am:AlarmManager  = getSystemService(Context.ALARM_SERVICE) as AlarmManager;
+        am.cancel(contentIntent)
+        am.setRepeating(AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis(), 5, contentIntent)*/
+   val calendar: Calendar  = Calendar.getInstance()
+val intent1:Intent  =  Intent(this, AlarmReceiverQuizz::class.java)
+val pendingIntent:PendingIntent  = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+    val am:AlarmManager  = getSystemService(Context.ALARM_SERVICE) as AlarmManager;
+am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600*4 , pendingIntent)
 
 
         class_yt_myvideos.setOnClickListener {
@@ -216,6 +225,16 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             intent.putExtra("studentclassId", currentStudent.classId)
             startActivity(intent)
         }
+        chatstudent.setOnClickListener {
+            val i = Intent(applicationContext, Chat::class.java)
+            i.putExtra("schoolid_chat", schoolId)
+            i.putExtra("chat_username", currentStudent.name)
+            i.putExtra("name_chatwith", teachername)
+            i.putExtra("userrtypeeee", "Student")
+            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            startActivity(i)
+        }
+
 
         classschedule_student.setOnClickListener {
             val intent = Intent(this, ScheduleCkassOnlineList::class.java)
@@ -247,6 +266,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                 classTeacherName.text = teacher.name
                 classTeacherEmail.text = teacher.email
                 teacherid = teacher.email
+                teachername = teacher.name
             }
         })
 
@@ -266,11 +286,11 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                         // Toast.makeText(applicationContext,token, Toast.LENGTH_LONG).show()
 
                         val post = StudentToken(currentStudent.name,currentStudent.classId, token);
-
                         val missionsReference =
                                 FirebaseDatabase.getInstance().reference.child(schoolId).child("StudentTokens").child(token.toString())
-
                         missionsReference.setValue(post)
+
+
                         //sendFCMPush();
 //Displaying the token as toast
 // Toast.makeText(getApplicationContext(), "Registration token:" + token, Toast.LENGTH_LONG).show();
@@ -375,6 +395,24 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     override fun onDestroy() {
         super.onDestroy()
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver!!)
+
+        val calendar: Calendar  = Calendar.getInstance()
+        val intent1:Intent  =  Intent(this, AlarmReceiverQuizz::class.java)
+        val pendingIntent:PendingIntent  = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        val am:AlarmManager  = getSystemService(Context.ALARM_SERVICE) as AlarmManager;
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600*4 , pendingIntent)
+//        3600 * 1000 * 4
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver!!)
+        val calendar: Calendar  = Calendar.getInstance()
+        val intent1:Intent  =  Intent(this, AlarmReceiverQuizz::class.java)
+        val pendingIntent:PendingIntent  = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        val am:AlarmManager  = getSystemService(Context.ALARM_SERVICE) as AlarmManager;
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600*4 , pendingIntent)
+      //  startService( Intent(this, NotificationService::class.java))
     }
 
     /**
@@ -509,8 +547,29 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
         : ModelViewAdapter<Subject>(context, subjects, SubjectView::class) {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val v = super.getView(position, convertView, parent)
 
+
+             val subjectColor: View
+             val subjectName: TextView
+             val subjectClass: TextView
+             val subjectTeacher: TextView
+            val v:View=LayoutInflater.from(context).inflate(R.layout.view_subject, parent,false)
+
+
+            subjectColor = v.findViewById(R.id.subjectColor)
+            subjectName = v.findViewById(R.id.subjectName)
+            subjectClass = v.findViewById(R.id.subjectClass)
+            subjectTeacher = v.findViewById(R.id.subjectTeacher)
+            sp_loginsave = context.getSharedPreferences("SAVELOGINDETAILS", Context.MODE_PRIVATE)
+            ed_loginsave = sp_loginsave.edit()
+
+            subjectName.text = subjects.get(position).name
+            subjectClass.text = subjects.get(position).classId
+            UsersDao.getUserByEmail(schoolId, subjects.get(position).teacherId, OnSuccessListener { user ->
+                subjectTeacher.text = user?.name ?: subjects.get(position).teacherId
+            })
+            // subjectTeacher.text = model.teacherId
+            subjectColor.setBackgroundColor(convertToColor(subjects.get(position)))
             //subjectlist.add(subjects[position].name)
             // Log.e("msg111122",subjects[position].name)
             v.setOnClickListener {
@@ -518,18 +577,54 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                 startSecurely(SubjectActivity::class.java, Intent().apply {
                     putExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT, subject)
                     putExtra("user_name", currentStudent.name)
+                    putExtra("user_tokennn", token)
+                    putExtra("subjectTeacher_namee", subjects[position].teacherId)
+                    putExtra("userrtypeeee", "Student")
+
                 })
             }
+           // if(currentUser.type.equals("Teacher")){
+                subjectTeacher.visibility =  View.VISIBLE
+           // }
+            if(currentUser.type.equals("Student")){
+                subjectClass.visibility =  View.GONE
+            }
+            else{
+                subjectClass.visibility =  View.VISIBLE
+            }
+//            setSubjectTeacherVisible(true)
+         //   setSubjectClassVisible(false)
 
-            (v as SubjectView).apply {
+           /* (v as SubjectView).apply {
                 updateWithSchool(schoolId)
                 setSubjectTeacherVisible(true)
                 setSubjectClassVisible(false)
-            }
+            }*/
             return v
         }
+        fun setSubjectTeacherVisible(visible: Boolean) {
+            subjectTeacher.visibility =  View.VISIBLE
+            //  subjectTeacher.visibility = if (visible) View.VISIBLE else View.GONE
+        }
 
+        fun setSubjectClassVisible(visible: Boolean) {
+//        subjectClass.visibility = if (visible) View.VISIBLE else View.GONE
+            subjectClass.visibility = if (visible) View.VISIBLE else View.GONE
+        }
+        @SuppressLint("NewApi")
+        private fun convertToColor(o: Any): Int {
+            return try {
+                val i = o.hashCode()
+                Color.parseColor("#FF" + Integer.toHexString(i shr 16 and 0xFF) +
+                        Integer.toHexString(i shr 8 and 0xFF) +
+                        Integer.toHexString(i and 0xFF))
+            } catch (ignored: Exception) {
+                context.getColor(R.color.colorAccent)
+            }
+        }
     }
+
+
 
     internal class CourseAdapter(val context: Activity,
                                  val coursenamelist: ArrayList<String>,val datakey:String,val standard:String) :
@@ -672,6 +767,9 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
             mNotificationManager.notify(0, mBuilder.build())
         }
     }
+
+
+
 }
 
 

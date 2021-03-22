@@ -1,13 +1,9 @@
 package com.cygnus
 
-import android.Manifest
-import android.app.DatePickerDialog
+import android.app.*
 import android.app.DatePickerDialog.OnDateSetListener
-import android.app.Dialog
-import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.*
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -18,8 +14,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import co.aspirasoft.adapter.ModelViewAdapter
 import com.android.volley.AuthFailureError
@@ -131,6 +125,7 @@ class TeacherDashboardActivity : DashboardActivity() {
         ed_loginsave.putString("SubjectTeacherClassId", currentTeacher.classId)
         ed_loginsave.putString("studentclassId", currentTeacher.classId)
         ed_loginsave.putString("studentschoolid", schoolId)
+        ed_loginsave.putString("student_email", currentTeacher.email)
         ed_loginsave.putString("userrrtypee", "Teacher")
         ed_loginsave.commit()
 
@@ -139,13 +134,17 @@ class TeacherDashboardActivity : DashboardActivity() {
         Log.e("msg", "SUBJECT-TEACHERNAMEIDD" + sp_loginsave.getString("SubjectTeacherClassId", ""))
 
         getSubjectsList()
-        if (currentTeacher.isClassTeacher()) {
+
+        classTeacherCard.visibility = View.VISIBLE
+        className.text = currentTeacher.classId
+        getStudentCount()
+       /* if (currentTeacher.isClassTeacher()) {
             classTeacherCard.visibility = View.VISIBLE
             className.text = currentTeacher.classId
             getStudentCount()
         } else {
             classTeacherCard.visibility = View.VISIBLE
-        }
+        }*/
 
 
         /* SchoolDao.getSchoolByUser(firebaseUser.uid, OnSuccessListener {
@@ -209,6 +208,8 @@ class TeacherDashboardActivity : DashboardActivity() {
             intent.putExtra("studentschoolid", schoolId)
             intent.putExtra("studentschool_namee", schoolDetails.second)
             intent.putExtra("student_teacheridd", currentTeacher.classId)
+            intent.putExtra("userrtypeeee", "Teacher")
+
             startActivity(intent)
 
         }
@@ -748,7 +749,7 @@ class TeacherDashboardActivity : DashboardActivity() {
 
                         missionsReference.setValue(post)
 
-                        val post1 = TeacherToken(currentTeacher.name,currentTeacher.email, token)
+                        val post1 = ChatTokens(currentTeacher.name,currentTeacher.email, token,"")
                         val missionsReference1 = FirebaseDatabase.getInstance().reference.child(schoolId).
                                 child("ChatTokens").child(currentTeacher.name)
 
@@ -1052,6 +1053,10 @@ class TeacherDashboardActivity : DashboardActivity() {
                 startSecurely(SubjectActivity::class.java, Intent().apply {
                     putExtra(CygnusApp.EXTRA_SCHOOL_SUBJECT, subject)
                     putExtra(CygnusApp.EXTRA_EDITABLE_MODE, true)
+                    putExtra("user_name", currentTeacher.name)
+                    putExtra("user_tokennn", token)
+                    putExtra("subjectTeacher_namee", subjects[position].teacherId)
+                    putExtra("userrtypeeee", "Teacher")
                 })
             }
             return v

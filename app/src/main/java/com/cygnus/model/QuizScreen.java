@@ -1,12 +1,31 @@
 package com.cygnus.model;
 
 public class QuizScreen {
-    String name,status,connect;
+    String name,status,connect,classid;
+    Integer quizindex;
 
-    public QuizScreen(String name, String status,String connect) {
+    public QuizScreen(String name,String classid, String status,String connect,Integer quizindex) {
         this.setName(name);
         this.setStatus(status);
         this.setConnect(connect);
+        this.setQuizindex(quizindex);
+        this.setClassid(classid);
+    }
+
+    public String getClassid() {
+        return classid;
+    }
+
+    public void setClassid(String classid) {
+        this.classid = classid;
+    }
+
+    public Integer getQuizindex() {
+        return quizindex;
+    }
+
+    public void setQuizindex(Integer quizindex) {
+        this.quizindex = quizindex;
     }
 
     public String getName() {
