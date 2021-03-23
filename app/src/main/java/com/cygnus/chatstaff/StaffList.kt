@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import co.aspirasoft.view.NestedListView
 import com.cygnus.CygnusApp
 import com.cygnus.R
-import com.cygnus.dao.NoticeBoardDao
 import com.cygnus.model.*
 import com.firebase.client.Firebase
 import com.firebase.client.FirebaseError
@@ -20,14 +19,11 @@ import com.firebase.client.Query
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.text.DateFormat
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
-import java.util.Objects.compare
 import kotlin.collections.ArrayList
 
 
@@ -41,6 +37,7 @@ lateinit var teachername:String
 lateinit var schoolnameee:String
 lateinit var schoolname:String
 lateinit var student_teacheridd:String
+lateinit var userrtypeeee:String
     var sortlistfinal:ArrayList<Sortchatmodel> = ArrayList<Sortchatmodel>()
     var pd: ProgressDialog? = null
     var al = ArrayList<String>()
@@ -76,7 +73,7 @@ lateinit var student_teacheridd:String
             teachername = intent.getStringExtra("studentname")
             schoolname = intent.getStringExtra("studentschool_namee")
             student_teacheridd = intent.getStringExtra("student_teacheridd")
-           // Log.e("msg","UserMessagewwwwe1:"+schoolname)
+
 
         }
         catch (e:Exception){}
@@ -87,7 +84,6 @@ lateinit var student_teacheridd:String
 
 
    //     UserDetails.username=teachername
-        Log.e("msg","UserMessagewwwwe1:"+teachername)
         UserDetails.username=teachername
 
         val c = Calendar.getInstance().time
@@ -112,27 +108,58 @@ lateinit var student_teacheridd:String
                //     doOnSuccess(it)
                     teacherList.addAll(it)
 
-                    if(teachername.contains("school",ignoreCase = true)){
+                    if(teachername.contains("School",ignoreCase = true)){
                     }
                     else{
                         teacherList.add(Teacher("",schoolname ,Credentials("","")))
+                      //   teacherList.add(Teacher(student_teacheridd,"Group Chat" ,Credentials(student_teacheridd,"")))
 //                        getChat(schoolnameee)
                     }
 
-                    for( x in teacherList){
-                        val reff2 = FirebaseDatabase.getInstance().reference.child(schoolid).
+
+//store all names with current timestamp so that we can arrange list according to most recent chat
+                    val reff2 = FirebaseDatabase.getInstance().reference.child(schoolid).
                                 child("NamewithTimestampMessages")
                         reff2.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(dataSnapshottimee: DataSnapshot) {
                                 if (dataSnapshottimee.exists()) {
 
+                                        val reffexist = FirebaseDatabase.getInstance().reference.child(schoolid).
+                                                child("NamewithTimestampMessages")
+                                        val query: com.google.firebase.database.Query = reffexist.
+                                                orderByChild("chatusername").equalTo(teachername)
+                                        query.addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onDataChange(dataSnapshottimee: DataSnapshot) {
+                                                if (!dataSnapshottimee.exists()) {
+
+                                                    Log.e("msg","UserMessagewtryretyrywwwe1:"+teachername)
+                                                    val tsLong = System.currentTimeMillis() / 1000
+                                                    val ts = tsLong.toString()
+                                                    val post = Sortchatmodel(ts,teachername,date_time,time,"")
+                                                    val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolid).
+                                                            child("NamewithTimestampMessages")
+                                                    missionsReference.push().setValue(post)
+                                                }
+
+                                            }
+
+                                            override fun onCancelled(p0: DatabaseError) {
+
+                                            }
+                                        })
+
+
                                 }
                                 else {
-                                    val tsLong = System.currentTimeMillis() / 1000
-                                    val ts = tsLong.toString()
-                                    val post = Sortchatmodel(ts,x.name,date_time,time,"")
-                                    val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolid).child("NamewithTimestampMessages")
-                                    missionsReference.push().setValue(post)
+                                    for( x in teacherList){
+                                        Log.e("msg","UserMessagewtryretyrywwwe1:"+x.name)
+                                        val tsLong = System.currentTimeMillis() / 1000
+                                        val ts = tsLong.toString()
+                                        val post = Sortchatmodel(ts,x.name,date_time,time,"")
+                                        val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolid).child("NamewithTimestampMessages")
+                                        missionsReference.push().setValue(post)
+                                    }
+
                                    
                                 }
                             }
@@ -143,7 +170,9 @@ lateinit var student_teacheridd:String
                         })
 
 
-                    }
+                    userrtypeeee = intent.getStringExtra("userrtypeeee")
+
+                    Log.e("msg","UserMessagewwwwe5464645641:"+userrtypeeee)
 
                     getTimestampList()
 
@@ -180,20 +209,34 @@ lateinit var student_teacheridd:String
         timestampnamelist.clear()
         val reff2 = FirebaseDatabase.getInstance().reference.child(schoolid).
                 child("NamewithTimestampMessages")
-        val chatQuery: com.google.firebase.database.Query = reff2.orderByChild("postdate").limitToLast(teacherList.size)
+        val chatQuery: com.google.firebase.database.Query = reff2.orderByChild("postdate").limitToLast(teacherList.size+1)
 
         chatQuery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshottimee: DataSnapshot) {
                 if (dataSnapshottimee.exists()) {
                     for(ds in dataSnapshottimee.children){
-                        timestampnamelist.add(Sortchatmodel(ds.child("postdate").getValue().toString(),
-                                ds.child("chatusername").getValue().toString(),ds.child("date").getValue().toString(),
-                                ds.child("time").getValue().toString(),ds.child("message").getValue().toString()))
+
+                        if(!ds.child("chatusername").getValue().toString().equals(teachername)){
+                           /* if(userrtypeeee.equals("School")){
+                                if(!ds.child("chatusername").getValue().toString().equals("Group Chat"))
+                                timestampnamelist.add(Sortchatmodel(ds.child("postdate").getValue().toString(),
+                                        ds.child("chatusername").getValue().toString(),ds.child("date").getValue().toString(),
+                                        ds.child("time").getValue().toString(),ds.child("message").getValue().toString()))
+                            }*/
+                            // if(!userrtypeeee.equals("School")){
+                                timestampnamelist.add(Sortchatmodel(ds.child("postdate").getValue().toString(),
+                                        ds.child("chatusername").getValue().toString(),ds.child("date").getValue().toString(),
+                                        ds.child("time").getValue().toString(),ds.child("message").getValue().toString()))
+                            //}
+
+                        }
+
+
 
                     }
                     //timestampnamelist.sortedBy { it.date.toDate() }
                     Collections.reverse(timestampnamelist)
-                    staffAdapter = NewStaffAdapter(this@StaffList, timestampnamelist,schoolid,teachername,
+                    staffAdapter = NewStaffAdapter(this@StaffList, timestampnamelist,schoolid,teachername,userrtypeeee,
                             this@StaffList)
                     usersList!!.adapter = staffAdapter
 
@@ -205,6 +248,7 @@ lateinit var student_teacheridd:String
 
             }
         })
+
     }
     fun String.toDate(): Date{
         return SimpleDateFormat("dd MMM yyyy HH:mm a", Locale.getDefault()).parse(this)
@@ -273,7 +317,8 @@ lateinit var student_teacheridd:String
                     val date =d?.child("date")?.value.toString()
                     val userName =d?.child("user")?.value.toString()
                     Log.e("msg","UserMessagee:"+message)
-                    listmessage.add(Newchatmodel(Date(System.currentTimeMillis()),formattedDate,time,message,user,firebaseuid,0))
+                    listmessage.add(Newchatmodel(Date(System.currentTimeMillis()),
+                            formattedDate,time,message,user,firebaseuid,"unread","0","0"))
                    /* for(x in teacherList){
                         sortchatlist.add(Sortchatmodel(postdate,x.name,date,message))
                         sortchatlist.sortByDescending { it.postdate }
@@ -301,26 +346,7 @@ lateinit var student_teacheridd:String
 
     override fun onRestart() {
         super.onRestart()
-       // if(sp_loginsave.getString("sendmessage_successful","").equals("true")){
-            //  val intent = getIntent()
-            //  finish()
-            //  startActivity(intent)
-            //sendmessage_successful=sp_loginsave.getString("sendmessage_successful","").toString()
-         //   chatclick_position=sp_loginsave.getInt("chatclick_position",-1)
-
-
-
-
-       getTimestampList()
-
-
-
-
-
-
-
-       // }
-
+        getTimestampList()
 
     }
     private fun DataSnapshot.toUser(): User? {
@@ -339,7 +365,31 @@ lateinit var student_teacheridd:String
         }
     }
 
-    override fun chat(position: Int, name: String, tv_mesg: TextView,tv_date:TextView) {
+    override fun chat(position: Int, name: String, tv_mesg: TextView,tv_date:TextView, tv_msgcounter:TextView) {
+
+/*
+        val reff2 = FirebaseDatabase.getInstance().reference.child(schoolid).
+                child("NamewithTimestampMessages")
+        val chatQuery: com.google.firebase.database.Query = reff2.orderByChild("chatusername").equalTo(name)
+        chatQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshottimee: DataSnapshot) {
+                if (dataSnapshottimee.exists()) {
+                    for(ds in dataSnapshottimee.children){
+                        val timekey = ds.key.toString()
+                        val tsLong = System.currentTimeMillis() / 1000
+                        val ts = tsLong.toString()
+                        reff2.child(timekey).child("postdate").setValue(ts)
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })*/
+
         reference1 = Firebase("https://cygnus-3554a.firebaseio.com/" + schoolid + "/messages/" +
                 UserDetails.username + "_" + name)
         val query: Query = reference1.orderByKey().limitToLast(1)
@@ -350,18 +400,31 @@ lateinit var student_teacheridd:String
             }
 
             override fun onDataChange(p0: com.firebase.client.DataSnapshot?) {
+
                 for(d in p0!!.children){
                     val message =d?.child("message")?.value.toString()
+                    if(d?.child("type")?.value.toString().equals("2")){
+                          if(d?.child("msgstatus")?.value.toString().equals("unread")){
+                              val msgcounter =d?.child("countunread")?.value.toString()
+                              val intmsgcount:Int=msgcounter.toInt()
+                              if(intmsgcount>=1){
+                                  tv_msgcounter.visibility=View.VISIBLE
+                                  tv_msgcounter.setText(msgcounter)
+                              }
+                          }
+                      }
+
+
                     val userName =d?.child("user")?.value.toString()
-                    val date =d?.child("date")?.value.toString()
+                    val time =d?.child("time")?.value.toString()
                     val postdate =d?.child("postdate")?.value.toString()
                     Log.e("msg","UserMessagee:"+message)
 
-
                    // listmessage.add(Chatmodel(message,name,formatted,0))
                    // if(name.equals(x.user)){
-                        tv_mesg.setText(message)
-                    tv_date.setText(date)
+                    tv_mesg.setText(message)
+                    tv_date.setText(time)
+
                   //  }
                 }
                 Log.e("msg","UserMessagee1:"+listmessage.size)

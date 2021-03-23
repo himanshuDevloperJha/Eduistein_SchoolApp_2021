@@ -75,6 +75,7 @@ abstract class SecureActivity : AppCompatActivity() {
         startActivity(Intent(this, target).apply {
             this.putExtra(CygnusApp.EXTRA_USER, currentUser)
             this.putExtra(CygnusApp.EXTRA_SCHOOL, schoolDetails)
+            this.putExtra("schoolnamee", currentUser.name)
             src?.let { this.putExtras(it) }
         })
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

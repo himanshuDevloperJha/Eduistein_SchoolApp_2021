@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
@@ -23,8 +24,10 @@ import com.cygnus.core.DashboardActivity
 import com.cygnus.dao.Invite
 import com.cygnus.dao.InvitesDao
 import com.cygnus.erpfeature.AttendanceTeacher
+import com.cygnus.erpfeature.TeacherAttendanceNew
 import com.cygnus.feed.FeedActivity
 import com.cygnus.feesmanage.FeesmanagmentList
+import com.cygnus.model.ChatTokens
 import com.cygnus.model.School
 import com.cygnus.model.TeacherToken
 import com.cygnus.model.User
@@ -125,6 +128,7 @@ class SchoolDashboardActivity : DashboardActivity() {
             intent.putExtra("studentname", currentUser.name)
             intent.putExtra("studentschoolid", schoolId)
             intent.putExtra("studentschool_namee", schoolDetails.second)
+            intent.putExtra("userrtypeeee", "School")
             startActivity(intent)
         }
         attendanceTeacher.setOnClickListener {
@@ -134,6 +138,11 @@ class SchoolDashboardActivity : DashboardActivity() {
             intent.putExtra("studentschool_namee", schoolDetails.second)
             intent.putExtra("studenttype","School")
             startActivity(intent)
+        }
+
+       // val markAttendence : Button = findViewById(R.id.markAttendence)
+        markAttendence.setOnClickListener {
+            startSecurely(TeacherAttendanceNew::class.java)
         }
 
         admin_class.setOnItemClickListener { adapterView, view, i, l ->
@@ -194,7 +203,7 @@ class SchoolDashboardActivity : DashboardActivity() {
                         // Toast.makeText(applicationContext,token, Toast.LENGTH_LONG).show()
 
 
-                            val post = TeacherToken(currentUser.name,schoolId, token)
+                            val post = ChatTokens(currentUser.name,schoolId, token,"")
                             val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolId).
                                     child("ChatTokens").child(currentUser.name)
 

@@ -56,7 +56,7 @@ String schoolid,username,sendmessage_successful;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 holder.tv_chatwithname.setText(teacherList.get(position).getChatusername());
-chatmessageinterface.chat(position,teacherList.get(position).getChatusername(),holder.tv_msgname,holder.tv_chatdateee);
+chatmessageinterface.chat(position,teacherList.get(position).getChatusername(),holder.tv_msgname,holder.tv_chatdateee,holder.tv_chatdateee);
 /*if((teacherList.get(position).getName().equalsIgnoreCase(listmessage.get(position).getUser()))){
     holder.tv_msgname.setText(listmessage.get(position).getMessage());
 

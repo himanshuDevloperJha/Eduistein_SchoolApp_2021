@@ -1,11 +1,10 @@
 package com.cygnus.dao
 
 import com.cygnus.CygnusApp
-import com.cygnus.erpfeature.AttTeachermodel
+import com.cygnus.erpfeature.AttTeacher
 import com.cygnus.model.Attendance
 import com.cygnus.model.AttendanceRecord
 import com.cygnus.model.Student
-import com.cygnus.model.Teacher
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DataSnapshot
@@ -20,6 +19,26 @@ public object AttendanceDao {
                 .child(attendance.date)
                 .setValue(attendance)
                 .addOnCompleteListener(listener)
+    }
+
+    public fun addTeacher(schoolId: String, attendanceRecordStaff: AttTeacher, listener: OnCompleteListener<Void?>){
+        CygnusApp.refToAttTeacher(schoolId)
+                .setValue(attendanceRecordStaff)
+                .addOnCompleteListener(listener)
+    }
+    fun getByDateTeacher(schoolId: String, school: String, date: String, listener: OnSuccessListener<AttTeacher?>) {
+        CygnusApp.refToAttTeacher(schoolId)
+                .child(date)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        listener.onSuccess(snapshot.getValue(AttTeacher::class.java))
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        listener.onSuccess(null)
+                    }
+                })
     }
 
     /**

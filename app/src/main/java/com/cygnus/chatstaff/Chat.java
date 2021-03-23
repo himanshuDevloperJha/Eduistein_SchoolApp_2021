@@ -73,16 +73,17 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     Firebase reference1, reference2;
-    String schoolid,chatwith,chat_username;
+    String schoolid,chatwith,chat_username,userrtypeeee;
     Toolbar toolbar_chat;
     ChatAdapter chatAdapter;
     List<Newchatmodel> chatlist=new ArrayList<>();
     List<String> datelist=new ArrayList();
     String chatwithtoken="";
    ArrayList<String> tokenlist = new ArrayList();
-    String firebaseuid;
+    String user_tokennnnn,currentUser;
  SharedPreferences sp_loginsave;
      SharedPreferences.Editor ed_loginsave;
+     int messagecounter=0;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +102,28 @@ public class Chat extends AppCompatActivity {
         schoolid=getIntent().getStringExtra("schoolid_chat");
         chatwith=getIntent().getStringExtra("name_chatwith");
         chat_username=getIntent().getStringExtra("chat_username");
-        firebaseuid  = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userrtypeeee=getIntent().getStringExtra("userrtypeeee");
+        user_tokennnnn=getIntent().getStringExtra("user_tokennnnn");
+        currentUser=getIntent().getStringExtra("currentUser");
+        //firebaseuid  = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         toolbar_chat.setTitle(chatwith);
+
+
+        if(userrtypeeee.equals("Student")){
+            chat_username=getIntent().getStringExtra("name_chatwith");
+            chatwith=getIntent().getStringExtra("chat_groupuser");
+            toolbar_chat.setTitle(chat_username);
+        }
+else if(userrtypeeee.equals("Teacher")){
+    chatwith=getIntent().getStringExtra("name_chatwith");
+    chat_username=getIntent().getStringExtra("chat_username");
+    toolbar_chat.setTitle(chatwith);
+    Log.e("msg","UserMessagewwwwe1233:"+chat_username);
+}
         UserDetails.username =chat_username;
+        UserDetails.chatWith =chatwith;
+
         Log.e("msg","UserMessagewwwwe12:"+chat_username);
         Log.e("msg","UserMessagewwwwe13:"+UserDetails.username);
         Log.e("msg","UserMessagewwwwe14:"+UserDetails.chatWith);
@@ -121,12 +141,14 @@ public class Chat extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
         String time = simpleDateFormat.format(calander.getTime());
 
-       LocalDateTime current = LocalDateTime.now();
-       DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+//       LocalDateTime current = LocalDateTime.now();
+    //   DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
        String datetime  = formattedDate+" "+time;
 
         reference1 = new Firebase("https://cygnus-3554a.firebaseio.com/"+schoolid+"/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
         reference2 = new Firebase("https://cygnus-3554a.firebaseio.com/"+schoolid+"/messages/" + UserDetails.chatWith + "_" + UserDetails.username);
+        //reference3 = new Firebase("https://cygnus-3554a.firebaseio.com/"+schoolid+"/messages/" +  UserDetails.username  + "_" +"GroupChatStudents");
+      //  reference4 = new Firebase("https://cygnus-3554a.firebaseio.com/"+schoolid+"/messages/" + "GroupChatStudents" + "_" + UserDetails.username);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,97 +156,121 @@ public class Chat extends AppCompatActivity {
                 String messageText = messageArea.getText().toString();
 
                 if(!messageText.equals("")){
-                  //  Map<String, String> map = new HashMap<String, String>();
-                   /* map.put("message", messageText);
-                    map.put("user", chat_username);
-                    map.put("date",formattedDate);
-                    map.put("time",time);
-                    map.put("postdate", String.valueOf(new Date(System.currentTimeMillis())));*/
-                    Newchatmodel post = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
-                           time, messageText, chat_username,firebaseuid,0);
-                    reference1.push().setValue(post);
-                    reference2.push().setValue(post);
-//                    ed_loginsave.putString("sendmessage_successful","true");
-//                    ed_loginsave.commit();
+
+
+//                   if(userrtypeeee.equals("Student")){
+//                       messagecounter++;
+//                       Newchatmodel post1 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
+//                               time, messageText, chat_username,firebaseuid,"unread",String.valueOf(messagecounter),"1");
+//                       reference3.push().setValue(post1);
+//
+//
+//
+//
+//                   }
+//                   else{
+                       messagecounter++;
+                       Newchatmodel post1 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
+                               time, messageText, getIntent().getStringExtra("chat_username"),user_tokennnnn,"unread",String.valueOf(messagecounter),"1");
+                       Newchatmodel post2 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
+                               time, messageText, getIntent().getStringExtra("chat_username"),user_tokennnnn,"unread",String.valueOf(messagecounter),"2");
+                       reference1.push().setValue(post1);
+                       reference2.push().setValue(post2);
+                     //  reference3.push().setValue(post2);
+                       //reference4.push().setValue(post2);
 
 
 
+                       DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child(schoolid).child("NamewithTimestampMessages");
+                       reference1.addListenerForSingleValueEvent(new ValueEventListener() {
 
-                    DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child(schoolid).child("NamewithTimestampMessages");
-                    reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshots1) {
+                               for (final com.google.firebase.database.DataSnapshot datas1 : dataSnapshots1.getChildren()) {
+                                   if (chatwith.equalsIgnoreCase(datas1.child("chatusername").getValue().toString())) {
+                                       try {
+                                           Long tsLong = System.currentTimeMillis()/1000;
+                                           String ts = tsLong.toString();
+                                           Sortchatmodel post = new Sortchatmodel(ts, chatwith,datetime,time,messageText);
+                                           String timekey = datas1.getKey();
+                                           Log.e("msg", "VALUESQUIZ113336668889987666876:" + timekey);
+                                           reference1.child(timekey).child("postdate").setValue(post.getPostdate());
+                                           reference1.child(timekey).child("date").setValue(post.getDate());
+                                           reference1.child(timekey).child("message").setValue(post.getMessage());
+                                           reference1.child(timekey).child("chatusername").setValue(post.getChatusername());
+                                           reference1.child(timekey).child("time").setValue(post.getTime());
 
-                        @Override
-                        public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshots1) {
-                            for (final com.google.firebase.database.DataSnapshot datas1 : dataSnapshots1.getChildren()) {
-                                if (chatwith.equalsIgnoreCase(datas1.child("chatusername").getValue().toString())) {
-                                    try {
-                                        Long tsLong = System.currentTimeMillis()/1000;
-                                        String ts = tsLong.toString();
-                                        Sortchatmodel post = new Sortchatmodel(ts, chatwith,datetime,time,messageText);
-                                        String timekey = datas1.getKey();
-                                        Log.e("msg", "VALUESQUIZ113336668889987666876:" + timekey);
-                                        reference1.child(timekey).child("postdate").setValue(post.getPostdate());
-                                        reference1.child(timekey).child("date").setValue(post.getDate());
-                                        reference1.child(timekey).child("message").setValue(post.getMessage());
-                                        reference1.child(timekey).child("chatusername").setValue(post.getChatusername());
-                                        reference1.child(timekey).child("time").setValue(post.getTime());
+                                       } catch ( Exception e) {
+                                           //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
+                                       }
+                                   }
 
-                                    } catch ( Exception e) {
-                                        //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                               }
 
-                            }
+                           }
 
-                        }
+                           @Override
+                           public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-
-
-
-
-
-                    });
-
-                    //get student tokens and add it to list for notifications
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(schoolid).child("ChatTokens");
-                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
-
-                        @Override
-                        public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshots) {
-                            for (final com.google.firebase.database.DataSnapshot datas2 : dataSnapshots.getChildren()) {
-                                if (chatwith.equalsIgnoreCase(datas2.child("username").getValue().toString())) {
-                                    try {
-                                        chatwithtoken = datas2.child("token").getValue().toString();
-                                        tokenlist.add(chatwithtoken);
-
-
-
-                                    } catch ( Exception e) {
-                                        //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    // Toast.makeText(applicationContext, "No scheduled class", Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                            String body = "New message arrived from " +chat_username+ ".\nClick to Check Now !";
-                            sendFCMPush(tokenlist, body);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
+                           }
 
 
 
 
 
-                    });
+                       });
+                    Log.e("msg", "CHATUSERNAMEEE1:" + chatwith);
+                       //get student tokens and add it to list for notifications
+                       DatabaseReference reference = FirebaseDatabase.getInstance().getReference().
+                               child(schoolid).child("ChatTokens");
+                       reference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                           @Override
+                           public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshots) {
+                               for (final com.google.firebase.database.DataSnapshot datas2 : dataSnapshots.getChildren()) {
+
+
+                                    if(userrtypeeee.equals("Teacher")){
+                                            if (chatwith.equalsIgnoreCase(datas2.child("groupname").getValue().toString())) {
+                                                     try {
+                                                chatwithtoken = datas2.child("token").getValue().toString();
+                                                tokenlist.add(chatwithtoken);
+
+                                                     } catch ( Exception e) {
+            //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
+                                                     }
+                                                         }
+                                            }
+
+                                    else if(userrtypeeee.equals("Student")){
+                                        if (chatwith.equalsIgnoreCase(datas2.child("username").getValue().toString()) ||
+                                        ! currentUser.equalsIgnoreCase(datas2.child("username").getValue().toString())) {
+                                                    try {
+                                                chatwithtoken = datas2.child("token").getValue().toString();
+
+                                                tokenlist.add(chatwithtoken);
+                                                        Log.e("msg", "CHATUSERNAMEEETOKENNNNSSS:" + datas2.child("token").getValue().toString());
+
+                                                    } catch ( Exception e) {
+                                             }
+                                             }
+                                            }
+
+
+                               }
+                            //   Toast.makeText(Chat.this, ""+tokenlist.size(), Toast.LENGTH_SHORT).show();
+
+                               String body = "New message arrived from " +chat_username+ ".\nClick to Check Now !";
+                               sendFCMPush(tokenlist, body);
+                           }
+
+                           @Override
+                           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                           }
+                       });
+
+
 
 
                 }
@@ -256,6 +302,7 @@ public class Chat extends AppCompatActivity {
 
     public void getChat(){
         chatlist.clear();
+        //tokenlist.clear();
         reference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -281,10 +328,12 @@ public class Chat extends AppCompatActivity {
 
                 }
 
-                if(userName.equals(chat_username)){
+                if(userName.equals(getIntent().getStringExtra("chat_username"))){
                     //  addMessageBox( message, 1);
+
                     chatlist.add(new Newchatmodel(new Date(System.currentTimeMillis()),map.get("date").toString(),
-                            map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),firebaseuid,1));
+                            map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),
+                            user_tokennnnn,map.get("msgstatus").toString(),  map.get("countunread").toString(),"1"));
 
                     LinearLayoutManager ll=new LinearLayoutManager(Chat.this);
                     layout.setLayoutManager(ll);
@@ -297,13 +346,45 @@ public class Chat extends AppCompatActivity {
                 else{
                     //  addMessageBox( message, 2);
                     chatlist.add(new Newchatmodel(new Date(System.currentTimeMillis()),map.get("date").toString(),
-                            map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),firebaseuid,2));
+                            map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),
+                            user_tokennnnn,map.get("msgstatus").toString(),  map.get("countunread").toString(),"2"));
+
+                       /* DatabaseReference reference = FirebaseDatabase.getInstance().getReference().
+                                child(schoolid).child("ChatTokens");
+                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshots) {
+                                for (final com.google.firebase.database.DataSnapshot datas2 : dataSnapshots.getChildren()) {
+                                    Log.e("msg", "CHATUSERNAMEEE12:" + datas2.child("username").getValue().toString());
+
+                                        if (map.get("user").toString().equalsIgnoreCase(datas2.child("username").getValue().toString())) {
+                                            try {
+                                                chatwithtoken = datas2.child("token").getValue().toString();
+                                                tokenlist.add(chatwithtoken);
+
+                                            } catch ( Exception e) {
+                                            }
+                                        }
+
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });*/
+
+
                     LinearLayoutManager ll=new LinearLayoutManager(Chat.this);
                     layout.setLayoutManager(ll);
                     ll.setStackFromEnd(true);
                     chatAdapter = new ChatAdapter(Chat.this,chatlist,datefinallist);
                     layout.setAdapter(chatAdapter);
                     layout.getLayoutManager().scrollToPosition(chatlist.size()-1);
+
+
                     // layout.smoothScrollToPosition(chatAdapter.getItemCount() - 1);
                 }
 
@@ -354,7 +435,7 @@ public class Chat extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-            if(chatlist.get(position).getType() == 1) {
+            if(chatlist.get(position).getType().equals("1")) {
 
                 holder.tv_msgtime.setTextSize(10);
                 holder.tv_msgtime.setText(chatlist.get(position).getTime());
@@ -364,10 +445,20 @@ public class Chat extends AppCompatActivity {
                 holder.tv_chatmsg.setText(Html.fromHtml(chatlist.get(position).getMessage()));
                 holder.tv_chatmsg.setTextSize(16);
                 holder.fr_chat.setBackgroundResource(R.drawable.rounded_corner1);
-                ((LinearLayout)  holder.ll_chat).setGravity(Gravity.RIGHT);
+                ((LinearLayout) holder.ll_chat).setGravity(Gravity.RIGHT);
                 messageArea.setText("");
             }
             else{
+                if(chatwith.toLowerCase().contains("class")){
+                    holder.tv_msguser.setVisibility(View.VISIBLE);
+                    holder.tv_msguser.setText(chatlist.get(position).getUser());
+                }
+                if(userrtypeeee.equals("Student")){
+                    holder.tv_msguser.setVisibility(View.VISIBLE);
+                    holder.tv_msguser.setText(chatlist.get(position).getUser());
+                }
+
+
                 holder.tv_msgtime.setTextSize(10);
                 holder.tv_msgtime.setText(chatlist.get(position).getTime());
 
@@ -395,7 +486,7 @@ public class Chat extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder{
-            TextView tv_chatmsg,tv_msgtime,header_date;
+            TextView tv_chatmsg,tv_msgtime,header_date,tv_msguser;
             LinearLayout ll_chat;
             LinearLayout fr_chat;
             public ViewHolder(@NonNull View itemView) {
@@ -406,6 +497,7 @@ public class Chat extends AppCompatActivity {
                 tv_msgtime=itemView.findViewById(R.id.tv_msgtime);
                 fr_chat=itemView.findViewById(R.id.fr_chat);
                 header_date=itemView.findViewById(R.id.header_date);
+                tv_msguser=itemView.findViewById(R.id.tv_msguser);
                 // tv_chatdate=itemView.findViewById(R.header_date.tv_chatdate);
             }
         }
@@ -451,14 +543,14 @@ public class Chat extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("msg", "onResponse111111Chattmessage: "+response.toString() );
-                     //   Toast.makeText(PostsActivity.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(Chat.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("msg", "onResponse1111112: "+error.toString() );
-
+                        Toast.makeText(Chat.this, "Chat Error Notification:"+error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {

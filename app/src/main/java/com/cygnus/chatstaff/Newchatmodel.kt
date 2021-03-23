@@ -13,7 +13,9 @@ class Newchatmodel(
         var message: String ,
         var user: String ,
         var firebaseuid: String ,
-        var type: Int
+        var msgstatus: String ,
+        var countunread: String ,
+        var type: String
 
 
 ) : BaseModel(), Parcelable {
@@ -37,6 +39,8 @@ class Newchatmodel(
         if (firebaseuid != other.firebaseuid) return false
         if (user != other.user) return false
         if (type != other.type) return false
+        if (msgstatus != other.msgstatus) return false
+        if (countunread != other.countunread) return false
 
         return true
     }

@@ -3,6 +3,11 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="shapeAppearanceMediumComponent">@style/ShapeAppearanceOverlay.Cut.Medium</item>
+  </style>
+  <style name="ShapeAppearanceOverlay.Cut.Medium">
+    <item name="cornerSize">12dp</item>
+    <item name="cornerFamily">rounded</item>
   </style>
 
   <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">

@@ -24,6 +24,7 @@ sealed class User(var id: String, var name: String, var credentials: Credentials
 ) : BaseModel() {
 
     open val type: String get() = this::class.simpleName ?: "Student"
+    open val typeTeacher: String get() = this::class.simpleName ?: "Teacher"
 
     val email: String get() = credentials.email
 
@@ -33,6 +34,7 @@ sealed class User(var id: String, var name: String, var credentials: Credentials
             field = value
             setChanged()
         }
+
 
     var phone: String? = null
         set(value) {
@@ -75,6 +77,21 @@ class School(id: String, name: String, credentials: Credentials) : User(id, name
 
     // no-arg constructor required for Firebase
     constructor() : this("", "", Credentials())
+
+    var school: String? = null
+        set(value) {
+            field = value
+            setChanged()
+        }
+
+
+    fun updateWith(school: School) {
+        this.id = school.id
+        this.name = school.name
+        this.credentials = school.credentials
+
+    }
+
 
 }
 
@@ -145,6 +162,16 @@ class Teacher(id: String, name: String, credentials: Credentials) : User(id, nam
 
     // no-arg constructor required for Firebase
     constructor() : this("", "", Credentials())
+    open val typeTeacherr: String get() = this::class.simpleName ?: "Teacher"
+
+
+
+    var school: String? = null
+        set(value) {
+            field = value
+            setChanged()
+        }
+
 
     var classId: String? = null
         set(value) {
@@ -176,6 +203,7 @@ class Teacher(id: String, name: String, credentials: Credentials) : User(id, nam
         this.gender = teacher.gender
         this.classId = teacher.classId
         this.subjects = teacher.subjects
+
     }
 
 }

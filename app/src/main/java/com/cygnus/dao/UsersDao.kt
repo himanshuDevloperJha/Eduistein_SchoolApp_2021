@@ -1,6 +1,8 @@
 package com.cygnus.dao
 
 import com.cygnus.CygnusApp
+import com.cygnus.erpfeature.AttTeacher
+import com.cygnus.erpfeature.AttTeachermodel
 import com.cygnus.model.School
 import com.cygnus.model.Student
 import com.cygnus.model.Teacher
@@ -222,4 +224,48 @@ object UsersDao {
 
     }
 
-}
+    fun getByTeacher(schoolId: String, teacher: Teacher, listener: OnSuccessListener<List<AttTeachermodel>?>) {
+        CygnusApp.refToAttendance(schoolId, teacher.classId!!)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val t = object : GenericTypeIndicator<HashMap<String, AttTeacher>>() {}
+                        val records = ArrayList<AttTeachermodel>()
+                        snapshot.getValue(t)?.let { map ->
+                            map.values.forEach { attendancestaff ->
+                                records.addAll(attendancestaff.attendanceRecords.filter { it.id == teacher.classId })
+                            }
+                            listener.onSuccess(records)
+                        } ?: listener.onSuccess(null)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        listener.onSuccess(null)
+                    }
+                })
+    }
+
+        fun getTeacherByType(schoolId: String, school: String,
+                             listener: OnSuccessListener<List<User>>) {
+            CygnusApp.refToUsers(schoolId)
+                    .orderByChild("type")
+                    .equalTo(school)
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            val teachers = ArrayList<Teacher>()
+                            snapshot.children.forEach {
+                                val user = it.toUser()
+                                if (user is Teacher && user.typeTeacher == school) {
+                                    teachers.add(user)
+                                }
+                            }
+
+                            listener.onSuccess(teachers)
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            listener.onSuccess(ArrayList())
+                        }
+                    })
+        }
+    }
+
