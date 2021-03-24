@@ -39,72 +39,72 @@
         android:paddingEnd="@dimen/activity_horizontal_margin">
 
       <com.google.android.material.card.MaterialCardView
-          app:cardElevation="4dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          app:cardCornerRadius="20dp"
           app:cardBackgroundColor="#FFFFFF"
+          app:cardCornerRadius="20dp"
+          app:cardElevation="4dp"
 
           >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
+            android:orientation="vertical"
             android:paddingHorizontal="5dp"
-            android:orientation="vertical">
-          <!--hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
+            android:paddingVertical="10dp">
 
           <LinearLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:weightSum="3">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/headline"
                   style="@style/TextAppearance.MaterialComponents.Overline"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@string/student_class_head"/>
+                  android:text="@string/student_class_head" />
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/className"
                   style="@style/TextAppearance.MaterialComponents.Button"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:textStyle="bold"
-                  android:text="@string/ph_assigned_class"/>
+                  android:text="@string/ph_assigned_class"
+                  android:textStyle="bold" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="2">
+                android:layout_weight="2"
+                android:orientation="vertical">
 
               <com.google.android.material.textview.MaterialTextView
                   style="@style/TextAppearance.MaterialComponents.Caption"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:text="@string/label_class_teacher"
                   android:textAllCaps="true"
                   android:textSize="10sp"
-                  android:text="@string/label_class_teacher"
-                  tools:ignore="SmallSp"/>
+                  tools:ignore="SmallSp" />
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/classTeacherName"
                   style="@style/TextAppearance.MaterialComponents.Body2"
                   android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
+                  android:layout_height="wrap_content" />
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/classTeacherEmail"
@@ -112,7 +112,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:autoLink="email"
-                  android:textColorLink="?android:attr/textColorPrimary"/>
+                  android:textColorLink="?android:attr/textColorPrimary" />
 
             </LinearLayout>
           </LinearLayout>
@@ -120,167 +120,171 @@
 
           <LinearLayout
               android:layout_width="match_parent"
+              android:layout_height="wrap_content"
               android:layout_marginTop="6dp"
-              android:layout_marginBottom="5dp"
-              android:layout_height="wrap_content">
+              android:layout_marginBottom="5dp">
+
             <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.MaterialComponents.Overline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TOTAL POINTS EARNED:  "/>
+                android:text="TOTAL POINTS EARNED:  " />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/mtv_totalpts"
                 style="@style/TextAppearance.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="0 points"/>
+                android:text="0 points"
+                android:textStyle="bold" />
           </LinearLayout>
-          <!--hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
+
 
           <GridLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:columnCount="2"
-              android:rowCount="5"
-              android:paddingVertical="0dp"
               android:orientation="horizontal"
-              >
+              android:paddingVertical="0dp"
+              android:rowCount="5">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/attendanceButton"
-                app:icon="@drawable/ic_attendance"
-                android:text="@string/label_see_attendance"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="@string/label_see_attendance"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_attendance"
+                app:iconSize="34dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/gradesButton"
-                android:text="@string/label_see_grades"
-                app:icon="@drawable/ic_grades"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="@string/label_see_grades"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_grades"
+                app:iconSize="34dp" />
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/classschedule_student"
-                android:text="My Scheduled Classes"
-                app:icon="@drawable/timetable"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="My Scheduled Classes"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/timetable"
+                app:iconSize="34dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/class_yt_myvideos"
-                android:text="My Videos"
-                app:icon="@drawable/youtube"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="My Videos"
                 android:textAlignment="textStart"
-                app:iconSize="28dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/youtube"
+                app:iconSize="28dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/class_yt_notifications"
-                app:icon="@drawable/ic_notifications_black_24dp"
-                android:text="@string/my_notifications"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="@string/my_notifications"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_notifications_black_24dp"
+                app:iconSize="34dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/classAnnouncementsButton"
-                android:text="@string/label_announcements"
-                app:icon="@drawable/ic_announcements"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="@string/label_announcements"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_announcements"
+                app:iconSize="34dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/classFees"
-                android:text="Fee Payment"
-                app:icon="@drawable/pay_fees"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="Fee Payment"
                 android:textAlignment="textStart"
-                app:iconSize="28dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/pay_fees"
+                app:iconSize="28dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/playquiz"
-                android:text="Play Quiz"
-                app:icon="@drawable/ic_announcements"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="Play Quiz"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
-           <!-- <com.google.android.material.button.MaterialButton
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_announcements"
+                app:iconSize="34dp" />
+            <!-- <com.google.android.material.button.MaterialButton
                 android:id="@+id/feed"
                 android:text="Feed"
                 android:visibility="gone"
@@ -300,38 +304,38 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/chatstudent"
-                android:text="Group Chat"
-                android:visibility="gone"
-                app:icon="@drawable/ic_chat_black_24dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
                 android:padding="10dp"
-                android:textAllCaps="true"
+                android:text="Group Chat"
                 android:textAlignment="textStart"
-                app:iconSize="34dp"
-                android:textSize="10dp"/>
+                android:textAllCaps="true"
+                android:textSize="10dp"
+                android:visibility="gone"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_chat_black_24dp"
+                app:iconSize="34dp" />
           </GridLayout>
 
           <com.google.android.material.button.MaterialButton
               android:id="@+id/feed"
-              android:text="Feed"
-
-              app:icon="@drawable/pay_fees"
-              android:layout_marginRight="2dp"
-              android:layout_marginLeft="2dp"
               android:layout_width="match_parent"
-              android:layout_gravity="fill"
-              app:cornerRadius="20dp"
+
               android:layout_height="50dp"
+              android:layout_gravity="fill"
+              android:layout_marginLeft="2dp"
+              android:layout_marginRight="2dp"
               android:padding="10dp"
-              android:textAllCaps="true"
+              android:text="Feed"
               android:textAlignment="center"
-              app:iconSize="20dp"/>
+              android:textAllCaps="true"
+              app:cornerRadius="20dp"
+              app:icon="@drawable/pay_fees"
+              app:iconSize="20dp" />
 
         </LinearLayout>
 
@@ -342,56 +346,55 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          android:textStyle="bold"
-          android:text="@string/courses_head"/>
+          android:text="@string/courses_head"
+          android:textStyle="bold" />
 
       <co.aspirasoft.view.NestedGridView
           android:id="@+id/coursesList"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:numColumns="2"/>
+          android:numColumns="2" />
 
       <com.google.android.material.textview.MaterialTextView
           style="@style/TextAppearance.MaterialComponents.Button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          android:textStyle="bold"
-          android:text="@string/timetable_head"/>
+          android:text="@string/timetable_head"
+          android:textStyle="bold" />
 
       <com.google.android.material.tabs.TabLayout
-          style="@style/Widget.MaterialComponents.TabLayout"
           android:id="@+id/timetableDay"
+          style="@style/Widget.MaterialComponents.TabLayout"
           android:layout_width="match_parent"
           android:layout_height="24dp"
           android:layout_marginTop="8dp"
-          app:tabGravity="fill"
           app:tabBackground="@drawable/box"
-          app:tabSelectedTextColor="@android:color/primary_text_dark"
+          app:tabGravity="fill"
           app:tabIndicatorColor="@color/colorPrimary"
           app:tabIndicatorHeight="24dp"
-          app:tabMode="fixed"/>
+          app:tabMode="fixed"
+          app:tabSelectedTextColor="@android:color/primary_text_dark" />
 
       <co.aspirasoft.view.NestedViewPager
           android:id="@+id/timetableView"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
+          android:layout_height="wrap_content" />
 
       <com.google.android.material.textview.MaterialTextView
           style="@style/TextAppearance.MaterialComponents.Button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/activity_vertical_margin"
+          android:text="COURSES OFFERED"
           android:textStyle="bold"
-          android:visibility="gone"
-          android:text="COURSES OFFERED"/>
+          android:visibility="gone" />
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/coursesofferedList"
           android:layout_width="match_parent"
-android:visibility="gone"
           android:layout_height="wrap_content"
-          />
+          android:visibility="gone" />
 
     </LinearLayout>
 

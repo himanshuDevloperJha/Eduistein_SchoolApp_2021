@@ -27,39 +27,47 @@
   </com.google.android.material.card.MaterialCardView>
 
   <com.google.android.material.textview.MaterialTextView
-      style="@style/TextAppearance.MaterialComponents.Body1"
       android:id="@+id/userNameLabel"
+      style="@style/TextAppearance.MaterialComponents.Body1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:fontFamily="@font/montserrat"
       android:gravity="center"
       android:text="@string/ph_name"
-      android:textStyle="bold"/>
+      android:textStyle="bold"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.textview.MaterialTextView
-      style="@style/TextAppearance.MaterialComponents.Body2"
       android:id="@+id/userEmailLabel"
+      style="@style/TextAppearance.MaterialComponents.Body2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:fontFamily="@font/montserrat"
       android:gravity="center"
-      android:text="@string/ph_email"/>
+      android:text="@string/ph_email"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.textview.MaterialTextView
-      style="@style/TextAppearance.MaterialComponents.Caption"
       android:id="@+id/headline"
+      style="@style/TextAppearance.MaterialComponents.Caption"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/ph_type"/>
+      android:fontFamily="@font/montserrat"
+      android:text="@string/ph_type"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.button.MaterialButton
-      style="@style/Widget.MaterialComponents.Button"
       android:id="@+id/profileButton"
-      android:layout_width="wrap_content"
-      android:layout_height="42dp"
-      android:layout_marginBottom="16dp"
+      style="@style/Widget.MaterialComponents.Button"
+      android:layout_width="280sp"
+      android:layout_height="52dp"
       android:layout_marginTop="8dp"
+      android:layout_marginBottom="16dp"
+      android:fontFamily="@font/montserrat"
       android:text="@string/label_profile"
       android:textAllCaps="false"
-      app:cornerRadius="16dp"/>
+      app:backgroundTint="@color/purpleNew"
+      app:cornerRadius="16dp" />
 
   <View android:layout_width="match_parent"
         android:layout_height="1dp"

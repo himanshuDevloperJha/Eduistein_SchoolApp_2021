@@ -43,7 +43,7 @@
 
     <!-- Button Labels -->
     <string name="label_add">Add</string>
-    <string name="label_add_account">Add Account</string>
+    <string name="label_add_account">Add other accounts</string>
     <string name="label_announcements">Announcements</string>
     <string name="label_class_teacher">Class Teacher</string>
     <string name="label_edit">Edit</string>
@@ -53,7 +53,7 @@
     <string name="label_manage_classes">Class\nManagement</string>
     <string name="label_manage_courses">Course\nManagement</string>
     <string name="label_news">News</string>
-    <string name="label_profile">Manage your Eduistein Profile</string>
+    <string name="label_profile">Edit your profile</string>
     <string name="label_revoke">Revoke</string>
     <string name="label_save">Save</string>
     <string name="label_skip_teacher_assignment">Assign a teacher later.</string>
