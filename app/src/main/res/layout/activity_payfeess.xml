@@ -79,10 +79,10 @@
                 android:id="@+id/ll_totalfee"
                 android:orientation="horizontal"
                 android:layout_weight="0.075">
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                <TextView
                     android:id="@+id/tv_total"
                     android:textSize="18dp"
+
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

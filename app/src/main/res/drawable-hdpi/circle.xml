@@ -13,7 +13,7 @@
           android:thicknessRatio="1.9"
           android:useLevel="false" >
 
-        <solid android:color="@android:color/transparent" />
+        <solid android:color="@color/purpleNew" />
 
         <size android:width="40dp"
             android:height="90dp"/>

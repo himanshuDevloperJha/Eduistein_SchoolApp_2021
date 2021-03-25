@@ -367,14 +367,15 @@
           android:id="@+id/timetableDay"
           style="@style/Widget.MaterialComponents.TabLayout"
           android:layout_width="match_parent"
-          android:layout_height="24dp"
-          android:layout_marginTop="8dp"
+          android:layout_height="62dp"
           app:tabBackground="@drawable/box"
           app:tabGravity="fill"
-          app:tabIndicatorColor="@color/colorPrimary"
-          app:tabIndicatorHeight="24dp"
+          app:tabIndicator="@drawable/box"
+          app:tabIndicatorColor="@color/purpleNew"
+          app:tabIndicatorHeight="60dp"
           app:tabMode="fixed"
-          app:tabSelectedTextColor="@android:color/primary_text_dark" />
+          app:tabSelectedTextColor="#FFFFFF"
+          app:tabTextColor="@color/purpleNew" />
 
       <co.aspirasoft.view.NestedViewPager
           android:id="@+id/timetableView"

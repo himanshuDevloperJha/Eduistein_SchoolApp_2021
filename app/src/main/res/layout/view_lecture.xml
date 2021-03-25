@@ -26,62 +26,76 @@
       android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
-        style="@style/Widget.MaterialComponents.TabLayout"
         android:id="@+id/lectureDay"
+        style="@style/Widget.MaterialComponents.TabLayout"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="62dp"
         app:tabGravity="fill"
         app:tabBackground="@drawable/box"
-        app:tabSelectedTextColor="@android:color/primary_text_dark"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabIndicatorHeight="20dp"
-        app:tabMode="fixed">
+        app:tabIndicator="@drawable/circle"
+        app:tabSelectedTextColor="#FFFFFF"
+        app:tabIndicatorColor="@color/purpleNew"
+        app:tabIndicatorHeight="60dp"
+        app:tabMode="fixed"
+        app:tabTextColor="@color/purpleNew"
+
+        >
+
+<!--      android:layout_width="match_parent"-->
+<!--      android:layout_height="62dp"-->
+<!--      app:tabGravity="fill"-->
+<!--      app:tabIndicator="@drawable/box"-->
+<!--      app:tabIndicatorColor="@color/purpleNew"-->
+<!--      app:tabIndicatorHeight="60dp"-->
+<!--      app:tabSelectedTextColor="#FFFFFF"-->
+<!--      app:tabTextColor="@color/purpleNew"-->
+<!--      app:tabBackground="@drawable/box"-->
+      <com.google.android.material.tabs.TabItem
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:text="M" />
 
       <com.google.android.material.tabs.TabItem
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:text="M"/>
+          android:text="T" />
 
       <com.google.android.material.tabs.TabItem
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:text="T"/>
+          android:text="W" />
 
       <com.google.android.material.tabs.TabItem
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:text="W"/>
+          android:text="T" />
 
       <com.google.android.material.tabs.TabItem
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:text="T"/>
+          android:text="F" />
 
       <com.google.android.material.tabs.TabItem
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:text="F"/>
+          android:text="S" />
 
       <com.google.android.material.tabs.TabItem
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:text="S"/>
-
-      <com.google.android.material.tabs.TabItem
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:text="S"/>
+          android:text="S" />
 
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body2"
         android:id="@+id/lectureDetails"
+        style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="10:00am - 11:30am (CR #4, RIMMS)"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        app:fontFamily="@font/montserrat" />
 
   </LinearLayout>
 
