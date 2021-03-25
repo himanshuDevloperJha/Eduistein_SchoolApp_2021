@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    android:id="@+id/cd_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cd_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:checkable="false"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
-    app:cardElevation="4dp">
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Cut.Medium"
+    >
+
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/ll_notifctn"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <View
             android:id="@+id/vw_color"
-            android:layout_width="4dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/colorAccent"/>
+            android:background="#EEEFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#EEEFFF"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            >
 
             <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.MaterialComponents.Body1"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textSize="16dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone"
+                />
 
 
             <com.google.android.material.textview.MaterialTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:id="@+id/tv_msg_noti"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="top"
+                android:lineSpacingExtra="8sp"
+                android:text="hey you class"
+                android:textSize="16dp" />
 
         </LinearLayout>
 

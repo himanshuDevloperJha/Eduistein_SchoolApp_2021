@@ -3,11 +3,11 @@ package com.cygnus
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.*
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.SystemClock
+import android.net.Uri
+import android.os.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -47,6 +47,8 @@ import com.razorpay.PaymentResultListener
 import kotlinx.android.synthetic.main.activity_dashboard_student.*
 import kotlinx.android.synthetic.main.view_subject.*
 import org.json.JSONObject
+import org.jsoup.Jsoup
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -63,7 +65,7 @@ import kotlin.collections.ArrayList
  * @since 1.0.0
  */
 class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
-
+    var currentVersion=""
     var subjectlist: MutableList<String> = mutableListOf()
     private lateinit var currentStudent: Student
     public var classPosts = ArrayList<NoticeBoardPost>()
@@ -87,6 +89,8 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
         setContentView(R.layout.activity_dashboard_student)
         setSupportActionBar(toolbar)
         supportActionBar?.title = school
+
+        forceUpdate()
 
         // Only allow a signed in teacher to access this page
         currentStudent = when (currentUser) {
@@ -369,7 +373,71 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
 
 
     }
+    public fun forceUpdate(){
+        val packageManager: PackageManager = this.getPackageManager()
+        try {
+            val packageInfo: PackageInfo = packageManager.getPackageInfo(getPackageName(),0)
+            //currentVersion  = packageInfo.versionName
+            currentVersion  ="50+"
+            ForceUpdateAsync(currentVersion,this).execute()
+        } catch (e: PackageManager.NameNotFoundException ) {
+            Log.e("msg","Crashhhhh:"+e.toString())
+            e.printStackTrace()
+        }
 
+    }
+    companion object {
+        private var latestVersion: String? = null
+    }
+    class ForceUpdateAsync(private val currentVersion: String, private val context: Context) :
+            AsyncTask<String?, String?, JSONObject>() {
+
+
+        override fun onPostExecute(jsonObject: JSONObject) {
+            if (latestVersion != null) {
+                if (!currentVersion.equals(latestVersion, ignoreCase = true)) {
+                    val dialogupdate = Dialog(context)
+                    dialogupdate.setContentView(R.layout.dialog_updateinfo)
+                    dialogupdate.show()
+                    //  dialogupdate.setCancelable(false)
+                    // dialogupdate.setCanceledOnTouchOutside(false)
+                    val tv_updateinfo = dialogupdate.findViewById(R.id.tv_updateinfo) as TextView
+                    tv_updateinfo.setOnClickListener {
+                        context.startActivity(Intent(Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=" + context.packageName)))
+                        dialogupdate.dismiss()
+                    }
+
+                    // Toast.makeText(context,"update is available.",Toast.LENGTH_LONG).show();
+/*  if(!(context instanceof SchoolDashboardActivity)) {
+                    if(!((Activity)context).isFinishing()){
+
+                    }
+                }*/
+                }
+            }
+            super.onPostExecute(jsonObject)
+        }
+
+
+        override fun doInBackground(vararg params: String?): JSONObject {
+            try {
+                latestVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + context.packageName + "&hl=en")
+                        .timeout(50000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div.hAyfc:nth-child(3) > span:nth-child(2) > div:nth-child(1) > span:nth-child(1)")
+                        .first()
+                        .ownText()
+                Log.e("msg","latestversionNo: " +latestVersion+" , Current Version: "+currentVersion)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return JSONObject()
+        }
+
+    }
     override fun onRestart() {
         super.onRestart()
         getCoins()

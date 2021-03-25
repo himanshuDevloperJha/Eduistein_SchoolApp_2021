@@ -4,15 +4,16 @@ import android.app.*
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.*
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import co.aspirasoft.adapter.ModelViewAdapter
@@ -42,6 +43,8 @@ import kotlinx.android.synthetic.main.activity_dashboard_teacher.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import org.jsoup.Jsoup
+import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -88,6 +91,7 @@ class TeacherDashboardActivity : DashboardActivity() {
     lateinit var class_st_yt_unitsno: AutoCompleteTextView;
     lateinit var class_st_yt_title: TextInputEditText;
     lateinit var class_st_yt_youtubelink: TextInputEditText;
+    var currentVersion=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +99,7 @@ class TeacherDashboardActivity : DashboardActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = school
 
+        forceUpdate()
         // Only allow a signed in teacher to access this page
         currentTeacher = when (currentUser) {
             is Teacher -> currentUser as Teacher
@@ -785,7 +790,71 @@ class TeacherDashboardActivity : DashboardActivity() {
 
 
     }
+    public fun forceUpdate(){
+        val packageManager: PackageManager = this.getPackageManager()
+        try {
+            val packageInfo: PackageInfo = packageManager.getPackageInfo(getPackageName(),0)
+          //  currentVersion  = packageInfo.versionName
+            currentVersion  ="50+"
+            ForceUpdateAsync(currentVersion,this).execute()
+        } catch (e: PackageManager.NameNotFoundException ) {
+            Log.e("msg","Crashhhhh:"+e.toString())
+            e.printStackTrace()
+        }
 
+    }
+    companion object {
+        private var latestVersion: String? = null
+    }
+    class ForceUpdateAsync(private val currentVersion: String, private val context: Context) :
+            AsyncTask<String?, String?, JSONObject>() {
+
+
+        override fun onPostExecute(jsonObject: JSONObject) {
+            if (latestVersion != null) {
+                if (!currentVersion.equals(latestVersion, ignoreCase = true)) {
+                    val dialogupdate = Dialog(context)
+                    dialogupdate.setContentView(R.layout.dialog_updateinfo)
+                    dialogupdate.show()
+                    //  dialogupdate.setCancelable(false)
+                    // dialogupdate.setCanceledOnTouchOutside(false)
+                    val tv_updateinfo = dialogupdate.findViewById(R.id.tv_updateinfo) as TextView
+                    tv_updateinfo.setOnClickListener {
+                        context.startActivity(Intent(Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=" + context.packageName)))
+                        dialogupdate.dismiss()
+                    }
+
+                    // Toast.makeText(context,"update is available.",Toast.LENGTH_LONG).show();
+/*  if(!(context instanceof SchoolDashboardActivity)) {
+                    if(!((Activity)context).isFinishing()){
+
+                    }
+                }*/
+                }
+            }
+            super.onPostExecute(jsonObject)
+        }
+
+
+        override fun doInBackground(vararg params: String?): JSONObject {
+            try {
+                latestVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + context.packageName + "&hl=en")
+                        .timeout(50000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div.hAyfc:nth-child(3) > span:nth-child(2) > div:nth-child(1) > span:nth-child(1)")
+                        .first()
+                        .ownText()
+                Log.e("msg","latestversionNo: " +latestVersion+" , Current Version: "+currentVersion)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return JSONObject()
+        }
+
+    }
     private fun sendFCMPush(tokenlist: ArrayList<String>, bodyy: String) {
         val SERVER_KEY = "AAAAav-QFhw:APA91bG7ChbWR2kwz_FBMKgaDV8IZ_PMmED0Rp_sy7f0PtlZm37t-uAJRnUwyLYSM4Z-kSg_Jj9Xv9O8x4r_L5iQC9JAKhhTPt-ga5nmEqCBMcqgaUMtDnF5ponwXi8mD31k481DWHoF"
         var obj: JSONObject? = null

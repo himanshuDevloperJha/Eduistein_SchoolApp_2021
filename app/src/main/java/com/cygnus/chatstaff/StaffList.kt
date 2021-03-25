@@ -155,8 +155,6 @@ lateinit var userrtypeeee:String
                                         val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolid).child("NamewithTimestampMessages")
                                         missionsReference.push().setValue(post)
                                     }
-
-                                   
                                 }
                             }
 
