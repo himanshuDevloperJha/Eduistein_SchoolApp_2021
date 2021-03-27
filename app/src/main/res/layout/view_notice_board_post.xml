@@ -113,7 +113,6 @@
       android:layout_height="wrap_content"
       android:checkable="false"
       app:cardCornerRadius="15dp"
-      app:cardElevation="5dp"
       app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -121,8 +120,7 @@
         android:layout_height="wrap_content"
         android:background="@color/blurpurple"
         android:orientation="vertical"
-        android:padding="@dimen/_8dp"
-        android:rotationX="0">
+        android:padding="@dimen/_8dp">
 
       <com.google.android.material.textview.MaterialTextView
           android:id="@+id/postContent"
