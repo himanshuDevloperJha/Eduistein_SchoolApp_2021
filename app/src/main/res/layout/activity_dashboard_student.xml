@@ -370,7 +370,7 @@
           android:layout_height="62dp"
           app:tabBackground="@drawable/box"
           app:tabGravity="fill"
-          app:tabIndicator="@drawable/box"
+          app:tabIndicator="@drawable/circle"
           app:tabIndicatorColor="@color/purpleNew"
           app:tabIndicatorHeight="60dp"
           app:tabMode="fixed"
