@@ -44,7 +44,7 @@
           android:layout_marginTop="@dimen/activity_vertical_margin"
           app:cardBackgroundColor="#FFFFFF"
           app:cardCornerRadius="20dp"
-          app:cardElevation="4dp"
+          app:cardElevation="0dp"
 
           >
 
@@ -73,7 +73,8 @@
                   style="@style/TextAppearance.MaterialComponents.Overline"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@string/student_class_head" />
+                  android:text="@string/student_class_head"
+                  app:fontFamily="@font/montserrat" />
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/className"
@@ -81,7 +82,8 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/ph_assigned_class"
-                  android:textStyle="bold" />
+                  android:textStyle="bold"
+                  app:fontFamily="@font/montserrat" />
             </LinearLayout>
 
 
@@ -98,13 +100,16 @@
                   android:text="@string/label_class_teacher"
                   android:textAllCaps="true"
                   android:textSize="10sp"
+                  app:fontFamily="@font/montserrat"
                   tools:ignore="SmallSp" />
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/classTeacherName"
                   style="@style/TextAppearance.MaterialComponents.Body2"
                   android:layout_width="wrap_content"
-                  android:layout_height="wrap_content" />
+                  android:layout_height="wrap_content"
+                  android:textSize="12sp"
+                  app:fontFamily="@font/montserrat" />
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/classTeacherEmail"
@@ -112,7 +117,9 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:autoLink="email"
-                  android:textColorLink="?android:attr/textColorPrimary" />
+                  android:textColorLink="?android:attr/textColorPrimary"
+                  android:textSize="12sp"
+                  app:fontFamily="@font/montserrat" />
 
             </LinearLayout>
           </LinearLayout>
@@ -128,7 +135,8 @@
                 style="@style/TextAppearance.MaterialComponents.Overline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TOTAL POINTS EARNED:  " />
+                android:text="TOTAL POINTS EARNED:  "
+                app:fontFamily="@font/montserrat" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/mtv_totalpts"
@@ -136,190 +144,351 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 points"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat" />
           </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  <GridLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:columnCount="3"
+      android:orientation="horizontal"
+      android:rowCount="3">
 
-          <GridLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:columnCount="2"
-              android:orientation="horizontal"
-              android:paddingVertical="0dp"
-              android:rowCount="5">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/attendanceButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_row="0"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+          android:paddingLeft="10dp"
+          android:paddingRight="10dp"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/attendance"
+            android:layout_marginBottom="10dp"
+            />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/attendanceButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="@string/label_see_attendance"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_attendance"
-                app:iconSize="34dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/label_see_attendance"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/gradesButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="@string/label_see_grades"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_grades"
-                app:iconSize="34dp" />
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/gradesButton"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_row="0"
+        android:layout_gravity="fill"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+          android:paddingLeft="10dp"
+          android:paddingRight="10dp"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/grades"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="My Grades"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/classschedule_student"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_row="0"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:paddingBottom="10dp"
+          android:paddingTop="20dp"
+          android:paddingLeft="10dp"
+          android:paddingRight="10dp"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/schedule_class"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Scheduled Classes"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/class_yt_notifications"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/notification"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Notifications"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/classFees"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_row="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:paddingBottom="20dp"
+          android:paddingTop="20dp"
+          android:paddingLeft="10dp"
+          android:paddingRight="10dp"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/fee_payment"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Fee payment"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/classAnnouncementsButton"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_row="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/announcement"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Announcements"
+
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/classschedule_student"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="My Scheduled Classes"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/timetable"
-                app:iconSize="34dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playquiz"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:padding="10dp"
+        android:text="Play Quiz"
+        android:textAlignment="textStart"
+        android:textAllCaps="true"
+        android:textSize="10dp"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_announcements"
+        app:iconSize="34dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/class_yt_myvideos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:padding="10dp"
+        android:text="My Videos"
+        android:textAlignment="textStart"
+        android:textAllCaps="true"
+        android:textSize="10dp"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/youtube"
+        app:iconSize="28dp" />
+    <!-- <com.google.android.material.button.MaterialButton
+        android:id="@+id/feed"
+        android:text="Feed"
+        android:visibility="gone"
+        app:icon="@drawable/pay_fees"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cornerRadius="20dp"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        android:padding="10dp"
+        android:textAllCaps="true"
+        android:textAlignment="textStart"
+        app:iconSize="28dp"
+        android:textSize="10dp"/>-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/class_yt_myvideos"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="My Videos"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/youtube"
-                app:iconSize="28dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/chatstudent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:padding="10dp"
+        android:text="Group Chat"
+        android:textAlignment="textStart"
+        android:textAllCaps="true"
+        android:textSize="10dp"
+        android:visibility="gone"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/ic_chat_black_24dp"
+        app:iconSize="34dp" />
+  </GridLayout>
+</LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/class_yt_notifications"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="@string/my_notifications"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_notifications_black_24dp"
-                app:iconSize="34dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/classAnnouncementsButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="@string/label_announcements"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_announcements"
-                app:iconSize="34dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/classFees"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="Fee Payment"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/pay_fees"
-                app:iconSize="28dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/playquiz"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="Play Quiz"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_announcements"
-                app:iconSize="34dp" />
-            <!-- <com.google.android.material.button.MaterialButton
-                android:id="@+id/feed"
-                android:text="Feed"
-                android:visibility="gone"
-                app:icon="@drawable/pay_fees"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:cornerRadius="20dp"
-                android:layout_gravity="fill"
-                android:layout_columnWeight="1"
-                android:padding="10dp"
-                android:textAllCaps="true"
-                android:textAlignment="textStart"
-                app:iconSize="28dp"
-                android:textSize="10dp"/>-->
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/chatstudent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:padding="10dp"
-                android:text="Group Chat"
-                android:textAlignment="textStart"
-                android:textAllCaps="true"
-                android:textSize="10dp"
-                android:visibility="gone"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/ic_chat_black_24dp"
-                app:iconSize="34dp" />
-          </GridLayout>
 
           <com.google.android.material.button.MaterialButton
               android:id="@+id/feed"

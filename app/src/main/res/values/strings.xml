@@ -65,8 +65,8 @@
     <string name="label_mark_attendance">Mark Attendance</string>
     <string name="label_non_binary">Other</string>
     <string name="label_privacy">Privacy Policy</string>
-    <string name="label_see_attendance">See Attendance</string>
-    <string name="label_see_grades">See Grades</string>
+    <string name="label_see_attendance">My attendance</string>
+    <string name="label_see_grades">My grades</string>
     <string name="label_send">Send</string>
     <string name="label_tos">Terms of Service</string>
     <string name="label_change_photo">Change Photo</string>
