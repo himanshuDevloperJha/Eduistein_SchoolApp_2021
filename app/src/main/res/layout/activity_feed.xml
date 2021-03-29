@@ -14,9 +14,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarr"
-            app:title="Feed"
-            app:titleTextColor="@android:color/white"
-            android:background="@color/colorpurple"
+            app:title="Feeds"
+            app:titleTextColor="@color/purpleNew"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
            />
