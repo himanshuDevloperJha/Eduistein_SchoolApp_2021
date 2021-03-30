@@ -2,7 +2,7 @@
     <item>
         <shape android:shape="oval">
 
-            <solid android:color="@color/colorPrimaryDark"/>
+            <solid android:color="@color/purpleNew"/>
         </shape>
     </item>
 </selector>
