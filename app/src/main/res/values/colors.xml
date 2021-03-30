@@ -12,6 +12,7 @@
     <color name="blurpurple">#EEEFFF</color>
     <color name="green">#8EC3A3</color>
     <color name="red">#F89A9D</color>
+    <color name="fade">#EEEFFF</color>
     <color name="purpleNew">#7F0FE0</color>
     <color name="grey">#424259</color>
 </resources>
