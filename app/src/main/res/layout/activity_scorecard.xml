@@ -60,7 +60,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="70dp"
             android:layout_gravity="center"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:src="@drawable/trophy_win"/>
         <!-- For Losing the Quiz
         <ImageView

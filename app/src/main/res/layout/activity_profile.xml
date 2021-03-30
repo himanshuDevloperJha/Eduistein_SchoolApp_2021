@@ -49,32 +49,35 @@
       </com.google.android.material.card.MaterialCardView>
 
       <com.google.android.material.button.MaterialButton
-          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
           android:id="@+id/changeUserImageButton"
+          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
           android:layout_width="wrap_content"
           android:layout_height="42dp"
-          android:layout_marginBottom="16dp"
           android:layout_marginTop="8dp"
+          android:layout_marginBottom="16dp"
+          android:fontFamily="@font/montserrat"
           android:text="@string/label_change_photo"
           android:textAllCaps="false"
-          app:cornerRadius="16dp"/>
+          app:cornerRadius="16dp" />
 
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body1"
           android:id="@+id/userNameLabel"
+          style="@style/TextAppearance.MaterialComponents.Body1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/ph_name"
-          android:textStyle="bold"/>
+          android:textStyle="bold"
+          app:fontFamily="@font/montserrat" />
 
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body2"
           android:id="@+id/headline"
+          style="@style/TextAppearance.MaterialComponents.Body2"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:autoLink="email"
+          android:text="@string/ph_type"
           android:textColorLink="?android:attr/textColorPrimary"
-          android:text="@string/ph_type"/>
+          app:fontFamily="@font/montserrat" />
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -93,11 +96,12 @@
               style="@style/TextAppearance.MaterialComponents.Caption"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
+              android:layout_marginTop="16dp"
               android:text="@string/about_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Birthday -->
           <com.google.android.material.button.MaterialButton
@@ -119,20 +123,21 @@
 
           <!-- Gender -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/genderLabel"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/label_male"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_gender"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
         </LinearLayout>
 
@@ -147,45 +152,48 @@
               style="@style/TextAppearance.MaterialComponents.Caption"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
+              android:layout_marginTop="16dp"
               android:text="@string/academic_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Blood Type -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/className"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_assigned_class"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_classroom"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
           <!-- Emergency Contact -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/rollNo"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/hint_student_roll_no"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_students"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
         </LinearLayout>
 
@@ -200,62 +208,66 @@
               style="@style/TextAppearance.MaterialComponents.Caption"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
+              android:layout_marginTop="16dp"
               android:text="@string/contact_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Address -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/addressLabel"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_address"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_address"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
           <!-- Email -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/userEmailLabel"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_email"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_email"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
           <!-- Phone -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/phoneLabel"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_phone"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_phone"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
         </LinearLayout>
 
         <!-- EMERGENCY INFO -->
@@ -270,113 +282,121 @@
               style="@style/TextAppearance.MaterialComponents.Caption"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
+              android:layout_marginTop="16dp"
               android:text="@string/emergency_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Blood Type -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/bloodType"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/hint_blood_group"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_blood"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
           <!-- Emergency Contact -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/emergencyContactName"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_name"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_emergency"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
           <!-- Emergency Email -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/emergencyContactEmail"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_email"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_email"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
           <!-- Emergency Phone -->
           <com.google.android.material.button.MaterialButton
-              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:id="@+id/emergencyContactPhone"
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
               android:layout_width="wrap_content"
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_phone"
               android:textAllCaps="false"
               android:textColor="?android:attr/textColorPrimary"
               app:icon="@drawable/ic_phone"
-              app:iconSize="18dp"
               app:iconPadding="4dp"
-              app:iconTint="?android:attr/textColorPrimary"/>
+              app:iconSize="18dp"
+              app:iconTint="?android:attr/textColorPrimary" />
 
         </LinearLayout>
 
         <!-- Password Reset -->
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:id="@+id/changePasswordButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_marginTop="32dp"
+            android:fontFamily="@font/montserrat"
             android:padding="0dp"
             android:text="@string/label_change_password"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:id="@+id/btn_phonelogin"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:fontFamily="@font/montserrat"
             android:padding="0dp"
             android:text="Login with Mobile"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false" />
 
 
         <!-- Account Delete -->
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:id="@+id/deleteAccountButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:fontFamily="@font/montserrat"
             android:padding="0dp"
             android:text="@string/label_delete_account"
-            android:textColor="@color/colorWarning"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="@color/colorWarning" />
 
       </LinearLayout>
 
