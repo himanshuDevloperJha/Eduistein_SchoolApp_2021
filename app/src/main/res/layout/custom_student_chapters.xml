@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/blurpurple"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -15,7 +16,7 @@
 
         <View
             android:id="@+id/vw_color"
-            android:layout_width="4dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/colorAccent"/>
 
@@ -31,7 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="16dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18dp"
                 android:textStyle="bold"/>
 
 
@@ -42,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:textSize="16dp"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/ph_assigned_class"/>
 
         </LinearLayout>
