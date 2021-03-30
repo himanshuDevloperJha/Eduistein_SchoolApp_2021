@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+    tools:context=".quiz.StartQuizActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="?attr/actionBarSize"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18dp"
+            android:textColor="@color/purpleNew"
+            android:text="Quiz"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="70dp"
+        android:textSize="16dp"
+        android:id="@+id/tv_ques"
+        android:layout_marginLeft="110dp"
+        android:layout_marginRight="110dp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:text="Searching for your opponent..."
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="13dp"
+        android:fontFamily="@font/montserrat"
+        android:justificationMode="inter_word"
+        android:textAlignment="center"
+        android:text="Estimated time 05"
+        android:layout_height="wrap_content"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:rowCount="1"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="0dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardBackgroundColor="?android:attr/colorBackground"
+                    app:cardCornerRadius="32dp"
+                    app:strokeColor="?android:attr/textColorPrimary"
+                    app:strokeWidth="2dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ph_student"/>
+
+                </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/ph_name"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="St. jhons sr. sec. school"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_gravity="top"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="0dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/quiz_fight"
+                    android:layout_height="60dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="0"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="0dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardBackgroundColor="?android:attr/colorBackground"
+                    app:cardCornerRadius="32dp"
+                    app:strokeColor="?android:attr/textColorPrimary"
+                    app:strokeWidth="2dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ph_student"/>
+
+                </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/ph_name"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="12dp"
+                    android:fontFamily="sans-serif"
+                    android:text="St. jhons sr. sec. school"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+    </GridLayout>
+
+
+</LinearLayout>
