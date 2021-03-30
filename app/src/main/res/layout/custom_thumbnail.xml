@@ -5,33 +5,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cd_youtube"
     android:background="@android:color/white"
-    android:elevation="4dp"
-    app:cardElevation="4dp"
+    app:cardElevation="0dp"
     app:cardCornerRadius="4dp"
-    android:layout_margin="7dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:id="@+id/ll_thumbnail"
         android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:layout_width="match_parent"
        >
 
-        <TextView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:text="Title: "
-            android:gravity="center"
-            android:id="@+id/tv_titlee"
-            android:padding="3dp"
-            android:textColor="@android:color/black"
-            android:textSize="16dp"
-
-            android:layout_height="wrap_content"/>
+            app:cardCornerRadius="25dp"
+            android:layout_margin="4dp"
+            android:layout_height="180dp">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="180dp"
             android:scaleType="fitXY"
             android:id="@+id/iv_thumbnail"
             />
@@ -44,5 +40,90 @@
 <!--            android:fontFamily="sans-serif"-->
 <!--            android:textColor="@color/colorPrimary"-->
 <!--            />-->
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="5dp"
+                    app:cardBackgroundColor="?android:attr/colorBackground"
+                    app:cardCornerRadius="32dp"
+                    app:strokeColor="?android:attr/textColorPrimary"
+                    app:strokeWidth="1dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ph_student" />
+                </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1">
+                    <TableRow>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Title: "
+                            android:id="@+id/tv_titlee"
+                            android:padding="3dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="17dp"
+
+                            android:layout_height="wrap_content"/>
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent">
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:stretchColumns="3">
+                            <TableRow
+                                android:layout_width="match_parent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:paddingLeft="5dp"
+                                    android:fontFamily="@font/montserrat"
+                                    android:gravity="left"
+                                    android:text="@string/ph_name"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat"
+                                    android:text="4 hours ago 4 hours"
+                                    android:visibility="invisible"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:fontFamily="@font/montserrat"
+                                    android:text="4 hours ago"
+                                    android:textSize="12sp" />
+                            </TableRow>
+                        </TableLayout>
+                    </TableRow>
+
+                </TableLayout>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
