@@ -48,7 +48,7 @@
             android:src="@drawable/videos_screen2"
             />
     </LinearLayout>
-
+s
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_margin="10dp"
@@ -59,7 +59,7 @@
             android:verticalSpacing="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="2"/>
+            android:numColumns="1"/>
 
         <ProgressBar
             android:layout_width="wrap_content"

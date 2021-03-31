@@ -19,6 +19,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:title="Fee Details"
+            app:titleTextColor="@color/purpleNew"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="@android:color/transparent"
@@ -34,103 +35,179 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:weightSum="1"
-            android:orientation="vertical"
-            android:layout_weight="0.915">
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:id="@+id/tv_month"
-
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pay your school fee through simple process."
                 android:textSize="18dp"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.075"
-                android:layout_gravity="center"
-                android:text="September"/>
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat"
+                />
 
-            <FrameLayout
+            <TextView
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.85">
+                android:layout_height="wrap_content"
+                android:text="Fee card"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat"
+                />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_feeDetail"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-                <ProgressBar
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pb_payfees"
-                    android:indeterminateTint="@color/colorPrimary"
-                    android:layout_gravity="center"/>
+                    app:cardBackgroundColor="@color/blurpurple"
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_margin="15dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:padding="10dp"
+                            android:id="@+id/tv_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="September"
+                            android:textSize="16dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/purpleNew"
+                            android:fontFamily="@font/montserrat"
+                            />
 
-                <ImageView
-                    android:id="@+id/iv_paymentsuccess"
-                    android:layout_width="match_parent"
-                    android:visibility="gone"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/payment_success"/>
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
 
-            </FrameLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/ll_totalfee"
-                android:orientation="horizontal"
-                android:layout_weight="0.075">
-                <TextView
-                    android:id="@+id/tv_total"
-                    android:textSize="18dp"
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_feeDetail"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/pb_payfees"
+                                android:indeterminateTint="@color/colorPrimary"
+                                android:layout_gravity="center"/>
+
+                            <ImageView
+                                android:id="@+id/iv_paymentsuccess"
+                                android:layout_width="match_parent"
+                                android:visibility="gone"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/payment_success"/>
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ll_totalfee"
+                            android:layout_margin="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:textSize="17dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/montserrat"
+                                android:text="Total Fee"/>
+
+                            <!--  Total text has to be removed from below textview -->
+                            <TextView
+                                android:id="@+id/tv_total"
+                                android:textSize="18dp"
+                                android:gravity="right"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/montserrat"
+                                android:layout_gravity="center"
+                                android:text=" \u20B9 0"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
 
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="TOTAL : \u20B9 0"/>
-
-            </LinearLayout>
 
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:weightSum="1"
-            android:orientation="vertical"
-            android:layout_weight="0.085">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fee_history"
+            android:layout_width="match_parent"
+            app:cardBackgroundColor="@color/blurpurple"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="8dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:weightSum="1"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:padding="10dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_fee_history"/>
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fee history"
+                    android:textSize="16dp"
+                    android:textColor="@color/purpleNew"
+                    android:fontFamily="@font/montserrat"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right">
 
-                <com.google.android.material.button.MaterialButton
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_forward_btn"/>
 
-                    android:id="@+id/paynow"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:layout_height="match_parent"
-                    android:text="Pay Now"/>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.01"
-                    android:background="@android:color/white"/>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fee_history"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.49"
-                    android:layout_gravity="center"
-                    android:layout_height="match_parent"
-                    android:text="Fee History"/>
-
+                </LinearLayout>
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:gravity="bottom">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/paynow"
+                android:layout_width="match_parent"
+                android:layout_margin="15dp"
+                android:padding="15dp"
+                android:textAllCaps="false"
+                app:cornerRadius="10dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Pay Now"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="0dp">
-
-    <LinearLayout
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -35,8 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                    android:textSize="15dp"
                     app:fontFamily="@font/montserrat" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -47,8 +40,8 @@
                     android:textColor="#88827F"
                     android:textSize="14dp"
                     app:fontFamily="@font/montserrat" />
-            </LinearLayout>
 
+            </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_feeamt"
@@ -58,11 +51,10 @@
                 android:layout_weight="0.5"
                 android:gravity="right"
                 android:text="hhjj"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:textStyle="bold"
                 app:fontFamily="@font/montserrat" />
 
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
