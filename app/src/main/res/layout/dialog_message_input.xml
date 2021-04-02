@@ -1,31 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:orientation="vertical">
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Subtitle1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Announcement Details"
+      android:textColor="@color/colorPrimary"
+      android:textSize="18dp"
+      android:layout_marginBottom="20dp"
+      app:fontFamily="@font/montserrat"/>
 
+  <com.google.android.material.textview.MaterialTextView
+      style="@style/TextAppearance.MaterialComponents.Body2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="15dp"
+      android:text="Description"
+      app:fontFamily="@font/montserrat" />
   <com.google.android.material.textfield.TextInputLayout
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:hint="@string/hint_message">
+      app:boxBackgroundColor="@color/blurpurple"
+      app:boxCornerRadiusTopStart="12dp"
+      app:boxCornerRadiusBottomEnd="12dp"
+      app:boxCornerRadiusBottomStart="12dp"
+      app:boxCornerRadiusTopEnd="12dp"
+      android:hint="Type here something...">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/messageField"
         android:layout_width="match_parent"
         android:layout_height="256dp"
+        android:fontFamily="@font/montserrat"
         android:gravity="start|top"
-        android:inputType="textMultiLine"/>
+        android:inputType="textMultiLine" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
-  <com.google.android.material.button.MaterialButton
-      style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-      android:id="@+id/okButton"
-      android:layout_width="wrap_content"
+  <com.google.android.material.button.MaterialButton      android:id="@+id/okButton"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:padding="12dp"
+      android:textColor="#ffffff"
+      android:textSize="16dp"
+      app:cornerRadius="9dp"
+      android:textAllCaps="false"
+      android:backgroundTint="@color/purpleNew"
+      android:fontFamily="@font/montserrat"
       android:layout_gravity="end"
       android:text="@string/label_send"/>
 
