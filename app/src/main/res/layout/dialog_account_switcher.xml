@@ -36,22 +36,48 @@
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/other_accounts_head"/>
+            android:fontFamily="@font/montserrat"
+            android:text="@string/other_accounts_head" />
 
         <ListView
             android:id="@+id/accountsList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal">
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            -->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:fontFamily="@font/montserrat"-->
+<!--            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"-->
+<!--            android:textStyle="bold"-->
+<!--            app:cornerRadius="16dp" />-->
+          <com.google.android.material.button.MaterialButton
+              style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+              android:id="@+id/addAccountButton"
+              android:layout_width="36dp"
+              android:layout_height="48dp"
+              android:layout_gravity="top|end"
+              android:padding="0dp"
+              app:icon="@drawable/ic_action_name"
+              app:iconSize="32dp"
+              app:iconPadding="4dp"
+              app:iconTint="@color/purpleNew"/>
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            android:id="@+id/addAccountButton"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:text="@string/label_add_account"
-            android:textStyle="bold"
-            app:cornerRadius="16dp"/>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/label_add_account" />
+        </LinearLayout>
 
       </LinearLayout>
 
@@ -66,22 +92,26 @@
           android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:id="@+id/privacyButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:maxLines="1"
-            android:text="@string/label_privacy"/>
+            android:text="@string/label_privacy"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@color/purpleNew" />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:id="@+id/tosButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:maxLines="1"
-            android:text="@string/label_tos"/>
+            android:text="@string/label_tos"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@color/purpleNew" />
 
       </LinearLayout>
 
@@ -97,7 +127,7 @@
         app:icon="@drawable/ic_action_sign_out"
         app:iconSize="28dp"
         app:iconPadding="4dp"
-        app:iconTint="?android:attr/textColorPrimary"/>
+        app:iconTint="@color/purpleNew"/>
 
   </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

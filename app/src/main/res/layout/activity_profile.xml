@@ -49,32 +49,35 @@
       </com.google.android.material.card.MaterialCardView>
 
       <com.google.android.material.button.MaterialButton
-          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
           android:id="@+id/changeUserImageButton"
+          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
           android:layout_width="wrap_content"
           android:layout_height="42dp"
-          android:layout_marginBottom="16dp"
           android:layout_marginTop="8dp"
+          android:layout_marginBottom="16dp"
+          android:fontFamily="@font/montserrat"
           android:text="@string/label_change_photo"
           android:textAllCaps="false"
           app:cornerRadius="16dp"/>
 
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body1"
           android:id="@+id/userNameLabel"
+          style="@style/TextAppearance.MaterialComponents.Body1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/ph_name"
-          android:textStyle="bold"/>
+          android:textStyle="bold"
+          app:fontFamily="@font/montserrat" />
 
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body2"
           android:id="@+id/headline"
+          style="@style/TextAppearance.MaterialComponents.Body2"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:autoLink="email"
+          android:text="@string/ph_type"
           android:textColorLink="?android:attr/textColorPrimary"
-          android:text="@string/ph_type"/>
+          app:fontFamily="@font/montserrat" />
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -93,11 +96,12 @@
               style="@style/TextAppearance.MaterialComponents.Caption"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
+              android:layout_marginTop="16dp"
               android:text="@string/about_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Birthday -->
           <com.google.android.material.button.MaterialButton
@@ -125,6 +129,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/label_male"
               android:textAllCaps="false"
@@ -151,7 +156,8 @@
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
               android:text="@string/academic_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Blood Type -->
           <com.google.android.material.button.MaterialButton
@@ -161,6 +167,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_assigned_class"
               android:textAllCaps="false"
@@ -178,6 +185,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/hint_student_roll_no"
               android:textAllCaps="false"
@@ -204,7 +212,8 @@
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
               android:text="@string/contact_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Address -->
           <com.google.android.material.button.MaterialButton
@@ -214,6 +223,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_address"
               android:textAllCaps="false"
@@ -231,6 +241,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_email"
               android:textAllCaps="false"
@@ -248,6 +259,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_phone"
               android:textAllCaps="false"
@@ -274,7 +286,8 @@
               android:layout_marginStart="24dp"
               android:layout_marginLeft="24dp"
               android:text="@string/emergency_head"
-              app:textAllCaps="true"/>
+              app:fontFamily="@font/montserrat"
+              app:textAllCaps="true" />
 
           <!-- Blood Type -->
           <com.google.android.material.button.MaterialButton
@@ -284,6 +297,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/hint_blood_group"
               android:textAllCaps="false"
@@ -301,6 +315,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_name"
               android:textAllCaps="false"
@@ -318,6 +333,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_email"
               android:textAllCaps="false"
@@ -335,6 +351,7 @@
               android:layout_height="32dp"
               android:layout_margin="0dp"
               android:clickable="false"
+              android:fontFamily="@font/montserrat"
               android:padding="0dp"
               android:text="@string/ph_phone"
               android:textAllCaps="false"
@@ -353,6 +370,7 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_marginTop="32dp"
+            android:fontFamily="@font/montserrat"
             android:padding="0dp"
             android:text="@string/label_change_password"
             android:textAllCaps="false"/>
@@ -362,6 +380,7 @@
             android:id="@+id/btn_phonelogin"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:fontFamily="@font/montserrat"
             android:padding="0dp"
             android:text="Login with Mobile"
             android:textAllCaps="false"/>
@@ -373,6 +392,7 @@
             android:id="@+id/deleteAccountButton"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
+            android:fontFamily="@font/montserrat"
             android:padding="0dp"
             android:text="@string/label_delete_account"
             android:textColor="@color/colorWarning"

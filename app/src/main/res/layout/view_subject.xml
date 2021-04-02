@@ -4,50 +4,62 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="96dp"
+    android:layout_height="150dp"
     app:cardUseCompatPadding="true"
     app:cardElevation="4dp">
 
   <LinearLayout
+      android:id="@+id/subjectColor"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:background="@drawable/gradient_subject"
       android:orientation="horizontal">
-
-    <View
-        android:id="@+id/subjectColor"
-        android:layout_width="4dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="8dp">
 
+      <androidx.appcompat.widget.AppCompatImageView
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_gravity="center"
+          android:background="@drawable/ic_subject_icon"
+          android:paddingTop="5dp"
+          android:paddingBottom="5dp" />
+
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body1"
           android:id="@+id/subjectName"
+          style="@style/TextAppearance.MaterialComponents.Body1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_gravity="center"
           android:maxLines="2"
           android:text="@string/app_name"
-          android:textStyle="bold"/>
+          android:textColor="@color/common_google_signin_btn_text_dark_default"
+          android:textStyle="bold"
+          app:fontFamily="@font/montserrat" />
 
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body2"
           android:id="@+id/subjectTeacher"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:maxLines="1" />
-
-      <com.google.android.material.textview.MaterialTextView
           style="@style/TextAppearance.MaterialComponents.Body2"
-          android:id="@+id/subjectClass"
+          android:layout_gravity="center"
+          android:textColor="@color/common_google_signin_btn_text_dark_default"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:maxLines="1"
-         />
+          app:fontFamily="@font/montserrat" />
+
+      <com.google.android.material.textview.MaterialTextView
+          android:id="@+id/subjectClass"
+          style="@style/TextAppearance.MaterialComponents.Body2"
+          android:layout_width="wrap_content"
+          android:layout_gravity="center"
+          android:layout_height="wrap_content"
+          android:textColor="@color/common_google_signin_btn_text_dark_default"
+          android:maxLines="1"
+          app:fontFamily="@font/montserrat" />
 
     </LinearLayout>
 

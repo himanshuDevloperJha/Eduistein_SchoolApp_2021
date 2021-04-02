@@ -37,6 +37,7 @@ import com.cygnus.model.School
 import com.cygnus.model.User
 import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.tasks.InvitationTask
+import com.cygnus.view.AccountSwitcher
 import com.cygnus.view.EmailsInputDialog
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
@@ -69,17 +70,22 @@ class SchoolDashboardActivity : DashboardActivity() {
     var classname: String? = null
     var teachername: String? = null
     lateinit var sp_loginsave: SharedPreferences;
-    lateinit var ed_loginsave: SharedPreferences.Editor;
+    lateinit var ed_loginsave: SharedPreferences.Editor
     private var mRegistrationBroadcastReceiver: BroadcastReceiver? = null
     var token: String? = null
     var currentVersion=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = ""
+       // toolbarsc_schoolname.setText(school)
+     //   setSupportActionBar(toolbar)
+       // supportActionBar?.title = ""
         Log.e("msg","schoolName----"+schoolId)
-
+        ivsc_profile.setOnClickListener {
+            AccountSwitcher.Builder(this)
+                    .setUser(currentUser)
+                    .show()
+        }
         sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", MODE_PRIVATE)
         ed_loginsave = sp_loginsave.edit()
 
@@ -140,6 +146,7 @@ class SchoolDashboardActivity : DashboardActivity() {
             intent.putExtra("studentschoolid", schoolId)
             intent.putExtra("studentschool_namee", schoolDetails.second)
             intent.putExtra("userrtypeeee", "School")
+            intent.putExtra("studentclassId", schoolId)
             startActivity(intent)
         }
         attendanceTeacher.setOnClickListener {

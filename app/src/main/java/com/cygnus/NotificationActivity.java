@@ -63,7 +63,10 @@ else if(userrrtypee.equals("Teacher")){
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                    if (datas.child("classId").getValue().toString().equalsIgnoreCase(classid)) {
+                    if (datas.child("username").getValue().toString().equalsIgnoreCase(SubjectTeacherName)) {
+                        String key=datas.getKey().toString();
+                        reference.child(key).child("status").setValue("read");
+
                         notificationlist.add(datas.child("message").getValue().toString());
 
                     }

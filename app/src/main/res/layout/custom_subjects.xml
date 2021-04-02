@@ -1,88 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    android:layout_width="match_parent"
     android:background="@android:color/white"
-    android:elevation="4dp"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="4dp"
-    android:layout_margin="10dp"
     android:layout_height="wrap_content">
-    <LinearLayout
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp">
+    <TableLayout
+        android:layout_height="wrap_content"
+        android:stretchColumns="2"
+        android:layout_width="match_parent">
+        <TableRow
+            android:layout_width="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_column="1">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="12dp"
+                    app:cardBackgroundColor="?android:attr/colorBackground"
+                    app:cardCornerRadius="32dp"
+                    app:strokeColor="?android:attr/textColorPrimary"
+                    app:strokeWidth="2dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ph_student" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                >
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="2">
+
+                    <TableRow android:layout_width="match_parent"
+                        android:paddingTop="10dp">
+
+                        <TextView
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="left"
+                            android:padding="0dp"
+                            android:text="@string/ph_name"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow android:paddingTop="5dp">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:stretchColumns="3 ">
+
+                            <TableRow>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="1"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:text="posted at "
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    app:fontFamily="@font/montserrat" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_column="2"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:text="@string/ph_date"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    app:fontFamily="@font/montserrat" />
+                                <LinearLayout
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:src="@drawable/ic_zoom_icon"/>
+                                    <TextView
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center_vertical"
+                                        android:textColor="@color/black"
+                                        android:text="Zoom Class"
+                                        android:layout_width="wrap_content" />
+                                </LinearLayout>
+                            </TableRow>
+
+                        </TableLayout>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+
+        </TableRow>
+    </TableLayout>
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:padding="15dp"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:checkable="false"
+        app:cardCornerRadius="15dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/blurpurple"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_subject"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/montserrat"
+                    android:text="English"
+                    android:textColor="@color/purpleNew"
+                    android:textSize="18dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Date: "
+                    android:textSize="16dp"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:id="@+id/tv_date"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_marginTop="3dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_starttime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Class time: "
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text=" to  "
+                    android:textSize="16dp"
+                    android:id="@+id/tv_endtime"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="English"
-                android:textSize="18dp"
-                android:id="@+id/tv_subject"
-                android:fontFamily="sans-serif"
+                android:text="Zoom Link: "
+                android:layout_marginTop="3dp"
+                android:textSize="16dp"
+                android:id="@+id/tv_zoomlink"
+                android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorPrimary"
                 />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Date: "
-                android:textSize="16dp"
-                android:layout_weight="0.5"
-                android:gravity="end"
-                android:id="@+id/tv_date"
-                android:fontFamily="sans-serif"
-                android:textColor="#78726E"
-                />
+
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginTop="3dp"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Start Time: "
-            android:textSize="16dp"
-            android:layout_weight="0.5"
-
-            android:id="@+id/tv_starttime"
-            android:fontFamily="sans-serif"
-            android:textColor="#78726E"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_height="wrap_content"
-            android:text="End Time: "
-            android:gravity="end"
-            android:textSize="16dp"
-            android:id="@+id/tv_endtime"
-            android:fontFamily="sans-serif"
-            android:textColor="#78726E"
-            />
-    </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Zoom Link: "
-            android:layout_marginTop="3dp"
-            android:textSize="16dp"
-            android:id="@+id/tv_zoomlink"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/colorPrimary"
-            />
-
-    </LinearLayout>
 
 
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -31,6 +31,7 @@ import com.cygnus.feed.PendingApprovalPosts
 import com.cygnus.model.*
 import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.timetable.TimetablePagerAdapter
+import com.cygnus.view.AccountSwitcher
 import com.cygnus.view.SubjectView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
@@ -92,12 +93,34 @@ class TeacherDashboardActivity : DashboardActivity() {
     lateinit var class_st_yt_title: TextInputEditText;
     lateinit var class_st_yt_youtubelink: TextInputEditText;
     var currentVersion=""
+    var noticounter=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard_teacher)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = school
+       // setSupportActionBar(toolbar)
+       // supportActionBar?.title = school
+        toolbar_schoolname.setText(school)
+
+        ivt_profile.setOnClickListener {
+            AccountSwitcher.Builder(this)
+                    .setUser(currentUser)
+                    .show()
+        }
+        ivt_notification.setOnClickListener {
+            if(currentUser.type.equals("Student")){
+                val intent = Intent(this, NotificationActivity::class.java)
+                startActivity(intent)
+            }
+            else if(currentUser.type.equals("Teacher")){
+                val intent = Intent(this, NotificationActivity::class.java)
+                intent.putExtra("studentname", currentUser.name)
+                intent.putExtra("studentschoolid", schoolId)
+                intent.putExtra("studentschool_namee", schoolDetails.second)
+                intent.putExtra("studenttype","Teacher")
+                startActivity(intent)
+            }
+        }
 
         forceUpdate()
         // Only allow a signed in teacher to access this page
@@ -143,6 +166,30 @@ class TeacherDashboardActivity : DashboardActivity() {
         classTeacherCard.visibility = View.VISIBLE
         className.text = currentTeacher.classId
         getStudentCount()
+
+
+
+//get notification count
+        val  notireference = FirebaseDatabase.getInstance().reference.child(schoolId).child("TeacherNotifications")
+        notireference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (datas in dataSnapshot.children) {
+                    if (datas.child("username").value.toString().equals(currentTeacher.name, ignoreCase = true)
+                            && datas.child("status").value.toString().equals("unread")) {
+                        noticounter++
+                    }
+                }
+                if(noticounter>0){
+                    tv_countnoti.visibility=View.VISIBLE
+                    tv_countnoti.setText(noticounter.toString())
+                }
+             //   Toast.makeText(applicationContext,"Counter:"+noticounter,Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
+
        /* if (currentTeacher.isClassTeacher()) {
             classTeacherCard.visibility = View.VISIBLE
             className.text = currentTeacher.classId
@@ -186,14 +233,14 @@ class TeacherDashboardActivity : DashboardActivity() {
 
             startActivity(intent)
         }
-        tchr_notifications.setOnClickListener {
+       /* tchr_notifications.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             intent.putExtra("studentname", currentUser.name)
             intent.putExtra("studentschoolid", schoolId)
             intent.putExtra("studentschool_namee", schoolDetails.second)
             intent.putExtra("studenttype","Teacher")
             startActivity(intent)
-        }
+        }*/
         addChapternoList()
 
         feedteacher.setOnClickListener {
@@ -214,7 +261,7 @@ class TeacherDashboardActivity : DashboardActivity() {
             intent.putExtra("studentschool_namee", schoolDetails.second)
             intent.putExtra("student_teacheridd", currentTeacher.classId)
             intent.putExtra("userrtypeeee", "Teacher")
-
+            intent.putExtra("studentclassId", currentTeacher.classId)
             startActivity(intent)
 
         }
@@ -794,7 +841,7 @@ class TeacherDashboardActivity : DashboardActivity() {
         val packageManager: PackageManager = this.getPackageManager()
         try {
             val packageInfo: PackageInfo = packageManager.getPackageInfo(getPackageName(),0)
-          //  currentVersion  = packageInfo.versionName
+           // currentVersion  = packageInfo.versionName
             currentVersion  ="50+"
             ForceUpdateAsync(currentVersion,this).execute()
         } catch (e: PackageManager.NameNotFoundException ) {
@@ -895,7 +942,7 @@ class TeacherDashboardActivity : DashboardActivity() {
                 "https://fcm.googleapis.com/fcm/send", obj,
                 Response.Listener { response ->
                     Log.e("msg", "onResponse111111: $response")
-                    val post = StoreNotifications(currentTeacher.classId, bodyy);
+                    val post = StoreNotifications(currentTeacher.name,currentTeacher.classId, bodyy,"unread");
 
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolId).

@@ -7,7 +7,10 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
-import android.os.*
+import android.os.AsyncTask
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +21,11 @@ import androidx.annotation.NonNull
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.aspirasoft.adapter.ModelViewAdapter
+import com.cygnus.adapter.NotificationAdapter
 import com.cygnus.chatstaff.Chat
-import com.cygnus.chatstaff.UserDetails
 import com.cygnus.core.DashboardActivity
 import com.cygnus.coursefeature.SingleCourseActivity
 import com.cygnus.dao.NoticeBoardDao
@@ -30,11 +34,10 @@ import com.cygnus.dao.UsersDao
 import com.cygnus.feed.FeedActivity
 import com.cygnus.feesmanage.PayFees
 import com.cygnus.model.*
-import com.cygnus.notifications.AlarmReceiverQuizz
 import com.cygnus.notifications.GCMRegistrationIntentService
-import com.cygnus.notifications.ShowNotification
 import com.cygnus.quiz.StartQuizActivity
 import com.cygnus.timetable.TimetablePagerAdapter
+import com.cygnus.view.AccountSwitcher
 import com.cygnus.view.SubjectView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
@@ -82,13 +85,34 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
     lateinit var reference2: DatabaseReference
     lateinit var reference5: DatabaseReference
     var usertotalpoints = 0
-
+    var noticounter=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard_student)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = school
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.title = school
+        toolbarst_schoolname.setText(school)
+
+        ivst_profile.setOnClickListener {
+            AccountSwitcher.Builder(this)
+                    .setUser(currentUser)
+                    .show()
+        }
+        ivst_notification.setOnClickListener {
+            if(currentUser.type.equals("Student")){
+                val intent = Intent(this, NotificationActivity::class.java)
+                startActivity(intent)
+            }
+            else if(currentUser.type.equals("Teacher")){
+                val intent = Intent(this, NotificationActivity::class.java)
+                intent.putExtra("studentname", currentUser.name)
+                intent.putExtra("studentschoolid", schoolId)
+                intent.putExtra("studentschool_namee", schoolDetails.second)
+                intent.putExtra("studenttype","Teacher")
+                startActivity(intent)
+            }
+        }
 
         forceUpdate()
 
@@ -164,10 +188,38 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
         ed_loginsave.putString("user_standard", standard)
         ed_loginsave.putString("userrrtypee", "Student")
 
+        ed_loginsave.putString("SubjectTeacherName", currentStudent.name)
+        ed_loginsave.putString("SubjectTeacherClassId", currentStudent.classId)
+        ed_loginsave.putString("student_email", currentStudent.email)
         ed_loginsave.commit()
 
+        schoolid=schoolId
+        classid=currentStudent.classId
+        username=currentStudent.name
 
         getCoins()
+
+
+       val  notireference = FirebaseDatabase.getInstance().reference.child(schoolId).child("Notifications")
+        notireference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (datas in dataSnapshot.children) {
+                    if (datas.child("username").value.toString().equals(currentStudent.name, ignoreCase = true)
+                            && datas.child("status").value.toString().equals("unread")) {
+                        noticounter++
+                    }
+                }
+                if(noticounter>0){
+                   // tvst_countnoti.visibility=View.VISIBLE
+                    tvst_countnoti.setText(noticounter.toString())
+                }
+               // Toast.makeText(applicationContext,"Counter:"+noticounter,Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
+
        /* val notificationIntent:Intent  =  Intent(applicationContext, ShowNotification::class.java);
         val contentIntent:PendingIntent  = PendingIntent.getService(applicationContext, 0, notificationIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT)
@@ -207,10 +259,10 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
 
                    startActivity(intent)
         }
-        class_yt_notifications.setOnClickListener {
+        /*class_yt_notifications.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         classFees.setOnClickListener {
             val intent = Intent(this, PayFees::class.java)
@@ -235,6 +287,7 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
             i.putExtra("chat_username", currentStudent.name)
             i.putExtra("name_chatwith", teachername)
             i.putExtra("userrtypeeee", "Student")
+            i.putExtra("studentclassId", currentStudent.classId)
             i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
             startActivity(i)
         }
@@ -377,8 +430,8 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
         val packageManager: PackageManager = this.getPackageManager()
         try {
             val packageInfo: PackageInfo = packageManager.getPackageInfo(getPackageName(),0)
-            //currentVersion  = packageInfo.versionName
-            currentVersion  ="50+"
+           // currentVersion  = packageInfo.versionName
+           currentVersion  ="50+"
             ForceUpdateAsync(currentVersion,this).execute()
         } catch (e: PackageManager.NameNotFoundException ) {
             Log.e("msg","Crashhhhh:"+e.toString())
@@ -388,6 +441,9 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
     }
     companion object {
         private var latestVersion: String? = null
+        private var schoolid: String? = null
+        private var classid: String? = null
+        private var username: String? = null
     }
     class ForceUpdateAsync(private val currentVersion: String, private val context: Context) :
             AsyncTask<String?, String?, JSONObject>() {
@@ -833,10 +889,38 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
                 mBuilder.setChannelId(channelId)
             }
             mNotificationManager.notify(0, mBuilder.build())
+
+            val post = StoreNotifications(username,classid, "Fee Due for " + monthname,"unread")
+            val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolid.toString()).
+                    child("Notifications").push()
+            missionsReference.setValue(post)
         }
     }
 
+    class AlarmReceiverQuizz : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) { // TODO Auto-generated method stub
+            val `when` = System.currentTimeMillis()
+            val notificationManager = context
+                    .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationIntent = Intent(context, SplashActivity::class.java)
+            notificationIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            val pendingIntent = PendingIntent.getActivity(context, 0,
+                    notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val mNotifyBuilder = NotificationCompat.Builder(
+                    context).setSmallIcon(R.drawable.applogo)
+                    .setContentTitle("Eduistein")
+                    .setContentText("Quiz Time\nTime to Challenge your friends,sharpen your mind, Learn and much more in just 10 minutes!!")
+                    .setWhen(`when`)
+                    .setContentIntent(pendingIntent)
+            notificationManager.notify(`when`.toInt(), mNotifyBuilder.build())
 
+            val post = StoreNotifications(username,classid,
+                    "Quiz Time\nTime to Challenge your friends,sharpen your mind, Learn and much more in just 10 minutes!!","unread")
+            val missionsReference = FirebaseDatabase.getInstance().reference.child(schoolid.toString()).
+                    child("Notifications").push()
+            missionsReference.setValue(post)
+        }
+    }
 
 }
 

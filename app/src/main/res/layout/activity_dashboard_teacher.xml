@@ -12,15 +12,64 @@
   <com.google.android.material.appbar.AppBarLayout
       android:layout_width="match_parent"
       android:layout_height="55dp"
-      android:background="@drawable/bg"
+      android:background="@drawable/white_bg"
       app:elevation="0dp">
     <!--    android:background="@android:color/transparent"-->
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
         android:layout_height="?attr/actionBarSize"
-        app:layout_scrollFlags="scroll"
-        app:titleTextColor="#fff" />
+         >
+<LinearLayout
+    android:layout_width="0dp"
+    android:gravity="center"
+    android:layout_height="match_parent"
+  android:layout_weight="0.8">
+  <TextView
+      android:layout_width="match_parent"
+      android:text="Kapil School"
+      android:textSize="18dp"
+      android:textStyle="bold"
+      android:id="@+id/toolbar_schoolname"
+      android:layout_marginLeft="10dp"
+      android:textColor="@color/colorPrimary"
+      android:layout_height="wrap_content"/>
+</LinearLayout>
+<FrameLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+  android:layout_weight="0.1">
+  <ImageView
+      android:layout_width="match_parent"
+      android:src="@drawable/iconn_noti"
+      android:padding="7dp"
+      android:id="@+id/ivt_notification"
+      android:layout_height="match_parent"/>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:textSize="6dp"
+      android:layout_marginTop="12dp"
+      android:textColor="@android:color/white"
+      android:padding="2dp"
+      android:visibility="gone"
+      android:id="@+id/tv_countnoti"
+      android:layout_gravity="right"
+      android:layout_marginRight="6dp"
+      android:background="@android:color/holo_red_dark"
+      android:layout_height="wrap_content"/>
+</FrameLayout>
+
+      <ImageView
+          android:layout_width="0dp"
+          android:padding="7dp"
+          android:id="@+id/ivt_profile"
+          android:layout_weight="0.1"
+          android:src="@drawable/ic_action_account"
+          android:layout_height="match_parent"/>
+    </LinearLayout>
 
   </com.google.android.material.appbar.AppBarLayout>
 
@@ -206,11 +255,29 @@
                 app:iconSize="24dp"
                 android:textSize="10dp"/>
 
-            <com.google.android.material.button.MaterialButton
+           <!-- <com.google.android.material.button.MaterialButton
                 android:id="@+id/tchr_notifications"
                 android:text="My Notifications"
                 app:icon="@drawable/ic_notifications_black_24dp"
                 android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                app:cornerRadius="20dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textAllCaps="true"
+                android:textAlignment="textStart"
+                app:iconSize="34dp"
+                android:textSize="10dp"/>-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/chatbutton"
+                android:text="Chat"
+                app:icon="@drawable/ic_chat_black_24dp"
+                android:layout_width="0dp"
+
                 android:layout_marginRight="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_gravity="fill"
@@ -241,20 +308,7 @@
                 android:textSize="10dp"/>
 
           </GridLayout>
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/chatbutton"
-              android:text="Chat"
-              app:icon="@drawable/ic_chat_black_24dp"
-              android:layout_marginRight="2dp"
-              android:layout_marginLeft="2dp"
-              android:layout_width="match_parent"
-              android:layout_gravity="fill"
-              app:cornerRadius="20dp"
-              android:layout_height="50dp"
-              android:padding="10dp"
-              android:textAllCaps="true"
-              android:textAlignment="center"
-              app:iconSize="34dp"/>
+
         </LinearLayout>
 
       </com.google.android.material.card.MaterialCardView>

@@ -13,15 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/date_back"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:padding="9dp"
-        android:layout_gravity="center"
-        android:text="11 March 2021"
+        android:text="Tue, 11March 2021"
         android:textAllCaps="true"
-        android:textSize="13sp"
         android:textColor="#403C3A"
-        />
+        android:textSize="13sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_marginTop="3dp"
@@ -29,64 +28,65 @@
         android:orientation="vertical"
         android:id="@+id/ll_chat">
         <LinearLayout
-            android:layout_width="wrap_content"
             android:id="@+id/fr_chat"
-            android:padding="5dp"
-            android:background="@drawable/rounded_corner1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            >
+            android:background="@drawable/rounded_corner1"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:textColor="#E6E2E0"
-                android:visibility="gone"
-                android:textSize="10dp"
-                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_chatdate"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#E6E2E0"
+                android:textSize="10dp"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_msguser"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/darker_gray"
-                    android:layout_gravity="left"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:gravity="right"
-                    android:textSize="11dp"
-                    android:fontFamily="sans-serif"
-                    />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_msguser"
                     android:layout_width="wrap_content"
-                    android:textSize="18dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="right"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="11dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_chatmsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
-                    android:paddingBottom="3dp"
-                    android:paddingRight="5dp"
                     android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="3dp"
                     android:text="how are you"
                     android:textColor="@android:color/white"
-                    android:id="@+id/tv_chatmsg"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/tv_msgtime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/darker_gray"
                     android:layout_gravity="bottom|right"
                     android:layout_marginRight="5dp"
+                    android:fontFamily="sans-serif"
                     android:gravity="right"
                     android:text="11:09:99 AM"
-                    android:textSize="10dp"
-                    android:fontFamily="sans-serif"
-                    />
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="10dp" />
             </LinearLayout>
 
 

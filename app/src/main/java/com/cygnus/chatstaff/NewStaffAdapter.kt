@@ -17,7 +17,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 
 class NewStaffAdapter(val context: Activity, val timestampList: ArrayList<Sortchatmodel>,
-                 val schoolid:String, val username:String,val userrtypeeee:String,
+                 val schoolid:String, val username:String,val userrtypeeee:String,val classId:String,
                    val chatmessageinterface:Chatmessageinterface)
     :  ModelViewAdapterrr<Sortchatmodel>(context, timestampList, StaffView::class)
 
@@ -104,6 +104,7 @@ ll_chatname.setOnClickListener(View.OnClickListener {
         i.putExtra("chat_username", username)
         i.putExtra("name_chatwith", timestampList.get(position).chatusername)
            i.putExtra("userrtypeeee", userrtypeeee)
+        i.putExtra("studentclassId", classId)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         context.startActivity(i)
     }

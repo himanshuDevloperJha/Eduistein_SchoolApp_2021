@@ -10,8 +10,8 @@
     <string name="ph_address">74 Bangur Avenue, Kolkata, West Bengal</string>
     <string name="ph_date">2 January, 1961</string>
     <string name="ph_assigned_class">Assigned Class</string>
-    <string name="ph_email">bdeshmukh91@gmail.com</string>
-    <string name="ph_name">Brahman Deshmukh</string>
+    <string name="ph_email">kushalghosh9899@gmail.com</string>
+    <string name="ph_name">Kushal Ghosh</string>
     <string name="ph_phone">+9125742299</string>
     <string name="ph_school">The Exemplary School</string>
     <string name="ph_student_count">%d Student(s)</string>
@@ -43,7 +43,7 @@
 
     <!-- Button Labels -->
     <string name="label_add">Add</string>
-    <string name="label_add_account">Add Account</string>
+    <string name="label_add_account">Add other accounts</string>
     <string name="label_announcements">Announcements</string>
     <string name="label_class_teacher">Class Teacher</string>
     <string name="label_edit">Edit</string>
@@ -53,7 +53,7 @@
     <string name="label_manage_classes">Class\nManagement</string>
     <string name="label_manage_courses">Course\nManagement</string>
     <string name="label_news">News</string>
-    <string name="label_profile">Manage your Eduistein Profile</string>
+    <string name="label_profile">Edit your profile</string>
     <string name="label_revoke">Revoke</string>
     <string name="label_save">Save</string>
     <string name="label_skip_teacher_assignment">Assign a teacher later.</string>
@@ -65,8 +65,8 @@
     <string name="label_mark_attendance">Mark Attendance</string>
     <string name="label_non_binary">Other</string>
     <string name="label_privacy">Privacy Policy</string>
-    <string name="label_see_attendance">See Attendance</string>
-    <string name="label_see_grades">See Grades</string>
+    <string name="label_see_attendance">My attendance</string>
+    <string name="label_see_grades">My grades</string>
     <string name="label_send">Send</string>
     <string name="label_tos">Terms of Service</string>
     <string name="label_change_photo">Change Photo</string>

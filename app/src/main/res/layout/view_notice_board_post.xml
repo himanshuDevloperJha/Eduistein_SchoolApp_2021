@@ -1,77 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="10dp">
+    android:paddingHorizontal="2dp">
+
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="2">
+  <TableRow
+      android:layout_width="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_column="1">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="12dp"
+        app:cardBackgroundColor="?android:attr/colorBackground"
+        app:cardCornerRadius="32dp"
+        app:strokeColor="?android:attr/textColorPrimary"
+        app:strokeWidth="2dp">
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/userImage"
+          android:layout_width="64dp"
+          android:layout_height="64dp"
+          android:scaleType="centerCrop"
+          android:src="@drawable/ph_student" />
+    </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        >
+      <TableLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:stretchColumns="2">
+
+        <TableRow android:layout_width="match_parent">
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/postAuthor"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="match_parent"
+              android:layout_height="32dp"
+              android:fontFamily="@font/montserrat"
+              android:gravity="left"
+              android:padding="0dp"
+              android:text="@string/ph_name"
+              android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+              android:textColor="@color/black"
+              android:textSize="15sp"
+              android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:paddingTop="15dp">
+
+          <TableLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:stretchColumns="2 ">
+
+            <TableRow>
+
+              <com.google.android.material.textview.MaterialTextView
+                  style="@style/TextAppearance.MaterialComponents.Caption"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_column="1"
+                  android:layout_gravity="right"
+                  android:text="posted at "
+                  android:textColor="@color/grey"
+                  android:textSize="12sp"
+                  app:fontFamily="@font/montserrat" />
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/postDate"
+                  style="@style/TextAppearance.MaterialComponents.Caption"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_column="2"
+                  android:layout_gravity="right"
+                  android:text="@string/ph_date"
+                  android:textColor="@color/grey"
+                  android:textSize="12sp"
+                  app:fontFamily="@font/montserrat" />
+            </TableRow>
+          </TableLayout>
+        </TableRow>
+      </TableLayout>
+    </LinearLayout>
 
 
-  <LinearLayout
+  </TableRow>
+
+</TableLayout>
+
+
+  <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:background="@drawable/box"
-      android:padding="@dimen/_8dp">
+      android:checkable="false"
+      app:cardCornerRadius="15dp"
+      app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:background="@color/blurpurple"
+        android:orientation="vertical"
+        android:padding="@dimen/_8dp">
 
       <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Caption"
+          android:id="@+id/postContent"
+          style="@style/TextAppearance.MaterialComponents.Body1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="at "
-          android:textColor="@android:color/black"
-          android:textSize="12sp" />
-
-      <com.google.android.material.textview.MaterialTextView
-          android:id="@+id/postDate"
-          style="@style/TextAppearance.MaterialComponents.Caption"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/ph_date"
-          android:textColor="@android:color/black"
-          android:textSize="12sp" />
+          android:layout_margin="8dp"
+          android:fontFamily="@font/montserrat"
+          android:text="@string/academics_desc"
+          android:textColor="@android:color/black" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/postAuthor"
-          style="@style/Widget.MaterialComponents.Button.TextButton"
-          android:layout_width="wrap_content"
-          android:layout_height="32dp"
-          android:padding="0dp"
-          android:text="@string/ph_name"
-          android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-          android:textSize="13sp"
-          android:textStyle="bold"
-          app:rippleColor="@android:color/transparent" />
-
-      <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Caption"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text=" wrote:"
-          android:textColor="@android:color/black"
-          android:textSize="13sp" />
-    </LinearLayout>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/postContent"
-        style="@style/TextAppearance.MaterialComponents.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/academics_desc"
-        android:textColor="@android:color/black" />
-  </LinearLayout>
-
+  </androidx.cardview.widget.CardView>
 </LinearLayout>

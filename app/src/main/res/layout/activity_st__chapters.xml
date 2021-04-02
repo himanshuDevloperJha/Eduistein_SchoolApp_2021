@@ -18,29 +18,48 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:text="Chapters"
+            android:text="Videos"
             android:textColor="@color/colorPrimary"
             android:textSize="18dp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/montserrat"/>
     </LinearLayout>
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#A6A09C" />
-
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select your chapter to watch the latest content videos."
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat"
+            />
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="220dp"
+            android:layout_height="170dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/videos_screen2"
+            />
+    </LinearLayout>
+s
     <FrameLayout
         android:layout_width="match_parent"
-        android:background="@drawable/baxkground_subjects"
+        android:layout_margin="10dp"
         android:layout_height="match_parent">
         <co.aspirasoft.view.NestedGridView
             android:id="@+id/gv_chapters"
             android:horizontalSpacing="5dp"
             android:verticalSpacing="5dp"
-            android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="2"/>
+            android:numColumns="1"/>
 
         <ProgressBar
             android:layout_width="wrap_content"

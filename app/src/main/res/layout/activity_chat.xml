@@ -17,8 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_chat"
             app:title="Chat"
-            app:titleTextColor="@android:color/white"
-            android:background="@color/colorpurple"
+            app:titleTextColor="@color/purpleNew"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:layout_scrollFlags="scroll"/>

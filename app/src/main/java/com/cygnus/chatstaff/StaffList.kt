@@ -49,6 +49,7 @@ lateinit var userrtypeeee:String
     lateinit var ed_loginsave: SharedPreferences.Editor
     lateinit var formattedDate:String
     lateinit var time:String
+     var classId:String=""
     lateinit var date_time:String
      var sendmessage_successful:String="false"
      var chatclick_position:Int=-1
@@ -73,6 +74,7 @@ lateinit var userrtypeeee:String
             teachername = intent.getStringExtra("studentname")
             schoolname = intent.getStringExtra("studentschool_namee")
             student_teacheridd = intent.getStringExtra("student_teacheridd")
+            classId = intent.getStringExtra("studentclassId")
 
 
         }
@@ -230,7 +232,7 @@ lateinit var userrtypeeee:String
                     }
                     //timestampnamelist.sortedBy { it.date.toDate() }
                     Collections.reverse(timestampnamelist)
-                    staffAdapter = NewStaffAdapter(this@StaffList, timestampnamelist,schoolid,teachername,userrtypeeee,
+                    staffAdapter = NewStaffAdapter(this@StaffList, timestampnamelist,schoolid,teachername,userrtypeeee,classId,
                             this@StaffList)
                     usersList!!.adapter = staffAdapter
 

@@ -1,60 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/attendance_listitem_back"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin">
-
-  <RadioGroup
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-
-    <com.google.android.material.radiobutton.MaterialRadioButton
-        android:id="@+id/markPresentButton"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:buttonTint="?attr/colorPrimary"/>
-
-    <com.google.android.material.radiobutton.MaterialRadioButton
-        android:id="@+id/markAbsentButton"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:buttonTint="@color/colorWarning"/>
-
-  </RadioGroup>
-  <LinearLayout
-      android:layout_width="3dp"
-      android:layout_height="match_parent"
-      android:background="@android:color/white"/>
-
-  <LinearLayout
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+  <com.google.android.material.card.MaterialCardView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
-      android:layout_marginLeft="8dp"
-      android:orientation="vertical">
-
-    <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body1"
-        android:id="@+id/nameField"
-        android:layout_width="wrap_content"
+      app:cardBackgroundColor="@color/blurpurple"
+      android:elevation="10dp"
+      android:layout_margin="10dp">
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ph_name"
-        android:textAllCaps="true"
-        android:textStyle="bold"/>
+        android:padding="15dp"
+        android:stretchColumns="3">
+      <TableRow>
 
-    <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body2"
-        android:id="@+id/rollNo"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/markPresentButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/present_active"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            >
+          <TableLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+            android:stretchColumns="1">
+            <TableRow>
+              <TextView
+                  android:id="@+id/nameField"
+                  android:layout_weight="1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:textColor="@color/black"
+                  android:textSize="16dp"
+                  android:textAlignment="center"
+                  android:text="You are Present on"/>
+            </TableRow>
+            <TableRow>
+              <TextView
+                  android:id="@+id/rollNo"
+                  android:layout_weight="1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAlignment="center"
+                  android:fontFamily="@font/montserrat"
+                  android:textColor="@color/black"
+                  android:textSize="16dp"
+                  android:text="27 -11-2020"/>
+
+            </TableRow>
+          </TableLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/markAbsentButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:src="@drawable/ic_absent_deactive"/>
+      </TableRow>
+    </TableLayout>
+
+
+  </com.google.android.material.card.MaterialCardView>
+
+<!--  For Absent -->
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:cardBackgroundColor="@color/blurpurple"
+      android:elevation="10dp"
+      android:layout_margin="10dp">
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hint_student_roll_no"/>
+        android:padding="15dp"
+        android:stretchColumns="3">
+      <TableRow>
 
-  </LinearLayout>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_present_deactive"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="3"
+            >
+          <TableLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:stretchColumns="1">
+            <TableRow>
+              <TextView
+                  android:layout_weight="1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:textColor="@color/black"
+                  android:textSize="16dp"
+                  android:textAlignment="center"
+                  android:text="You are Absent on"/>
+            </TableRow>
+            <TableRow>
+              <TextView
+                  android:layout_weight="1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAlignment="center"
+                  android:fontFamily="@font/montserrat"
+                  android:textColor="@color/black"
+                  android:textSize="16dp"
+                  android:text="27 -11-2020"/>
+
+            </TableRow>
+          </TableLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:src="@drawable/ic_absent_active"/>
+      </TableRow>
+    </TableLayout>
+
+
+  </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
+

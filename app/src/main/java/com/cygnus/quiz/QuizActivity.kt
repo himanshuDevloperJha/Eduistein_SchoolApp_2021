@@ -1,8 +1,10 @@
 package com.cygnus.quiz
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
@@ -16,6 +18,7 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -428,7 +431,7 @@ class QuizActivity : AppCompatActivity() {
                 getQuestions()
             }
 
-        }, 30000)
+        }, 8000)
 
 
         btn_nextquiz.setOnClickListener {
@@ -441,98 +444,102 @@ class QuizActivity : AppCompatActivity() {
                         getQuizanstimestamp()
                     }
                     else if(!selectedanswer.contains(correctanswer)){
-                    refseconduserr = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
-                    refseconduserr.orderByChild("username").equalTo(tv_secondname.text.toString()).
-                            addListenerForSingleValueEvent(object : ValueEventListener {
-                                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        for (datas in dataSnapshot.children) {
-                                            keyseconduserr = datas.key.toString()
-                                            markansvalue = datas.child("markanswrong").value.toString()
-                                            markansstatus = datas.child("ansstatus").value.toString()
 
-                                        }
-                                        reffquizanswersmarked = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
-                                        queryanswermarked = reffquizanswersmarked.orderByChild("username").equalTo(studentname)
-                                        queryanswermarked.addListenerForSingleValueEvent(object : ValueEventListener {
-                                            override fun onDataChange(dataSnapshotquiz: DataSnapshot) {
-                                                if (dataSnapshotquiz.exists()) {
-                                                    for(dtq in dataSnapshotquiz.children){
-                                                        val tsLong = System.currentTimeMillis() / 1000
-                                                        val ts = tsLong.toString()
-                                                        quizanswermarkedkey = dtq.key.toString()
-                                                    }
+                        refseconduserr = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
+                        refseconduserr.orderByChild("username").equalTo(tv_secondname.text.toString()).
+                                addListenerForSingleValueEvent(object : ValueEventListener {
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            for (datas in dataSnapshot.children) {
+                                                keyseconduserr = datas.key.toString()
+                                                markansvalue = datas.child("markanswrong").value.toString()
+                                                markansstatus = datas.child("ansstatus").value.toString()
 
-
-                                                    if(quizwrongans.equals("wrongans") && markansvalue.equals("")){
-                                                        singlewrongmarked="wrongfirst"
-                                                        reffquizanswersmarked.child(quizanswermarkedkey).child("markanswrong").setValue("yes")
-
-                                                        if(selectedanswer.contains("A.  ",ignoreCase = true)){
-                                                            rb_optiona.isChecked = true
-                                                            rb_optiona.setBackgroundColor(Color.parseColor("#F89A9D"))
-                                                        }
-                                                        else if(selectedanswer.contains("B.  ",ignoreCase = true)){
-                                                            rb_optionb.isChecked = true
-                                                            rb_optionb.setBackgroundColor(Color.parseColor("#F89A9D"))
-                                                        }
-                                                        else if(selectedanswer.contains("C.  ",ignoreCase = true)){
-                                                            rb_optionc.isChecked = true
-                                                            rb_optionc.setBackgroundColor(Color.parseColor("#F89A9D"))
-                                                        }
-                                                        else if(selectedanswer.contains("D.  ",ignoreCase = true)){
-                                                            rb_optiond.isChecked = true
-                                                            rb_optiond.setBackgroundColor(Color.parseColor("#F89A9D"))
+                                            }
+                                            reffquizanswersmarked = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
+                                            queryanswermarked = reffquizanswersmarked.orderByChild("username").equalTo(studentname)
+                                            queryanswermarked.addListenerForSingleValueEvent(object : ValueEventListener {
+                                                override fun onDataChange(dataSnapshotquiz: DataSnapshot) {
+                                                    if (dataSnapshotquiz.exists()) {
+                                                        for(dtq in dataSnapshotquiz.children){
+                                                            val tsLong = System.currentTimeMillis() / 1000
+                                                            val ts = tsLong.toString()
+                                                            quizanswermarkedkey = dtq.key.toString()
                                                         }
 
-                                                        Snackbar.make(btn_nextquiz,"Oops... Your answer is wrong\n"+"Please wait for "+tv_secondname.text.toString(),Snackbar.LENGTH_LONG).show()
+                                                        Log.e("msg","VALUESSSSSNEHAWRONG::"+quizwrongans+"  ,   AnsValue:"+markansvalue)
+                                                        if(quizwrongans.equals("wrongans") && markansvalue.equals("")){
+                                                            singlewrongmarked="wrongfirst"
+                                                            reffquizanswersmarked.child(quizanswermarkedkey).child("markanswrong").setValue("yes")
 
-                                                        if(markansstatus.equals("true")){
+                                                            if(selectedanswer.contains("A.  ",ignoreCase = true)){
+                                                                rb_optiona.isChecked = true
+                                                                rb_optiona.setBackgroundColor(Color.parseColor("#F89A9D"))
+                                                            }
+                                                            else if(selectedanswer.contains("B.  ",ignoreCase = true)){
+                                                                rb_optionb.isChecked = true
+                                                                rb_optionb.setBackgroundColor(Color.parseColor("#F89A9D"))
+                                                            }
+                                                            else if(selectedanswer.contains("C.  ",ignoreCase = true)){
+                                                                rb_optionc.isChecked = true
+                                                                rb_optionc.setBackgroundColor(Color.parseColor("#F89A9D"))
+                                                            }
+                                                            else if(selectedanswer.contains("D.  ",ignoreCase = true)){
+                                                                rb_optiond.isChecked = true
+                                                                rb_optiond.setBackgroundColor(Color.parseColor("#F89A9D"))
+                                                            }
+
+                                                            Snackbar.make(btn_nextquiz,"Oops... Your answer is wrong\n"+"Please wait for "+tv_secondname.text.toString(),Snackbar.LENGTH_LONG).show()
+
+                                                            if(markansstatus.equals("true")){
+                                                                flagindexfour="wrongg"
+                                                                testflag=""
+                                                                nextQues()
+                                                                startTimer()
+                                                            }
+
+                                                        }
+                                                        else if(quizwrongans.equals("wrongans") && markansvalue.equals("yes")){
+
+                                                            reffquizanswersmarked.child(quizanswermarkedkey).child("timestatus").setValue("true")
+                                                            reffquizanswersmarked.child(quizanswermarkedkey).child("ansstatus").setValue("true")
+                                                            reffquizanswersmarked.child(quizanswermarkedkey).child("flagstatus").setValue("false")
                                                             flagindexfour="wrongg"
                                                             testflag=""
+                                                            Snackbar.make(btn_nextquiz,"Oops... Your answer is wrong",Snackbar.LENGTH_LONG).show()
                                                             nextQues()
                                                             startTimer()
                                                         }
 
                                                     }
-                                                    else if(quizwrongans.equals("wrongans") && markansvalue.equals("yes")){
-                                                        reffquizanswersmarked.child(quizanswermarkedkey).child("timestatus").setValue("true")
-                                                        reffquizanswersmarked.child(quizanswermarkedkey).child("ansstatus").setValue("true")
-                                                        reffquizanswersmarked.child(quizanswermarkedkey).child("flagstatus").setValue("false")
-                                                        flagindexfour="wrongg"
-                                                        testflag=""
-                                                        Snackbar.make(btn_nextquiz,"Oops... Your answer is wrong",Snackbar.LENGTH_LONG).show()
-                                                        nextQues()
-                                                        startTimer()
+                                                    else{
+                                                        val tsLong = System.currentTimeMillis() / 1000
+                                                        val ts = tsLong.toString()
+                                                        quizwrongans="wrongans"
+                                                        val post = Selectansmodel(ts,studentname,selectedanswer,"","","","")
+                                                        val missionsReference = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
+                                                        missionsReference.push().setValue(post)
+
                                                     }
 
                                                 }
-                                                else{
-                                                    val tsLong = System.currentTimeMillis() / 1000
-                                                    val ts = tsLong.toString()
-                                                    quizwrongans="wrongans"
-                                                    val post = Selectansmodel(ts,studentname,selectedanswer,"","","","")
-                                                    val missionsReference = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
-                                                    missionsReference.push().setValue(post)
+
+                                                override fun onCancelled(p0: DatabaseError) {
 
                                                 }
-
-                                            }
-
-                                            override fun onCancelled(p0: DatabaseError) {
-
-                                            }
-                                        })
+                                            })
 
 
 
 
+                                        }
                                     }
-                                }
 
-                                override fun onCancelled(p0: DatabaseError) {
-                                }
-                            })
+                                    override fun onCancelled(p0: DatabaseError) {
+                                    }
+                                })
+
+
                     }
 
 
@@ -646,6 +653,22 @@ class QuizActivity : AppCompatActivity() {
                                      testflag=""
                                      highlighQuesUser1()
 
+                                     refseconduserr = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
+                                     refseconduserr.orderByChild("username").equalTo(tv_secondname.text.toString()).
+                                             addListenerForSingleValueEvent(object : ValueEventListener {
+                                                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                                     if (dataSnapshot.exists()) {
+                                                         for (datas in dataSnapshot.children) {
+                                                             keyseconduserr = datas.key.toString()
+
+                                                         }
+                                                         refseconduserr.child(keyseconduserr).child("markanswrong").setValue("")
+                                                     }
+                                                 }
+
+                                                 override fun onCancelled(p0: DatabaseError) {
+                                                 }
+                                             })
 
                                      //flagindexfour="false"
                                   //   Handler().postDelayed({
@@ -1770,26 +1793,30 @@ class QuizActivity : AppCompatActivity() {
                             })
                         }
 
-                        val uidRef1 = FirebaseDatabase.getInstance().reference.child("coins")
-                        val valueEventListener1 = object : ValueEventListener {
-                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                for (ds in dataSnapshot.getChildren()) {
 
-                                    if (tv_secondname.text.toString().equals(ds.key, ignoreCase = true)) {
-                                        coinsseconduser=0
-                                        coinsseconduser = (ds.child("points").getValue() as Long).toInt()
-                                        tv_secondscore.setText(coinsseconduser.toString())
+                        Handler().postDelayed({
+                            val uidRef1 = FirebaseDatabase.getInstance().reference.child("coins")
+                            val valueEventListener1 = object : ValueEventListener {
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    for (ds in dataSnapshot.getChildren()) {
+
+                                        if (tv_secondname.text.toString().equals(ds.key, ignoreCase = true)) {
+                                            coinsseconduser=0
+                                            coinsseconduser = (ds.child("points").getValue() as Long).toInt()
+                                            tv_secondscore.setText(coinsseconduser.toString())
 
 
+                                        }
                                     }
                                 }
-                            }
 
-                            override fun onCancelled(databaseError: DatabaseError) {
-                                Log.d("msg", databaseError.message) //Don't ignore errors!
+                                override fun onCancelled(databaseError: DatabaseError) {
+                                    Log.d("msg", databaseError.message) //Don't ignore errors!
+                                }
                             }
-                        }
-                        uidRef1.addListenerForSingleValueEvent(valueEventListener1)
+                            uidRef1.addListenerForSingleValueEvent(valueEventListener1)
+                        },1000)
+
                     }
                 }
 
@@ -3220,6 +3247,7 @@ class QuizActivity : AppCompatActivity() {
 
                                         }
                                         else if(quizwrongans.equals("wrongans") && singlewrongmarked.equals("wrongfirst")){
+                                            Snackbar.make(btn_nextquiz,"Your answer is wrong",Snackbar.LENGTH_LONG).show()
 
                                         }
                                         else
@@ -3657,6 +3685,12 @@ class QuizActivity : AppCompatActivity() {
 
         } catch (e: Exception) {
         }
+        try{
+            if(quizwrongans.equals("wrongans")){
+                refseconduserr.child(keyseconduserr).child("markanswrong").setValue("")
+            }
+        }
+        catch (e:Exception){}
 
         val reffquizanss = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
         reffquizanss.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -3757,6 +3791,12 @@ class QuizActivity : AppCompatActivity() {
         } catch (e: Exception) {
         }
 
+        try{
+            if(quizwrongans.equals("wrongans")){
+                refseconduserr.child(keyseconduserr).child("markanswrong").setValue("")
+            }
+        }
+        catch (e:Exception){}
 
         val reffquizanss = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
         reffquizanss.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -3863,6 +3903,13 @@ class QuizActivity : AppCompatActivity() {
         } catch (e: Exception) {
         }
 
+        try{
+            if(quizwrongans.equals("wrongans")){
+                refseconduserr.child(keyseconduserr).child("markanswrong").setValue("")
+            }
+        }
+        catch (e:Exception){}
+
         val reffquizanss = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
         reffquizanss.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshottimee: DataSnapshot) {
@@ -3956,7 +4003,30 @@ class QuizActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+      //  super.onBackPressed()
+
+        val dialogBuilder = AlertDialog.Builder(this, R.style.AlertDialogCustom)
+        dialogBuilder.setMessage("Do you want to Quit ?")
+                // if the dialog is cancelable
+                .setCancelable(false)
+                // positive button text and action
+                .setPositiveButton("Yes", DialogInterface.OnClickListener {
+                    dialog, id -> finish()
+                })
+                // negative button text and action
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                    dialog, id -> dialog.cancel()
+                })
+
+        // create dialog box
+        val alert = dialogBuilder.create()
+        alert.setTitle("Quiz")
+        alert.show()
+        val bq:Button  = alert.getButton(DialogInterface.BUTTON_NEGATIVE)
+        bq.setBackgroundColor(Color.parseColor("#1976D2"))
+        val bq1:Button  = alert.getButton(DialogInterface.BUTTON_POSITIVE)
+        bq1.setBackgroundColor(Color.parseColor("#1976D2"))
+
         try {
             countDownTimer.cancel()
             timer1.cancel()
@@ -3964,6 +4034,7 @@ class QuizActivity : AppCompatActivity() {
             countDownFlagTimer.cancel()
         } catch (e: Exception) {
         }
+
         val reffquizanss = FirebaseDatabase.getInstance().reference.child("quiz-ansusers")
         reffquizanss.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshottimee: DataSnapshot) {
@@ -4053,5 +4124,13 @@ class QuizActivity : AppCompatActivity() {
             }
         }
         uidRef2.addListenerForSingleValueEvent(valueEventListener1)
+
+        try{
+            if(quizwrongans.equals("wrongans")){
+                refseconduserr.child(keyseconduserr).child("markanswrong").setValue("")
+            }
+        }
+        catch (e:Exception){}
+
     }
 }

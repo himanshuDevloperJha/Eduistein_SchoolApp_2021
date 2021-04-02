@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cd_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:checkable="false"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Cut.Medium"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#EEEFFF"
     android:gravity="bottom"
     android:orientation="horizontal">
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:inputType="textCapSentences"
-        android:textColorHint="#978E89"
-        android:textColor="@android:color/black"
-        android:hint="Write a message..."
         android:id="@+id/messageArea"
-        android:maxHeight="80dp"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@null"
+        android:fontFamily="@font/montserrat"
+        android:hint="Type here something"
+        android:inputType="textCapSentences"
+        android:maxHeight="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="#978E89"
+        android:textSize="14sp" />
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_weight="4"
-        android:padding="4dp"
-        android:src="@drawable/ic_send"
+        android:layout_weight="6"
+        android:src="@drawable/send_btn"
+        android:padding="3dp"
         android:id="@+id/sendButton"/>
 </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
