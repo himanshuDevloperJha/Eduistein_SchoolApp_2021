@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="350dp"
-    android:layout_height="500dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:padding="20dp">
 
@@ -11,9 +11,30 @@
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:text="Schedule Classes"
         android:textColor="@color/colorPrimary"
-        android:text="Schedule Class"/>
+        android:textSize="19dp"
+        app:fontFamily="@font/montserrat"/>
+
+
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/add_subject_desc"
+        app:fontFamily="@font/montserrat" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="Schedule class"
+        app:fontFamily="@font/montserrat" />
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.MaterialComponents.Body2"
@@ -43,16 +64,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Subject">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/class_subject"
-            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,16 +86,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="@string/hint_subject_class">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/class_name"
-            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,19 +108,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Date">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_date"
             android:layout_width="match_parent"
-            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:clickable="true"
             android:editable="false"
             android:focusable="false"
-            android:clickable="true"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,19 +133,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Start Time">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_starttime"
             android:layout_width="match_parent"
-            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:clickable="true"
             android:editable="false"
             android:focusable="false"
-            android:clickable="true"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,19 +158,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="End Time">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_endtime"
             android:layout_width="match_parent"
-            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:clickable="true"
             android:editable="false"
             android:focusable="false"
-            android:clickable="true"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,33 +182,39 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hintTextColor="@color/colorPrimary"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
-        app:boxCornerRadiusTopEnd="@dimen/d20dp"
-        app:boxCornerRadiusBottomStart="@dimen/d20dp"
         android:hint="Class Link"
-        android:textColorHint="@color/colorPrimary">
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_zoomlink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:inputType="text"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimary" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_schedulesave"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="8dp"
-        android:text="@string/label_save"/>
+        android:layout_marginTop="50dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
+        android:text="Create class"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editButton"

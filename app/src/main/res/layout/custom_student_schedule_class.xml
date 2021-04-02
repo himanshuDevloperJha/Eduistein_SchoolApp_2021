@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="350dp"
-    android:layout_height="450dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:padding="20dp">
 
@@ -11,36 +11,33 @@
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:text="Schedule Classes"
         android:textColor="@color/colorPrimary"
-        android:text="Schedule Class"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body2"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:text="@string/add_subject_desc"/>
+        android:textSize="19dp"
+        app:fontFamily="@font/montserrat" />
 
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
-        android:hint="Subject">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/class_st_sub"
-            android:textColor="#000000"
-            android:editable="false"
-            android:focusable="false"
-            android:clickable="false"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:layout_marginTop="8dp"
+            app:boxBackgroundColor="@color/blurpurple"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            android:hint="Subject">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/class_st_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:editable="false"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,19 +46,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Class Name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_classname"
-            android:textColor="#000000"
-            android:editable="false"
-            android:focusable="false"
-            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:clickable="false"
+            android:editable="false"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,19 +72,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Date">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_date"
-            android:textColor="#000000"
-            android:editable="false"
-            android:focusable="false"
-            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:clickable="false"
+            android:editable="false"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,19 +97,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Start time">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_starttime"
-            android:textColor="#000000"
-            android:editable="false"
-            android:focusable="false"
-            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:clickable="false"
+            android:editable="false"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -112,19 +121,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="End Time">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_endtime"
-            android:textColor="#000000"
-            android:editable="false"
-            android:focusable="false"
-            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:clickable="false"
+            android:editable="false"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,8 +148,11 @@
         android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="@string/hint_subject_class">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -153,45 +169,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColorHint="@color/colorPrimary"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
-        app:boxCornerRadiusBottomStart="@dimen/d20dp"
-        app:boxCornerRadiusTopEnd="@dimen/d20dp"
-
-        android:hint="Zoom URL">
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        android:hint="Class link">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_zoomlink"
             android:layout_width="match_parent"
-            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:clickable="true"
             android:editable="false"
             android:focusable="false"
-            android:clickable="true"
-            android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:fontFamily="@font/montserrat"
+            android:inputType="none"
+            android:textColor="#000000" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_schedulesave"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:text="@string/label_save"/>
+        android:layout_marginTop="30dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
+        android:text="Create class"
+        android:visibility="gone" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        android:text="@string/label_edit"/>
+        android:layout_marginTop="30dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/label_edit"
+        android:visibility="gone" />
 
 </LinearLayout>
