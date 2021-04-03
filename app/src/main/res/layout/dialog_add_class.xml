@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -85,20 +86,30 @@
 
   <com.google.android.material.button.MaterialButton
       android:id="@+id/okButton"
-      style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="end"
       android:layout_marginTop="8dp"
-      android:text="@string/label_save"/>
+      android:padding="12dp"
+      app:cornerRadius="10dp"
+      android:textColor="#ffffff"
+      android:textSize="16dp"
+      android:textAllCaps="false"
+      android:backgroundTint="@color/purpleNew"
+      android:fontFamily="@font/montserrat"
+      android:text="@string/label_save" />
 
   <com.google.android.material.button.MaterialButton
       android:id="@+id/editButton"
-      style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="end"
       android:layout_marginTop="8dp"
+      android:padding="12dp"
+      app:cornerRadius="10dp"
+      android:textColor="#ffffff"
+      android:textSize="16dp"
+      android:textAllCaps="false"
+      android:backgroundTint="@color/purpleNew"
+      android:fontFamily="@font/montserrat"
       android:visibility="gone"
       android:text="@string/label_edit"/>
 
