@@ -535,9 +535,10 @@
           style="@style/TextAppearance.MaterialComponents.Button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textSize="16dp"
+          android:textAllCaps="false"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          android:text="@string/courses_head"
-          android:textStyle="bold" />
+          android:text="@string/courses_head" />
 
       <co.aspirasoft.view.NestedGridView
           android:id="@+id/coursesList"
@@ -549,9 +550,10 @@
           style="@style/TextAppearance.MaterialComponents.Button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textAllCaps="false"
+          android:textSize="16dp"
           android:layout_marginTop="@dimen/activity_vertical_margin"
-          android:text="@string/timetable_head"
-          android:textStyle="bold" />
+          android:text="Time Table" />
 
       <com.google.android.material.tabs.TabLayout
           android:id="@+id/timetableDay"
