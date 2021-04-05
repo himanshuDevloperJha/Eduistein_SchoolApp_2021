@@ -210,7 +210,7 @@ class StudentDashboardActivity : DashboardActivity(), PaymentResultListener {
                     }
                 }
                 if(noticounter>0){
-                   // tvst_countnoti.visibility=View.VISIBLE
+                    tvst_countnoti.visibility=View.VISIBLE
                     tvst_countnoti.setText(noticounter.toString())
                 }
                // Toast.makeText(applicationContext,"Counter:"+noticounter,Toast.LENGTH_LONG).show()
@@ -496,6 +496,30 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
     }
     override fun onRestart() {
         super.onRestart()
+        noticounter=0
+        val  notireference = FirebaseDatabase.getInstance().reference.child(schoolId).child("Notifications")
+        notireference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (datas in dataSnapshot.children) {
+                    if (datas.child("username").value.toString().equals(currentStudent.name, ignoreCase = true)
+                            && datas.child("status").value.toString().equals("unread")) {
+                        noticounter++
+                    }
+                }
+                if(noticounter>0){
+                    tvst_countnoti.visibility=View.VISIBLE
+                    tvst_countnoti.setText(noticounter.toString())
+                }
+                else{
+                    tvst_countnoti.visibility=View.GONE
+                }
+                // Toast.makeText(applicationContext,"Counter:"+noticounter,Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
+
         getCoins()
     }
 
@@ -921,6 +945,8 @@ am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 3600
             missionsReference.setValue(post)
         }
     }
+
+
 
 }
 

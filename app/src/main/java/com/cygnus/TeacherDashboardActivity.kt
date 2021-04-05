@@ -1126,6 +1126,30 @@ class TeacherDashboardActivity : DashboardActivity() {
 
     override fun onRestart() {
         super.onRestart()
+        noticounter=0
+        val  notireference = FirebaseDatabase.getInstance().reference.child(schoolId).child("TeacherNotifications")
+        notireference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (datas in dataSnapshot.children) {
+                    if (datas.child("username").value.toString().equals(currentTeacher.name, ignoreCase = true)
+                            && datas.child("status").value.toString().equals("unread")) {
+                        noticounter++
+                    }
+                }
+                if(noticounter>0){
+                    tv_countnoti.visibility=View.VISIBLE
+                    tv_countnoti.setText(noticounter.toString())
+                }
+                else{
+                    tv_countnoti.visibility=View.GONE
+
+                }
+                //   Toast.makeText(applicationContext,"Counter:"+noticounter,Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
         if(sp_loginsave.getString("notice_back","").equals("true")){
           //  val intent = getIntent()
           //  finish()

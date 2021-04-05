@@ -2,6 +2,7 @@ package com.cygnus;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -63,13 +64,19 @@ else if(userrrtypee.equals("Teacher")){
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
 
-                    if (datas.child("username").getValue().toString().equalsIgnoreCase(SubjectTeacherName)) {
-                        String key=datas.getKey().toString();
-                        reference.child(key).child("status").setValue("read");
+                    try{
+                        if (datas.child("username").getValue().toString().equalsIgnoreCase(SubjectTeacherName)) {
+                            String key=datas.getKey().toString();
+                            reference.child(key).child("status").setValue("read");
 
-                        notificationlist.add(datas.child("message").getValue().toString());
+                            notificationlist.add(datas.child("message").getValue().toString());
 
+                        }
                     }
+                    catch (Exception e){
+                        Log.e("msg","NOTITTTTTTTTIIIII: "+e.toString());
+                    }
+
 
                 }
                 Collections.reverse(notificationlist);
