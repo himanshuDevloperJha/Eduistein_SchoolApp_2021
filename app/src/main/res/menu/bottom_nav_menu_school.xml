@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="School"
+        android:title="School ERP"
         android:icon="@drawable/school"
         />
     <item
@@ -10,7 +10,7 @@
         android:icon="@drawable/feed"
         />
     <item
-        android:title="ERP"
+        android:title="Setup"
         android:icon="@drawable/erp"
         />
     <item
