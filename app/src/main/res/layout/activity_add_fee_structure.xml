@@ -73,6 +73,6 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         app:backgroundTint="?attr/colorPrimary"
         app:icon="@drawable/ic_action_add"
-        app:iconTint="?android:attr/textColorPrimary"/>
+        app:iconTint="#ffffff"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,6 +15,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import co.aspirasoft.adapter.ModelViewAdapter
 import com.android.volley.AuthFailureError
@@ -131,8 +134,6 @@ class TeacherDashboardActivity : DashboardActivity() {
                 return
             }
         }
-
-
 
 
         teacheremail = currentUser.credentials.email
