@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:background="@drawable/updateinfo_back"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/update_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inder"
+        android:text="Update Info"
+        android:layout_margin="12dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorpurple"
+        android:gravity="top"
+        />
+    <TextView
+        android:id="@+id/new_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inder"
+       android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:textColor="#424259"
+        android:textSize="18dp"
+        android:text="New version available on play store. Kindly update your application to be with eduistein."
+        android:lineSpacingExtra="2sp"
+
+        />
+    <TextView
+        android:id="@+id/tv_updateinfo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+       android:text="OK"
+        android:textColor="@android:color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle_7"
+        />
+
+</LinearLayout>
