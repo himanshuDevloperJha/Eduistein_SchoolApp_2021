@@ -7,18 +7,7 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-  <com.google.android.material.button.MaterialButton
-      android:id="@+id/deleteButton"
-      style="@style/Widget.MaterialComponents.Button.TextButton"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
-      android:padding="0dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginRight="8dp"
-      android:visibility="gone"
-      app:icon="@drawable/ic_action_delete"
-      app:iconSize="20dp"
-      app:iconTint="@color/colorWarning"/>
+
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -84,16 +73,36 @@
           android:text="S" />
 
     </com.google.android.material.tabs.TabLayout>
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal">
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/lectureDetails"
+        android:layout_gravity="center_vertical"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="10:00am - 11:30am (CR #4, RIMMS)"
-        android:textSize="12sp"
+        android:textSize="13sp"
         app:fontFamily="@font/montserrat" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:visibility="visible"
+            app:icon="@drawable/ic_action_delete_btn"
+            app:iconSize="20dp"
+            app:iconTint="@color/purpleNew"/>
+    </LinearLayout>
+</LinearLayout>
 
   </LinearLayout>
 
