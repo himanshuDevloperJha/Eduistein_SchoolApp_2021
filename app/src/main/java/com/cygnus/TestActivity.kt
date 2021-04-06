@@ -309,7 +309,7 @@ class TestActivity : DashboardChildActivity() {
                     Log.e("msg", "onResponse111111: $response")
                     //Toast.makeText(applicationContext, "1:" + response.toString(), Toast.LENGTH_SHORT).show()
 
-                    val post = StoreNotifications(subjectteachername, body);
+                    val post = StoreNotifications(subjectteachername, teacherClassId,body,"unread");
 
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolId).

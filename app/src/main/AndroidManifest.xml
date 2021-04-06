@@ -274,7 +274,9 @@
         </service>
 
         <!-- Register the Alarm Receiver -->
+
         <receiver android:name=".notifications.AlarmReceiverQuizz"/>
+
 
 
     </application>

@@ -9,12 +9,12 @@
     tools:context=".feesmanage.PayFees">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        app:elevation="0dp">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -25,7 +25,7 @@
             android:background="@android:color/transparent"
             />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
     <LinearLayout
@@ -84,28 +84,28 @@
                             android:fontFamily="@font/montserrat"
                             />
 
-                        <FrameLayout
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.85">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_feeDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pb_payfees"
+                        android:indeterminateTint="@color/colorPrimary"
+                        android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/iv_paymentsuccess"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rv_feeDetail"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <ProgressBar
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/pb_payfees"
-                                android:indeterminateTint="@color/colorPrimary"
-                                android:layout_gravity="center"/>
-
-                            <ImageView
-                                android:id="@+id/iv_paymentsuccess"
-                                android:layout_width="match_parent"
-                                android:visibility="gone"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/payment_success"/>
+                            android:visibility="gone"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/payment_success"/>
 
                         </FrameLayout>
 
@@ -145,7 +145,7 @@
 
 
 
-        </LinearLayout>
+            </LinearLayout>
 
 
         <androidx.cardview.widget.CardView
@@ -210,7 +210,14 @@
                 android:text="Pay Now"/>
         </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
 
 
 </LinearLayout>

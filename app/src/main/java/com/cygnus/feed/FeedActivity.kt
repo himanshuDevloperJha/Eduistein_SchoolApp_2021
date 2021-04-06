@@ -591,10 +591,9 @@ Collections.shuffle(postslist)
                 "https://fcm.googleapis.com/fcm/send", obj,
                 Response.Listener { response ->
                     Log.e("msg", "onResponse111111: $response")
-                    val post = StoreNotifications(studentclassId, body)
+                    val post = StoreNotifications(studentname,studentclassId, body,"unread")
 
-                    val missionsReference =
-                            FirebaseDatabase.getInstance().reference.child(studentschoolid).
+                    val missionsReference = FirebaseDatabase.getInstance().reference.child(studentschoolid).
                                     child("TeacherNotifications").push()
                     missionsReference.setValue(post)
 

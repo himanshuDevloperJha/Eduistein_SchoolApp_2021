@@ -459,14 +459,14 @@ fun getPendingPosts(){
                     }
                 }
 
-                sendFCMPush(tokenlist,body,userclassId)
+                sendFCMPush(tokenlist,body,userclassId,username)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
             }
         })
     }
-    private fun sendFCMPush(tokenlist: ArrayList<String>, body: String, userclassId: String) {
+    private fun sendFCMPush(tokenlist: ArrayList<String>, body: String, userclassId: String, username: String) {
         val SERVER_KEY = "AAAAav-QFhw:APA91bG7ChbWR2kwz_FBMKgaDV8IZ_PMmED0Rp_sy7f0PtlZm37t-uAJRnUwyLYSM4Z-kSg_Jj9Xv9O8x4r_L5iQC9JAKhhTPt-ga5nmEqCBMcqgaUMtDnF5ponwXi8mD31k481DWHoF"
         var obj: JSONObject? = null
         var objData: JSONObject? = null
@@ -506,8 +506,7 @@ fun getPendingPosts(){
                 "https://fcm.googleapis.com/fcm/send", obj,
                 Response.Listener { response ->
                     Log.e("msg", "onResponse111111: $response")
-                    val post = StoreNotifications(userclassId, body)
-
+                    val post = StoreNotifications(username,userclassId, body,"unread")
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolid).
                                     child("Notifications").push()
