@@ -64,7 +64,6 @@
     android:layout_marginRight="10dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ytvideos"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <ProgressBar

@@ -10,23 +10,33 @@
       style="@style/TextAppearance.MaterialComponents.Subtitle1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textStyle="bold"
-      android:text="Add Lecture"/>
+      android:text="Add Lecture"
+      android:textSize="17dp"
+      android:textColor="@color/purpleNew"
+      android:layout_marginBottom="20dp"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.textview.MaterialTextView
       style="@style/TextAppearance.MaterialComponents.Body2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Select a day and time to create a new lecture appointment."/>
+      android:text="Select a day and time to create a new lecture appointment."
+      android:layout_marginBottom="10dp"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.tabs.TabLayout
       android:id="@+id/lectureDayField"
       style="@style/Widget.MaterialComponents.TabLayout"
       android:layout_width="match_parent"
-      android:layout_height="32dp"
-      android:layout_marginTop="8dp"
+      android:layout_height="62dp"
+      app:tabGravity="fill"
       app:tabBackground="@drawable/box"
-      app:tabMode="fixed">
+      app:tabIndicator="@drawable/circle"
+      app:tabSelectedTextColor="#FFFFFF"
+      app:tabIndicatorColor="@color/purpleNew"
+      app:tabIndicatorHeight="60dp"
+      app:tabMode="fixed"
+      app:tabTextColor="@color/purpleNew"  >
 
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
@@ -82,16 +92,18 @@
           style="@style/TextAppearance.MaterialComponents.Caption"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Time"/>
+          android:text="Time"
+          app:fontFamily="@font/montserrat" />
 
       <com.google.android.material.button.MaterialButton
-          style="@style/Widget.MaterialComponents.Button.TextButton"
           android:id="@+id/lectureTimeField"
+          style="@style/Widget.MaterialComponents.Button.TextButton"
           android:layout_width="match_parent"
           android:layout_height="48dp"
-          android:paddingBottom="0dp"
+          android:fontFamily="@font/montserrat"
           android:gravity="start|bottom"
-          android:text="00:00"/>
+          android:paddingBottom="0dp"
+          android:text="00:00" />
 
     </LinearLayout>
 
@@ -107,7 +119,8 @@
           style="@style/TextAppearance.MaterialComponents.Caption"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Duration (min)"/>
+          android:text="Duration (min)"
+          app:fontFamily="@font/montserrat" />
 
       <com.google.android.material.textfield.TextInputLayout
           style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
@@ -122,11 +135,12 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="0dp"
+            android:fontFamily="@font/montserrat"
+            android:hint="Duration"
             android:inputType="number"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-            android:hint="Duration"
-            android:textColorHint="@color/colorPrimary"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary" />
 
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,11 +151,16 @@
 
   <com.google.android.material.button.MaterialButton
       android:id="@+id/okButton"
-      style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="end"
       android:layout_marginTop="8dp"
+      android:padding="12dp"
+      app:cornerRadius="10dp"
+      android:textColor="#ffffff"
+      android:textSize="16dp"
+      android:textAllCaps="false"
+      android:backgroundTint="@color/purpleNew"
+      android:fontFamily="@font/montserrat"
       android:text="@string/label_save"/>
 
 </LinearLayout>

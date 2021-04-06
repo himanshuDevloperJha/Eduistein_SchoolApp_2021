@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="350dp"
-    android:layout_height="480dp"
+    android:layout_width="320dp"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:padding="15dp">
 
@@ -11,11 +11,28 @@
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_red_light"
+        app:fontFamily="@font/montserrat"
+        android:textSize="18dp"
+        android:textColor="@color/purpleNew"
         android:text="Youtube Videos"/>
 
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="Upload your subject content on youtube."
+        app:fontFamily="@font/montserrat" />
 
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="Youtube videos"
+        app:fontFamily="@font/montserrat" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -39,8 +56,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="@string/hint_subject_class">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -57,8 +77,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Subject">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -74,8 +97,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Chapter No">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -91,8 +117,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Chapter Name">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -111,8 +140,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
         android:hint="Title">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -128,12 +160,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:boxCornerRadiusTopStart="@dimen/d20dp"
-        app:boxCornerRadiusBottomEnd="@dimen/d20dp"
-        app:boxCornerRadiusBottomStart="@dimen/d20dp"
-        app:boxCornerRadiusTopEnd="@dimen/d20dp"
-        android:hint="Youtube URL"
-        android:textColorHint="@android:color/holo_red_light">
+        app:boxBackgroundColor="@color/blurpurple"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        android:hint="Youtube URL">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/class_st_yt_youtubelink"
@@ -146,21 +178,32 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_yt_save"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-
-        android:layout_marginTop="8dp"
-        android:text="@string/label_save"/>
+        android:layout_marginTop="30dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
+        android:text="Upload"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="50dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
         android:visibility="gone"
         android:text="@string/label_edit"/>
 

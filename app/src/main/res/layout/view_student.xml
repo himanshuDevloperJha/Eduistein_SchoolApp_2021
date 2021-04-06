@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    app:cardElevation="5dp"
+    android:elevation="4dp"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/blurpurple"
+    app:cardCornerRadius="12dp"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:background="@drawable/box"
-    android:orientation="horizontal"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:orientation="horizontal">
 
   <com.google.android.material.card.MaterialCardView
-      android:layout_width="64dp"
-      android:layout_height="64dp"
-      app:cardBackgroundColor="?android:attr/colorBackground"
-      app:cardCornerRadius="16dp">
+      android:layout_width="90dp"
+      android:layout_height="90dp"
+      app:cardElevation="0dp"
+      android:backgroundTint="@color/blurpurple"
+      app:cardCornerRadius="12dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/userImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ph_student"/>
+        android:src="@drawable/teacher_pic"/>
 
   </com.google.android.material.card.MaterialCardView>
   <LinearLayout
@@ -40,20 +46,21 @@
         android:layout_height="wrap_content"
         android:text="@string/ph_name"
         android:textColor="#051525"
-        android:textAllCaps="true"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="7dp"/>
+        android:textAllCaps="false"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18dp"/>
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:id="@+id/rollNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#051525"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/grey"
+        android:textSize="11dp"
         android:text="@string/hint_student_roll_no"/>
   </LinearLayout>
 
 </LinearLayout>
+</androidx.cardview.widget.CardView>

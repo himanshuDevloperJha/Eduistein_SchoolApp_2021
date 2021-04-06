@@ -89,9 +89,7 @@
     student must have a unique roll number and email address.
   </string>
     <string name="add_subject_head">Add Subject</string>
-    <string name="add_subject_desc">Enter details of the new subject to add it to your school. Please note that each
-    subject taught to a class must have a unique name.
-  </string>
+    <string name="add_subject_desc">Create your own classes here.</string>
     <string name="contact_head">Contact</string>
     <string name="course_material_head">Course Material</string>
     <string name="courses_head">Your Courses</string>
