@@ -17,9 +17,9 @@
       app:elevation="0dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-      <ImageView
+ <ImageView
           android:layout_width="25dp"
           android:layout_gravity="center_vertical"
           android:layout_height="25dp"
@@ -27,14 +27,64 @@
           android:layout_marginRight="10dp"
           android:layout_marginLeft="20dp"
           android:src="@drawable/menu_icon"/>
+    
 
-      <androidx.appcompat.widget.Toolbar
-          android:id="@+id/toolbar"
-          android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
-          app:layout_scrollFlags="scroll"
-          app:titleTextColor="#000000" />
+<LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_height="?attr/actionBarSize"
+        >
+      <LinearLayout
+          android:layout_width="0dp"
+          android:gravity="center"
+          android:layout_height="match_parent"
+          android:layout_weight="0.8">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Kapil School"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:id="@+id/toolbarst_schoolname"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content"/>
+      </LinearLayout>
+      <FrameLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="0.1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/iconn_noti"
+            android:padding="5dp"
+            android:id="@+id/ivst_notification"
+            android:layout_height="match_parent"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="6dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/white"
+            android:padding="3dp"
+           android:visibility="gone"
+            android:textStyle="bold"
+            android:id="@+id/tvst_countnoti"
+            android:layout_gravity="right"
+            android:layout_marginRight="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:layout_height="wrap_content"/>
+      </FrameLayout>
+
+      <ImageView
+          android:layout_width="0dp"
+          android:padding="5dp"
+          android:id="@+id/ivst_profile"
+          android:layout_weight="0.1"
+          android:src="@drawable/ic_action_account"
+          android:layout_height="match_parent"/>
+    </LinearLayout>
     </LinearLayout>
 
   </com.google.android.material.appbar.AppBarLayout>
@@ -62,11 +112,12 @@
           >
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:paddingVertical="10dp"
             android:paddingHorizontal="5dp"
-            android:paddingVertical="10dp">
+            >
           <TextView
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -81,13 +132,12 @@
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:weightSum="3">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_weight="1">
 
               <com.google.android.material.textview.MaterialTextView
                   android:id="@+id/headline"
@@ -111,8 +161,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_weight="2">
 
               <com.google.android.material.textview.MaterialTextView
                   style="@style/TextAppearance.MaterialComponents.Caption"
@@ -148,10 +198,9 @@
 
           <LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
               android:layout_marginTop="6dp"
-              android:layout_marginBottom="5dp">
-
+              android:layout_marginBottom="5dp"
+              android:layout_height="wrap_content">
             <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.MaterialComponents.Overline"
                 android:layout_width="wrap_content"
@@ -319,6 +368,7 @@
         android:id="@+id/class_yt_notifications"
         app:cardBackgroundColor="@color/blurpurple"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_column="2"
         android:layout_row="1"
@@ -347,6 +397,51 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:text="Notifications"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/class_yt_myvideos"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_row="2"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:paddingBottom="20dp"
+          android:paddingTop="20dp"
+          android:paddingLeft="10dp"
+          android:paddingRight="10dp"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/youtube_videos"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="My Videos"
             android:textAlignment="center"
             android:textSize="13sp"
             android:textStyle="bold" />
@@ -440,9 +535,92 @@
 
     </androidx.cardview.widget.CardView>
 
-
-    <com.google.android.material.button.MaterialButton
+    <androidx.cardview.widget.CardView
         android:id="@+id/playquiz"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_row="1"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_subtitles_black_24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Play Quiz"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/feed"
+        app:cardBackgroundColor="@color/blurpurple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_row="2"
+        android:layout_gravity="fill"
+        android:layout_columnWeight="1"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:layout_margin="4dp"
+        >
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:layout_gravity="center_vertical|center_horizontal"
+          >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_subtitles_black_24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Feed"
+
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+      </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--<com.google.android.material.button.MaterialButton
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
@@ -451,14 +629,14 @@
         android:layout_marginRight="2dp"
         android:padding="10dp"
         android:text="Play Quiz"
+        android:id="@+id/playquiz"
         android:textAlignment="textStart"
         android:textAllCaps="true"
         android:textSize="10dp"
         app:cornerRadius="20dp"
         app:icon="@drawable/ic_announcements"
-        app:iconSize="34dp" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/class_yt_myvideos"
+        app:iconSize="34dp" />-->
+   <!-- <com.google.android.material.button.MaterialButton
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_columnWeight="1"
@@ -467,29 +645,30 @@
         android:layout_marginRight="2dp"
         android:padding="10dp"
         android:text="My Videos"
+        android:id="@+id/class_yt_myvideos"
         android:textAlignment="textStart"
         android:textAllCaps="true"
         android:textSize="10dp"
         app:cornerRadius="20dp"
         app:icon="@drawable/youtube"
-        app:iconSize="28dp" />
-    <!-- <com.google.android.material.button.MaterialButton
-        android:id="@+id/feed"
-        android:text="Feed"
-        android:visibility="gone"
-        app:icon="@drawable/pay_fees"
-        android:layout_marginRight="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:cornerRadius="20dp"
+        app:iconSize="28dp" />-->
+  <!--  <com.google.android.material.button.MaterialButton
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="50dp"
         android:layout_gravity="fill"
-        android:layout_columnWeight="1"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:padding="10dp"
+        android:text="Feed"
+        android:id="@+id/feed"
+        android:textAlignment="center"
         android:textAllCaps="true"
-        android:textAlignment="textStart"
-        app:iconSize="28dp"
-        android:textSize="10dp"/>-->
+        app:cornerRadius="20dp"
+        app:icon="@drawable/pay_fees"
+        app:iconSize="20dp" />-->
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/chatstudent"
@@ -512,21 +691,7 @@
 </LinearLayout>
 
 
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/feed"
-              android:layout_width="match_parent"
 
-              android:layout_height="50dp"
-              android:layout_gravity="fill"
-              android:layout_marginLeft="2dp"
-              android:layout_marginRight="2dp"
-              android:padding="10dp"
-              android:text="Feed"
-              android:textAlignment="center"
-              android:textAllCaps="true"
-              app:cornerRadius="20dp"
-              app:icon="@drawable/pay_fees"
-              app:iconSize="20dp" />
 
         </LinearLayout>
 
@@ -545,7 +710,7 @@
           android:id="@+id/coursesList"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:numColumns="2" />
+          android:numColumns="2"/>
 
       <com.google.android.material.textview.MaterialTextView
           style="@style/TextAppearance.MaterialComponents.Button"
@@ -573,7 +738,7 @@
       <co.aspirasoft.view.NestedViewPager
           android:id="@+id/timetableView"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="wrap_content"/>
 
       <com.google.android.material.textview.MaterialTextView
           style="@style/TextAppearance.MaterialComponents.Button"
@@ -583,13 +748,15 @@
           android:fontFamily="@font/montserrat"
           android:text="COURSES OFFERED"
           android:textStyle="bold"
-          android:visibility="gone" />
+          android:visibility="gone"
+          />
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/coursesofferedList"
           android:layout_width="match_parent"
+android:visibility="gone"
           android:layout_height="wrap_content"
-          android:visibility="gone" />
+          />
 
     </LinearLayout>
 

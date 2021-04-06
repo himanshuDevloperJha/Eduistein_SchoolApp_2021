@@ -6,7 +6,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class AttendanceRecord : BaseModel() {
-
+    var postdate: Date = Date(System.currentTimeMillis())
     var studentName: String? = null
     var studentRollNo: String? = null
     var classId: String? = null
@@ -20,7 +20,7 @@ class Attendance() {
     constructor(classId: String) : this() {
         this.classId = classId
     }
-
+    var postdate: Date = Date(System.currentTimeMillis())
     var classId: String = ""
     var date: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(System.currentTimeMillis())
     var attendanceRecords: ArrayList<AttendanceRecord> = ArrayList()

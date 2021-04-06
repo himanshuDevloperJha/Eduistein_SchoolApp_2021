@@ -77,7 +77,7 @@ class AttendanceActivity : DashboardChildActivity() {
 
         override fun notifyDataSetChanged() {
             //records.sortedBy { it.date }
-            attendanceRecords.sortByDescending { it.date }
+            attendanceRecords.sortByDescending { it.postdate }
             pb_attendance.visibility=View.GONE
             super.notifyDataSetChanged()
         }
