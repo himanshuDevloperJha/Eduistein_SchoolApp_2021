@@ -30,6 +30,7 @@
             android:layout_height="48dp"
             android:padding="8dp"
             android:scaleType="centerInside"
+            android:tint="@color/purpleNew"
             app:srcCompat="@drawable/ic_email"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -44,8 +45,9 @@
               android:id="@+id/emailField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fontFamily="@font/montserrat"
               android:inputType="textEmailAddress"
-              android:maxLines="1"/>
+              android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,6 +64,7 @@
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:padding="8dp"
+            android:tint="@color/purpleNew"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_address"/>
 
@@ -76,8 +79,9 @@
               android:id="@+id/streetField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fontFamily="@font/montserrat"
               android:inputType="textPostalAddress"
-              android:maxLines="1"/>
+              android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,8 +101,9 @@
             android:id="@+id/cityField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:inputType="textPostalAddress"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,8 +130,9 @@
               android:id="@+id/postalCodeField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fontFamily="@font/montserrat"
               android:inputType="textPostalAddress"
-              android:maxLines="1"/>
+              android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,8 +148,9 @@
               android:id="@+id/stateField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fontFamily="@font/montserrat"
               android:inputType="textPostalAddress"
-              android:maxLines="1"/>
+              android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,8 +170,9 @@
             android:id="@+id/countryField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:inputType="textPostalAddress"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -180,6 +188,7 @@
             android:layout_height="48dp"
             android:layout_marginBottom="8dp"
             android:padding="8dp"
+            android:tint="@color/purpleNew"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_phone"/>
 
@@ -194,8 +203,9 @@
               android:id="@+id/phoneField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fontFamily="@font/montserrat"
               android:inputType="phone"
-              android:maxLines="1"/>
+              android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

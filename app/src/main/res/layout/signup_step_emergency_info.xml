@@ -30,6 +30,7 @@
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:padding="8dp"
+            android:tint="@color/purpleNew"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_blood"/>
 
@@ -45,8 +46,9 @@
               android:id="@+id/bloodTypeField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:fontFamily="@font/montserrat"
               android:inputType="text"
-              android:maxLines="1"/>
+              android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,6 +65,7 @@
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:padding="8dp"
+            android:tint="@color/purpleNew"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_emergency"/>
 
@@ -77,7 +80,8 @@
               android:id="@+id/emergencyContactNameField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:inputType="textPersonName"/>
+              android:fontFamily="@font/montserrat"
+              android:inputType="textPersonName" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,6 +98,7 @@
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:padding="8dp"
+            android:tint="@color/purpleNew"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_phone"/>
 
@@ -108,7 +113,8 @@
               android:id="@+id/emergencyContactPhoneField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:inputType="phone"/>
+              android:fontFamily="@font/montserrat"
+              android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,6 +131,7 @@
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:padding="8dp"
+            android:tint="@color/purpleNew"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_email"/>
 
@@ -139,7 +146,8 @@
               android:id="@+id/emergencyContactEmailField"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:inputType="textEmailAddress"/>
+              android:fontFamily="@font/montserrat"
+              android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

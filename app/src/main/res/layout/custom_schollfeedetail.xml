@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -13,15 +14,10 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <View
-            android:id="@+id/vw_color"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/blurpurple"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -33,26 +29,27 @@
                 >
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_feemonth1"
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="0dp"
-                    android:textStyle="bold"
-                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="@string/app_name"
                     android:textSize="15dp"
-                    android:id="@+id/tv_feemonth1" />
+                    android:textStyle="bold"
+                    app:fontFamily="@font/montserrat" />
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:id="@+id/tv_date1"
-                    android:text="hhjj"
-                    android:gravity="right"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="0dp"
-                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:text="hhjj"
                     android:textSize="15dp"
-                    />
+                    app:fontFamily="@font/montserrat" />
             </LinearLayout>
 
 
@@ -68,23 +65,23 @@
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="0dp"
-                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="Paid"
                     android:textSize="15dp"
-                    />
+                    app:fontFamily="@font/montserrat" />
 
 
                 <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:id="@+id/tv_amt1"
-                    android:text="hhjj"
-                    android:gravity="right"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="0dp"
-                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:text="hhjj"
                     android:textSize="15dp"
-                    />
+                    app:fontFamily="@font/montserrat" />
             </LinearLayout>
 
 

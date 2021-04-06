@@ -22,30 +22,29 @@
             android:padding="13dp">
 
 
-
-
             <com.google.android.material.textview.MaterialTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:id="@+id/tv_studentname"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="0dp"
-                android:paddingLeft="10dp"
-                android:layout_weight="0.85"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.85"
+                android:paddingLeft="10dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
-                />
+                app:fontFamily="@font/montserrat" />
+
             <TextView
                 android:id="@+id/viewFilesButton"
                 android:layout_width="0dp"
-                android:layout_weight="0.15"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
                 android:layout_height="25dp"
+                android:layout_weight="0.15"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
                 android:padding="0dp"
                 android:text="VIEW"
-                />
+                android:textColor="@color/colorPrimary"
+                android:textSize="13dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

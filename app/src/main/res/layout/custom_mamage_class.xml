@@ -15,25 +15,30 @@
 android:orientation="horizontal"
         android:weightSum="1"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/tv_clname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:textAppearance="?attr/textAppearanceListItem" />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_teachername"
         android:layout_width="match_parent"
 
-        android:paddingRight="@dimen/_8dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:paddingRight="@dimen/_8dp"
         android:textAppearance="?attr/textAppearanceListItemSecondary" />
 
     <TextView
         android:id="@+id/tv_teacherid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
         android:textAppearance="?attr/textAppearanceListItemSecondary" />
 
 </LinearLayout>

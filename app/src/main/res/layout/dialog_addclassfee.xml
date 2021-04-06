@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="280dp"
@@ -11,13 +12,16 @@
         style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:layout_marginBottom="20dp"
         android:text="Add Class"/>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blurpurple"
         android:layout_marginTop="4dp"
         android:hint="ClassName">
 
@@ -33,6 +37,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blurpurple"
         android:layout_marginTop="4dp"
         android:hint="Standard">
 
@@ -49,13 +54,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addFeeClass"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/cardview_light_background"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
         android:text="@string/label_save"/>
 
 

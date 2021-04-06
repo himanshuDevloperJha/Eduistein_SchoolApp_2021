@@ -13,6 +13,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:boxBackgroundColor="@color/blurpurple"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:hint="Class">
@@ -21,6 +22,7 @@
                 android:id="@+id/admin_course_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
                 android:inputType="text"
                 android:textColor="#000000" />
 
@@ -79,6 +81,6 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         app:backgroundTint="?attr/colorPrimary"
         app:icon="@drawable/ic_action_add"
-        app:iconTint="?android:attr/textColorPrimary" />
+        app:iconTint="#ffff" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

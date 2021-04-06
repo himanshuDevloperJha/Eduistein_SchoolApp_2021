@@ -349,6 +349,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/tchr_notifications"
+                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_column="2"

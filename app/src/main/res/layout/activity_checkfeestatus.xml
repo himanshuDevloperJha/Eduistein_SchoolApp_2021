@@ -33,41 +33,51 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/blurpurple"
             android:layout_marginTop="4dp"
             android:hint="ClassName">
 
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/check_classnamee"
-                android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:textColor="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
+            android:background="@color/blurpurple"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="StudentName">
 
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/check_stname"
-                android:textColor="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:textColor="#000000" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_marginTop="20dp"
             android:id="@+id/checkFeeStatus"
-            android:layout_width="200dp"
-            android:layout_marginTop="40dp"
-            app:cornerRadius="@dimen/d20dp"
-            android:layout_gravity="center"
-            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="15dp"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/purpleNew"
+            android:fontFamily="@font/montserrat"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            app:iconSize="20dp"
+            android:padding="15dp"
             android:text="Check Fee Details"/>
     </LinearLayout>
 

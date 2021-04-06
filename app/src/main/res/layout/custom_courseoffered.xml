@@ -6,18 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="96dp"
     app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/blurpurple"
         android:orientation="horizontal">
-
-        <View
-            android:id="@+id/courseColor"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,15 +22,16 @@
             android:padding="8dp">
 
             <com.google.android.material.textview.MaterialTextView
-                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:id="@+id/coursename"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:maxLines="2"
-                android:gravity="center"
                 android:layout_gravity="center"
+                android:gravity="center"
+                android:maxLines="2"
                 android:text="@string/app_name"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat" />
 
 
 

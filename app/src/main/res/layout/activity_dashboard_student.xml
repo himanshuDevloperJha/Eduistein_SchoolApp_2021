@@ -315,11 +315,12 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:visibility="invisible"
         android:id="@+id/class_yt_notifications"
         app:cardBackgroundColor="@color/blurpurple"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_column="0"
+        android:layout_column="2"
         android:layout_row="1"
         android:layout_gravity="fill"
         android:layout_columnWeight="1"
@@ -359,7 +360,7 @@
         app:cardBackgroundColor="@color/blurpurple"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_column="2"
+        android:layout_column="0"
         android:layout_row="1"
         android:layout_gravity="fill"
         android:layout_columnWeight="1"

@@ -5,19 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/blurpurple"
         android:orientation="horizontal">
-
-        <View
-            android:id="@+id/vw_color"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"/>
-
 
 
 
@@ -32,38 +27,40 @@
         android:orientation="vertical"
         android:padding="20dp"
         android:layout_height="wrap_content">
+
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_classname"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textSize="16dp"
-            android:id="@+id/tv_classname"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:fontFamily="@font/montserrat" />
+
         <com.google.android.material.textview.MaterialTextView
-            style="@style/TextAppearance.MaterialComponents.Body2"
             android:id="@+id/tv_recfee"
-            android:textColor="#88827F"
+            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#88827F"
             android:textSize="15dp"
-            />
+            app:fontFamily="@font/montserrat" />
     </LinearLayout>
 
 
-
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body2"
         android:id="@+id/tv_feesss"
-        android:text="hhjj"
-        android:padding="20dp"
-        android:textStyle="bold"
-        android:gravity="right"
+        style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
-        android:layout_weight="0.4"
         android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:gravity="right"
+        android:padding="20dp"
+        android:text="hhjj"
         android:textSize="16dp"
-        />
+        android:textStyle="bold"
+        app:fontFamily="@font/montserrat" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="0dp"
