@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_chh"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="#333333"
-    android:text="hug"
-    android:fontFamily="sans-serif"
-    android:textSize="17dp"
-    android:id="@+id/tv_chh"
+    android:fontFamily="@font/montserrat"
     android:padding="15dp"
-    />
+    android:text="hug"
+    android:textColor="#333333"
+    android:textSize="17dp" />

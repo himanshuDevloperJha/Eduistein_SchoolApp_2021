@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -13,37 +14,33 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <View
-            android:id="@+id/vw_color"
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/blurpurple"
             android:orientation="vertical"
             android:padding="20dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_classtotalfee"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textSize="16dp"
-                android:id="@+id/tv_classtotalfee"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat" />
 
 
             <com.google.android.material.textview.MaterialTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:id="@+id/tv_totalfee"
-                android:text="hhjj"
-                android:visibility="gone"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="hhjj"
                 android:textSize="16dp"
-                />
+                android:visibility="gone"
+                app:fontFamily="@font/montserrat" />
 
         </LinearLayout>
 

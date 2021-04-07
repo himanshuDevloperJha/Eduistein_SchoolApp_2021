@@ -11,11 +11,13 @@
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@color/blurpurple"
       android:hint="@string/hint_emails"
       app:helperText="@string/emails_input_explanation">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/emailsField"
+        android:fontFamily="@font/montserrat"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:gravity="start|top"
@@ -24,11 +26,17 @@
   </com.google.android.material.textfield.TextInputLayout>
 
   <com.google.android.material.button.MaterialButton
-      style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
       android:id="@+id/okButton"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="end"
+      android:layout_marginTop="20dp"
+      android:padding="12dp"
+      app:cornerRadius="10dp"
+      android:textColor="#ffffff"
+      android:textSize="16dp"
+      android:textAllCaps="false"
+      android:backgroundTint="@color/purpleNew"
+      android:fontFamily="@font/montserrat"
       android:text="@android:string/ok"/>
 
 </LinearLayout>

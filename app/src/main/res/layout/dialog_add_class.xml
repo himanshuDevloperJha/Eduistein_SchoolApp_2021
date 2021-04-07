@@ -10,19 +10,23 @@
       style="@style/TextAppearance.MaterialComponents.Subtitle1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textStyle="bold"
-      android:text="@string/add_class_head"/>
+      android:text="@string/add_class_head"
+      android:textColor="@color/colorPrimary"
+      android:textSize="18dp"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.textview.MaterialTextView
       style="@style/TextAppearance.MaterialComponents.Body2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/add_class_desc"/>
+      android:text="@string/add_class_desc"
+      app:fontFamily="@font/montserrat" />
 
   <com.google.android.material.textfield.TextInputLayout
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@color/blurpurple"
       android:layout_marginTop="8dp"
       android:hint="@string/hint_class_name">
 
@@ -30,13 +34,15 @@
         android:id="@+id/classNameField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:fontFamily="@font/montserrat"
+        android:inputType="text" />
 
   </com.google.android.material.textfield.TextInputLayout>
   <com.google.android.material.textfield.TextInputLayout
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@color/blurpurple"
       android:layout_marginTop="8dp"
       android:hint="Standard">
 
@@ -44,13 +50,15 @@
         android:id="@+id/classStandard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:fontFamily="@font/montserrat"
+        android:inputType="text" />
 
   </com.google.android.material.textfield.TextInputLayout>
   <com.google.android.material.textfield.TextInputLayout
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@color/blurpurple"
       android:layout_marginTop="8dp"
       android:hint="Teacher Name">
 
@@ -58,7 +66,8 @@
         android:id="@+id/class_teacher_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:fontFamily="@font/montserrat"
+        android:inputType="text" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,6 +76,7 @@
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@color/blurpurple"
       android:layout_marginTop="8dp"
       android:hint="@string/hint_class_teacher">
 
@@ -74,7 +84,8 @@
         android:id="@+id/classTeacherField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:fontFamily="@font/montserrat"
+        android:inputType="text" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,7 +93,8 @@
       android:id="@+id/skipTeacherAssignment"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/label_skip_teacher_assignment"/>
+      android:fontFamily="@font/montserrat"
+      android:text="@string/label_skip_teacher_assignment" />
 
   <com.google.android.material.button.MaterialButton
       android:id="@+id/okButton"

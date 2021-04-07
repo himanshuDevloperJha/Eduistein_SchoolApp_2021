@@ -48,7 +48,8 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ph_date"/>
+            android:text="@string/ph_date"
+            app:fontFamily="@font/montserrat" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
@@ -65,7 +66,8 @@
           style="@style/Widget.MaterialComponents.Button.OutlinedButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/label_save"/>
+          android:fontFamily="@font/montserrat"
+          android:text="@string/label_save" />
 
       <co.aspirasoft.view.NestedListView
           android:id="@+id/contentList"

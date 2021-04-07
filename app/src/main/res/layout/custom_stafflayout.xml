@@ -10,7 +10,7 @@
     android:orientation="horizontal"
     android:weightSum="1"
     android:id="@+id/ll_chatname"
-    android:padding="7dp"
+    android:padding="10dp"
     android:layout_gravity="center"
     android:layout_height="wrap_content">
     <de.hdodenhof.circleimageview.CircleImageView
@@ -39,25 +39,28 @@
             android:paddingRight="5dp"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.6"
-                android:textSize="16dp"
-                android:layout_gravity="center"
-                android:textColor="@android:color/black"
-                android:id="@+id/tv_chatwithname"
-                android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:textSize="10dp"
-                android:layout_weight="0.4"
-               android:gravity="right"
-                android:layout_marginRight="5dp"
+                android:id="@+id/tv_chatwithname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="#676161"
+                android:layout_weight="0.6"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@android:color/black"
+                android:textSize="16dp" />
+
+            <TextView
                 android:id="@+id/tv_chatdateee"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.4"
+                android:fontFamily="@font/montserrat"
+                android:gravity="right"
+                android:textColor="#676161"
+                android:textSize="10dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,26 +68,30 @@
             android:paddingRight="5dp"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.91"
-                android:textSize="15dp"
-                android:layout_gravity="center"
-                android:textColor="#77716D"
                 android:id="@+id/tv_msgname"
-                android:layout_height="wrap_content"/>
-            <TextView
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.91"
+                android:fontFamily="@font/montserrat"
+                android:textColor="#77716D"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_msgcounter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="0.08"
+                android:background="@drawable/msgcirclecount"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:textColor="@android:color/white"
                 android:textSize="14dp"
                 android:textStyle="bold"
-            android:visibility="gone"
-                android:gravity="center"
-                android:background="@drawable/msgcirclecount"
-                android:layout_gravity="center"
-                android:textColor="@android:color/white"
-                android:id="@+id/tv_msgcounter"
-                android:layout_height="wrap_content"/>
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

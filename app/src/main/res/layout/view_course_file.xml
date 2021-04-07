@@ -5,24 +5,26 @@
    android:orientation="vertical"
    android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <com.google.android.material.button.MaterialButton
 
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:id="@+id/fileView"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="32dp"
+        android:fontFamily="@font/montserrat"
         android:gravity="start"
-        android:paddingBottom="0dp"
-        android:paddingTop="0dp"
         android:paddingStart="8dp"
+        android:paddingTop="0dp"
         android:paddingEnd="8dp"
+        android:paddingBottom="0dp"
         android:text="Filename"
         android:textAllCaps="false"
         android:textColor="?android:attr/textColorPrimary"
         app:icon="@drawable/ic_cloud"
-        app:iconSize="24dp"
         app:iconPadding="4dp"
-        app:iconTint="?android:attr/textColorPrimary"/>
+        app:iconSize="24dp"
+        app:iconTint="?android:attr/textColorPrimary" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,15 +37,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="at "
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            app:fontFamily="@font/montserrat" />
 
         <com.google.android.material.textview.MaterialTextView
-            style="@style/TextAppearance.MaterialComponents.Caption"
             android:id="@+id/postDatehome"
+            style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ph_date"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            app:fontFamily="@font/montserrat" />
 
     </LinearLayout>
 </LinearLayout>

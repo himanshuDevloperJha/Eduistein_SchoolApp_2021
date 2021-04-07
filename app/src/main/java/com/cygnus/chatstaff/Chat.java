@@ -39,6 +39,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cygnus.R;
+import com.cygnus.model.StoreNotifications;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -78,9 +79,10 @@ public class Chat extends AppCompatActivity {
     ChatAdapter chatAdapter;
     List<Newchatmodel> chatlist=new ArrayList<>();
     List<String> datelist=new ArrayList();
-    String chatwithtoken="";
+    String chatwithtoken="",groupname="",currentId="";
    ArrayList<String> tokenlist = new ArrayList();
-    String user_tokennnnn,currentUser;
+    String currentUser,firebaseuid,classId;
+//    user_tokennnnn
  SharedPreferences sp_loginsave;
      SharedPreferences.Editor ed_loginsave;
      int messagecounter=0;
@@ -103,9 +105,10 @@ public class Chat extends AppCompatActivity {
         chatwith=getIntent().getStringExtra("name_chatwith");
         chat_username=getIntent().getStringExtra("chat_username");
         userrtypeeee=getIntent().getStringExtra("userrtypeeee");
-        user_tokennnnn=getIntent().getStringExtra("user_tokennnnn");
+     //   user_tokennnnn=getIntent().getStringExtra("user_tokennnnn");
         currentUser=getIntent().getStringExtra("currentUser");
-        //firebaseuid  = FirebaseAuth.getInstance().getCurrentUser().getUid();
+      classId=getIntent().getStringExtra("studentclassId");
+        firebaseuid  = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         toolbar_chat.setTitle(chatwith);
 
@@ -153,6 +156,7 @@ else if(userrtypeeee.equals("Teacher")){
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tokenlist.clear();
                 String messageText = messageArea.getText().toString();
 
                 if(!messageText.equals("")){
@@ -171,9 +175,9 @@ else if(userrtypeeee.equals("Teacher")){
 //                   else{
                        messagecounter++;
                        Newchatmodel post1 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
-                               time, messageText, getIntent().getStringExtra("chat_username"),user_tokennnnn,"unread",String.valueOf(messagecounter),"1");
+                               time, messageText, getIntent().getStringExtra("chat_username"),firebaseuid,"unread",String.valueOf(messagecounter),"1");
                        Newchatmodel post2 = new Newchatmodel(new Date(System.currentTimeMillis()),formattedDate,
-                               time, messageText, getIntent().getStringExtra("chat_username"),user_tokennnnn,"unread",String.valueOf(messagecounter),"2");
+                               time, messageText, getIntent().getStringExtra("chat_username"),firebaseuid,"unread",String.valueOf(messagecounter),"2");
                        reference1.push().setValue(post1);
                        reference2.push().setValue(post2);
                      //  reference3.push().setValue(post2);
@@ -181,12 +185,30 @@ else if(userrtypeeee.equals("Teacher")){
 
 
 
-                       DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child(schoolid).child("NamewithTimestampMessages");
+                       DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().
+                               child(schoolid).child("NamewithTimestampMessages");
                        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
 
                            @Override
                            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshots1) {
                                for (final com.google.firebase.database.DataSnapshot datas1 : dataSnapshots1.getChildren()) {
+                                   if (chat_username.equalsIgnoreCase(datas1.child("chatusername").getValue().toString())) {
+                                       try {
+                                           Long tsLong = System.currentTimeMillis()/1000;
+                                           String ts = tsLong.toString();
+                                           Sortchatmodel post = new Sortchatmodel(ts, chat_username,datetime,time,messageText);
+                                           String timekey = datas1.getKey();
+                                           Log.e("msg", "VALUESQUIZ113336668889987666876:" + timekey);
+                                           reference1.child(timekey).child("postdate").setValue(post.getPostdate());
+                                           reference1.child(timekey).child("date").setValue(post.getDate());
+                                           reference1.child(timekey).child("message").setValue(post.getMessage());
+                                           reference1.child(timekey).child("chatusername").setValue(post.getChatusername());
+                                           reference1.child(timekey).child("time").setValue(post.getTime());
+
+                                       } catch ( Exception e) {
+                                           //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
+                                       }
+                                   }
                                    if (chatwith.equalsIgnoreCase(datas1.child("chatusername").getValue().toString())) {
                                        try {
                                            Long tsLong = System.currentTimeMillis()/1000;
@@ -204,6 +226,7 @@ else if(userrtypeeee.equals("Teacher")){
                                            //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
                                        }
                                    }
+
 
                                }
 
@@ -234,12 +257,24 @@ else if(userrtypeeee.equals("Teacher")){
                                             if (chatwith.equalsIgnoreCase(datas2.child("groupname").getValue().toString())) {
                                                      try {
                                                 chatwithtoken = datas2.child("token").getValue().toString();
+                                                         groupname = datas2.child("groupname").getValue().toString();
+                                                         currentId = datas2.child("teacherId").getValue().toString();
                                                 tokenlist.add(chatwithtoken);
 
                                                      } catch ( Exception e) {
             //Toast.makeText(applicationContext, ""+e.toString(), Toast.LENGTH_SHORT).show();
                                                      }
                                                          }
+
+                                            else if(datas2.child("groupname").getValue().toString().equals("")
+                                            && chatwith.equalsIgnoreCase(datas2.child("username").getValue().toString())){
+                                                chatwithtoken = datas2.child("token").getValue().toString();
+                                                groupname = datas2.child("groupname").getValue().toString();
+                                                currentId = datas2.child("teacherId").getValue().toString();
+                                                tokenlist.add(chatwithtoken);
+                                            }
+
+
                                             }
 
                                     else if(userrtypeeee.equals("Student")){
@@ -247,6 +282,8 @@ else if(userrtypeeee.equals("Teacher")){
                                         ! currentUser.equalsIgnoreCase(datas2.child("username").getValue().toString())) {
                                                     try {
                                                 chatwithtoken = datas2.child("token").getValue().toString();
+                                                        groupname = datas2.child("groupname").getValue().toString();
+                                                        currentId = datas2.child("teacherId").getValue().toString();
 
                                                 tokenlist.add(chatwithtoken);
                                                         Log.e("msg", "CHATUSERNAMEEETOKENNNNSSS:" + datas2.child("token").getValue().toString());
@@ -256,12 +293,21 @@ else if(userrtypeeee.equals("Teacher")){
                                              }
                                             }
 
+                                    else if(userrtypeeee.equals("School")){
+                                        if(chatwith.equalsIgnoreCase(datas2.child("username").getValue().toString())){
+                                            chatwithtoken = datas2.child("token").getValue().toString();
+                                            groupname = datas2.child("groupname").getValue().toString();
+                                            currentId = datas2.child("teacherId").getValue().toString();
+                                            tokenlist.add(chatwithtoken);
+                                        }
+                                    }
+
 
                                }
                             //   Toast.makeText(Chat.this, ""+tokenlist.size(), Toast.LENGTH_SHORT).show();
 
                                String body = "New message arrived from " +chat_username+ ".\nClick to Check Now !";
-                               sendFCMPush(tokenlist, body);
+                               sendFCMPush(tokenlist, body,userrtypeeee,groupname,currentId);
                            }
 
                            @Override
@@ -333,7 +379,7 @@ else if(userrtypeeee.equals("Teacher")){
 
                     chatlist.add(new Newchatmodel(new Date(System.currentTimeMillis()),map.get("date").toString(),
                             map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),
-                            user_tokennnnn,map.get("msgstatus").toString(),  map.get("countunread").toString(),"1"));
+                            firebaseuid,map.get("msgstatus").toString(),  map.get("countunread").toString(),"1"));
 
                     LinearLayoutManager ll=new LinearLayoutManager(Chat.this);
                     layout.setLayoutManager(ll);
@@ -347,7 +393,7 @@ else if(userrtypeeee.equals("Teacher")){
                     //  addMessageBox( message, 2);
                     chatlist.add(new Newchatmodel(new Date(System.currentTimeMillis()),map.get("date").toString(),
                             map.get("time").toString(), map.get("message").toString(),map.get("user").toString(),
-                            user_tokennnnn,map.get("msgstatus").toString(),  map.get("countunread").toString(),"2"));
+                            firebaseuid,map.get("msgstatus").toString(),  map.get("countunread").toString(),"2"));
 
                        /* DatabaseReference reference = FirebaseDatabase.getInstance().getReference().
                                 child(schoolid).child("ChatTokens");
@@ -503,7 +549,7 @@ else if(userrtypeeee.equals("Teacher")){
         }
     }
 
-    private void sendFCMPush( ArrayList<String> tokenlist, String body) {
+    private void sendFCMPush(ArrayList<String> tokenlist, String body, String userrtypeeee, String groupname, String currentId) {
 
         final String SERVER_KEY= "AAAAav-QFhw:APA91bG7ChbWR2kwz_FBMKgaDV8IZ_PMmED0Rp_sy7f0PtlZm37t-uAJRnUwyLYSM4Z-kSg_Jj9Xv9O8x4r_L5iQC9JAKhhTPt-ga5nmEqCBMcqgaUMtDnF5ponwXi8mD31k481DWHoF";
 
@@ -542,7 +588,32 @@ else if(userrtypeeee.equals("Teacher")){
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e("msg", "onResponse111111Chattmessage: "+response.toString() );
+                        Log.e("msg", "onResponse111111Chattmessage23444: "+classId );
+                        if(userrtypeeee.equals("Teacher")){
+                            Log.e("msg", "onResponse111111Chattmessage234441: "+classId );
+
+                            if(groupname.equals("") && !currentId.toLowerCase().contains("class")){
+                                StoreNotifications post2 = new StoreNotifications(chatwith,classId, body,"unread");
+                                DatabaseReference missionsReference2 = FirebaseDatabase.getInstance().getReference().child(schoolid).
+                                        child("TeacherNotifications").push();
+                                missionsReference2.setValue(post2);
+                            }
+                            else{
+                                StoreNotifications post = new StoreNotifications(chatwith,classId, body,"unread");
+                                DatabaseReference missionsReference = FirebaseDatabase.getInstance().getReference().child(schoolid).
+                                        child("Notifications").push();
+                                missionsReference.setValue(post);
+                            }
+                        }
+
+                        else if(userrtypeeee.equals("Student")){
+                            StoreNotifications post = new StoreNotifications(chatwith,classId, body,"unread");
+                            DatabaseReference missionsReference = FirebaseDatabase.getInstance().getReference().child(schoolid).
+                                    child("TeacherNotifications").push();
+                            missionsReference.setValue(post);
+                        }
+
+
                        // Toast.makeText(Chat.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 },
@@ -563,8 +634,11 @@ else if(userrtypeeee.equals("Teacher")){
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
         requestQueue.add(jsObjRequest);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

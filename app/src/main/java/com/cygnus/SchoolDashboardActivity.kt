@@ -1,16 +1,21 @@
 package com.cygnus
 
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.*
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
@@ -29,10 +34,10 @@ import com.cygnus.feed.FeedActivity
 import com.cygnus.feesmanage.FeesmanagmentList
 import com.cygnus.model.ChatTokens
 import com.cygnus.model.School
-import com.cygnus.model.TeacherToken
 import com.cygnus.model.User
 import com.cygnus.notifications.GCMRegistrationIntentService
 import com.cygnus.tasks.InvitationTask
+import com.cygnus.view.AccountSwitcher
 import com.cygnus.view.EmailsInputDialog
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
@@ -45,6 +50,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_school.*
+import org.json.JSONObject
+import org.jsoup.Jsoup
+import java.io.IOException
 
 /**
  * SchoolDashboardActivity is the schools' homepage.
@@ -62,23 +70,32 @@ class SchoolDashboardActivity : DashboardActivity() {
     var classname: String? = null
     var teachername: String? = null
     lateinit var sp_loginsave: SharedPreferences;
-    lateinit var ed_loginsave: SharedPreferences.Editor;
+    lateinit var ed_loginsave: SharedPreferences.Editor
     private var mRegistrationBroadcastReceiver: BroadcastReceiver? = null
     var token: String? = null
-
+    var currentVersion=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school)
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = ""
+       // toolbarsc_schoolname.setText(school)
+     //   setSupportActionBar(toolbar)
+       // supportActionBar?.title = ""
         Log.e("msg","schoolName----"+schoolId)
-
+        ivsc_profile.setOnClickListener {
+            AccountSwitcher.Builder(this)
+                    .setUser(currentUser)
+                    .show()
+        }
         sp_loginsave = getSharedPreferences("SAVELOGINDETAILS", MODE_PRIVATE)
         ed_loginsave = sp_loginsave.edit()
 
         ed_loginsave.putString("SchoolID", schoolId)
         ed_loginsave.putString("schoolnameee", currentUser.name)
         ed_loginsave.commit()
+
+
+        forceUpdate()
+
 
 
         val clslist: MutableList<String> = mutableListOf()
@@ -129,6 +146,7 @@ class SchoolDashboardActivity : DashboardActivity() {
             intent.putExtra("studentschoolid", schoolId)
             intent.putExtra("studentschool_namee", schoolDetails.second)
             intent.putExtra("userrtypeeee", "School")
+            intent.putExtra("studentclassId", schoolId)
             startActivity(intent)
         }
         attendanceTeacher.setOnClickListener {
@@ -236,6 +254,71 @@ class SchoolDashboardActivity : DashboardActivity() {
             val itent = Intent(applicationContext, GCMRegistrationIntentService::class.java)
             startService(itent)
         }
+    }
+    public fun forceUpdate(){
+   val packageManager: PackageManager = this.getPackageManager()
+        try {
+        val packageInfo: PackageInfo = packageManager.getPackageInfo(getPackageName(),0)
+         //currentVersion  = packageInfo.versionName
+         currentVersion  ="50+"
+         ForceUpdateAsync(currentVersion,this).execute()
+    } catch (e: PackageManager.NameNotFoundException ) {
+            Log.e("msg","Crashhhhh:"+e.toString())
+        e.printStackTrace()
+    }
+
+}
+    companion object {
+        private var latestVersion: String? = null
+    }
+    class ForceUpdateAsync(private val currentVersion: String, private val context: Context) :
+            AsyncTask<String?, String?, JSONObject>() {
+
+
+        override fun onPostExecute(jsonObject: JSONObject) {
+            if (latestVersion != null) {
+                if (!currentVersion.equals(latestVersion, ignoreCase = true)) {
+                    val dialogupdate = Dialog(context)
+                    dialogupdate.setContentView(R.layout.dialog_updateinfo)
+                    dialogupdate.show()
+                  //  dialogupdate.setCancelable(false)
+                   // dialogupdate.setCanceledOnTouchOutside(false)
+                    val tv_updateinfo = dialogupdate.findViewById(R.id.tv_updateinfo) as TextView
+                    tv_updateinfo.setOnClickListener {
+                        context.startActivity(Intent(Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=" + context.packageName)))
+                        dialogupdate.dismiss()
+                    }
+
+                    // Toast.makeText(context,"update is available.",Toast.LENGTH_LONG).show();
+/*  if(!(context instanceof SchoolDashboardActivity)) {
+                    if(!((Activity)context).isFinishing()){
+
+                    }
+                }*/
+                }
+            }
+            super.onPostExecute(jsonObject)
+        }
+
+
+        override fun doInBackground(vararg params: String?): JSONObject {
+            try {
+                latestVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + context.packageName + "&hl=en")
+                        .timeout(50000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div.hAyfc:nth-child(3) > span:nth-child(2) > div:nth-child(1) > span:nth-child(1)")
+                        .first()
+                        .ownText()
+                Log.e("msg","latestversionNo: " +latestVersion+" , Current Version: "+currentVersion)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return JSONObject()
+        }
+
     }
 
     override fun onStart() {

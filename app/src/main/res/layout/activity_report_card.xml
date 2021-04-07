@@ -47,8 +47,9 @@
           style="@style/TextAppearance.MaterialComponents.Button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:text="Total"
           android:textStyle="bold"
-          android:text="Total"/>
+          app:fontFamily="@font/montserrat" />
 
       <LinearLayout
           android:id="@+id/totalView"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="380dp"
@@ -10,14 +11,13 @@
 
 
 
-
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:id="@+id/addfees"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="FEE DETAILS"
+            android:textSize="17dp"
+            android:text="Fee Details"
             android:textAllCaps="false"
             />
 
@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:background="@color/blurpurple"
             android:hint="Recursive Nature of Fee">
 
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
@@ -42,6 +43,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
+        android:background="@color/blurpurple"
         android:layout_height="wrap_content"
         android:hint="Fee Type">
 
@@ -58,9 +60,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
-
+        android:background="@color/blurpurple"
         android:layout_height="wrap_content"
-
         android:hint="Amount">
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -75,13 +76,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addFees"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/cardview_light_background"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        app:cornerRadius="10dp"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purpleNew"
+        android:fontFamily="@font/montserrat"
         android:text="@string/label_save"/>
 
 </LinearLayout>

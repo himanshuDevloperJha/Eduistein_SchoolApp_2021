@@ -316,6 +316,7 @@ if(userrtypeeee.equals("Student")){
         i.putExtra("name_chatwith",subject.name+" "+subject.classId)
         i.putExtra("userrtypeeee", userrtypeeee)
         i.putExtra("user_tokennnnn", user_tokennn)
+        i.putExtra("studentclassId", subject.classId)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         startActivity(i)
     }
@@ -512,7 +513,7 @@ if(userrtypeeee.equals("Student")){
                 Response.Listener { response ->
                     Log.e("msg", "onResponse111111: $response")
                     //Toast.makeText(applicationContext, "1:" + response.toString(), Toast.LENGTH_SHORT).show()
-                    val post = StoreNotifications(subjectteachername, body);
+                    val post = StoreNotifications(subjectteachername,teacherClassId, body,"unread");
 
                     val missionsReference =
                             FirebaseDatabase.getInstance().reference.child(schoolId).
