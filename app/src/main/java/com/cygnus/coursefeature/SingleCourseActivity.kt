@@ -89,7 +89,7 @@ lateinit var course_std:String
 
             val tutorialdesc: MaterialTextView = v.findViewById(R.id.tutorialdesc)
             val tutorialno: MaterialTextView = v.findViewById(R.id.tutorialno)
-            val tutorialcolor: View = v.findViewById(R.id.tutorialcolor)
+//            val tutorialcolor: View = v.findViewById(R.id.tutorialcolor)
             val tutorialCard: MaterialCardView = v.findViewById(R.id.tutorialCard)
         }
         @NonNull
@@ -100,7 +100,7 @@ lateinit var course_std:String
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             holder.tutorialdesc.setText(courseofferlist.get(position).description)
             holder.tutorialno.setText("Tutorial "+courseofferlist.get(position).tutorialno.replace("tutorial",""))
-            holder.tutorialcolor.setBackgroundColor(convertToColor(courseofferlist.get(position)))
+//            holder.tutorialcolor.setBackgroundColor(convertToColor(courseofferlist.get(position)))
             holder.tutorialCard.setOnClickListener {
 
                 if(courseofferlist.get(position).url.contains(".mp4") || courseofferlist.get(position).url.contains(".3gp")||

@@ -33,19 +33,57 @@
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin">
 
-      <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body1"
-          android:id="@+id/className"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/ph_assigned_class"/>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
 
-      <com.google.android.material.textview.MaterialTextView
-          style="@style/TextAppearance.MaterialComponents.Body2"
-          android:id="@+id/teacherName"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/ph_name"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ph_assigned_class"
+            app:fontFamily="@font/montserrat" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/className"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="@color/purpleNew"
+            android:text="Class 6A"
+            app:fontFamily="@font/montserrat" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher Name "
+            app:fontFamily="@font/montserrat" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/teacherName"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="@color/purpleNew"
+            android:text="@string/ph_name"
+            app:fontFamily="@font/montserrat" />
+
+      </LinearLayout>
 
 
 
@@ -60,20 +98,29 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/lecture_times_head"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/addAppointmentButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:textSize="20dp"
+            android:text="@string/lecture_times_head"
+            app:fontFamily="@font/montserrat" />
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:gravity="end"
-            android:padding="0dp"
-            android:onClick="onAddAppointmentClicked"
-            android:text="@string/label_add"
-            android:visibility="gone"
-            app:rippleColor="@android:color/transparent"/>
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/addAppointmentButton"
+              style="@style/Widget.MaterialComponents.Button.TextButton"
+              android:layout_width="70dp"
+              android:layout_height="32dp"
+              android:gravity="end"
+              android:padding="0dp"
+              android:onClick="onAddAppointmentClicked"
+              android:text="@string/label_add"
+              android:visibility="gone"
+              app:icon="@drawable/ic_add_icons"
+              app:iconSize="30dp"
+              app:rippleColor="@android:color/transparent"/>
+
+        </LinearLayout>
 
       </LinearLayout>
 
@@ -89,99 +136,338 @@
           android:visibility="gone"
           android:id="@+id/tv_studentFiles"
           android:text="Student Files"/>
-
       <LinearLayout
-          android:id="@+id/ll_uploadFiles"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
+          android:layout_height="wrap_content">
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:textStyle="bold"
-            android:id="@+id/tv_uploadfiles"
-            android:text="Upload Files"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/addFilesButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:gravity="end"
-            android:visibility="gone"
-            android:padding="0dp"
-            android:onClick="onAddFilesClicked"
-            android:text="@string/label_add"
-            app:rippleColor="@android:color/transparent"/>
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:rowCount="3">
 
+          <!--        Kindly Fix this student File this card it is converting to button from back-->
+
+          <androidx.cardview.widget.CardView
+              android:id="@+id/ll_uploadFiles"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_column="0"
+              app:cardBackgroundColor="@color/blurpurple"
+              android:layout_row="0"
+              android:layout_gravity="fill"
+              android:layout_columnWeight="1"
+              android:layout_rowWeight="1"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="2dp"
+              android:layout_margin="4dp"
+              >
+            <LinearLayout
+                android:id="@+id/tv_uploadfiles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:src="@drawable/ic_student_file"
+                  android:layout_marginBottom="10dp"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:text="Student Files"
+                  android:textAlignment="center"
+                  android:textSize="13sp"
+                  android:textStyle="bold" />
+
+              <com.google.android.material.button.MaterialButton
+                  android:id="@+id/addFilesButton"
+                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  android:layout_width="wrap_content"
+                  android:layout_height="30dp"
+                  android:padding="0dp"
+                  android:visibility="gone"
+                  android:onClick="onAddFilesClicked"
+                  android:text="@string/label_add"
+                  app:rippleColor="@android:color/transparent"/>
+
+            </LinearLayout>
+
+          </androidx.cardview.widget.CardView>
+
+          <androidx.cardview.widget.CardView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_column="1"
+              app:cardBackgroundColor="@color/blurpurple"
+              android:layout_row="0"
+              android:layout_gravity="fill"
+              android:layout_columnWeight="1"
+              android:layout_rowWeight="1"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="2dp"
+              android:layout_margin="4dp"
+              >
+            <LinearLayout
+                android:id="@+id/tv_coursematerial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:src="@drawable/course_material"
+                  android:layout_marginBottom="10dp"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:text="Course Material"
+                  android:textAlignment="center"
+                  android:textSize="13sp"
+                  android:textStyle="bold" />
+
+              <com.google.android.material.button.MaterialButton
+                  android:id="@+id/addMaterialButton"
+                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  android:layout_width="wrap_content"
+                  android:layout_height="30dp"
+                  android:padding="0dp"
+                  android:visibility="gone"
+                  android:onClick="onAddFilesClicked"
+                  android:text="@string/label_add"
+                  app:rippleColor="@android:color/transparent"/>
+
+            </LinearLayout>
+
+          </androidx.cardview.widget.CardView>
+
+          <androidx.cardview.widget.CardView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_column="2"
+              app:cardBackgroundColor="@color/blurpurple"
+              android:layout_row="0"
+              android:layout_gravity="fill"
+              android:layout_columnWeight="1"
+              android:layout_rowWeight="1"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="2dp"
+              android:layout_margin="4dp"
+              >
+            <LinearLayout
+                android:id="@+id/tv_homework"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:src="@drawable/homework"
+                  android:layout_marginBottom="10dp"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:text="Homework Sheets"
+                  android:textAlignment="center"
+                  android:textSize="13sp"
+                  android:textStyle="bold" />
+
+              <com.google.android.material.button.MaterialButton
+                  android:id="@+id/addHomeworkButton"
+                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  android:layout_width="wrap_content"
+                  android:layout_height="30dp"
+                  android:padding="0dp"
+                  android:visibility="gone"
+                  android:onClick="onAddFilesClicked"
+                  android:text="@string/label_add"
+                  app:rippleColor="@android:color/transparent"/>
+
+            </LinearLayout>
+
+          </androidx.cardview.widget.CardView>
+
+          <androidx.cardview.widget.CardView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_column="0"
+              app:cardBackgroundColor="@color/blurpurple"
+              android:layout_row="1"
+              android:layout_gravity="fill"
+              android:layout_columnWeight="1"
+              android:layout_rowWeight="1"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="2dp"
+              android:layout_margin="4dp"
+              >
+            <LinearLayout
+                android:id="@+id/noticeBoardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:src="@drawable/news"
+                  android:layout_marginBottom="10dp"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:text="News"
+                  android:textAlignment="center"
+                  android:textSize="13sp"
+                  android:textStyle="bold" />
+
+            </LinearLayout>
+
+          </androidx.cardview.widget.CardView>
+
+          <androidx.cardview.widget.CardView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_column="1"
+              app:cardBackgroundColor="@color/blurpurple"
+              android:layout_row="1"
+              android:layout_gravity="fill"
+              android:layout_columnWeight="1"
+              android:layout_rowWeight="1"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="2dp"
+              android:layout_margin="4dp"
+              >
+            <LinearLayout
+                android:id="@+id/addGradesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:src="@drawable/grades"
+                  android:layout_marginBottom="10dp"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:text="Grades"
+                  android:textAlignment="center"
+                  android:textSize="13sp"
+                  android:textStyle="bold" />
+
+            </LinearLayout>
+
+          </androidx.cardview.widget.CardView>
+
+          <androidx.cardview.widget.CardView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_column="2"
+              app:cardBackgroundColor="@color/blurpurple"
+              android:layout_row="1"
+              android:layout_gravity="fill"
+              android:layout_columnWeight="1"
+              android:layout_rowWeight="1"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="2dp"
+              android:layout_margin="4dp"
+              >
+            <LinearLayout
+                android:id="@+id/groupChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                >
+              <ImageView
+                  android:layout_width="30dp"
+                  android:layout_height="30dp"
+                  android:src="@drawable/group_chat"
+                  android:layout_marginBottom="20dp"
+                  />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/montserrat"
+                  android:text="Group Chat"
+                  android:textAlignment="center"
+                  android:textSize="13sp"
+                  android:textStyle="bold" />
+
+            </LinearLayout>
+
+          </androidx.cardview.widget.CardView>
+
+        </GridLayout>
       </LinearLayout>
+
 
       <co.aspirasoft.view.NestedListView
           android:id="@+id/filesList"
           android:visibility="gone"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/tv_coursematerial"
-          android:layout_width="wrap_content"
-          android:layout_height="48dp"
-          android:text="@string/course_material_head"
-          android:textStyle="bold" />
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/addMaterialButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:gravity="end"
-            android:padding="0dp"
-            android:onClick="onAddMaterialClicked"
-            android:text="@string/label_add"
-            android:visibility="gone"
-            app:rippleColor="@android:color/transparent"/>
-
-      </LinearLayout>
 
       <co.aspirasoft.view.NestedListView
           android:id="@+id/contentList"
           android:visibility="gone"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center_vertical"
-          android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:textStyle="bold"
-            android:id="@+id/tv_homework"
-            android:text="@string/homework_sheets_head"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/addHomeworkButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:gravity="end"
-            android:padding="0dp"
-            android:onClick="onAddHomeworkClicked"
-            android:text="@string/label_add"
-            android:visibility="gone"
-            app:rippleColor="@android:color/transparent"/>
-
-      </LinearLayout>
 
       <co.aspirasoft.view.NestedListView
           android:id="@+id/homeworkList"
@@ -194,45 +480,5 @@
     </LinearLayout>
 
   </androidx.core.widget.NestedScrollView>
-
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom|center_horizontal"
-      android:orientation="horizontal">
-
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:id="@+id/noticeBoardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="onNoticeBoardClicked"
-        android:text="@string/label_news"
-        app:icon="@drawable/ic_news"/>
-
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:id="@+id/addGradesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:onClick="onAddGradesClicked"
-        android:text="@string/label_grades"
-        app:icon="@drawable/ic_grades"/>
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:id="@+id/groupChat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:onClick="onChatClick"
-        android:text="Group Chat"
-        app:icon="@drawable/ic_chat_black_24dp"/>
-
-  </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

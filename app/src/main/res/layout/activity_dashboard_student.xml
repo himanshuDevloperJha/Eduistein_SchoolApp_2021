@@ -368,7 +368,6 @@
         android:id="@+id/class_yt_notifications"
         app:cardBackgroundColor="@color/blurpurple"
         android:layout_width="0dp"
-        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_column="2"
         android:layout_row="1"

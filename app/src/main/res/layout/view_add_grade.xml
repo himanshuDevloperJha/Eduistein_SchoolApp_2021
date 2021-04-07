@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -14,44 +15,45 @@
       android:orientation="horizontal">
 
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body2"
         android:id="@+id/rollNo"
-        android:layout_weight="0.25"
+        style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
-        android:textSize="15dp"
-
         android:layout_height="wrap_content"
-        android:text="20060007"/>
+        android:layout_weight="0.25"
+        android:text="20060007"
+        android:layout_marginRight="10dp"
+        android:textSize="15dp"
+        app:fontFamily="@font/montserrat" />
 
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Body1"
         android:id="@+id/nameField"
+        style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
-        android:layout_weight="0.4"
-        android:textSize="15dp"
-        android:gravity="center"
-        android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:text="@string/ph_name" />
+        android:layout_weight="0.4"
+        android:text="@string/ph_name"
+        android:textSize="17dp"
+        app:fontFamily="@font/montserrat" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/theoryMarks"
         android:layout_width="0dp"
-        android:layout_weight="0.175"
-        android:textSize="15dp"
-
         android:layout_height="wrap_content"
+        android:layout_weight="0.175"
+        android:fontFamily="@font/montserrat"
         android:hint="Theory"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:textSize="17dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/practicalMarks"
         android:layout_width="0dp"
-        android:layout_weight="0.175"
-        android:textSize="15dp"
-
         android:layout_height="wrap_content"
+        android:layout_weight="0.175"
+        android:fontFamily="@font/montserrat"
         android:hint="Practical"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:textSize="17dp" />
   </LinearLayout>
 
 

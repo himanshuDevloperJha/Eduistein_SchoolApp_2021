@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class StudentsActivity : DashboardChildActivity() {
+class StudentDashboardActivity : DashboardChildActivity() {
 
     private val studentsList: ArrayList<Student> = ArrayList()
 
