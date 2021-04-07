@@ -123,6 +123,7 @@
             android:rowCount="3">
 
           <androidx.cardview.widget.CardView
+              android:visibility="invisible"
               android:id="@+id/attendanceButton"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
@@ -393,8 +394,8 @@
               app:cardBackgroundColor="@color/blurpurple"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:layout_column="2"
-              android:layout_row="1"
+              android:layout_column="0"
+              android:layout_row="0"
               android:layout_gravity="fill"
               android:layout_columnWeight="1"
               app:cardCornerRadius="12dp"
