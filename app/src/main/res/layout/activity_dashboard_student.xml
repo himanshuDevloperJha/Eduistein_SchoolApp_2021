@@ -364,6 +364,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:visibility="invisible"
         android:id="@+id/class_yt_notifications"
         app:cardBackgroundColor="@color/blurpurple"
         android:layout_width="0dp"
